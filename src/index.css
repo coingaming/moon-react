@@ -1,5 +1,9 @@
-/* @import "tailwindcss";
+@import "tailwindcss";
 @import "tw-animate-css";
+
+/* @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap"); */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -118,9 +122,8 @@
     @apply bg-background text-foreground;
   }
 }
- */
 
-@import "./assets/css/moon-base.css";
+@import "../assets/css/moon-base.css";
 
 .moon-form-hint {
   font: var(--text-body-200-font-weight) var(--text-body-200-font-size) /
@@ -2985,4 +2988,13 @@
 }
 .moon-carousel :where(.moon-carousel-control):dir(rtl) :where(svg) {
   transform: rotate(180deg);
+}
+
+/* MODIFIERS */
+.moon-dropdown--padding {
+  padding: var(--dimension-space-16);
+}
+
+.moon-dialog--translate {
+  transform: translateX(var(--dimension-space-136));
 }
