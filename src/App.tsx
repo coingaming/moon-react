@@ -73,6 +73,22 @@ import {
 import { DataTable } from "./components/ui/data-table/data-table";
 import { columns } from "./components/ui/data-table/columns";
 import { MOCK_DATA } from "./components/ui/data-table/mockData";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./components/ui/table";
+import { Textarea } from "./components/ui/textarea";
+import { Switch } from "./components/ui/switch";
+import { TableWithPagination } from "./components/ui/table-with-pagination";
+import { TableWithSorting } from "./components/ui/table-with-sorting";
+import TableWithFiltering from "./components/ui/table-with-filtering";
+import TableWithVisibilityColumns from "./components/ui/table-with-visibility-columns";
+import { TableWithRowSelection } from "./components/ui/table-with-row-selection";
 
 function App() {
   return (
@@ -89,7 +105,33 @@ function App() {
           </Accordion> */}
         <div>
           <h3>Button</h3>
-          <Button>Click me</Button>
+          <div className="">
+            {/* <h4>Sizes</h4> */}
+            <div>
+              <Button size="xs" disabled>
+                Click me
+              </Button>
+            </div>
+            <div className="mt-2">
+              <Button size="sm" variant="soft">
+                Click me
+              </Button>
+            </div>
+
+            <div className="mt-2">
+              <Button variant="outline">Click me</Button>
+            </div>
+
+            <div className="mt-2">
+              <Button size="lg" variant="ghost">
+                Click me
+              </Button>
+            </div>
+
+            <div className="mt-2">
+              <Button size="xl">Click me</Button>
+            </div>
+          </div>
         </div>
 
         <hr className="mt-5" />
@@ -102,7 +144,6 @@ function App() {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
               <DropdownMenuItem>Profile</DropdownMenuItem>
               <DropdownMenuItem>Billing</DropdownMenuItem>
               <DropdownMenuItem>Team</DropdownMenuItem>
@@ -111,48 +152,7 @@ function App() {
           </DropdownMenu>
         </div>
       </div>
-
-      {/*  <hr className="mt-5" />
-      <div className="mt-5">
-        <h3>Dialog</h3>
-        <Dialog>
-          <DialogTrigger>Open</DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-      </div> */}
-
-      {/*
       <hr className="mt-5" />
-      <div className="mt-5">
-        <h3>Drawer</h3>
-        <Drawer>
-          <DrawerTrigger>Open</DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader>
-              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-              <DrawerDescription>
-                This action cannot be undone.
-              </DrawerDescription>
-            </DrawerHeader>
-            <DrawerFooter>
-              <Button>Submit</Button>
-              <DrawerClose>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
-      </div> */}
-
-      <hr className="mt-5" />
-
       <div className="mt-5">
         <h3 className="mb-5">Alert</h3>
         <Alert variant="info">
@@ -163,7 +163,6 @@ function App() {
           </AlertDescription>
         </Alert>
       </div>
-
       {/*  <div className="mt-5">
         <h3>Authenticator</h3>
         <Authenticator maxLength={6}>
@@ -177,9 +176,7 @@ function App() {
           </AuthenticatorGroup>
         </Authenticator>
       </div> */}
-
       <hr className="mt-5" />
-
       <div className="mt-5">
         <h3 className="mb-5">Breadcrumb</h3>
 
@@ -204,7 +201,6 @@ function App() {
           </Breadcrumb>
         </div>
       </div>
-
       <hr className="mt-5" />
       <div className="mt-5">
         <h3 className="mb-5">Pagination</h3>
@@ -212,7 +208,6 @@ function App() {
           <PaginationWrapper />
         </div>
       </div>
-
       <hr className="mt-5" />
       <div className="mt-5">
         <h3 className="mb-5">Tabs</h3>
@@ -221,15 +216,12 @@ function App() {
         </div>
       </div>
       <hr className="mt-5" />
-
-      <hr className="mt-5" />
       <div className="mt-5">
         <h3 className="mb-5">Checkbox</h3>
         <div className="flex justify-center">
           <Checkbox />
         </div>
       </div>
-
       {/* <hr className="mt-5" />
       <div className="mt-5">
         <h3 className="mb-5">Select</h3>
@@ -246,7 +238,6 @@ function App() {
           </Select>
         </div>
       </div> */}
-
       <hr className="mt-5" />
       <div className="mt-5">
         <h3 className="mb-5">Input</h3>
@@ -254,14 +245,130 @@ function App() {
           <Input />
         </div>
       </div>
-
       <hr className="mt-5" />
       <div className="mt-5">
-        <h3 className="mb-5">Table</h3>
+        <h3 className="mb-5">Textarea</h3>
         <div className="flex justify-center">
-          <DataTable columns={columns} data={MOCK_DATA} />
+          <Textarea />
         </div>
       </div>
+      <hr className="mt-5" />
+      <div className="mt-5">
+        <h3 className="mb-5">Basic Table</h3>
+        <div className="flex justify-center">
+          <Table size="lg">
+            <TableCaption>A list of your recent invoices.</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">Invoice</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Method</TableHead>
+                <TableHead className="text-right">Amount</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-medium">INV001</TableCell>
+                <TableCell>Paid</TableCell>
+                <TableCell>Credit Card</TableCell>
+                <TableCell className="text-right">$250.00</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">INV001</TableCell>
+                <TableCell>Paid</TableCell>
+                <TableCell>Credit Card</TableCell>
+                <TableCell className="text-right">$250.00</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">INV001</TableCell>
+                <TableCell>Paid</TableCell>
+                <TableCell>Credit Card</TableCell>
+                <TableCell className="text-right">$250.00</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">INV001</TableCell>
+                <TableCell>Paid</TableCell>
+                <TableCell>Credit Card</TableCell>
+                <TableCell className="text-right">$250.00</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+      <hr className="mt-5" />
+      <div className="mt-5">
+        <h3 className="mb-5">Table with Pagination</h3>
+        <div className="flex justify-center">
+          <TableWithPagination data={MOCK_DATA} columns={columns} />
+        </div>
+      </div>
+      <hr className="mt-5" />
+      <div className="mt-5">
+        <h3 className="mb-5">Table with Sorting</h3>
+        <div className="flex justify-center">
+          <TableWithSorting data={MOCK_DATA.slice(0, 10)} columns={columns} />
+        </div>
+      </div>
+      <hr className="mt-5" />
+      <div className="mt-5">
+        <h3 className="mb-5">Table with Filtering</h3>
+        <div className="flex justify-center">
+          <TableWithFiltering data={MOCK_DATA.slice(0, 10)} columns={columns} />
+        </div>
+      </div>
+      <hr className="mt-5" />
+      <div className="mt-5">
+        <h3 className="mb-5">Table with visibility columns</h3>
+        <div className="flex justify-center">
+          <TableWithVisibilityColumns
+            data={MOCK_DATA.slice(0, 10)}
+            columns={columns}
+          />
+        </div>
+      </div>
+      <hr className="mt-5" />
+      <div className="mt-5">
+        <h3 className="mb-5">Table with row selection</h3>
+        <div className="flex justify-center">
+          <TableWithRowSelection
+            data={MOCK_DATA.slice(0, 10)}
+            columns={[
+              {
+                id: "select",
+                header: ({ table }) => (
+                  <Checkbox
+                    checked={
+                      table.getIsAllPageRowsSelected() ||
+                      (table.getIsSomePageRowsSelected() && "indeterminate")
+                    }
+                    onCheckedChange={(value) =>
+                      table.toggleAllPageRowsSelected(!!value)
+                    }
+                    aria-label="Select all"
+                  />
+                ),
+                cell: ({ row }) => (
+                  <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={(value) => row.toggleSelected(!!value)}
+                    aria-label="Select row"
+                  />
+                ),
+                enableSorting: false,
+                enableHiding: false,
+              },
+              ...columns,
+            ]}
+          />
+        </div>
+      </div>
+
+      {/* <div className="mt-5">
+        <h3 className="mb-5">Switch</h3>
+        <div className="flex justify-center">
+          <Switch />
+        </div>
+      </div> */}
     </>
   );
 }
