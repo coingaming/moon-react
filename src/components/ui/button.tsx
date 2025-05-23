@@ -1,16 +1,15 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
 
 import "../../index.css";
+import clsx from "clsx";
 
 const buttonVariants = {
   fill: "moon-button-fill",
   soft: "moon-button-soft",
   outline: "moon-button-outline",
   ghost: "moon-button-ghost",
-};
+} as const;
 
 const buttonSizes = {
   xs: "moon-button-xs",
@@ -18,7 +17,7 @@ const buttonSizes = {
   md: "moon-button-md",
   lg: "moon-button-lg",
   xl: "moon-button-xl",
-};
+} as const;
 
 function Button({
   className,
@@ -26,16 +25,18 @@ function Button({
   size = "md",
   asChild = false,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-  }) {
+}: React.ComponentProps<"button"> & {
+  variant?: keyof typeof buttonVariants;
+  size?: keyof typeof buttonSizes;
+} & {
+  asChild?: boolean;
+}) {
   const Comp = asChild ? Slot : "button";
 
   return (
     <Comp
       data-slot="button"
-      className={cn(
+      className={clsx(
         "moon-button",
         buttonVariants[variant],
         buttonSizes[size],

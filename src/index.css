@@ -3039,3 +3039,7 @@
 .moon-authenticator-slot.moon-authenticator-slot-focus {
   box-shadow: inset 0 0 0 var(--dimension-space-2) var(--semantic-border-active);
 }
+
+.moon-checkbox svg {
+  width: 1rem;
+}
