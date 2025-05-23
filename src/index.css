@@ -1516,7 +1516,7 @@
   display: inline-flex;
   gap: var(--scale-md-gap);
 }
-.moon-authenticator :where(input) {
+.moon-authenticator :where(.moon-authenticator-slot) {
   display: flex;
   width: 100%;
   max-width: var(--scale-md-width);
@@ -1535,49 +1535,55 @@
   transition: box-shadow 150ms ease-in-out, opacity 150ms ease-in-out,
     background-color 150ms ease-in-out;
 }
-.moon-authenticator :where(input)::-moz-placeholder {
+.moon-authenticator :where(.moon-authenticator-slot)::-moz-placeholder {
   color: var(--semantic-text-secondary);
 }
-.moon-authenticator :where(input)::placeholder {
+.moon-authenticator :where(.moon-authenticator-slot)::placeholder {
   color: var(--semantic-text-secondary);
 }
-.moon-authenticator :where(input):-moz-read-only {
+.moon-authenticator :where(.moon-authenticator-slot):-moz-read-only {
   cursor: not-allowed;
 }
-.moon-authenticator :where(input):read-only,
-.moon-authenticator :where(input):disabled {
+.moon-authenticator :where(.moon-authenticator-slot):read-only,
+.moon-authenticator :where(.moon-authenticator-slot):disabled {
   cursor: not-allowed;
 }
-.moon-authenticator :where(input):disabled {
+.moon-authenticator :where(.moon-authenticator-slot):disabled {
   opacity: var(--effect-opacity-disabled);
 }
-.moon-authenticator :where(input):not(:-moz-read-only, :disabled):hover {
+.moon-authenticator
+  :where(.moon-authenticator-slot):not(:-moz-read-only, :disabled):hover {
   box-shadow: inset 0 0 0 var(--dimension-space-2) var(--authenticator-border);
   background-color: var(--semantic-background-hover);
 }
-.moon-authenticator :where(input):not(:read-only, :disabled):hover {
+.moon-authenticator
+  :where(.moon-authenticator-slot):not(:read-only, :disabled):hover {
   box-shadow: inset 0 0 0 var(--dimension-space-2) var(--authenticator-border);
   background-color: var(--semantic-background-hover);
 }
-.moon-authenticator :where(input):not(:-moz-read-only, :disabled):focus {
+.moon-authenticator
+  :where(.moon-authenticator-slot):not(:-moz-read-only, :disabled):focus {
   box-shadow: inset 0 0 0 var(--dimension-space-2) var(--semantic-border-active);
 }
-.moon-authenticator :where(input):not(:read-only, :disabled):focus {
+.moon-authenticator
+  :where(.moon-authenticator-slot):not(:read-only, :disabled):focus {
   box-shadow: inset 0 0 0 var(--dimension-space-2) var(--semantic-border-active);
 }
-.moon-authenticator.moon-authenticator-error :where(input) {
+.moon-authenticator.moon-authenticator-error :where(.moon-authenticator-slot) {
   box-shadow: inset 0 0 0 var(--dimension-space-2)
     var(--semantic-border-negative);
 }
-.moon-authenticator.moon-authenticator-error :where(input):hover,
-.moon-authenticator.moon-authenticator-error :where(input):focus {
+.moon-authenticator.moon-authenticator-error
+  :where(.moon-authenticator-slot):hover,
+.moon-authenticator.moon-authenticator-error
+  :where(.moon-authenticator-slot):focus {
   box-shadow: inset 0 0 0 var(--dimension-space-2)
     var(--semantic-border-negative);
 }
 .moon-authenticator.moon-authenticator-sm {
   gap: var(--scale-sm-gap);
 }
-.moon-authenticator.moon-authenticator-sm :where(input) {
+.moon-authenticator.moon-authenticator-sm :where(.moon-authenticator-slot) {
   max-width: var(--scale-sm-width);
   height: var(--scale-sm-height);
   border-radius: var(--utility-authenticator-radius-sm);
@@ -1587,7 +1593,7 @@
 .moon-authenticator.moon-authenticator-lg {
   gap: var(--scale-lg-gap);
 }
-.moon-authenticator.moon-authenticator-lg :where(input) {
+.moon-authenticator.moon-authenticator-lg :where(.moon-authenticator-slot) {
   max-width: var(--scale-lg-width);
   height: var(--scale-lg-height);
   border-radius: var(--utility-authenticator-radius-lg);
@@ -1597,7 +1603,7 @@
 .moon-authenticator.moon-authenticator-xl {
   gap: var(--scale-xl-gap);
 }
-.moon-authenticator.moon-authenticator-xl :where(input) {
+.moon-authenticator.moon-authenticator-xl :where(.moon-authenticator-slot) {
   max-width: var(--scale-xl-width);
   height: var(--scale-xl-height);
   border-radius: var(--utility-authenticator-radius-xl);
@@ -2995,6 +3001,41 @@
   padding: var(--dimension-space-16);
 }
 
-.moon-dialog--translate {
-  transform: translateX(var(--dimension-space-136));
+.moon-dialog-wrapper {
+  position: fixed;
+  top: 33%;
+  left: 33%;
+  z-index: 999;
+}
+
+.moon-dialog-overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 50;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.moon-dialog-close {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+}
+
+.moon-authenticator-slot {
+  width: 3rem;
+}
+
+.moon-authenticator-slot span {
+  width: 100%;
+}
+
+.moon-authenticator-slot:focus {
+  box-shadow: inset 0 0 0 var(--dimension-space-2) var(--semantic-border-active);
+}
+
+.moon-authenticator-slot.moon-authenticator-slot-focus {
+  box-shadow: inset 0 0 0 var(--dimension-space-2) var(--semantic-border-active);
 }

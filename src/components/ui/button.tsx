@@ -1,30 +1,24 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 import "../../index.css";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-  {
-    variants: {
-      variant: {
-        fill: "moon-button-fill",
-        soft: "moon-button-soft",
-        outline: "moon-button-outline",
-        ghost: "moon-button-ghost",
-      },
-      size: {
-        xs: "moon-button-xs",
-        sm: "moon-button-sm",
-        md: "moon-button-md",
-        lg: "moon-button-lg",
-        xl: "moon-button-xl",
-      },
-    },
-  }
-);
+const buttonVariants = {
+  fill: "moon-button-fill",
+  soft: "moon-button-soft",
+  outline: "moon-button-outline",
+  ghost: "moon-button-ghost",
+};
+
+const buttonSizes = {
+  xs: "moon-button-xs",
+  sm: "moon-button-sm",
+  md: "moon-button-md",
+  lg: "moon-button-lg",
+  xl: "moon-button-xl",
+};
 
 function Button({
   className,
@@ -43,7 +37,9 @@ function Button({
       data-slot="button"
       className={cn(
         "moon-button",
-        buttonVariants({ variant, size, className })
+        buttonVariants[variant],
+        buttonSizes[size],
+        className
       )}
       {...props}
     />
