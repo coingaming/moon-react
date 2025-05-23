@@ -1,14 +1,11 @@
 "use client";
 
 import {
-  type ColumnDef,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
-  type OnChangeFn,
-  type TableOptions,
+  getSortedRowModel,
   useReactTable,
-  type VisibilityState,
 } from "@tanstack/react-table";
 
 import {
@@ -20,9 +17,32 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "../button";
-import type { Table as TableType } from "@tanstack/react-table";
+import type { SortingState } from "@tanstack/react-table";
+import { useState } from "react";
+import type { DataTableProps } from "../dataTypes";
 
-export function DataTable<TData>({ table }: { table: TableType<TData> }) {
+export function DataTable<TData, TValue>({
+  data,
+  columns,
+}: DataTableProps<TData, TValue>) {
+  const [rowSelection, setRowSelection] = useState({});
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    onRowSelectionChange: setRowSelection,
+    getPaginationRowModel: getPaginationRowModel(),
+    getRowId: (row) => row.id,
+    enableRowSelection: true,
+    state: {
+      sorting,
+      rowSelection,
+    },
+  });
+
   return (
     <div>
       <Table className="moon-table">
@@ -60,6 +80,24 @@ export function DataTable<TData>({ table }: { table: TableType<TData> }) {
             ))}
         </TableBody>
       </Table>
+      <div className="mt-3 flex justify-center gap-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }
