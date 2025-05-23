@@ -55,7 +55,6 @@ function DialogContent({
         >
           <DialogPrimitive.Close className="moon-dialog-close">
             <XIcon />
-            <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
           {children}
         </DialogPrimitive.Content>

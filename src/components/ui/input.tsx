@@ -1,28 +1,28 @@
+import clsx from "clsx";
 import * as React from "react";
-
-import { cn } from "@/lib/utils";
-
-type Size = "sm" | "md" | "lg" | "xl";
 
 const sizesClasses = {
   sm: "moon-authenticator-sm",
   md: "moon-authenticator-md",
   lg: "moon-authenticator-lg",
   xl: "moon-authenticator-xl",
-};
+} as const;
 
 function Input({
   className,
   type,
-  error = false,
   size = "md",
+  error = false,
   ...props
-}: React.ComponentProps<"input"> & { error?: boolean; size?: Size }) {
+}: React.ComponentProps<"input"> & {
+  error?: boolean;
+  size?: keyof typeof sizesClasses;
+}) {
   return (
     <input
       type={type}
       data-slot="input"
-      className={cn("moon-input", sizesClasses[size], {
+      className={clsx("moon-input", sizesClasses[size], {
         "moon-input-error": error,
       })}
       {...props}

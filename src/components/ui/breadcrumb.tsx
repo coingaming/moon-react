@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { ChevronRight, MoreHorizontal } from "lucide-react";
-
-import { cn } from "@/lib/utils";
+import { MoreHorizontal } from "lucide-react";
+import clsx from "clsx";
 
 function Breadcrumb({ ...props }: React.ComponentProps<"nav">) {
   return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />;
@@ -12,7 +11,7 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
   return (
     <ol
       data-slot="breadcrumb-list"
-      className={cn("moon-breadcrumb", className)}
+      className={clsx("moon-breadcrumb", className)}
       {...props}
     />
   );
@@ -22,7 +21,7 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
   return (
     <li
       data-slot="breadcrumb-item"
-      className={cn("moon-breadcrumb-item", className)}
+      className={clsx("moon-breadcrumb-item", className)}
       {...props}
     />
   );
@@ -65,8 +64,7 @@ function BreadcrumbEllipsis({
       className={className}
       {...props}
     >
-      <MoreHorizontal className="size-4" />
-      <span className="sr-only">More</span>
+      <MoreHorizontal />
     </span>
   );
 }

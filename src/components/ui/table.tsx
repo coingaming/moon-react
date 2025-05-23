@@ -1,26 +1,23 @@
+import clsx from "clsx";
 import * as React from "react";
-
-import { cn } from "@/lib/utils";
-
-type Size = "sm" | "md" | "lg" | "xl";
 
 const sizesClasses = {
   sm: "moon-table-sm",
   md: "moon-table-md",
   lg: "moon-table-lg",
   xl: "moon-table-xl",
-};
+} as const;
 
 function Table({
   className,
   size = "md",
   ...props
-}: React.ComponentProps<"table"> & { size?: Size }) {
+}: React.ComponentProps<"table"> & { size?: keyof typeof sizesClasses }) {
   return (
     <div data-slot="table-container">
       <table
         data-slot="table"
-        className={cn("moon-table", sizesClasses[size])}
+        className={clsx("moon-table", sizesClasses[size])}
         {...props}
       />
     </div>
