@@ -40,3 +40,31 @@
 .read-the-docs {
   color: #888;
 }
+
+.justify-center {
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.w-2xs {
+  width: 18rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
+.gap-2 {
+  gap: 8px;
+}

@@ -23,6 +23,7 @@ function DropdownMenuTrigger({
   return (
     <DropdownMenuPrimitive.Trigger
       data-slot="dropdown-menu-trigger"
+      className="moon-dropdown-trigger"
       {...props}
     />
   );

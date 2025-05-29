@@ -82,9 +82,7 @@ function App() {
         <div className="mt-5">
           <h3 className="mb-5">Dropdown</h3>
           <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Button variant="outline">Open</Button>
-            </DropdownMenuTrigger>
+            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuItem>Profile</DropdownMenuItem>
