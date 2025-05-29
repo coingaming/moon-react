@@ -1,8 +1,9 @@
-@import "../assets/css/moon-base.css";
+
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "../assets/css/moon-base.css";
 
-.moon-form-hint {
+/* .moon-form-hint {
   font: var(--text-body-200-font-weight) var(--text-body-200-font-size) /
     var(--text-body-200-line-height) var(--text-body-200-font-family);
   color: var(--semantic-text-secondary);
@@ -2948,4 +2949,4 @@ button {
 
 .gap-2 {
   row-gap: 8px;
-}
+} */
