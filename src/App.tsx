@@ -82,7 +82,9 @@ function App() {
         <div className="mt-5">
           <h3 className="mb-5">Dropdown</h3>
           <DropdownMenu>
-            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+            <DropdownMenuTrigger className="moon-button moon-button-outline">
+              Open
+            </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuItem>Profile</DropdownMenuItem>
@@ -194,6 +196,7 @@ function App() {
       <hr className="mt-5" />
 
       <div className="mt-5">
+        <h3 className="mb-5">Carousel</h3>
         <div className="flex justify-center">
           <MoonCarousel>
             <MoonCarouselContent>
@@ -226,6 +229,8 @@ function App() {
           </MoonCarousel>
         </div>
       </div>
+
+      <hr className="mt-5" />
 
       <div className="mt-5">
         <h3 className="mb-5">Textarea</h3>

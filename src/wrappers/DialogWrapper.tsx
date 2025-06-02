@@ -12,7 +12,9 @@ const DialogWrapper = () => {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>Open</DialogTrigger>
+      <DialogTrigger className="moon-button moon-button-outline">
+        Open
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
