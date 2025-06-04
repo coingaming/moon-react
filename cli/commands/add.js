@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs-extra";
+import { execa } from "execa";
 import { COMPONENTS_META } from "../../src/components/components-meta.js";
-import { execSync } from "child_process";
 
 const deps = new Set();
 const copied = new Set();
@@ -20,8 +20,14 @@ async function initMoonCss() {
     return;
   }
 
-  console.log(`📦 Installing CSS package '${MOON_CSS_PACKAGE}'...`);
-  execSync(`npx @heathmont/moon-css --with-components`, { stdio: "inherit" });
+  try {
+    await execa("npx", [MOON_CSS_PACKAGE, "--with-components"], {
+      stdio: "inherit",
+    });
+  } catch (err) {
+    console.error("❌ Failed to install Moon CSS package:", err);
+    process.exit(1);
+  }
 
   const pkgCssPath = path.join(
     process.cwd(),
@@ -47,13 +53,12 @@ async function copyComponent(componentName, baseDir) {
   if (copied.has(componentName)) return;
 
   const src = path.join(baseDir, "../src/components/", `${componentName}.tsx`);
+  const dest = path.join(process.cwd(), "components", `${componentName}.tsx`);
 
   if (!fs.existsSync(src)) {
     console.error(`❌ Component '${componentName}' doesn't exist.`);
     process.exit(1);
   }
-
-  const dest = path.join(process.cwd(), "components", `${componentName}.tsx`);
 
   await fs.ensureDir(path.dirname(dest));
   await fs.copy(src, dest);
@@ -61,7 +66,6 @@ async function copyComponent(componentName, baseDir) {
   console.log(
     `✅ Component '${componentName}' copied to 'components/${componentName}.tsx'`
   );
-
   copied.add(componentName);
 
   const meta = COMPONENTS_META[componentName];
@@ -75,26 +79,42 @@ async function copyComponent(componentName, baseDir) {
   }
 }
 
-function addExternalDependencies() {
+async function addExternalDependencies() {
+  const pkgPath = path.join(process.cwd(), "package.json");
+  const pkg = await fs.readJson(pkgPath);
+  const installed = {
+    ...pkg.dependencies,
+    ...pkg.devDependencies,
+  };
+
   for (const name of copied) {
-    COMPONENTS_META[name]?.deps?.forEach((dependency) => {
-      deps.add(dependency);
+    COMPONENTS_META[name]?.deps?.forEach((dep) => {
+      if (!installed[dep]) {
+        deps.add(dep);
+      }
     });
   }
 
-  if (deps.size === 0) {
-    return;
-  }
+  if (deps.size === 0) return;
 
   const depsList = Array.from(deps);
+  console.log(`📦 Installing new dependencies: ${depsList.join(", ")}`);
 
-  console.log(`📦 Installing dependencies: ${depsList.join(", ")}`);
-  execSync(`yarn add ${depsList.join(" ")}`, { stdio: "inherit" });
+  try {
+    await execa("yarn", ["add", ...depsList], { stdio: "inherit" });
+  } catch (err) {
+    console.error("❌ Failed to install dependencies:", err);
+    process.exit(1);
+  }
 }
 
-export default async function add(componentName, baseDir) {
-  await copyComponent(componentName, baseDir);
-  addExternalDependencies();
+export default async function add(components, baseDir) {
+  const list = Array.isArray(components) ? components : [components];
 
+  for (const componentName of list) {
+    await copyComponent(componentName, baseDir);
+  }
+
+  await addExternalDependencies();
   await initMoonCss();
 }
