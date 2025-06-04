@@ -1,20 +1,24 @@
 import "./App.css";
 
-import { Button } from "./components/ui/button";
+import { Button } from "./components/ui/button/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "./components/ui/dropdown-menu";
+} from "./components/ui/dropdown-menu/dropdown-menu";
 import "../assets/css/moon-base.css";
-import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "./components/ui/alert/alert";
 import PaginationWrapper from "./wrappers/PaginationWrapper";
 import BreadcrumbWrapper from "./wrappers/BreadcrumbWrapper";
 import TabsWrapper from "./wrappers/TabsWrapper";
-import { Checkbox } from "./components/ui/checkbox";
-import { Input } from "./components/ui/input";
+import { Checkbox } from "./components/ui/checkbox/checkbox";
+import { Input } from "./components/ui/input/input";
 
 import { columns } from "./components/ui/data-table/columns";
 import { MOCK_DATA } from "./components/ui/data-table/mockData";
@@ -26,7 +30,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./components/ui/table";
+} from "./components/ui/table/table";
 import { Textarea } from "./components/ui/textarea";
 import DialogWrapper from "./wrappers/DialogWrapper";
 import {
@@ -35,12 +39,12 @@ import {
   MoonCarouselItem,
   MoonCarouselNext,
   MoonCarouselPrev,
-} from "./components/ui/carousel";
+} from "./components/ui/carousel/carousel";
 import {
   Authenticator,
   AuthenticatorGroup,
   AuthenticatorSlot,
-} from "./components/ui/authenticator";
+} from "./components/ui/authenticator/authenticator";
 import { DataTable } from "./components/ui/data-table/data-table";
 
 function App() {

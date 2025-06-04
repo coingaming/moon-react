@@ -6,10 +6,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../dropdown-menu";
+} from "../dropdown/dropdown";
 import { Button } from "../button";
 import { MoreHorizontal } from "lucide-react";
-import { Checkbox } from "../checkbox";
+import { Checkbox } from "../checkbox/checkbox";
 
 // Updated shape of the data
 export type Payment = {

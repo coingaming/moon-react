@@ -15,7 +15,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/table/table";
 import { Button } from "../button";
 import type { SortingState } from "@tanstack/react-table";
 import { useState } from "react";
