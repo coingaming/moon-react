@@ -4,7 +4,7 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-} from "@/components/ui/pagination";
+} from "@/components/pagination";
 
 const PaginationWrapper = () => {
   const [currentPage, setCurrentPage] = useState(1);

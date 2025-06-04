@@ -15,11 +15,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table/table";
+} from "@/components/table";
 import { Button } from "../button";
 import type { SortingState } from "@tanstack/react-table";
 import { useState } from "react";
-import type { DataTableProps } from "../dataTypes";
+import type { ColumnDef } from "@tanstack/react-table";
+
+export interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+}
 
 export function DataTable<TData, TValue>({
   data,

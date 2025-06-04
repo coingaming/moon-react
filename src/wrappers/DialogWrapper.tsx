@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
+} from "@/components/dialog";
 
 const DialogWrapper = () => {
   const [open, setOpen] = useState(false);

@@ -1,27 +1,23 @@
 import "./App.css";
 
-import { Button } from "./components/ui/button/button";
+import { Button } from "./components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "./components/ui/dropdown-menu/dropdown-menu";
+} from "./components/dropdown";
 import "../assets/css/moon-base.css";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "./components/ui/alert/alert";
+import { Alert, AlertDescription, AlertTitle } from "./components/alert";
 import PaginationWrapper from "./wrappers/PaginationWrapper";
 import BreadcrumbWrapper from "./wrappers/BreadcrumbWrapper";
 import TabsWrapper from "./wrappers/TabsWrapper";
-import { Checkbox } from "./components/ui/checkbox/checkbox";
-import { Input } from "./components/ui/input/input";
+import { Checkbox } from "./components/checkbox";
+import { Input } from "./components/input";
 
-import { columns } from "./components/ui/data-table/columns";
-import { MOCK_DATA } from "./components/ui/data-table/mockData";
+import { columns } from "./components/data-table/columns";
+import { MOCK_DATA } from "./components/data-table/mockData";
 import {
   Table,
   TableBody,
@@ -30,8 +26,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./components/ui/table/table";
-import { Textarea } from "./components/ui/textarea";
+} from "./components/table";
+import { Textarea } from "./components/textarea";
 import DialogWrapper from "./wrappers/DialogWrapper";
 import {
   MoonCarousel,
@@ -39,13 +35,13 @@ import {
   MoonCarouselItem,
   MoonCarouselNext,
   MoonCarouselPrev,
-} from "./components/ui/carousel/carousel";
+} from "./components/carousel";
 import {
   Authenticator,
   AuthenticatorGroup,
   AuthenticatorSlot,
-} from "./components/ui/authenticator/authenticator";
-import { DataTable } from "./components/ui/data-table/data-table";
+} from "./components/authenticator";
+import { DataTable } from "./components/data-table/data-table";
 
 function App() {
   return (

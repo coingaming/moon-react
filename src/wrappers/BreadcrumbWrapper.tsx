@@ -5,7 +5,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
+} from "@/components/breadcrumb";
 
 const BreadcrumbWrapper = () => {
   const [activeHref, setActiveHref] = useState("/components");

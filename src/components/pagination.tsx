@@ -4,7 +4,7 @@ import {
   ChevronRightIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
-import { Button } from "@/components/ui/button/button";
+import { Button } from "@/components/button";
 import clsx from "clsx";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
@@ -38,6 +38,7 @@ function PaginationItem({ ...props }: React.ComponentProps<"li">) {
 
 type PaginationLinkProps = {
   isActive?: boolean;
+  size?: string;
 } & Pick<React.ComponentProps<typeof Button>, "size"> &
   React.ComponentProps<"a">;
 
