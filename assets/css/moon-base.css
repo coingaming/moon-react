@@ -1,4 +1,4 @@
-/* v1.12.6 */
+/* v1.13.1 */
 *, ::before, ::after, ::backdrop {
 	--accordion-stroke: var(--dimension-border-none);
 	--alert-caution-stroke: var(--dimension-border-default);
