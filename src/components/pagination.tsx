@@ -4,8 +4,9 @@ import {
   ChevronRightIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
-import { Button } from "@/components/button";
+import { Button } from "./button";
 import clsx from "clsx";
+import "../../assets/css/moon-components.css";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (

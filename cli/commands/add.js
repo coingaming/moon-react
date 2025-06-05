@@ -2,23 +2,34 @@ import path from "path";
 import fs from "fs-extra";
 import { execa } from "execa";
 import { COMPONENTS_META } from "../../src/components/components-meta.js";
+import { fileURLToPath } from "url";
 
 const deps = new Set();
 const copied = new Set();
 
 const MOON_CSS_PACKAGE = "@heathmont/moon-css";
 const MOON_CSS_COMPONENTS_FILE = "dist/_components.css";
-const MOON_CSS_COMPONENTS_DIST = "assets/css/moon-components.css";
+const MOON_CSS_COMPONENTS_DIST = "assets/css/_components.css";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+async function copyCssFile(sourcePath, targetPath, label) {
+  if (!fs.existsSync(sourcePath)) {
+    console.error(`❌ ${label} file not found: ${sourcePath}`);
+    process.exit(1);
+  }
+
+  await fs.ensureDir(path.dirname(targetPath));
+  await fs.copyFile(sourcePath, targetPath);
+  console.log(`✅ ${label} copied to '${targetPath}'`);
+}
 
 async function initMoonCss() {
-  const destPath = path.join(process.cwd(), MOON_CSS_COMPONENTS_DIST);
-
-  if (fs.existsSync(destPath)) {
-    console.log(
-      `🎨 CSS already exists at ${MOON_CSS_COMPONENTS_DIST} — skipping.`
-    );
-    return;
-  }
+  const clientRoot = process.cwd();
+  const moonReactRoot = path.resolve(__dirname, "../..");
+  const moonCssPath = path.join(clientRoot, "node_modules", MOON_CSS_PACKAGE);
+  const targetComponentsCss = path.join(clientRoot, MOON_CSS_COMPONENTS_DIST);
 
   try {
     await execa("npx", [MOON_CSS_PACKAGE, "--with-components"], {
@@ -29,23 +40,25 @@ async function initMoonCss() {
     process.exit(1);
   }
 
-  const pkgCssPath = path.join(
-    process.cwd(),
-    "node_modules",
-    MOON_CSS_PACKAGE,
-    MOON_CSS_COMPONENTS_FILE
+  const sourceComponentsCss = path.join(moonCssPath, MOON_CSS_COMPONENTS_FILE);
+  const sourceMoonComponentsCss = path.join(
+    moonReactRoot,
+    "assets/css/moon-components.css"
+  );
+  const targetMoonComponentsCss = path.join(
+    clientRoot,
+    "assets/css/moon-components.css"
   );
 
-  if (!fs.existsSync(pkgCssPath)) {
-    console.error(`❌ CSS file not found in package: ${pkgCssPath}`);
-    process.exit(1);
-  }
-
-  await fs.ensureDir(path.dirname(destPath));
-  await fs.copyFile(pkgCssPath, destPath);
-
-  console.log(
-    `✅ CSS copied from '${MOON_CSS_PACKAGE}' to '${MOON_CSS_COMPONENTS_DIST}'`
+  await copyCssFile(
+    sourceComponentsCss,
+    targetComponentsCss,
+    "_components.css"
+  );
+  await copyCssFile(
+    sourceMoonComponentsCss,
+    targetMoonComponentsCss,
+    "moon-components.css"
   );
 }
 
