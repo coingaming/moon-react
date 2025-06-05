@@ -6,7 +6,6 @@ import {
 } from "lucide-react";
 import { Button } from "./button";
 import clsx from "clsx";
-import "../../assets/css/moon-components.css";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (

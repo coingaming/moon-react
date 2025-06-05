@@ -8,8 +8,8 @@ const deps = new Set();
 const copied = new Set();
 
 const MOON_CSS_PACKAGE = "@heathmont/moon-css";
-const MOON_CSS_COMPONENTS_FILE = "dist/_components.css";
-const MOON_CSS_COMPONENTS_DIST = "assets/css/_components.css";
+const _COMPONENTS_PATH = "assets/css/_components.css";
+const MOON_COMPONENTS_PATH = "assets/css/moon-components.css";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,11 +25,10 @@ async function copyCssFile(sourcePath, targetPath, label) {
   console.log(`✅ ${label} copied to '${targetPath}'`);
 }
 
-async function initMoonCss() {
+export async function initMoonCss() {
   const clientRoot = process.cwd();
   const moonReactRoot = path.resolve(__dirname, "../..");
-  const moonCssPath = path.join(clientRoot, "node_modules", MOON_CSS_PACKAGE);
-  const targetComponentsCss = path.join(clientRoot, MOON_CSS_COMPONENTS_DIST);
+  const targetComponentsCss = path.join(clientRoot, _COMPONENTS_PATH);
 
   try {
     await execa("npx", [MOON_CSS_PACKAGE, "--with-components"], {
@@ -40,23 +39,15 @@ async function initMoonCss() {
     process.exit(1);
   }
 
-  const sourceComponentsCss = path.join(moonCssPath, MOON_CSS_COMPONENTS_FILE);
-  const sourceMoonComponentsCss = path.join(
-    moonReactRoot,
-    "assets/css/moon-components.css"
-  );
-  const targetMoonComponentsCss = path.join(
-    clientRoot,
-    "assets/css/moon-components.css"
-  );
+  const targetMoonComponentsCss = path.join(clientRoot, MOON_COMPONENTS_PATH);
 
   await copyCssFile(
-    sourceComponentsCss,
+    path.join(moonReactRoot, _COMPONENTS_PATH),
     targetComponentsCss,
     "_components.css"
   );
   await copyCssFile(
-    sourceMoonComponentsCss,
+    path.join(moonReactRoot, MOON_COMPONENTS_PATH),
     targetMoonComponentsCss,
     "moon-components.css"
   );
@@ -129,5 +120,4 @@ export default async function add(components, baseDir) {
   }
 
   await addExternalDependencies();
-  await initMoonCss();
 }
