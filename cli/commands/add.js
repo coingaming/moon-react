@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs-extra";
 import { execa } from "execa";
-import { COMPONENTS_META } from "../../src/components/components-meta.js";
+import { COMPONENTS_META } from "../../src/components-meta.js";
 import { fileURLToPath } from "url";
 
 const deps = new Set();

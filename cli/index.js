@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { fileURLToPath } from "url";
 import path from "path";
-import { COMPONENTS_META } from "../src/components/components-meta.js";
+import { COMPONENTS_META } from "../src/components-meta.js";
 import { initMoonCss } from "./commands/add.js";
 
 const ADD_COMMAND = "add";

@@ -1,18 +1,21 @@
 {
   "name": "@heathmont/moon-react",
-  "private": true,
+  "private": false,
   "version": "0.1.0-alpha.0",
   "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "moon-css": "npx @heathmont/moon-css --with-components"
   },
-  "workspaces": [
-    "cli"
-  ],
   "dependencies": {
     "@heathmont/moon-css": "^1.13.1",
     "@radix-ui/react-accordion": "^1.2.8",

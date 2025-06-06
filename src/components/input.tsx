@@ -6,23 +6,19 @@ const sizesClasses = {
   md: "moon-authenticator-md",
   lg: "moon-authenticator-lg",
   xl: "moon-authenticator-xl",
-} as const;
+};
 
-function Input({
-  className,
-  type,
-  size = "md",
-  error = false,
-  ...props
-}: React.ComponentProps<"input"> & {
+type InputProps = React.ComponentProps<"input"> & {
   error?: boolean;
   size?: keyof typeof sizesClasses;
-}) {
+};
+
+function Input({ className, type, error = false, size, ...props }: InputProps) {
   return (
     <input
       type={type}
       data-slot="input"
-      className={clsx("moon-input", sizesClasses[size], {
+      className={clsx("moon-input", sizesClasses[size ?? "md"], {
         "moon-input-error": error,
       })}
       {...props}

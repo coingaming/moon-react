@@ -1,6 +1,7 @@
 {
   "name": "@heathmont/moon-react-cli",
   "version": "0.1.0-alpha.0",
+  "private": false,
   "bin": {
     "moon-react-cli": "./index.js"
   },
