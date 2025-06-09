@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import * as React from "react";
+import "../assets/css/moon-components.css";
 
 const sizesClasses = {
   sm: "moon-table-sm",

@@ -2,6 +2,7 @@ import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 import clsx from "clsx";
+import "../assets/css/moon-components.css";
 
 function DropdownMenu({
   ...props

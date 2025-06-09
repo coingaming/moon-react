@@ -5,6 +5,7 @@ import {
   MoreHorizontalIcon,
 } from "lucide-react";
 import clsx from "clsx";
+import "../assets/css/moon-components.css";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (

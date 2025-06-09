@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs-extra";
 import { execa } from "execa";
-import { COMPONENTS_META } from "../../src/components-meta.js";
+import { COMPONENTS_META } from "../components-meta.js";
 import { fileURLToPath } from "url";
 
 const deps = new Set();
@@ -27,8 +27,10 @@ async function copyCssFile(sourcePath, targetPath, label) {
 
 export async function initMoonCss() {
   const clientRoot = process.cwd();
-  const moonReactRoot = path.resolve(__dirname, "../..");
+  const moonCssAssetsPath = path.resolve(__dirname, "../../src/assets/css");
+
   const targetComponentsCss = path.join(clientRoot, _COMPONENTS_PATH);
+  const targetMoonComponentsCss = path.join(clientRoot, MOON_COMPONENTS_PATH);
 
   try {
     await execa("npx", [MOON_CSS_PACKAGE, "--with-components"], {
@@ -39,15 +41,13 @@ export async function initMoonCss() {
     process.exit(1);
   }
 
-  const targetMoonComponentsCss = path.join(clientRoot, MOON_COMPONENTS_PATH);
-
   await copyCssFile(
-    path.join(moonReactRoot, _COMPONENTS_PATH),
+    path.join(moonCssAssetsPath, "_components.css"),
     targetComponentsCss,
     "_components.css"
   );
   await copyCssFile(
-    path.join(moonReactRoot, MOON_COMPONENTS_PATH),
+    path.join(moonCssAssetsPath, "moon-components.css"),
     targetMoonComponentsCss,
     "moon-components.css"
   );

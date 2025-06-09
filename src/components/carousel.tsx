@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ArrowLeftIcon, ArrowRight } from "lucide-react";
 import { Button } from "./button";
+import "../assets/css/moon-components.css";
 
 type Direction = "left" | "right";
 

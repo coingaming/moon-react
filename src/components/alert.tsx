@@ -1,5 +1,6 @@
 import * as React from "react";
 import clsx from "clsx";
+import "../assets/css/moon-components.css";
 
 const alertVariants = {
   neutral: "moon-alert-neutral",
