@@ -1,7 +1,7 @@
 {
   "name": "@heathmont/moon-react",
   "private": false,
-  "version": "0.1.0-alpha.5",
+  "version": "0.1.0-alpha.7",
   "type": "module",
   "main": "dist/index.js",
   "exports": {
@@ -15,6 +15,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "moon-css": "npx @heathmont/moon-css --with-components"
+  },
+  "bin": {
+    "moon-react-cli": "cli/index.js"
   },
   "dependencies": {
     "@heathmont/moon-css": "^1.13.1",
@@ -35,7 +38,10 @@
     "lucide-react": "^0.507.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "vaul": "^1.1.2"
+    "vaul": "^1.1.2",
+    "execa": "^9.6.0",
+    "fs-extra": "^11.1.1",
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

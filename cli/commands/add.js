@@ -56,7 +56,7 @@ export async function initMoonCss() {
 async function copyComponent(componentName, baseDir) {
   if (copied.has(componentName)) return;
 
-  const src = path.join(baseDir, "../src/components/", `${componentName}.tsx`);
+  const src = path.join(baseDir, `${componentName}.tsx`);
   const dest = path.join(process.cwd(), "components", `${componentName}.tsx`);
 
   if (!fs.existsSync(src)) {
