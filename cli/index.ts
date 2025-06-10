@@ -8,7 +8,7 @@ const ADD_COMMAND = "add";
 
 const __dirname = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
-  "../src/components"
+  "../../src/components"
 );
 const args = process.argv.slice(2);
 
