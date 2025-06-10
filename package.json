@@ -12,12 +12,13 @@
   },
   "scripts": {
     "dev": "vite",
+    "build": "tsc",
     "lint": "eslint .",
     "preview": "vite preview",
     "moon-css": "npx @heathmont/moon-css --with-components"
   },
   "bin": {
-    "moon-react-cli": "cli/index.js"
+    "moon-react-cli": "dist/cli/index.js"
   },
   "dependencies": {
     "@heathmont/moon-css": "^1.13.1",
@@ -32,16 +33,17 @@
     "@radix-ui/react-tabs": "^1.1.11",
     "@tailwindcss/vite": "^4.1.8",
     "@tanstack/react-table": "^8.21.3",
+    "@types/fs-extra": "^11.0.4",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
-    "input-otp": "^1.4.2",
-    "lucide-react": "^0.507.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "vaul": "^1.1.2",
     "execa": "^9.6.0",
     "fs-extra": "^11.1.1",
-    "prompts": "^2.4.2"
+    "input-otp": "^1.4.2",
+    "lucide-react": "^0.507.0",
+    "prompts": "^2.4.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "vaul": "^1.1.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

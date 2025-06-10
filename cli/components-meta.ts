@@ -1,4 +1,9 @@
-export const COMPONENTS_META = {
+type Deps = {
+  deps: string[];
+  internalDeps: string[];
+};
+
+export const COMPONENTS_META: Record<string, Deps> = {
   alert: {
     deps: ["clsx"],
     internalDeps: [],

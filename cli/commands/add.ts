@@ -4,8 +4,8 @@ import { execa } from "execa";
 import { COMPONENTS_META } from "../components-meta.js";
 import { fileURLToPath } from "url";
 
-const deps = new Set();
-const copied = new Set();
+const deps: Set<string> = new Set();
+const copied: Set<string> = new Set();
 
 const MOON_CSS_PACKAGE = "@heathmont/moon-css";
 const _COMPONENTS_PATH = "assets/css/_components.css";
@@ -14,7 +14,11 @@ const MOON_COMPONENTS_PATH = "assets/css/moon-components.css";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-async function copyCssFile(sourcePath, targetPath, label) {
+async function copyCssFile(
+  sourcePath: string,
+  targetPath: string,
+  label: string
+) {
   if (!fs.existsSync(sourcePath)) {
     console.error(`❌ ${label} file not found: ${sourcePath}`);
     process.exit(1);
@@ -53,7 +57,7 @@ export async function initMoonCss() {
   );
 }
 
-async function copyComponent(componentName, baseDir) {
+async function copyComponent(componentName: string, baseDir: string) {
   if (copied.has(componentName)) return;
 
   const src = path.join(baseDir, `${componentName}.tsx`);
@@ -112,7 +116,7 @@ async function addExternalDependencies() {
   }
 }
 
-export default async function add(components, baseDir) {
+export default async function add(components: string[], baseDir: string) {
   const list = Array.isArray(components) ? components : [components];
 
   for (const componentName of list) {

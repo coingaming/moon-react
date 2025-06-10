@@ -28,5 +28,7 @@ if (args[0] === ADD_COMMAND && args.length > 1) {
     await initMoonCss();
   }
 } else {
-  console.log(`❌ Command no valid. use: my-ui add <component>`);
+  console.log(
+    `❌ Command no valid. use: npx @heathmont/moon-react add <component>`
+  );
 }
