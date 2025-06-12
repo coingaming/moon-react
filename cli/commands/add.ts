@@ -31,7 +31,7 @@ async function copyCssFile(
 
 export async function initMoonCss() {
   const clientRoot = process.cwd();
-  const moonCssAssetsPath = path.resolve(__dirname, "../../src/assets/css");
+  const moonCssAssetsPath = path.resolve(__dirname, "../../../src/assets/css");
 
   const targetComponentsCss = path.join(clientRoot, _COMPONENTS_PATH);
   const targetMoonComponentsCss = path.join(clientRoot, MOON_COMPONENTS_PATH);

@@ -13,9 +13,14 @@ const __dirname = path.join(
 const args = process.argv.slice(2);
 
 if (args[0] === ADD_COMMAND && args.length > 1) {
-  const components = args.filter((arg) =>
-    Object.keys(COMPONENTS_META).includes(arg)
+  const components = args.filter(
+    (arg) => !arg.startsWith("--") && Object.keys(COMPONENTS_META).includes(arg)
   );
+
+  if (!components.length) {
+    console.log(`❌ No valid components provided.`);
+    process.exit(1);
+  }
 
   const addCommand = await import("./commands/add.js");
   const includeCss = args.includes("--with-css");
