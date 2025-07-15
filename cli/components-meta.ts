@@ -1,39 +1,63 @@
+import { fileURLToPath } from "url";
+import path from "path";
+
+const __dirname = path.join(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../../src"
+);
+
 type Deps = {
   deps: string[];
   internalDeps: string[];
 };
 
 export const COMPONENTS_META: Record<string, Deps> = {
+  avatar: {
+    deps: [],
+    internalDeps: [
+      path.resolve(path.join(__dirname, "helpers/index.js")),
+      path.join(__dirname, "assets/icons/User.tsx"),
+    ],
+  },
+  accordion: {
+    deps: [],
+    internalDeps: [path.resolve(path.join(__dirname, "helpers/index.js"))],
+  },
   alert: {
     deps: ["clsx"],
     internalDeps: [],
   },
   authenticator: {
-    deps: ["input-otp", "lucide-react", "clsx"],
+    deps: ["clsx"],
+    internalDeps: [],
+  },
+  badge: {
+    deps: [],
     internalDeps: [],
   },
   breadcrumb: {
-    deps: ["@radix-ui/react-slot", "lucide-react", "clsx"],
+    deps: ["clsx"],
     internalDeps: [],
   },
   button: {
-    deps: ["@radix-ui/react-slot", "clsx"],
+    deps: ["clsx"],
     internalDeps: [],
   },
   carousel: {
-    deps: ["lucide-react"],
+    deps: [],
     internalDeps: ["button"],
   },
+  select: { deps: ["clsx"], internalDeps: [] },
   checkbox: {
-    deps: ["@radix-ui/react-checkbox", "lucide-react"],
-    internalDeps: [],
-  },
-  dialog: {
-    deps: ["@radix-ui/react-dialog", "lucide-react"],
+    deps: [],
     internalDeps: [],
   },
   dropdown: {
-    deps: ["@radix-ui/react-dropdown-menu", "lucide-react", "clsx"],
+    deps: ["clsx"],
+    internalDeps: ["popover"],
+  },
+  "linear-progress": {
+    deps: ["clsx"],
     internalDeps: [],
   },
   input: {
@@ -48,11 +72,15 @@ export const COMPONENTS_META: Record<string, Deps> = {
     deps: ["clsx", "lucide-react"],
     internalDeps: ["button"],
   },
-  tabs: {
-    deps: ["@radix-ui/react-tabs", "clsx"],
+  switch: {
+    deps: ["clsx"],
     internalDeps: [],
   },
   textarea: {
+    deps: ["clsx"],
+    internalDeps: [],
+  },
+  tooltip: {
     deps: ["clsx"],
     internalDeps: [],
   },

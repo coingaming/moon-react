@@ -2,38 +2,42 @@
 import { fileURLToPath } from "url";
 import path from "path";
 import { COMPONENTS_META } from "./components-meta.js";
-import { initMoonCss } from "./commands/add.js";
+import { initMoonCss } from "./helpers.js";
+const addCommand = await import("./commands/add.js");
 
-const ADD_COMMAND = "add";
-
-const __dirname = path.join(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "../../src/components"
-);
 const args = process.argv.slice(2);
 
-if (args[0] === ADD_COMMAND && args.length > 1) {
-  const components = args.filter(
-    (arg) => !arg.startsWith("--") && Object.keys(COMPONENTS_META).includes(arg)
+const cssConfigIndex = args.findIndex((arg) => arg === "--css-path");
+const cssPath = cssConfigIndex !== -1 ? args[cssConfigIndex + 1] : null;
+const hasAllComponentsFlag = args.find((arg) => arg === "--all-components");
+
+const addComponents = () => {
+  const __dirname = path.join(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "../../src/components"
   );
-
-  if (!components.length) {
-    console.log(`❌ No valid components provided.`);
-    process.exit(1);
-  }
-
-  const addCommand = await import("./commands/add.js");
-  const includeCss = args.includes("--with-css");
-
   const dirBase = path.resolve(__dirname);
+  const ADD_COMMAND = "add";
 
-  addCommand.default(components, dirBase);
+  if (hasAllComponentsFlag) {
+    addCommand.default(Object.keys(COMPONENTS_META), dirBase);
+  } else if (args[0] === ADD_COMMAND && args.length > 1) {
+    const components = args.filter(
+      (arg) =>
+        !arg.startsWith("--") && Object.keys(COMPONENTS_META).includes(arg)
+    );
 
-  if (includeCss) {
-    await initMoonCss();
+    if (!components.length) {
+      console.log(`❌ No valid components provided.`);
+      process.exit(1);
+    }
+
+    addCommand.default(components, dirBase);
   }
-} else {
-  console.log(
-    `❌ Command no valid. use: npx @heathmont/moon-react add <component>`
-  );
-}
+};
+
+initMoonCss(cssPath).then((response) => {
+  if (response !== undefined) {
+    addComponents();
+  }
+});

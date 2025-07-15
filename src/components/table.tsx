@@ -1,24 +1,26 @@
-import clsx from "clsx";
 import * as React from "react";
-import "../assets/css/moon-components.css";
+import mergeClasses from "../helpers";
 
-const sizesClasses = {
-  sm: "moon-table-sm",
-  md: "moon-table-md",
-  lg: "moon-table-lg",
-  xl: "moon-table-xl",
-} as const;
+export enum TableSizes {
+  sm = "sm",
+  md = "md",
+  lg = "lg",
+  xl = "xl",
+}
 
 function Table({
   className,
-  size = "md",
+  size = TableSizes.md,
   ...props
-}: React.ComponentProps<"table"> & { size?: keyof typeof sizesClasses }) {
+}: React.ComponentProps<"table"> & { size?: TableSizes }) {
   return (
     <div data-slot="table-container">
       <table
         data-slot="table"
-        className={clsx("moon-table", sizesClasses[size])}
+        className={mergeClasses(
+          "moon-table",
+          size !== TableSizes.md && `moon-table-${size}`
+        )}
         {...props}
       />
     </div>
