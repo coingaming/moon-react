@@ -1,6 +1,6 @@
 import React from "react";
-import UserIcon from "../assets/icons/User";
-import mergeClasses from "../helpers";
+import UserIcon from "../assets/icons/UserIcon";
+import mergeClasses from "../helpers/mergeClasses";
 
 export enum AvatarSizes {
   xs = "xs",

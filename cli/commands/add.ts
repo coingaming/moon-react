@@ -1,32 +1,38 @@
 import path from "path";
 import fs from "fs-extra";
-import { execa } from "execa";
 import { COMPONENTS_META } from "../components-meta.js";
 
-const deps: Set<string> = new Set();
 const copied: Set<string> = new Set();
 
-async function copyComponent(componentName: string, baseDir: string) {
+const logger = {
+  nonExistingComponent: (src: string, componentName: string) => {
+    if (!fs.existsSync(src)) {
+      console.error(`❌ '${componentName}' doesn't exist.`);
+      process.exit(1);
+    }
+  },
+  copiedComponent: (componentName: string, destPath: string) => {
+    console.log(`✅ '${componentName}' copied to '${destPath}'`);
+  },
+};
+
+async function copyComponent(
+  componentName: string,
+  baseDir: string,
+  destDir: string
+) {
   if (copied.has(componentName)) return;
 
   const src = path.join(baseDir, `${componentName}.tsx`);
-  const dest = path.join(
-    process.cwd(),
-    "src/components",
-    `${componentName}.tsx`
-  );
+  const dest = path.join(process.cwd(), destDir, `${componentName}.tsx`);
 
-  if (!fs.existsSync(src)) {
-    console.error(`❌ Component '${componentName}' doesn't exist.`);
-    process.exit(1);
-  }
+  logger.nonExistingComponent(src, componentName);
 
   await fs.ensureDir(path.dirname(dest));
   await fs.copy(src, dest);
 
-  console.log(
-    `✅ Component '${componentName}' copied to 'components/${componentName}.tsx'`
-  );
+  logger.copiedComponent(componentName, `${destDir}/${componentName}.tsx`);
+
   copied.add(componentName);
 
   const meta = COMPONENTS_META[componentName];
@@ -35,37 +41,8 @@ async function copyComponent(componentName: string, baseDir: string) {
     return;
   }
 
-  for (const depName of meta.internalDeps) {
-    await copyComponent(depName?.name, baseDir);
-  }
-}
-
-async function addExternalDependencies() {
-  const pkgPath = path.join(process.cwd(), "package.json");
-  const pkg = await fs.readJson(pkgPath);
-  const installed = {
-    ...pkg.dependencies,
-    ...pkg.devDependencies,
-  };
-
-  for (const name of copied) {
-    COMPONENTS_META[name]?.deps?.forEach((dep) => {
-      if (!installed[dep]) {
-        deps.add(dep);
-      }
-    });
-  }
-
-  if (deps.size === 0) return;
-
-  const depsList = Array.from(deps);
-  console.log(`📦 Installing new dependencies: ${depsList.join(", ")}`);
-
-  try {
-    await execa("yarn", ["add", ...depsList], { stdio: "inherit" });
-  } catch (err) {
-    console.error("❌ Failed to install dependencies:", err);
-    process.exit(1);
+  for (const dep of meta.internalDeps) {
+    await copyComponent(dep.name, dep.srcPath, dep.destPath);
   }
 }
 
@@ -73,8 +50,6 @@ export default async function add(components: string[], baseDir: string) {
   const list = Array.isArray(components) ? components : [components];
 
   for (const componentName of list) {
-    await copyComponent(componentName, baseDir);
+    await copyComponent(componentName, baseDir, "src/components");
   }
-
-  await addExternalDependencies();
 }

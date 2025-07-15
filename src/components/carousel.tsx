@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Button } from "./button";
-import mergeClasses from "../helpers";
-import ArrowLeft from "../assets/icons/ArrowLeft";
-import ArrowRight from "../assets/icons/ArrowRight";
+import mergeClasses from "../helpers/mergeClasses";
+import ArrowLeft from "../assets/icons/ArrowLeftIcon";
+import ArrowRight from "../assets/icons/ArrowRightIcon";
 
 export enum ScrollDirecion {
   right = "right",

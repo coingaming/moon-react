@@ -6,46 +6,86 @@ const __dirname = path.join(
   "../../src"
 );
 
+type InternalDeps = {
+  name: string;
+  srcPath: string;
+  destPath: string;
+};
+
 type Deps = {
   deps: string[];
-  internalDeps: string[];
+  internalDeps: InternalDeps[];
+};
+
+const mergeClassesHelper = {
+  name: "mergeClasses",
+  srcPath: path.resolve(path.join(__dirname, "helpers")),
+  destPath: "src/helpers",
+};
+
+const componentsData: InternalDeps = {
+  name: "",
+  srcPath: path.resolve(path.join(__dirname, "components")),
+  destPath: "src/components",
+};
+
+const iconsData: InternalDeps = {
+  name: "",
+  srcPath: path.join(__dirname, "assets/icons"),
+  destPath: "src/assets/icons",
 };
 
 export const COMPONENTS_META: Record<string, Deps> = {
   avatar: {
     deps: [],
     internalDeps: [
-      path.resolve(path.join(__dirname, "helpers/index.js")),
-      path.join(__dirname, "assets/icons/User.tsx"),
+      mergeClassesHelper,
+      {
+        ...iconsData,
+        name: "UserIcon",
+      },
     ],
   },
   accordion: {
     deps: [],
-    internalDeps: [path.resolve(path.join(__dirname, "helpers/index.js"))],
+    internalDeps: [mergeClassesHelper],
   },
   alert: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   authenticator: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   badge: {
     deps: [],
     internalDeps: [],
   },
   breadcrumb: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   button: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   carousel: {
     deps: [],
-    internalDeps: ["button"],
+    internalDeps: [
+      {
+        ...componentsData,
+        name: "button",
+      },
+      {
+        ...iconsData,
+        name: "ArrowLeftIcon",
+      },
+      {
+        ...iconsData,
+        name: "ArrowRightIcon",
+      },
+    ],
   },
   select: { deps: ["clsx"], internalDeps: [] },
   checkbox: {
@@ -54,7 +94,12 @@ export const COMPONENTS_META: Record<string, Deps> = {
   },
   dropdown: {
     deps: ["clsx"],
-    internalDeps: ["popover"],
+    internalDeps: [
+      {
+        ...componentsData,
+        name: "popover",
+      },
+    ],
   },
   "linear-progress": {
     deps: ["clsx"],
@@ -70,7 +115,12 @@ export const COMPONENTS_META: Record<string, Deps> = {
   },
   pagination: {
     deps: ["clsx", "lucide-react"],
-    internalDeps: ["button"],
+    internalDeps: [
+      {
+        ...componentsData,
+        name: "button",
+      },
+    ],
   },
   switch: {
     deps: ["clsx"],
