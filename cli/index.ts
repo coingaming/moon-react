@@ -2,14 +2,19 @@
 import { fileURLToPath } from "url";
 import path from "path";
 import { COMPONENTS_META } from "./components-meta.js";
-import { initMoonCss } from "./helpers.js";
+import { filterArgs, initMoonCss, logger } from "./helpers.js";
+
 const addCommand = await import("./commands/add.js");
 
-const args = process.argv.slice(2);
+enum MOON_REACT_ARGS {
+  ALL_COMPONENTS = "--all-components",
+  ADD = "--add",
+}
 
-const cssConfigIndex = args.findIndex((arg) => arg === "--css-path");
-const cssPath = cssConfigIndex !== -1 ? args[cssConfigIndex + 1] : null;
-const hasAllComponentsFlag = args.find((arg) => arg === "--all-components");
+const args = process.argv.slice(2);
+const hasAllComponentsFlag = args.find(
+  (arg) => arg === MOON_REACT_ARGS.ALL_COMPONENTS
+);
 
 const addComponents = () => {
   const __dirname = path.join(
@@ -17,18 +22,17 @@ const addComponents = () => {
     "../../src/components"
   );
   const dirBase = path.resolve(__dirname);
-  const ADD_COMMAND = "add";
 
   if (hasAllComponentsFlag) {
     addCommand.default(Object.keys(COMPONENTS_META), dirBase);
-  } else if (args[0] === ADD_COMMAND && args.length > 1) {
+  } else if (args[0] === MOON_REACT_ARGS.ADD && args.length > 1) {
     const components = args.filter(
       (arg) =>
         !arg.startsWith("--") && Object.keys(COMPONENTS_META).includes(arg)
     );
 
     if (!components.length) {
-      console.log(`❌ No valid components provided.`);
+      logger.nonValidComponentsProvided();
       process.exit(1);
     }
 
@@ -36,8 +40,19 @@ const addComponents = () => {
   }
 };
 
-initMoonCss(cssPath).then((response) => {
-  if (response !== undefined) {
-    addComponents();
-  }
-});
+const main = () => {
+  const filteredArgs = filterArgs(
+    args.filter(
+      (currentArg) =>
+        !Object.values(MOON_REACT_ARGS).includes(currentArg as MOON_REACT_ARGS)
+    )
+  );
+
+  initMoonCss(filteredArgs).then((response) => {
+    if (response !== undefined) {
+      addComponents();
+    }
+  });
+};
+
+main();

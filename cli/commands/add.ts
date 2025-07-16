@@ -1,20 +1,9 @@
 import path from "path";
 import fs from "fs-extra";
 import { COMPONENTS_META } from "../components-meta.js";
+import { logger } from "../helpers.js";
 
 const copied: Set<string> = new Set();
-
-const logger = {
-  nonExistingComponent: (src: string, componentName: string) => {
-    if (!fs.existsSync(src)) {
-      console.error(`❌ '${componentName}' doesn't exist.`);
-      process.exit(1);
-    }
-  },
-  copiedComponent: (componentName: string, destPath: string) => {
-    console.log(`✅ '${componentName}' copied to '${destPath}'`);
-  },
-};
 
 async function copyComponent(
   componentName: string,
@@ -26,7 +15,10 @@ async function copyComponent(
   const src = path.join(baseDir, `${componentName}.tsx`);
   const dest = path.join(process.cwd(), destDir, `${componentName}.tsx`);
 
-  logger.nonExistingComponent(src, componentName);
+  if (!fs.existsSync(src)) {
+    logger.nonExistingComponent(componentName);
+    process.exit(1);
+  }
 
   await fs.ensureDir(path.dirname(dest));
   await fs.copy(src, dest);
