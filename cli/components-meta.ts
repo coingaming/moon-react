@@ -93,14 +93,15 @@ export const COMPONENTS_META: Record<string, Deps> = {
       },
     ],
   },
-  select: { deps: ["clsx"], internalDeps: [] },
+  select: { deps: [], internalDeps: [mergeClassesHelper] },
   checkbox: {
     deps: [],
-    internalDeps: [],
+    internalDeps: [mergeClassesHelper],
   },
   dropdown: {
-    deps: ["clsx"],
+    deps: [],
     internalDeps: [
+      mergeClassesHelper,
       {
         ...componentsData,
         name: "popover",
@@ -108,20 +109,21 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   "linear-progress": {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   input: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   table: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   pagination: {
-    deps: ["clsx", "lucide-react"],
+    deps: ["lucide-react"],
     internalDeps: [
+      mergeClassesHelper,
       {
         ...componentsData,
         name: "button",
@@ -129,12 +131,12 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   switch: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   textarea: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   tooltip: {
     deps: [],
