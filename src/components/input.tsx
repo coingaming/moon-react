@@ -1,17 +1,16 @@
-import clsx from "clsx";
 import * as React from "react";
-import "../assets/css/moon-components.css";
+import mergeClasses from "../helpers/mergeClasses";
 
-const sizesClasses = {
-  sm: "moon-authenticator-sm",
-  md: "moon-authenticator-md",
-  lg: "moon-authenticator-lg",
-  xl: "moon-authenticator-xl",
-};
+export enum InputSizes {
+  sm = "sm",
+  md = "md",
+  lg = "lg",
+  xl = "xl",
+}
 
 type InputProps = React.ComponentProps<"input"> & {
   error?: boolean;
-  size?: keyof typeof sizesClasses;
+  size?: InputSizes;
 };
 
 function Input({ className, type, error = false, size, ...props }: InputProps) {
@@ -19,9 +18,13 @@ function Input({ className, type, error = false, size, ...props }: InputProps) {
     <input
       type={type}
       data-slot="input"
-      className={clsx("moon-input", sizesClasses[size ?? "md"], {
-        "moon-input-error": error,
-      })}
+      className={mergeClasses(
+        "moon-input",
+        size !== "md" && `moon-input-${size}`,
+        {
+          "moon-input-error": error,
+        }
+      )}
       {...props}
     />
   );

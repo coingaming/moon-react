@@ -1,92 +1,172 @@
-import React from "react";
-import { OTPInput, OTPInputContext } from "input-otp";
-import { MinusIcon } from "lucide-react";
-import { clsx } from "clsx";
-import "../assets/css/moon-components.css";
+import { createContext, useContext, useRef, useState } from "react";
+import mergeClasses from "../helpers/mergeClasses";
 
-function Authenticator({
-  className,
-  containerClassName,
-  ...props
-}: React.ComponentProps<typeof OTPInput> & {
-  containerClassName?: string;
-}) {
-  return (
-    <OTPInput
-      data-slot="input-otp"
-      className={className}
-      containerClassName={containerClassName}
-      {...props}
-    />
-  );
+export enum AuthenticatorSizes {
+  sm = "sm",
+  md = "md",
+  lg = "lg",
+  xl = "xl",
 }
 
-type Size = "sm" | "md" | "lg" | "xl";
+interface AuthenticatorProps {
+  length?: number;
+  size?: AuthenticatorSizes;
+  error?: boolean;
+  value?: string;
+  onChange?: (char: string) => void;
+  children: React.ReactNode;
+}
 
-const sizesClasses = {
-  sm: "moon-authenticator-sm",
-  md: "moon-authenticator-md",
-  lg: "moon-authenticator-lg",
-  xl: "moon-authenticator-xl",
+type AuthenticatorContextType = {
+  onKeyDown: (
+    _index: number,
+    _e: React.KeyboardEvent<HTMLInputElement>
+  ) => void;
+  onPaste: (_e: React.ClipboardEvent<HTMLInputElement>) => void;
+  onChange: (index: number, char: string) => void;
+  size: AuthenticatorSizes;
+  error: boolean;
+  internalValue: string;
+  inputsRef: React.RefObject<(HTMLInputElement | null)[]> | null;
 };
 
-function AuthenticatorGroup({
-  className,
+const AUTHENTICATOR_DEFAULT_CONTEXT = {
+  onKeyDown: (_index: number, _e: React.KeyboardEvent<HTMLInputElement>) => {},
+  onPaste: (_e: React.ClipboardEvent<HTMLInputElement>) => {},
+  onChange: (_index: number, _char: string) => {},
+  size: AuthenticatorSizes.md,
+  internalValue: "",
+  error: false,
+  inputsRef: null,
+};
+
+const AuthenticatorContext = createContext<AuthenticatorContextType>(
+  AUTHENTICATOR_DEFAULT_CONTEXT
+);
+
+const useAuthenticatorContext = () => {
+  const context = useContext(AuthenticatorContext);
+
+  if (!context) {
+    throw new Error(
+      "Authenticator components should go inside <Authenticator />"
+    );
+  }
+
+  return context;
+};
+
+export default function Authenticator({
+  length = 6,
+  size = AuthenticatorSizes.md,
   error = false,
-  size = "md",
-  ...props
-}: React.ComponentProps<"div"> & {
-  error?: boolean;
-  size?: Size;
-}) {
+  value = "",
+  onChange,
+  children,
+}: AuthenticatorProps) {
+  const [internalValue, setInternalValue] = useState(value);
+  const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
+
+  const handleChange = (index: number, char: string) => {
+    const newValueArray = internalValue.split("");
+    newValueArray[index] = char;
+    const newValue = newValueArray.join("");
+
+    setInternalValue(newValue);
+    onChange?.(newValue);
+
+    if (char && index < length - 1) {
+      inputsRef.current[index + 1]?.focus();
+    }
+  };
+
+  const handleKeyDown = (
+    index: number,
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Backspace" && !internalValue[index] && index > 0) {
+      inputsRef.current[index - 1]?.focus();
+    }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const pasted = e.clipboardData.getData("text").slice(0, length);
+    const clean = pasted.replace(/[^0-9a-zA-Z]/g, "").slice(0, length);
+
+    if (clean) {
+      setInternalValue(clean.padEnd(length, ""));
+      onChange?.(clean);
+
+      const targetIndex = Math.min(clean.length, length - 1);
+      inputsRef.current[targetIndex]?.focus();
+      e.preventDefault();
+    }
+  };
+  return (
+    <>
+      <AuthenticatorContext.Provider
+        value={{
+          onChange: handleChange,
+          onPaste: handlePaste,
+          onKeyDown: handleKeyDown,
+          size,
+          error,
+          internalValue,
+          inputsRef,
+        }}
+      >
+        {children}
+      </AuthenticatorContext.Provider>
+    </>
+  );
+}
+
+export const AuthenticatorGroup = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  const { size, error } = useAuthenticatorContext();
+
   return (
     <div
-      data-slot="input-otp-group"
-      className={clsx("moon-authenticator", sizesClasses[size], {
-        "moon-authenticator-error": error,
-      })}
+      className={mergeClasses(
+        "moon-authenticator",
+        size !== AuthenticatorSizes.md && `moon-authenticator-${size}`,
+        error && "moon-authenticator-error",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const AuthenticatorSlot = ({
+  index,
+  ...props
+}: Omit<React.ComponentProps<"input">, "size"> & { index: number }) => {
+  const { onChange, onKeyDown, internalValue, onPaste, inputsRef } =
+    useAuthenticatorContext();
+  return (
+    <input
+      ref={(el) => {
+        if (inputsRef?.current) {
+          inputsRef.current[index] = el;
+        }
+      }}
+      type="text"
+      maxLength={1}
+      value={internalValue[index] || ""}
+      onChange={(e) => onChange(index, e.target.value.slice(-1))}
+      onKeyDown={(e) => onKeyDown(index, e)}
+      onPaste={onPaste}
+      autoComplete="off"
+      inputMode="text"
+      pattern="[0-9a-zA-Z]*"
       {...props}
     />
   );
-}
-
-function AuthenticatorSlot({
-  index,
-  className,
-  ...props
-}: React.ComponentProps<"div"> & {
-  index: number;
-}) {
-  const AuthenticatorContext = React.useContext(OTPInputContext);
-  const { char, isActive } = AuthenticatorContext?.slots[index] ?? {};
-  const ref = React.useRef<HTMLInputElement>(null);
-
-  return (
-    <div
-      className={clsx("moon-authenticator-slot", {
-        "moon-authenticator-slot-focus": isActive,
-      })}
-      ref={ref}
-      data-active={isActive}
-      {...props}
-      tabIndex={0}
-    >
-      <span>{char}</span>
-    </div>
-  );
-}
-
-function AuthenticatorSeparator({ ...props }: React.ComponentProps<"div">) {
-  return (
-    <div data-slot="input-otp-separator" role="separator" {...props}>
-      <MinusIcon />
-    </div>
-  );
-}
-
-export {
-  Authenticator,
-  AuthenticatorGroup,
-  AuthenticatorSlot,
-  AuthenticatorSeparator,
 };
