@@ -2,38 +2,57 @@
 import { fileURLToPath } from "url";
 import path from "path";
 import { COMPONENTS_META } from "./components-meta.js";
-import { initMoonCss } from "./commands/add.js";
+import { filterArgs, initMoonCss, logger } from "./helpers.js";
 
-const ADD_COMMAND = "add";
+const addCommand = await import("./commands/add.js");
 
-const __dirname = path.join(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "../../src/components"
-);
+enum MOON_REACT_ARGS {
+  ALL_COMPONENTS = "--all-components",
+  ADD = "--add",
+}
+
 const args = process.argv.slice(2);
+const hasAllComponentsFlag = args.find(
+  (arg) => arg === MOON_REACT_ARGS.ALL_COMPONENTS
+);
 
-if (args[0] === ADD_COMMAND && args.length > 1) {
-  const components = args.filter(
-    (arg) => !arg.startsWith("--") && Object.keys(COMPONENTS_META).includes(arg)
+const addComponents = () => {
+  const __dirname = path.join(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "../../src/components"
   );
-
-  if (!components.length) {
-    console.log(`❌ No valid components provided.`);
-    process.exit(1);
-  }
-
-  const addCommand = await import("./commands/add.js");
-  const includeCss = args.includes("--with-css");
-
   const dirBase = path.resolve(__dirname);
 
-  addCommand.default(components, dirBase);
+  if (hasAllComponentsFlag) {
+    addCommand.default(Object.keys(COMPONENTS_META), dirBase);
+  } else if (args[0] === MOON_REACT_ARGS.ADD && args.length > 1) {
+    const components = args.filter(
+      (arg) =>
+        !arg.startsWith("--") && Object.keys(COMPONENTS_META).includes(arg)
+    );
 
-  if (includeCss) {
-    await initMoonCss();
+    if (!components.length) {
+      logger.nonValidComponentsProvided();
+      process.exit(1);
+    }
+
+    addCommand.default(components, dirBase);
   }
-} else {
-  console.log(
-    `❌ Command no valid. use: npx @heathmont/moon-react add <component>`
+};
+
+const main = () => {
+  const filteredArgs = filterArgs(
+    args.filter(
+      (currentArg) =>
+        !Object.values(MOON_REACT_ARGS).includes(currentArg as MOON_REACT_ARGS)
+    )
   );
-}
+
+  initMoonCss(filteredArgs).then((response) => {
+    if (response !== undefined) {
+      addComponents();
+    }
+  });
+};
+
+main();

@@ -1,24 +1,34 @@
-import * as React from "react";
-import { ArrowLeftIcon, ArrowRight } from "lucide-react";
+import React, { useContext } from "react";
 import { Button } from "./button";
-import "../assets/css/moon-components.css";
+import mergeClasses from "../helpers/mergeClasses";
+import ArrowLeft from "../assets/icons/ArrowLeftIcon";
+import ArrowRight from "../assets/icons/ArrowRightIcon";
 
-type Direction = "left" | "right";
+export enum ScrollDirecion {
+  right = "right",
+  left = "left",
+}
 
 type MoonCarouselContextType = {
-  scrollBy: (direction: "left" | "right") => void;
+  scrollBy: (direction: ScrollDirecion) => void;
   reelRef: React.RefObject<HTMLDivElement | null> | null;
 };
 
-const MoonCarouselContext = React.createContext<MoonCarouselContextType>({
-  scrollBy: (_direction: Direction) => null,
+const CarouselContext = React.createContext<MoonCarouselContextType>({
+  scrollBy: (_direction: ScrollDirecion) => null,
   reelRef: null,
 });
 
-export const MoonCarousel = ({ children }: { children: React.ReactNode }) => {
+export function useCarouselContext() {
+  const ctx = useContext(CarouselContext);
+  if (!ctx) throw new Error("Carousel components must be inside <Carousel>");
+  return ctx;
+}
+
+export const Carousel = ({ children }: { children: React.ReactNode }) => {
   const reelRef = React.useRef<HTMLDivElement>(null);
 
-  const scrollBy = (direction: "left" | "right") => {
+  const scrollBy = (direction: ScrollDirecion) => {
     if (!reelRef.current) return;
 
     const reel = reelRef.current;
@@ -36,60 +46,51 @@ export const MoonCarousel = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <MoonCarouselContext.Provider value={{ scrollBy, reelRef }}>
-      <div className="moon-carousel">{children}</div>
-    </MoonCarouselContext.Provider>
+    <CarouselContext.Provider value={{ scrollBy, reelRef }}>
+      {children}
+    </CarouselContext.Provider>
   );
 };
 
-export const MoonCarouselContent = ({
+export const CarouselContent = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const { reelRef } = React.useContext(MoonCarouselContext);
+  const { reelRef } = useCarouselContext();
 
   return (
-    <div className="moon-carousel-reel" ref={reelRef}>
-      {children}
+    <div className="moon-carousel">
+      <div className="moon-carousel-reel" ref={reelRef}>
+        {children}
+      </div>
     </div>
   );
 };
 
-export const MoonCarouselItem = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const CarouselItem = ({ children }: { children: React.ReactNode }) => {
   return <div className="moon-carousel-item">{children}</div>;
 };
 
-export const MoonCarouselPrev = () => {
-  const { scrollBy } = React.useContext(MoonCarouselContext);
+export const CarouselControl = ({
+  className,
+  direction,
+  ...props
+}: React.ComponentProps<"button"> & {
+  direction: ScrollDirecion;
+}) => {
+  const { scrollBy } = useCarouselContext();
 
   return (
     <Button
-      className="moon-carousel-control"
-      onClick={() => {
-        scrollBy("left");
+      className={mergeClasses("moon-carousel-control", className)}
+      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+        scrollBy(direction);
+        props?.onClick?.(e);
       }}
+      {...props}
     >
-      <ArrowLeftIcon />
-    </Button>
-  );
-};
-
-export const MoonCarouselNext = () => {
-  const { scrollBy } = React.useContext(MoonCarouselContext);
-
-  return (
-    <Button
-      className="moon-carousel-control"
-      onClick={() => {
-        scrollBy("right");
-      }}
-    >
-      <ArrowRight />
+      {direction === ScrollDirecion.right ? <ArrowRight /> : <ArrowLeft />}
     </Button>
   );
 };

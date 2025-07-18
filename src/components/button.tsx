@@ -1,44 +1,37 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import clsx from "clsx";
-import "../assets/css/moon-components.css";
+import mergeClasses from "../helpers/mergeClasses";
 
-const buttonVariants = {
-  fill: "moon-button-fill",
-  soft: "moon-button-soft",
-  outline: "moon-button-outline",
-  ghost: "moon-button-ghost",
-} as const;
+enum ButtonSizes {
+  xs = "xs",
+  sm = "sm",
+  md = "md",
+  lg = "lg",
+  xl = "xl",
+}
 
-const buttonSizes = {
-  xs: "moon-button-xs",
-  sm: "moon-button-sm",
-  md: "moon-button-md",
-  lg: "moon-button-lg",
-  xl: "moon-button-xl",
-} as const;
+enum ButtonVariants {
+  soft = "soft",
+  outline = "outline",
+  filled = "filled",
+  ghost = "ghost",
+}
 
 function Button({
   className,
-  variant = "fill",
-  size = "md",
-  asChild = false,
+  variant = ButtonVariants.filled,
+  size = ButtonSizes.md,
   ...props
 }: React.ComponentProps<"button"> & {
-  variant?: keyof typeof buttonVariants;
-  size?: keyof typeof buttonSizes;
-} & {
-  asChild?: boolean;
+  variant?: ButtonVariants;
+  size?: ButtonSizes;
 }) {
-  const Comp = asChild ? Slot : "button";
-
   return (
-    <Comp
+    <button
       data-slot="button"
-      className={clsx(
+      className={mergeClasses(
         "moon-button",
-        buttonVariants[variant],
-        buttonSizes[size],
+        variant !== ButtonVariants.filled && `moon-button-${variant}`,
+        size !== ButtonSizes.md && `moon-button-${size}`,
         className
       )}
       {...props}
@@ -46,4 +39,4 @@ function Button({
   );
 }
 
-export { Button, buttonVariants };
+export { Button, ButtonVariants, ButtonSizes };

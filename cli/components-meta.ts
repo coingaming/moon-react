@@ -1,39 +1,108 @@
+import { fileURLToPath } from "url";
+import path from "path";
+
+const __dirname = path.join(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../../src"
+);
+
+type InternalDeps = {
+  name: string;
+  srcPath: string;
+  destPath: string;
+};
+
 type Deps = {
   deps: string[];
-  internalDeps: string[];
+  internalDeps: InternalDeps[];
+};
+
+const mergeClassesHelper = {
+  name: "mergeClasses",
+  srcPath: path.resolve(path.join(__dirname, "helpers")),
+  destPath: "src/helpers",
+};
+
+const componentsData: InternalDeps = {
+  name: "",
+  srcPath: path.resolve(path.join(__dirname, "components")),
+  destPath: "src/components",
+};
+
+const iconsData: InternalDeps = {
+  name: "",
+  srcPath: path.join(__dirname, "assets/icons"),
+  destPath: "src/assets/icons",
 };
 
 export const COMPONENTS_META: Record<string, Deps> = {
+  avatar: {
+    deps: [],
+    internalDeps: [
+      mergeClassesHelper,
+      {
+        ...iconsData,
+        name: "UserIcon",
+      },
+    ],
+  },
+  accordion: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
   alert: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   authenticator: {
-    deps: ["input-otp", "lucide-react", "clsx"],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  badge: {
+    deps: [],
     internalDeps: [],
   },
   breadcrumb: {
-    deps: ["@radix-ui/react-slot", "lucide-react", "clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   button: {
-    deps: ["@radix-ui/react-slot", "clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   carousel: {
-    deps: ["lucide-react"],
-    internalDeps: ["button"],
+    deps: [],
+    internalDeps: [
+      {
+        ...componentsData,
+        name: "button",
+      },
+      {
+        ...iconsData,
+        name: "ArrowLeftIcon",
+      },
+      {
+        ...iconsData,
+        name: "ArrowRightIcon",
+      },
+    ],
   },
+  select: { deps: ["clsx"], internalDeps: [] },
   checkbox: {
-    deps: ["@radix-ui/react-checkbox", "lucide-react"],
-    internalDeps: [],
-  },
-  dialog: {
-    deps: ["@radix-ui/react-dialog", "lucide-react"],
+    deps: [],
     internalDeps: [],
   },
   dropdown: {
-    deps: ["@radix-ui/react-dropdown-menu", "lucide-react", "clsx"],
+    deps: ["clsx"],
+    internalDeps: [
+      {
+        ...componentsData,
+        name: "popover",
+      },
+    ],
+  },
+  "linear-progress": {
+    deps: ["clsx"],
     internalDeps: [],
   },
   input: {
@@ -46,13 +115,22 @@ export const COMPONENTS_META: Record<string, Deps> = {
   },
   pagination: {
     deps: ["clsx", "lucide-react"],
-    internalDeps: ["button"],
+    internalDeps: [
+      {
+        ...componentsData,
+        name: "button",
+      },
+    ],
   },
-  tabs: {
-    deps: ["@radix-ui/react-tabs", "clsx"],
+  switch: {
+    deps: ["clsx"],
     internalDeps: [],
   },
   textarea: {
+    deps: ["clsx"],
+    internalDeps: [],
+  },
+  tooltip: {
     deps: ["clsx"],
     internalDeps: [],
   },
