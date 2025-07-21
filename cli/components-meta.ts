@@ -114,8 +114,9 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [],
   },
   pagination: {
-    deps: ["clsx", "lucide-react"],
+    deps: ["lucide-react"],
     internalDeps: [
+      mergeClassesHelper,
       {
         ...componentsData,
         name: "button",
@@ -133,5 +134,17 @@ export const COMPONENTS_META: Record<string, Deps> = {
   tooltip: {
     deps: ["clsx"],
     internalDeps: [],
+  },
+  list: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  menu: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  tabs: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
 };

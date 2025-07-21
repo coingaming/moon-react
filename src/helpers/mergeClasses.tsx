@@ -1,4 +1,9 @@
-type ArgsType = string | number | Record<string, string> | false | undefined;
+type ArgsType =
+  | string
+  | number
+  | Record<string, string | boolean>
+  | false
+  | undefined;
 
 function toVal(value: ArgsType): string {
   if (typeof value === "string" || typeof value === "number") {

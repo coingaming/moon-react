@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import mergeClasses from "../helpers";
+import mergeClasses from "../helpers/mergeClasses";
 
 export enum ListSizes {
   sm = "sm",

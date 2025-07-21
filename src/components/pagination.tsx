@@ -1,84 +1,93 @@
-import * as React from "react";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MoreHorizontalIcon,
-} from "lucide-react";
-import clsx from "clsx";
-import "../assets/css/moon-components.css";
+import React, { createContext, useContext } from "react";
+import { MoreHorizontalIcon } from "lucide-react";
+import ArrowLeft from "../assets/icons/ArrowLeftIcon";
+import ArrowRight from "../assets/icons/ArrowRightIcon";
+import mergeClasses from "../helpers/mergeClasses";
 
-function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
+type PaginationContextType = {
+  page: number;
+  setPage: (page: number) => void;
+};
+
+const PaginationContext = createContext<PaginationContextType>({
+  page: 0,
+  setPage: () => {},
+});
+
+function Pagination({
+  children,
+  page,
+  setPage,
+}: React.ComponentProps<"nav"> & {
+  page: number;
+  setPage: (page: number) => void;
+}) {
   return (
-    <nav
-      role="navigation"
-      aria-label="pagination"
-      data-slot="pagination"
-      className="moon-pagination"
-      {...props}
-    />
+    <PaginationContext.Provider value={{ page, setPage }}>
+      {children}
+    </PaginationContext.Provider>
   );
 }
 
 function PaginationContent({
   className,
+  children,
   ...props
 }: React.ComponentProps<"ul">) {
-  return <ul data-slot="pagination-content" {...props} />;
+  return (
+    <nav
+      role="navigation"
+      aria-label="pagination"
+      data-slot="pagination"
+      {...props}
+    >
+      <ul className="moon-pagination" {...props}>
+        {children}
+      </ul>
+    </nav>
+  );
 }
 
-function PaginationItem({ ...props }: React.ComponentProps<"li">) {
+function PaginationItem({
+  index,
+  className,
+  ...props
+}: React.ComponentProps<"li"> & { index: number }) {
+  const { page, setPage } = useContext(PaginationContext);
   return (
     <li
-      data-slot="pagination-item"
-      className={clsx("moon-pagination-item", props?.className)}
+      onClick={(e) => {
+        e.preventDefault();
+        setPage(index);
+      }}
+      className={mergeClasses(
+        "moon-pagination-item",
+        { "moon-pagination-item-active": page === index },
+        className
+      )}
       {...props}
     />
   );
 }
 
-type PaginationLinkProps = {
-  isActive?: boolean;
-  size?: string;
-} & React.ComponentProps<"button"> &
-  React.ComponentProps<"a">;
-
-function PaginationLink({
-  className,
-  isActive,
-  ...props
-}: PaginationLinkProps) {
+function PaginationPrevious({ className, ...props }: { className?: string }) {
   return (
-    <a
-      aria-current={isActive ? "page" : undefined}
-      data-slot="pagination-link"
-      data-active={isActive}
-      className={clsx("moon-pagination-item", className)}
-      {...props}
-    />
-  );
-}
-
-function PaginationPrevious({
-  className,
-  ...props
-}: React.ComponentProps<typeof PaginationLink>) {
-  return (
-    <PaginationLink aria-label="Go to previous page" size="default" {...props}>
-      <ChevronLeftIcon />
+    <PaginationItem aria-label="Go to previous page" {...props} index={-1}>
+      <ArrowLeft />
       <span>Previous</span>
-    </PaginationLink>
+    </PaginationItem>
   );
 }
 
 function PaginationNext({
   className,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) {
+}: React.ComponentProps<typeof PaginationItem>) {
   return (
-    <PaginationLink aria-label="Go to next page" size="default" {...props}>
+    <PaginationItem aria-label="Go to next page" {...props} index={-1}>
       <span>Next</span>
-      <ChevronRightIcon />
-    </PaginationLink>
+      <ArrowRight />
+    </PaginationItem>
   );
 }
 
@@ -87,7 +96,7 @@ function PaginationEllipsis({
   ...props
 }: React.ComponentProps<"span">) {
   return (
-    <span aria-hidden data-slot="pagination-ellipsis" {...props}>
+    <span aria-hidden {...props}>
       <MoreHorizontalIcon />
     </span>
   );
@@ -96,7 +105,6 @@ function PaginationEllipsis({
 export {
   Pagination,
   PaginationContent,
-  PaginationLink,
   PaginationItem,
   PaginationPrevious,
   PaginationNext,
