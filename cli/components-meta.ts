@@ -134,4 +134,16 @@ export const COMPONENTS_META: Record<string, Deps> = {
     deps: ["clsx"],
     internalDeps: [],
   },
+  "bottom-sheet": {
+    deps: [],
+    internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
+  },
+  drawer: {
+    deps: [],
+    internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
+  },
+  dialog: {
+    deps: [],
+    internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
+  },
 };
