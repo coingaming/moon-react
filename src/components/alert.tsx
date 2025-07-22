@@ -1,40 +1,105 @@
-import * as React from "react";
-import clsx from "clsx";
-import "../assets/css/moon-components.css";
+import { ReactNode, MouseEventHandler } from "react";
+import mergeClasses from "../helpers/mergeClasses";
+import Close from "../assets/icons/CloseIcon";
 
-const alertVariants = {
-  neutral: "moon-alert-neutral",
-  negative: "moon-alert-negative",
-  caution: "moon-alert-caution",
-  info: "moon-alert-info",
-} as const;
+enum AlertVariants {
+  neutral = "neutral",
+  negative = "negative",
+  positive = "positive",
+  info = "info",
+}
+
+type AlertRootProps = React.ComponentProps<"div"> & {
+  variant?: AlertVariants;
+  children: ReactNode;
+  className?: string;
+};
 
 function Alert({
+  variant = AlertVariants.neutral,
+  children,
   className,
-  variant = "neutral",
-  ...props
-}: React.ComponentProps<"div"> & { variant: keyof typeof alertVariants }) {
+}: AlertRootProps) {
   return (
     <div
-      data-slot="alert"
-      role="alert"
-      className={clsx("moon-alert", alertVariants[variant], className)}
-      {...props}
-    />
+      className={mergeClasses(
+        "moon-alert",
+        variant !== AlertVariants.neutral && `moon-alert-${variant}`,
+        className
+      )}
+    >
+      {children}
+    </div>
   );
 }
 
-function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
+interface TitleProps {
+  children: ReactNode;
+  className?: string;
+}
+
+function AlertTitle({ children, className }: TitleProps) {
   return (
-    <div data-slot="alert-title" className="moon-alert-title" {...props} />
+    <div className={mergeClasses("moon-alert-title-wrapper", className)}>
+      <span className="moon-alert-title">{children}</span>
+    </div>
   );
 }
 
-function AlertDescription({
+function AlertDismiss({
+  children,
+  onClick,
   className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return <div data-slot="alert-description" className={className} {...props} />;
+}: {
+  children?: ReactNode;
+  onClick?: (_e: React.MouseEvent<HTMLElement>) => void;
+  className?: string;
+}) {
+  return (
+    <p
+      className={mergeClasses("moon-alert-dismiss", className)}
+      onClick={onClick}
+    >
+      {children ? children : <Close />}
+    </p>
+  );
 }
 
-export { Alert, AlertTitle, AlertDescription };
+interface ContentProps {
+  children: ReactNode;
+  className?: string;
+}
+
+function AlertContent({ children, className }: ContentProps) {
+  return (
+    <div className={mergeClasses("moon-alert-content", className)}>
+      {children}
+    </div>
+  );
+}
+
+interface ActionProps {
+  children: ReactNode;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  className?: string;
+}
+
+function AlertAction({ children, onClick, className }: ActionProps) {
+  return (
+    <button
+      className={mergeClasses("moon-alert-action", className)}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+
+export {
+  Alert,
+  AlertTitle,
+  AlertContent,
+  AlertAction,
+  AlertDismiss,
+  AlertVariants,
+};
