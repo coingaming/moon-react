@@ -1,25 +1,41 @@
-import { ReactNode, MouseEventHandler } from "react";
+import { ReactNode, MouseEventHandler, FC } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 import Close from "../assets/icons/CloseIcon";
 
-enum AlertVariants {
+export enum AlertVariants {
   neutral = "neutral",
   negative = "negative",
   positive = "positive",
   info = "info",
 }
 
-type AlertRootProps = React.ComponentProps<"div"> & {
+export type AlertRootProps = React.ComponentProps<"div"> & {
   variant?: AlertVariants;
   children: ReactNode;
   className?: string;
 };
 
-function Alert({
+export type TitleProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+export type ActionProps = {
+  children: ReactNode;
+  onClick?: MouseEventHandler<HTMLElement>;
+  className?: string;
+};
+
+export type ContentProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+const Alert: FC<AlertRootProps> = ({
   variant = AlertVariants.neutral,
   children,
   className,
-}: AlertRootProps) {
+}) => {
   return (
     <div
       className={mergeClasses(
@@ -31,30 +47,21 @@ function Alert({
       {children}
     </div>
   );
-}
+};
 
-interface TitleProps {
-  children: ReactNode;
-  className?: string;
-}
-
-function AlertTitle({ children, className }: TitleProps) {
+export const AlertTitle = ({ children, className }: TitleProps) => {
   return (
     <div className={mergeClasses("moon-alert-title-wrapper", className)}>
       <span className="moon-alert-title">{children}</span>
     </div>
   );
-}
+};
 
-function AlertDismiss({
+export const AlertDismiss: FC<ActionProps> = ({
   children,
   onClick,
   className,
-}: {
-  children?: ReactNode;
-  onClick?: (_e: React.MouseEvent<HTMLElement>) => void;
-  className?: string;
-}) {
+}) => {
   return (
     <p
       className={mergeClasses("moon-alert-dismiss", className)}
@@ -63,28 +70,21 @@ function AlertDismiss({
       {children ? children : <Close />}
     </p>
   );
-}
+};
 
-interface ContentProps {
-  children: ReactNode;
-  className?: string;
-}
-
-function AlertContent({ children, className }: ContentProps) {
+export const AlertContent: FC<ContentProps> = ({ children, className }) => {
   return (
     <div className={mergeClasses("moon-alert-content", className)}>
       {children}
     </div>
   );
-}
+};
 
-interface ActionProps {
-  children: ReactNode;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  className?: string;
-}
-
-function AlertAction({ children, onClick, className }: ActionProps) {
+export const AlertAction: FC<ActionProps> = ({
+  children,
+  onClick,
+  className,
+}) => {
   return (
     <button
       className={mergeClasses("moon-alert-action", className)}
@@ -93,13 +93,6 @@ function AlertAction({ children, onClick, className }: ActionProps) {
       {children}
     </button>
   );
-}
-
-export {
-  Alert,
-  AlertTitle,
-  AlertContent,
-  AlertAction,
-  AlertDismiss,
-  AlertVariants,
 };
+
+export default Alert;

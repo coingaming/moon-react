@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum SnackbarVariants {
@@ -8,17 +8,21 @@ export enum SnackbarVariants {
   positive = "positive",
 }
 
-type SnackbarProps = React.ComponentProps<"div"> & {
-  variant?: SnackbarVariants;
-  children?: string | React.ReactNode;
+export type SnackbarActionProps = {
+  children?: React.ReactNode;
   className?: string;
 };
 
-const Snackbar = ({
+export type SnackbarProps = SnackbarActionProps &
+  React.ComponentProps<"div"> & {
+    variant?: SnackbarVariants;
+  };
+
+const Snackbar: FC<SnackbarProps> = ({
   children,
   variant = SnackbarVariants.neutral,
   className,
-}: SnackbarProps) => {
+}) => {
   return (
     <div
       className={mergeClasses(
@@ -32,12 +36,9 @@ const Snackbar = ({
   );
 };
 
-export const SnackbackAction = ({
+export const SnackbackAction: FC<SnackbarActionProps> = ({
   children,
   className,
-}: {
-  children?: React.ReactNode;
-  className?: string;
 }) => {
   return (
     <div className={mergeClasses("moon-snackbar-action", className)}>
