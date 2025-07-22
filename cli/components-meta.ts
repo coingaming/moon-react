@@ -93,13 +93,8 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [],
   },
   dropdown: {
-    deps: ["clsx"],
-    internalDeps: [
-      {
-        ...componentsData,
-        name: "popover",
-      },
-    ],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   "linear-progress": {
     deps: ["clsx"],
