@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum TextareaSizes {
@@ -13,12 +13,12 @@ export type TextareaProps = React.ComponentProps<"textarea"> & {
   error?: boolean;
 };
 
-function Textarea({
+const Textarea: React.FC<TextareaProps> = ({
   className,
   size = TextareaSizes.md,
   error = false,
   ...props
-}: TextareaProps) {
+}) => {
   return (
     <textarea
       className={mergeClasses(
@@ -30,6 +30,6 @@ function Textarea({
       {...props}
     />
   );
-}
+};
 
 export { Textarea };
