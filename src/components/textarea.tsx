@@ -8,21 +8,23 @@ export enum TextareaSizes {
   xl = "xl",
 }
 
+export type TextareaProps = React.ComponentProps<"textarea"> & {
+  size?: TextareaSizes;
+  error?: boolean;
+};
+
 function Textarea({
   className,
   size = TextareaSizes.md,
   error = false,
   ...props
-}: React.ComponentProps<"textarea"> & {
-  size?: TextareaSizes;
-  error?: boolean;
-}) {
+}: TextareaProps) {
   return (
     <textarea
       className={mergeClasses(
         "moon-textarea",
         size !== TextareaSizes.md && `moon-textarea-${size}`,
-        { "moon-textarea-error": error },
+        error && "moon-textarea-error",
         className
       )}
       {...props}

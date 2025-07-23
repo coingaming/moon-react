@@ -8,14 +8,21 @@ export enum AuthenticatorSizes {
   xl = "xl",
 }
 
-interface AuthenticatorProps {
+export type AuthenticatorProps = {
   length?: number;
   size?: AuthenticatorSizes;
   error?: boolean;
   value?: string;
-  onChange?: (char: string) => void;
+  onChange?: (char: string | number) => void;
   children: React.ReactNode;
-}
+};
+
+export type AuthenticatorSlotProps = Omit<
+  React.ComponentProps<"input">,
+  "size"
+> & {
+  index: number;
+};
 
 type AuthenticatorContextType = {
   onKeyDown: (
@@ -121,15 +128,16 @@ export default function Authenticator({
   );
 }
 
+export type AuthenticatorGroupProps = {
+  children: React.ReactNode;
+  className?: string;
+};
+
 export const AuthenticatorGroup = ({
   children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+}: AuthenticatorGroupProps) => {
   const { size, error } = useAuthenticatorContext();
-
   return (
     <div
       className={mergeClasses(
@@ -147,7 +155,7 @@ export const AuthenticatorGroup = ({
 export const AuthenticatorSlot = ({
   index,
   ...props
-}: Omit<React.ComponentProps<"input">, "size"> & { index: number }) => {
+}: AuthenticatorSlotProps) => {
   const { onChange, onKeyDown, internalValue, onPaste, inputsRef } =
     useAuthenticatorContext();
   return (

@@ -32,20 +32,19 @@ export function Select({ children, ...props }: SelectProps) {
   );
 }
 
-export function SelectContent({
-  children,
-  className,
-}: React.ComponentProps<"select"> & {
+export type SelectContentProps = React.ComponentProps<"select"> & {
   children: React.ReactNode;
   className?: string;
-}) {
+};
+
+export function SelectContent({ children, className }: SelectContentProps) {
   const { size, disabled, error, ...props } = useContext(SelectContext);
   return (
     <select
       className={mergeClasses(
         "moon-select",
         size !== Sizes.md && `moon-select-${size}`,
-        { "moon-select-error": error as boolean },
+        error && "moon-select-error",
         className
       )}
       {...props}
@@ -55,22 +54,23 @@ export function SelectContent({
   );
 }
 
-export function SelectItem({
-  children,
-  ...props
-}: {
-  children: React.ReactNode & React.ComponentProps<"option">;
-}) {
+export type SelectItemProps = React.ComponentProps<"option"> & {
+  children: React.ReactNode;
+};
+
+export function SelectItem({ children, ...props }: SelectItemProps) {
   return <option {...props}>{children}</option>;
 }
+
+export type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
+  children: React.ReactNode;
+  label: string;
+  disabled?: boolean;
+};
 
 export function SelectItemsGroup({
   children,
   ...props
-}: {
-  children: React.ReactNode;
-  label: string;
-  disabled?: boolean;
-} & React.ComponentProps<"optgroup">) {
+}: SelectItemsGroupProps) {
   return <optgroup {...props}>{children}</optgroup>;
 }
