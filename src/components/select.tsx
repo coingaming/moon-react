@@ -26,18 +26,22 @@ const DEFAULT_SELECT_CONTEXT: SelectContextType = {
 
 const SelectContext = createContext<SelectContextType>(DEFAULT_SELECT_CONTEXT);
 
-export function Select({ children, ...props }: SelectProps) {
+export const Select: React.FC<SelectProps> = ({ children, ...props }) => {
   return (
     <SelectContext.Provider value={props}>{children}</SelectContext.Provider>
   );
-}
+};
 
 export type SelectContentProps = React.ComponentProps<"select"> & {
   children: React.ReactNode;
   className?: string;
 };
 
-export function SelectContent({ children, className }: SelectContentProps) {
+export const SelectContent: React.FC<SelectContentProps> = ({
+  children,
+  className,
+  ...rest
+}) => {
   const { size, disabled, error, ...props } = useContext(SelectContext);
   return (
     <select
@@ -48,19 +52,23 @@ export function SelectContent({ children, className }: SelectContentProps) {
         className
       )}
       {...props}
+      {...rest}
     >
       {children}
     </select>
   );
-}
+};
 
 export type SelectItemProps = React.ComponentProps<"option"> & {
   children: React.ReactNode;
 };
 
-export function SelectItem({ children, ...props }: SelectItemProps) {
+export const SelectItem: React.FC<SelectItemProps> = ({
+  children,
+  ...props
+}) => {
   return <option {...props}>{children}</option>;
-}
+};
 
 export type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
   children: React.ReactNode;
@@ -68,9 +76,9 @@ export type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
   disabled?: boolean;
 };
 
-export function SelectItemsGroup({
+export const SelectItemsGroup: React.FC<SelectItemsGroupProps> = ({
   children,
   ...props
-}: SelectItemsGroupProps) {
+}) => {
   return <optgroup {...props}>{children}</optgroup>;
-}
+};

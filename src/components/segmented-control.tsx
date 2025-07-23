@@ -32,12 +32,12 @@ export type SegmentedControlProps = {
   setActiveIndex: (idx: number) => void;
 };
 
-export type SegmentList = {
+export type SegmentListProps = {
   children: ReactNode;
   className?: string;
 };
 
-export type SegmentProps = {
+export type SegmentProps = React.ComponentProps<"button"> & {
   children: ReactNode;
   className?: string;
   index: number;
@@ -58,9 +58,11 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
   );
 };
 
-export const SegmentList: React.FC<
-  React.ComponentProps<"ul"> & SegmentList
-> = ({ children, className, ...props }) => {
+export const SegmentList: React.FC<SegmentListProps> = ({
+  children,
+  className,
+  ...props
+}) => {
   const { size } = useSegmentedControlContext();
   return (
     <div
@@ -77,9 +79,12 @@ export const SegmentList: React.FC<
   );
 };
 
-export const Segment: React.FC<
-  React.ComponentProps<"button"> & SegmentProps
-> = ({ children, className, index, ...props }) => {
+export const Segment: React.FC<SegmentProps> = ({
+  children,
+  className,
+  index,
+  ...props
+}) => {
   const context = useSegmentedControlContext();
   const isActive = context.activeIndex === index;
   return (

@@ -7,7 +7,7 @@ export enum SwitchSizes {
   sm = "sm",
 }
 
-type Props = Omit<React.ComponentProps<"input">, "size"> & {
+type SwitchProps = Omit<React.ComponentProps<"input">, "size"> & {
   checked: boolean;
   onChange: () => void;
   disabled?: boolean;
@@ -16,13 +16,13 @@ type Props = Omit<React.ComponentProps<"input">, "size"> & {
   className?: string;
 };
 
-export function Switch({
+export const Switch: React.FC<SwitchProps> = ({
   onChange,
   size = SwitchSizes.sm,
   label,
   className,
   ...props
-}: Props) {
+}) => {
   return (
     <label>
       {label && label}
@@ -38,4 +38,4 @@ export function Switch({
       />
     </label>
   );
-}
+};

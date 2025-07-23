@@ -5,7 +5,11 @@ export type CheckboxProps = Omit<React.ComponentProps<"input">, "type"> & {
   label?: string;
 };
 
-export function Checkbox({ className, label, ...props }: CheckboxProps) {
+export const Checkbox: React.FC<CheckboxProps> = ({
+  className,
+  label,
+  ...props
+}) => {
   return (
     <p className={mergeClasses("moon-checkbox-wrapper", className)}>
       <label>
@@ -14,4 +18,4 @@ export function Checkbox({ className, label, ...props }: CheckboxProps) {
       </label>
     </p>
   );
-}
+};

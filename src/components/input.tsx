@@ -8,12 +8,18 @@ export enum InputSizes {
   xl = "xl",
 }
 
-type InputProps = React.ComponentProps<"input"> & {
+export type InputProps = React.ComponentProps<"input"> & {
   error?: boolean;
   size?: InputSizes;
 };
 
-function Input({ className, type, error = false, size, ...props }: InputProps) {
+const Input: React.FC<InputProps> = ({
+  className,
+  type,
+  error = false,
+  size,
+  ...props
+}) => {
   return (
     <input
       type={type}
@@ -21,13 +27,11 @@ function Input({ className, type, error = false, size, ...props }: InputProps) {
       className={mergeClasses(
         "moon-input",
         size !== "md" && `moon-input-${size}`,
-        {
-          "moon-input-error": error,
-        }
+        error && "moon-input-error"
       )}
       {...props}
     />
   );
-}
+};
 
 export { Input };

@@ -63,14 +63,14 @@ const useAuthenticatorContext = () => {
   return context;
 };
 
-export default function Authenticator({
+export const Authenticator: React.FC<AuthenticatorProps> = ({
   length = 6,
   size = AuthenticatorSizes.md,
   error = false,
   value = "",
   onChange,
   children,
-}: AuthenticatorProps) {
+}) => {
   const [internalValue, setInternalValue] = useState(value);
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
 
@@ -126,17 +126,17 @@ export default function Authenticator({
       </AuthenticatorContext.Provider>
     </>
   );
-}
+};
 
 export type AuthenticatorGroupProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-export const AuthenticatorGroup = ({
+export const AuthenticatorGroup: React.FC<AuthenticatorGroupProps> = ({
   children,
   className,
-}: AuthenticatorGroupProps) => {
+}) => {
   const { size, error } = useAuthenticatorContext();
   return (
     <div
@@ -152,10 +152,10 @@ export const AuthenticatorGroup = ({
   );
 };
 
-export const AuthenticatorSlot = ({
+export const AuthenticatorSlot: React.FC<AuthenticatorSlotProps> = ({
   index,
   ...props
-}: AuthenticatorSlotProps) => {
+}) => {
   const { onChange, onKeyDown, internalValue, onPaste, inputsRef } =
     useAuthenticatorContext();
   return (
