@@ -11,17 +11,20 @@ export enum ChipVariants {
   outline = "outline",
 }
 
+
+export type ChipProps = {
+  size?: ChipSizes;
+  variant?: ChipVariants;
+  selected?: boolean;
+  children: ReactNode;
+};
+
 const Chip = ({
   size = ChipSizes.md,
   selected = false,
   variant = ChipVariants.fill,
   children,
-}: {
-  size?: ChipSizes;
-  variant?: ChipVariants;
-  selected?: boolean;
-  children: ReactNode;
-}) => {
+}: ChipProps) => {
   return (
     <button
       className={mergeClasses(
