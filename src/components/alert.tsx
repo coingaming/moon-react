@@ -49,7 +49,7 @@ const Alert: FC<AlertRootProps> = ({
   );
 };
 
-export const AlertTitle = ({ children, className }: TitleProps) => {
+export const AlertTitle: FC<TitleProps> = ({ children, className }) => {
   return (
     <div className={mergeClasses("moon-alert-title-wrapper", className)}>
       <span className="moon-alert-title">{children}</span>
