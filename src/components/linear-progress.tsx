@@ -1,17 +1,19 @@
-import clsx from "clsx";
-import * as React from "react";
+import React, { FC } from "react";
+import mergeClasses from "../helpers/mergeClasses";
 
-function LinearProgress({
-  className,
-  value,
-  children,
-}: {
+export type LinearProgressProps = {
   children?: React.ReactNode;
   className?: string;
   value: number;
-}) {
+};
+
+const LinearProgress: FC<LinearProgressProps> = ({
+  className,
+  value,
+  children,
+}) => {
   return (
-    <div className={clsx("moon-linear-progress-wrapper", className)}>
+    <div className={mergeClasses("moon-linear-progress-wrapper", className)}>
       {children}
       <progress
         value={String(value)}
@@ -20,6 +22,6 @@ function LinearProgress({
       ></progress>
     </div>
   );
-}
+};
 
-export { LinearProgress };
+export default LinearProgress;
