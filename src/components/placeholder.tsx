@@ -1,8 +1,10 @@
-import clsx from "clsx";
-import React from "react";
+import React, { FC } from "react";
+import mergeClasses from "../helpers/mergeClasses";
 
-const Placeholder = ({ className }: { className?: string }) => {
-  return <div className={clsx("moon-placeholder", className)} />;
+export type PlaceholderProps = { className?: string };
+
+const Placeholder: FC<PlaceholderProps> = ({ className }) => {
+  return <div className={mergeClasses("moon-placeholder", className)} />;
 };
 
 export default Placeholder;

@@ -60,7 +60,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
   },
   badge: {
     deps: [],
-    internalDeps: [],
+    internalDeps: [mergeClassesHelper],
   },
   breadcrumb: {
     deps: [],
@@ -87,6 +87,10 @@ export const COMPONENTS_META: Record<string, Deps> = {
       },
     ],
   },
+  "circular-progress": {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
   select: { deps: ["clsx"], internalDeps: [] },
   checkbox: {
     deps: [],
@@ -102,8 +106,20 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   "linear-progress": {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  loader: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  placeholder: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  tag: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   input: {
     deps: ["clsx"],

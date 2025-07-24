@@ -1,7 +1,7 @@
-import clsx from "clsx";
-import React from "react";
+import React, { FC } from "react";
+import mergeClasses from "../helpers/mergeClasses";
 
-enum LoaderSize {
+export enum LoaderSize {
   "2xs" = "2xs",
   xs = "xs",
   sm = "sm",
@@ -9,12 +9,15 @@ enum LoaderSize {
   lg = "lg",
 }
 
-const Loader = ({ size = LoaderSize.md }: { size?: LoaderSize }) => {
+export type LoaderProps = { size?: LoaderSize; className?: string };
+
+const Loader: FC<LoaderProps> = ({ size = LoaderSize.md, className }) => {
   return (
     <div
-      className={clsx(
+      className={mergeClasses(
         "moon-loader",
-        size !== LoaderSize.md && `moon-loader-${size}`
+        size !== LoaderSize.md && `moon-loader-${size}`,
+        className
       )}
     />
   );

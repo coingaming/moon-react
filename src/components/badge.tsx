@@ -1,34 +1,23 @@
-import React from "react";
-import clsx from "clsx";
+import React, { FC } from "react";
+import mergeClasses from "../helpers/mergeClasses";
 
-type BadgeProps = {
+export type BadgeProps = {
   children?: React.ReactNode;
   className?: string;
 };
 
-type BadgeWrapperProps = {
-  children: React.ReactNode;
-  badgeContent?: React.ReactNode;
-  wrapperClassName?: string;
-  badgeClassName?: string;
+const Badge: FC<BadgeProps> = ({ children, className }) => {
+  return (
+    <span className={mergeClasses("moon-badge", className)}>{children}</span>
+  );
 };
 
-export function Badge({ children, className }: BadgeProps) {
-  return <span className={clsx("moon-badge", className)}>{children}</span>;
-}
-
-export function BadgeWrapper({
-  children,
-  badgeContent,
-  wrapperClassName,
-  badgeClassName,
-}: BadgeWrapperProps) {
+export const BadgeWrapper: FC<BadgeProps> = ({ children, className }) => {
   return (
-    <div className={clsx("moon-badge-wrapper", wrapperClassName)}>
+    <div className={mergeClasses("moon-badge-wrapper", className)}>
       {children}
-      {badgeContent !== undefined && (
-        <Badge className={badgeClassName}>{badgeContent}</Badge>
-      )}
     </div>
   );
-}
+};
+
+export default Badge;

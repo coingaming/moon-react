@@ -1,5 +1,5 @@
-import clsx from "clsx";
-import React, { ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
+import mergeClasses from "../helpers/mergeClasses";
 
 export enum TagSizes {
   "2xs" = "2xs",
@@ -18,13 +18,14 @@ export type TagProps = React.ComponentProps<"div"> & {
   children: ReactNode;
 };
 
-const Tag = ({ size, variant, children }: TagProps) => {
+const Tag: FC<TagProps> = ({ size, variant, children, className }) => {
   return (
     <div
-      className={clsx(
+      className={mergeClasses(
         "moon-tag",
         size !== TagSizes.xs && `moon-tag-${size}`,
-        variant !== TagVariants.outline && `moon-tag-${variant}`
+        variant !== TagVariants.outline && `moon-tag-${variant}`,
+        className
       )}
     >
       {children}

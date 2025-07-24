@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum CircularProgressSize {
@@ -11,17 +11,17 @@ export enum CircularProgressSize {
   "2xl" = "2xl",
 }
 
-type CircularProgressType = {
+export type CircularProgressType = {
   size?: CircularProgressSize;
   value: number;
   className?: string;
 };
 
-const CircularProgress = ({
+const CircularProgress: FC<CircularProgressType> = ({
   size = CircularProgressSize.md,
   className,
   value,
-}: CircularProgressType) => {
+}) => {
   return (
     <div
       data-value={value}
