@@ -1,23 +1,21 @@
 import * as React from "react";
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { CheckIcon } from "lucide-react";
-import "../assets/css/moon-components.css";
+import mergeClasses from "../helpers/mergeClasses";
 
-function Checkbox({
+export type CheckboxProps = Omit<React.ComponentProps<"input">, "type"> & {
+  label?: string;
+};
+
+export const Checkbox: React.FC<CheckboxProps> = ({
   className,
+  label,
   ...props
-}: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
+}) => {
   return (
-    <CheckboxPrimitive.Root
-      data-slot="checkbox"
-      className="moon-checkbox"
-      {...props}
-    >
-      <CheckboxPrimitive.Indicator data-slot="checkbox-indicator">
-        <CheckIcon />
-      </CheckboxPrimitive.Indicator>
-    </CheckboxPrimitive.Root>
+    <p className={mergeClasses("moon-checkbox-wrapper", className)}>
+      <label>
+        {label && label}
+        <input type="checkbox" className="moon-checkbox" {...props} />
+      </label>
+    </p>
   );
-}
-
-export { Checkbox };
+};
