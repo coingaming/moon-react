@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useRef, ReactNode } from "react";
+import React, { createContext, useContext, useRef, ReactNode, FC } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 import Close from "../assets/icons/CloseIcon";
 import { createPortal } from "react-dom";
@@ -19,21 +19,24 @@ type DrawerProps = {
   children: ReactNode;
 };
 
-export function Drawer({ children }: DrawerProps) {
+export const Drawer: FC<DrawerProps> = ({ children }) => {
   const drawerRef = useRef<HTMLDialogElement | null>(null);
   return (
     <DrawerContext.Provider value={{ drawerRef }}>
       {children}
     </DrawerContext.Provider>
   );
-}
+};
 
 type DrawerTriggerProps = {
   children: ReactNode;
   className?: string;
 };
 
-export function DrawerTrigger({ children, className }: DrawerTriggerProps) {
+export const DrawerTrigger: FC<DrawerTriggerProps> = ({
+  children,
+  className,
+}) => {
   const { drawerRef } = useDrawerContext();
   return (
     <button
@@ -43,7 +46,7 @@ export function DrawerTrigger({ children, className }: DrawerTriggerProps) {
       {children}
     </button>
   );
-}
+};
 
 type DrawerContentProps = {
   children: ReactNode;
@@ -55,15 +58,18 @@ type DrawerTitleProps = {
   className?: string;
 };
 
-export function DrawerTitle({ children, className }: DrawerTitleProps) {
+export const DrawerTitle: FC<DrawerTitleProps> = ({ children, className }) => {
   return (
     <div className={mergeClasses("moon-drawer-title", className)}>
       {children}
     </div>
   );
-}
+};
 
-export function DrawerContent({ children, className }: DrawerContentProps) {
+export const DrawerContent: FC<DrawerContentProps> = ({
+  children,
+  className,
+}) => {
   const { drawerRef } = useDrawerContext();
   return createPortal(
     <dialog className={mergeClasses("moon-drawer", className)} ref={drawerRef}>
@@ -74,7 +80,7 @@ export function DrawerContent({ children, className }: DrawerContentProps) {
     </dialog>,
     document.body
   );
-}
+};
 
 type DrawerCloseProps = {
   onClick?: () => void;
@@ -82,7 +88,7 @@ type DrawerCloseProps = {
   children?: ReactNode;
 };
 
-export function DrawerClose({ onClick, className }: DrawerCloseProps) {
+export const DrawerClose: FC<DrawerCloseProps> = ({ onClick, className }) => {
   const { drawerRef } = useDrawerContext();
   const handleClick = () => {
     drawerRef?.current?.close();
@@ -96,6 +102,6 @@ export function DrawerClose({ onClick, className }: DrawerCloseProps) {
       <Close />
     </button>
   );
-}
+};
 
 export default Drawer;

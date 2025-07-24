@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useRef } from "react";
+import { FC, ReactNode, createContext, useContext, useRef } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 import Close from "../assets/icons/CloseIcon";
 
@@ -11,24 +11,12 @@ type BottomSheetProps = {
   className?: string;
 };
 
-type TriggerProps = {
-  children: ReactNode;
-  className?: string;
-};
-
 type HandleProps = {
   className?: string;
 };
 
-type TitleProps = {
-  children: ReactNode;
-  className?: string;
-};
-
-type CloseProps = {
+type CloseProps = BottomSheetProps & {
   onClick?: () => void;
-  className?: string;
-  children?: ReactNode;
 };
 
 const BottomSheetContext = createContext<BottomSheetContextType | null>(null);
@@ -40,7 +28,7 @@ export function useBottomSheetContext() {
   return ctx;
 }
 
-export function BottomSheet({ children }: BottomSheetProps) {
+export const BottomSheet: FC<BottomSheetProps> = ({ children }) => {
   const bottomSheetRef = useRef<HTMLDialogElement | null>(null);
 
   return (
@@ -48,15 +36,12 @@ export function BottomSheet({ children }: BottomSheetProps) {
       {children}
     </BottomSheetContext.Provider>
   );
-}
+};
 
-export function BottomSheetContent({
+export const BottomSheetContent: FC<BottomSheetProps> = ({
   children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+}) => {
   const { bottomSheetRef } = useBottomSheetContext();
 
   return (
@@ -70,9 +55,12 @@ export function BottomSheetContent({
       </form>
     </dialog>
   );
-}
+};
 
-export function BottomSheetTrigger({ children, className }: TriggerProps) {
+export const BottomSheetTrigger: FC<BottomSheetProps> = ({
+  children,
+  className,
+}) => {
   const { bottomSheetRef } = useBottomSheetContext();
 
   return (
@@ -83,23 +71,26 @@ export function BottomSheetTrigger({ children, className }: TriggerProps) {
       {children}
     </button>
   );
-}
+};
 
-export function BottomSheetHandle({ className }: HandleProps) {
+export const BottomSheetHandle: FC<HandleProps> = ({ className }) => {
   return (
     <div className={mergeClasses("moon-bottom-sheet-handle", className)} />
   );
-}
+};
 
-export function BottomSheetTitle({ children, className }: TitleProps) {
+export const BottomSheetTitle: FC<BottomSheetProps> = ({
+  children,
+  className,
+}) => {
   return (
     <header className={mergeClasses("moon-bottom-sheet-title", className)}>
       {children}
     </header>
   );
-}
+};
 
-export function BottomSheetClose({ onClick, className }: CloseProps) {
+export const BottomSheetClose: FC<CloseProps> = ({ onClick, className }) => {
   const { bottomSheetRef } = useBottomSheetContext();
 
   const handleClick = () => {
@@ -115,4 +106,4 @@ export function BottomSheetClose({ onClick, className }: CloseProps) {
       <Close />
     </button>
   );
-}
+};
