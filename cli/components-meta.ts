@@ -52,7 +52,13 @@ export const COMPONENTS_META: Record<string, Deps> = {
   },
   alert: {
     deps: [],
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [
+      mergeClassesHelper,
+      {
+        ...iconsData,
+        name: "CloseIcon",
+      },
+    ],
   },
   authenticator: {
     deps: [],
@@ -133,6 +139,10 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [mergeClassesHelper],
   },
   tooltip: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  snackbar: {
     deps: [],
     internalDeps: [mergeClassesHelper],
   },

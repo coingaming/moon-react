@@ -1,40 +1,88 @@
-import * as React from "react";
-import clsx from "clsx";
-import "../assets/css/moon-components.css";
+import { ReactNode, MouseEventHandler, FC } from "react";
+import mergeClasses from "../helpers/mergeClasses";
+import Close from "../assets/icons/CloseIcon";
 
-const alertVariants = {
-  neutral: "moon-alert-neutral",
-  negative: "moon-alert-negative",
-  caution: "moon-alert-caution",
-  info: "moon-alert-info",
-} as const;
+export enum AlertVariants {
+  neutral = "neutral",
+  negative = "negative",
+  positive = "positive",
+  info = "info",
+}
 
-function Alert({
+export type AlertRootProps = React.ComponentProps<"div"> & {
+  variant?: AlertVariants;
+  children: ReactNode;
+  className?: string;
+};
+
+export type TitleProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+export type ActionProps = {
+  children: ReactNode;
+  onClick?: MouseEventHandler<HTMLElement>;
+  className?: string;
+};
+
+export type ContentProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+const Alert: FC<AlertRootProps> = ({
+  variant = AlertVariants.neutral,
+  children,
   className,
-  variant = "neutral",
-  ...props
-}: React.ComponentProps<"div"> & { variant: keyof typeof alertVariants }) {
-  return (
-    <div
-      data-slot="alert"
-      role="alert"
-      className={clsx("moon-alert", alertVariants[variant], className)}
-      {...props}
-    />
-  );
-}
+}) => (
+  <div
+    className={mergeClasses(
+      "moon-alert",
+      variant !== AlertVariants.neutral && `moon-alert-${variant}`,
+      className
+    )}
+  >
+    {children}
+  </div>
+);
 
-function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div data-slot="alert-title" className="moon-alert-title" {...props} />
-  );
-}
+export const AlertTitle: FC<TitleProps> = ({ children, className }) => (
+  <div className={mergeClasses("moon-alert-title-wrapper", className)}>
+    <span className="moon-alert-title">{children}</span>
+  </div>
+);
 
-function AlertDescription({
+export const AlertDismiss: FC<ActionProps> = ({
+  children,
+  onClick,
   className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return <div data-slot="alert-description" className={className} {...props} />;
-}
+}) => (
+  <p
+    className={mergeClasses("moon-alert-dismiss", className)}
+    onClick={onClick}
+  >
+    {children ? children : <Close />}
+  </p>
+);
 
-export { Alert, AlertTitle, AlertDescription };
+export const AlertContent: FC<ContentProps> = ({ children, className }) => (
+  <div className={mergeClasses("moon-alert-content", className)}>
+    {children}
+  </div>
+);
+
+export const AlertAction: FC<ActionProps> = ({
+  children,
+  onClick,
+  className,
+}) => (
+  <button
+    className={mergeClasses("moon-alert-action", className)}
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
+
+export default Alert;
