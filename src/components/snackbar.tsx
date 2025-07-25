@@ -22,29 +22,25 @@ const Snackbar: FC<SnackbarProps> = ({
   children,
   variant = SnackbarVariants.neutral,
   className,
-}) => {
-  return (
-    <div
-      className={mergeClasses(
-        "moon-snackbar",
-        variant !== SnackbarVariants.neutral && `moon-snackbar-${variant}`,
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-};
+}) => (
+  <div
+    className={mergeClasses(
+      "moon-snackbar",
+      variant !== SnackbarVariants.neutral && `moon-snackbar-${variant}`,
+      className
+    )}
+  >
+    {children}
+  </div>
+);
 
 export const SnackbackAction: FC<SnackbarActionProps> = ({
   children,
   className,
-}) => {
-  return (
-    <div className={mergeClasses("moon-snackbar-action", className)}>
-      {children}
-    </div>
-  );
-};
+}) => (
+  <div className={mergeClasses("moon-snackbar-action", className)}>
+    {children}
+  </div>
+);
 
 export default Snackbar;

@@ -23,34 +23,30 @@ const Tooltip: FC<TooltipProps> = ({
   children,
   position = TooltipPosition.top,
   pointer = false,
-}) => {
-  return (
-    <div
-      className={mergeClasses("moon-tooltip", `moon-tooltip-${position}`, {
-        "moon-tooltip-pointer": pointer,
-      })}
-    >
-      {children}
-    </div>
-  );
-};
+}) => (
+  <div
+    className={mergeClasses(
+      "moon-tooltip",
+      `moon-tooltip-${position}`,
+      pointer && "moon-tooltip-pointer"
+    )}
+  >
+    {children}
+  </div>
+);
 
 export const TooltipTrigger: FC<TooltipChildren> = ({
   children,
   className,
-}) => {
-  return <p className={className}>{children}</p>;
-};
+}) => <p className={className}>{children}</p>;
 
 export const TooltipContent: FC<TooltipChildren> = ({
   children,
   className,
-}) => {
-  return (
-    <div className={mergeClasses("moon-tooltip-content", className)}>
-      {children}
-    </div>
-  );
-};
+}) => (
+  <div className={mergeClasses("moon-tooltip-content", className)}>
+    {children}
+  </div>
+);
 
 export default Tooltip;
