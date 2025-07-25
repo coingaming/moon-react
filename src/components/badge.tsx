@@ -6,18 +6,14 @@ export type BadgeProps = {
   className?: string;
 };
 
-const Badge: FC<BadgeProps> = ({ children, className }) => {
-  return (
-    <span className={mergeClasses("moon-badge", className)}>{children}</span>
-  );
-};
+const Badge: FC<BadgeProps> = ({ children, className }) => (
+  <span className={mergeClasses("moon-badge", className)}>{children}</span>
+);
 
-export const BadgeWrapper: FC<BadgeProps> = ({ children, className }) => {
-  return (
-    <div className={mergeClasses("moon-badge-wrapper", className)}>
-      {children}
-    </div>
-  );
-};
+export const BadgeWrapper: FC<BadgeProps> = ({ children, className }) => (
+  <div className={mergeClasses("moon-badge-wrapper", className)}>
+    {children}
+  </div>
+);
 
 export default Badge;

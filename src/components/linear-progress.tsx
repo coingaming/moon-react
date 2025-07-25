@@ -11,17 +11,15 @@ const LinearProgress: FC<LinearProgressProps> = ({
   className,
   value,
   children,
-}) => {
-  return (
-    <div className={mergeClasses("moon-linear-progress-wrapper", className)}>
-      {children}
-      <progress
-        value={String(value)}
-        max="100"
-        className="moon-linear-progress moon-linear-progress-3xs"
-      ></progress>
-    </div>
-  );
-};
+}) => (
+  <div className={mergeClasses("moon-linear-progress-wrapper", className)}>
+    {children}
+    <progress
+      value={String(value)}
+      max="100"
+      className="moon-linear-progress moon-linear-progress-3xs"
+    ></progress>
+  </div>
+);
 
 export default LinearProgress;

@@ -11,16 +11,14 @@ export enum LoaderSize {
 
 export type LoaderProps = { size?: LoaderSize; className?: string };
 
-const Loader: FC<LoaderProps> = ({ size = LoaderSize.md, className }) => {
-  return (
-    <div
-      className={mergeClasses(
-        "moon-loader",
-        size !== LoaderSize.md && `moon-loader-${size}`,
-        className
-      )}
-    />
-  );
-};
+const Loader: FC<LoaderProps> = ({ size = LoaderSize.md, className }) => (
+  <div
+    className={mergeClasses(
+      "moon-loader",
+      size !== LoaderSize.md && `moon-loader-${size}`,
+      className
+    )}
+  />
+);
 
 export default Loader;

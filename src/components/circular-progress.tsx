@@ -21,17 +21,15 @@ const CircularProgress: FC<CircularProgressType> = ({
   size = CircularProgressSize.md,
   className,
   value,
-}) => {
-  return (
-    <div
-      data-value={value}
-      className={mergeClasses(
-        "moon-circular-progress",
-        size !== CircularProgressSize.md && `moon-circular-progress-${size}`,
-        className
-      )}
-    />
-  );
-};
+}) => (
+  <div
+    data-value={value}
+    className={mergeClasses(
+      "moon-circular-progress",
+      size !== CircularProgressSize.md && `moon-circular-progress-${size}`,
+      className
+    )}
+  />
+);
 
 export default CircularProgress;
