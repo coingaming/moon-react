@@ -18,19 +18,17 @@ export type TagProps = React.ComponentProps<"div"> & {
   children: ReactNode;
 };
 
-const Tag: FC<TagProps> = ({ size, variant, children, className }) => {
-  return (
-    <div
-      className={mergeClasses(
-        "moon-tag",
-        size !== TagSizes.xs && `moon-tag-${size}`,
-        variant !== TagVariants.outline && `moon-tag-${variant}`,
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-};
+const Tag: FC<TagProps> = ({ size, variant, children, className }) => (
+  <div
+    className={mergeClasses(
+      "moon-tag",
+      size !== TagSizes.xs && `moon-tag-${size}`,
+      variant !== TagVariants.outline && `moon-tag-${variant}`,
+      className
+    )}
+  >
+    {children}
+  </div>
+);
 
 export default Tag;
