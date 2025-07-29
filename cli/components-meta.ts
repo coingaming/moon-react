@@ -52,7 +52,13 @@ export const COMPONENTS_META: Record<string, Deps> = {
   },
   alert: {
     deps: [],
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [
+      mergeClassesHelper,
+      {
+        ...iconsData,
+        name: "CloseIcon",
+      },
+    ],
   },
   authenticator: {
     deps: [],
@@ -60,7 +66,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
   },
   badge: {
     deps: [],
-    internalDeps: [],
+    internalDeps: [mergeClassesHelper],
   },
   breadcrumb: {
     deps: [],
@@ -87,30 +93,47 @@ export const COMPONENTS_META: Record<string, Deps> = {
       },
     ],
   },
-  select: { deps: ["clsx"], internalDeps: [] },
+  select: { deps: [], internalDeps: [mergeClassesHelper] },
+  "circular-progress": {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
   checkbox: {
     deps: [],
-    internalDeps: [],
+    internalDeps: [mergeClassesHelper],
   },
   dropdown: {
     deps: [],
     internalDeps: [mergeClassesHelper],
   },
   "linear-progress": {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  loader: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  placeholder: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  tag: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   input: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   table: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   pagination: {
-    deps: ["clsx", "lucide-react"],
+    deps: ["lucide-react"],
     internalDeps: [
+      mergeClassesHelper,
       {
         ...componentsData,
         name: "button",
@@ -118,16 +141,20 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   switch: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   textarea: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   tooltip: {
-    deps: ["clsx"],
-    internalDeps: [],
+    deps: [],
+    internalDeps: [mergeClassesHelper],
+  },
+  snackbar: {
+    deps: [],
+    internalDeps: [mergeClassesHelper],
   },
   "bottom-sheet": {
     deps: [],
