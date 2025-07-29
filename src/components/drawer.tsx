@@ -7,7 +7,9 @@ type DrawerContextType = {
   drawerRef: React.RefObject<HTMLDialogElement | null> | null;
 };
 
-const DrawerContext = createContext<DrawerContextType>({ drawerRef: null });
+export const DrawerContext = createContext<DrawerContextType>({
+  drawerRef: null,
+});
 
 export function useDrawerContext() {
   const ctx = useContext(DrawerContext);
@@ -15,7 +17,7 @@ export function useDrawerContext() {
   return ctx;
 }
 
-type DrawerProps = {
+export type DrawerProps = {
   children: ReactNode;
 };
 
@@ -28,7 +30,7 @@ export const Drawer: FC<DrawerProps> = ({ children }) => {
   );
 };
 
-type DrawerTriggerProps = {
+export type DrawerTriggerProps = {
   children: ReactNode;
   className?: string;
 };
@@ -48,23 +50,19 @@ export const DrawerTrigger: FC<DrawerTriggerProps> = ({
   );
 };
 
-type DrawerContentProps = {
+export type DrawerContentProps = {
   children: ReactNode;
   className?: string;
 };
 
-type DrawerTitleProps = {
+export type DrawerTitleProps = {
   children: ReactNode;
   className?: string;
 };
 
-export const DrawerTitle: FC<DrawerTitleProps> = ({ children, className }) => {
-  return (
-    <div className={mergeClasses("moon-drawer-title", className)}>
-      {children}
-    </div>
-  );
-};
+export const DrawerTitle: FC<DrawerTitleProps> = ({ children, className }) => (
+  <div className={mergeClasses("moon-drawer-title", className)}>{children}</div>
+);
 
 export const DrawerContent: FC<DrawerContentProps> = ({
   children,
@@ -82,7 +80,7 @@ export const DrawerContent: FC<DrawerContentProps> = ({
   );
 };
 
-type DrawerCloseProps = {
+export type DrawerCloseProps = {
   onClick?: () => void;
   className?: string;
   children?: ReactNode;

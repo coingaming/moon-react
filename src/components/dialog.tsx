@@ -3,7 +3,7 @@ import Close from "../assets/icons/CloseIcon";
 import { createPortal } from "react-dom";
 import mergeClasses from "../helpers/mergeClasses";
 
-type DialogContextType = {
+export type DialogContextType = {
   dialogRef: React.RefObject<HTMLDialogElement | null> | null;
 };
 
@@ -47,9 +47,9 @@ export const DialogContent: FC<DialogProps> = ({ children }) => {
   );
 };
 
-export const DialogHeader: FC<DialogProps> = ({ children }) => {
-  return <header className="moon-dialog-title">{children}</header>;
-};
+export const DialogHeader: FC<DialogProps> = ({ children }) => (
+  <header className="moon-dialog-title">{children}</header>
+);
 
 export function DialogClose() {
   const { dialogRef } = useContext(DialogContext);
