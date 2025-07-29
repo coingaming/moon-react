@@ -104,13 +104,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
   },
   dropdown: {
     deps: [],
-    internalDeps: [
-      mergeClassesHelper,
-      {
-        ...componentsData,
-        name: "popover",
-      },
-    ],
+    internalDeps: [mergeClassesHelper],
   },
   "linear-progress": {
     deps: [],
@@ -161,5 +155,17 @@ export const COMPONENTS_META: Record<string, Deps> = {
   snackbar: {
     deps: [],
     internalDeps: [mergeClassesHelper],
+  },
+  "bottom-sheet": {
+    deps: [],
+    internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
+  },
+  drawer: {
+    deps: [],
+    internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
+  },
+  dialog: {
+    deps: [],
+    internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
   },
 };
