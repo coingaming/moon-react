@@ -118,8 +118,12 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [
       mergeClassesHelper,
       {
-        ...componentsData,
-        name: "button",
+        ...iconsData,
+        name: "ArrowLeftIcon",
+      },
+      {
+        ...iconsData,
+        name: "ArrowRightIcon",
       },
     ],
   },

@@ -29,18 +29,18 @@ export type TabsProps = {
   setActiveIndex: (idx: number) => void;
 };
 
-export type TabListProps = {
+export type TabListProps = React.ComponentProps<"ul"> & {
   children: ReactNode;
   className?: string;
 };
 
-export type TabProps = {
+export type TabProps = React.ComponentProps<"button"> & {
   children: ReactNode;
   className?: string;
   index: number;
 };
 
-export type TabPanelProps = {
+export type TabPanelProps = React.ComponentProps<"div"> & {
   children: ReactNode;
   className?: string;
   index: number;
@@ -51,15 +51,13 @@ export const Tabs: React.FC<TabsProps> = ({
   size = TabSizes.md,
   activeIndex,
   setActiveIndex,
-}) => {
-  return (
-    <TabsContext.Provider value={{ activeIndex, setActiveIndex, size }}>
-      {children}
-    </TabsContext.Provider>
-  );
-};
+}) => (
+  <TabsContext.Provider value={{ activeIndex, setActiveIndex, size }}>
+    {children}
+  </TabsContext.Provider>
+);
 
-export const TabList: React.FC<React.ComponentProps<"ul"> & TabListProps> = ({
+export const TabList: React.FC<TabListProps> = ({
   children,
   className,
   ...props
@@ -80,7 +78,7 @@ export const TabList: React.FC<React.ComponentProps<"ul"> & TabListProps> = ({
   );
 };
 
-export const Tab: React.FC<React.ComponentProps<"button"> & TabProps> = ({
+export const Tab: React.FC<TabProps> = ({
   children,
   className,
   index,
@@ -108,9 +106,12 @@ export const Tab: React.FC<React.ComponentProps<"button"> & TabProps> = ({
   );
 };
 
-export const TabPanel: React.FC<
-  React.ComponentProps<"div"> & TabPanelProps
-> = ({ children, className, index, ...props }) => {
+export const TabPanel: React.FC<TabPanelProps> = ({
+  children,
+  className,
+  index,
+  ...props
+}) => {
   const context = useTabsContext();
   const isActive = context.activeIndex === index;
   return (
