@@ -131,7 +131,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [mergeClassesHelper],
   },
   pagination: {
-    deps: ["lucide-react"],
+    deps: [],
     internalDeps: [
       mergeClassesHelper,
       {
