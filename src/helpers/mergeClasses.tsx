@@ -1,9 +1,4 @@
-type ArgsType =
-  | string
-  | number
-  | Record<string, string | boolean>
-  | false
-  | undefined;
+type ArgsType = string | number | false | undefined;
 
 function toVal(value: ArgsType): string {
   if (typeof value === "string" || typeof value === "number") {
@@ -12,12 +7,6 @@ function toVal(value: ArgsType): string {
 
   if (Array.isArray(value)) {
     return value.map(toVal).filter(Boolean).join(" ");
-  }
-
-  if (typeof value === "object" && value !== null) {
-    return Object.keys(value)
-      .filter((key) => value[key])
-      .join(" ");
   }
 
   return "";

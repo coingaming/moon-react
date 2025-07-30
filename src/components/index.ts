@@ -23,3 +23,6 @@ export * from "./loader";
 export * from "./placeholder";
 export * from "./tag";
 export * from "./menu";
+export * from "./circular-progress";
+export * from "./tabs";
+export * from "./segmented-control";
