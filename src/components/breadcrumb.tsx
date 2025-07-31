@@ -60,13 +60,14 @@ function BreadcrumbItem({
 }) {
   const { currentPage, setCurrentPage } = useBreadcrumbContext();
   const isCurrentItemSelected = currentPage === index;
-
   return (
     <li
-      {...(isCurrentItemSelected ? { "aria-current": "page" } : {})}
-      className={mergeClasses("moon-breadcrumb-item", className, {
-        "moon-breadcrumb-item-active": isCurrentItemSelected,
-      })}
+      aria-current={isCurrentItemSelected ? "page" : undefined}
+      className={mergeClasses(
+        "moon-breadcrumb-item",
+        isCurrentItemSelected && "moon-breadcrumb-item-active",
+        className
+      )}
       onClick={() => {
         setCurrentPage(index);
       }}
