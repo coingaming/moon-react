@@ -1,13 +1,19 @@
-import React, { createContext, ReactNode, useContext } from "react";
+import React, { createContext, FC, ReactNode, useContext } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-type BreadCrumbContext = {
+export type BreadCrumbContext = {
   currentPage: number;
   setCurrentPage: (page: number) => void;
 };
 
-type BreadcrumbProps = BreadCrumbContext & {
+export type BreadcrumbProps = BreadCrumbContext & {
   children: ReactNode;
+};
+
+export type BreadcrumbListProps = React.ComponentProps<"ol">;
+
+export type BreadcrumpItemProps = React.ComponentProps<"li"> & {
+  index: number;
 };
 
 const BreadcrumbContext = createContext<BreadCrumbContext>({
@@ -15,7 +21,7 @@ const BreadcrumbContext = createContext<BreadCrumbContext>({
   setCurrentPage: (_page: number) => {},
 });
 
-function useBreadcrumbContext() {
+const useBreadcrumbContext = () => {
   const context = useContext(BreadcrumbContext);
 
   if (!context) {
@@ -25,39 +31,29 @@ function useBreadcrumbContext() {
   }
 
   return context;
-}
+};
 
-function Breadcrumb({
+const Breadcrumb: FC<BreadcrumbProps> = ({
   children,
   currentPage,
   setCurrentPage,
-}: BreadcrumbProps) {
-  return (
-    <BreadcrumbContext.Provider value={{ currentPage, setCurrentPage }}>
-      {children}
-    </BreadcrumbContext.Provider>
-  );
-}
+}) => (
+  <BreadcrumbContext.Provider value={{ currentPage, setCurrentPage }}>
+    {children}
+  </BreadcrumbContext.Provider>
+);
 
-function BreadcrumbList({
-  className,
-  ...props
-}: React.ComponentProps<"ol"> & { dataTestId?: string }) {
-  return (
-    <nav>
-      <ol className={mergeClasses("moon-breadcrumb", className)} {...props} />
-    </nav>
-  );
-}
+const BreadcrumbList: FC<BreadcrumbListProps> = ({ className, ...props }) => (
+  <nav>
+    <ol className={mergeClasses("moon-breadcrumb", className)} {...props} />
+  </nav>
+);
 
-function BreadcrumbItem({
+const BreadcrumbItem: FC<BreadcrumpItemProps> = ({
   className,
   index,
   ...props
-}: React.ComponentProps<"li"> & {
-  index: number;
-  dataTestId?: string;
-}) {
+}) => {
   const { currentPage, setCurrentPage } = useBreadcrumbContext();
   const isCurrentItemSelected = currentPage === index;
   return (
@@ -74,6 +70,6 @@ function BreadcrumbItem({
       {...props}
     />
   );
-}
+};
 
 export { Breadcrumb, BreadcrumbList, BreadcrumbItem };
