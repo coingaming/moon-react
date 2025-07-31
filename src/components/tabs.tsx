@@ -1,46 +1,122 @@
-import * as React from "react";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
-import clsx from "clsx";
-import "../assets/css/moon-components.css";
+import React, { ReactNode, createContext, useContext } from "react";
+import mergeClasses from "../helpers/mergeClasses";
 
-function Tabs({
-  className,
-  ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root>) {
-  return <TabsPrimitive.Root data-slot="tabs" {...props} />;
+export enum TabSizes {
+  sm = "sm",
+  md = "md",
 }
 
-function TabsList({
+type TabsContextType = {
+  activeIndex: number;
+  setActiveIndex: (idx: number) => void;
+  size: TabSizes;
+};
+
+const TabsContext = createContext<TabsContextType | null>(null);
+
+function useTabsContext() {
+  const context = useContext(TabsContext);
+  if (!context) {
+    throw new Error("Tabs components must be used within <Tabs> wrapper");
+  }
+  return context;
+}
+
+export type TabsProps = {
+  children: ReactNode;
+  size?: TabSizes;
+  activeIndex: number;
+  setActiveIndex: (idx: number) => void;
+};
+
+export type TabListProps = React.ComponentProps<"ul"> & {
+  children: ReactNode;
+  className?: string;
+};
+
+export type TabProps = React.ComponentProps<"button"> & {
+  children: ReactNode;
+  className?: string;
+  index: number;
+};
+
+export type TabPanelProps = React.ComponentProps<"div"> & {
+  children: ReactNode;
+  className?: string;
+  index: number;
+};
+
+export const Tabs: React.FC<TabsProps> = ({
+  children,
+  size = TabSizes.md,
+  activeIndex,
+  setActiveIndex,
+}) => (
+  <TabsContext.Provider value={{ activeIndex, setActiveIndex, size }}>
+    {children}
+  </TabsContext.Provider>
+);
+
+export const TabList: React.FC<TabListProps> = ({
+  children,
   className,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.List>) {
+}) => {
+  const { size } = useTabsContext();
   return (
-    <TabsPrimitive.List
-      data-slot="tabs-list"
-      className="moon-tab-list"
+    <ul
+      role="tablist"
+      className={mergeClasses(
+        "moon-tab-list",
+        size !== TabSizes.md && `moon-tab-list-${size}`,
+        className
+      )}
       {...props}
-    />
+    >
+      {children}
+    </ul>
   );
-}
+};
 
-function TabsTrigger({
+export const Tab: React.FC<TabProps> = ({
+  children,
   className,
+  index,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+}) => {
+  const context = useTabsContext();
+  const isActive = context.activeIndex === index;
   return (
-    <TabsPrimitive.Trigger
-      data-slot="tabs-trigger"
-      className={clsx("moon-tab", className)}
-      {...props}
-    />
+    <li>
+      <button
+        role="tab"
+        aria-selected={isActive}
+        className={mergeClasses(
+          "moon-tab",
+          isActive && "moon-tab-active",
+          className
+        )}
+        onClick={() => context.setActiveIndex(index)}
+        tabIndex={isActive ? 0 : -1}
+        {...props}
+      >
+        {children}
+      </button>
+    </li>
   );
-}
+};
 
-function TabsContent({
+export const TabPanel: React.FC<TabPanelProps> = ({
+  children,
   className,
+  index,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Content>) {
-  return <TabsPrimitive.Content data-slot="tabs-content" {...props} />;
-}
-
-export { Tabs, TabsList, TabsTrigger, TabsContent };
+}) => {
+  const context = useTabsContext();
+  const isActive = context.activeIndex === index;
+  return (
+    <div role="tabpanel" className={className} hidden={!isActive} {...props}>
+      {children}
+    </div>
+  );
+};

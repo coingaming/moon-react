@@ -1,80 +1,75 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { MoreHorizontal } from "lucide-react";
-import clsx from "clsx";
-import "../assets/css/moon-components.css";
+import React, { createContext, FC, ReactNode, useContext } from "react";
+import mergeClasses from "../helpers/mergeClasses";
 
-function Breadcrumb({ ...props }: React.ComponentProps<"nav">) {
-  return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />;
-}
+export type BreadCrumbContext = {
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+};
 
-function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
-  return (
-    <ol
-      data-slot="breadcrumb-list"
-      className={clsx("moon-breadcrumb", className)}
-      {...props}
-    />
-  );
-}
+export type BreadcrumbProps = BreadCrumbContext & {
+  children: ReactNode;
+};
 
-function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
+export type BreadcrumbListProps = React.ComponentProps<"ol">;
+
+export type BreadcrumpItemProps = React.ComponentProps<"li"> & {
+  index: number;
+};
+
+const BreadcrumbContext = createContext<BreadCrumbContext>({
+  currentPage: 1,
+  setCurrentPage: (_page: number) => {},
+});
+
+const useBreadcrumbContext = () => {
+  const context = useContext(BreadcrumbContext);
+
+  if (!context) {
+    throw new Error(
+      "Breadcrumb components must be used within <Breadcrumb> wrapper"
+    );
+  }
+
+  return context;
+};
+
+const Breadcrumb: FC<BreadcrumbProps> = ({
+  children,
+  currentPage,
+  setCurrentPage,
+}) => (
+  <BreadcrumbContext.Provider value={{ currentPage, setCurrentPage }}>
+    {children}
+  </BreadcrumbContext.Provider>
+);
+
+const BreadcrumbList: FC<BreadcrumbListProps> = ({ className, ...props }) => (
+  <nav>
+    <ol className={mergeClasses("moon-breadcrumb", className)} {...props} />
+  </nav>
+);
+
+const BreadcrumbItem: FC<BreadcrumpItemProps> = ({
+  className,
+  index,
+  ...props
+}) => {
+  const { currentPage, setCurrentPage } = useBreadcrumbContext();
+  const isCurrentItemSelected = currentPage === index;
   return (
     <li
-      data-slot="breadcrumb-item"
-      className={clsx("moon-breadcrumb-item", className)}
+      aria-current={isCurrentItemSelected ? "page" : undefined}
+      className={mergeClasses(
+        "moon-breadcrumb-item",
+        isCurrentItemSelected && "moon-breadcrumb-item-active",
+        className
+      )}
+      onClick={() => {
+        setCurrentPage(index);
+      }}
       {...props}
     />
   );
-}
-
-function BreadcrumbLink({
-  asChild,
-  className,
-  ...props
-}: React.ComponentProps<"a"> & {
-  asChild?: boolean;
-}) {
-  const Comp = asChild ? Slot : "a";
-
-  return <Comp data-slot="breadcrumb-link" className={className} {...props} />;
-}
-
-function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
-  return (
-    <span
-      data-slot="breadcrumb-page"
-      role="link"
-      aria-disabled="true"
-      aria-current="page"
-      className={className}
-      {...props}
-    />
-  );
-}
-
-function BreadcrumbEllipsis({
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
-  return (
-    <span
-      data-slot="breadcrumb-ellipsis"
-      role="presentation"
-      aria-hidden="true"
-      className={className}
-      {...props}
-    >
-      <MoreHorizontal />
-    </span>
-  );
-}
-
-export {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbEllipsis,
 };
+
+export { Breadcrumb, BreadcrumbList, BreadcrumbItem };

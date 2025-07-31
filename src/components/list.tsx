@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import mergeClasses from "../helpers";
+import mergeClasses from "../helpers/mergeClasses";
 
 export enum ListSizes {
   sm = "sm",
@@ -16,19 +16,17 @@ const List = ({
 }: React.ComponentProps<"ul"> & {
   size?: ListSizes;
   children: ReactNode;
-}) => {
-  return (
-    <ul
-      className={mergeClasses(
-        "moon-list",
-        size !== ListSizes.md && `moon-list-${size}`
-      )}
-      {...props}
-    >
-      {children}
-    </ul>
-  );
-};
+}) => (
+  <ul
+    className={mergeClasses(
+      "moon-list",
+      size !== ListSizes.md && `moon-list-${size}`
+    )}
+    {...props}
+  >
+    {children}
+  </ul>
+);
 
 export const ListItem = ({
   children,

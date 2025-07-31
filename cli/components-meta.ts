@@ -13,7 +13,6 @@ type InternalDeps = {
 };
 
 type Deps = {
-  deps: string[];
   internalDeps: InternalDeps[];
 };
 
@@ -37,7 +36,6 @@ const iconsData: InternalDeps = {
 
 export const COMPONENTS_META: Record<string, Deps> = {
   avatar: {
-    deps: [],
     internalDeps: [
       mergeClassesHelper,
       {
@@ -47,11 +45,9 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   accordion: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   alert: {
-    deps: [],
     internalDeps: [
       mergeClassesHelper,
       {
@@ -61,23 +57,18 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   authenticator: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   badge: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   breadcrumb: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   button: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   carousel: {
-    deps: [],
     internalDeps: [
       {
         ...componentsData,
@@ -93,45 +84,20 @@ export const COMPONENTS_META: Record<string, Deps> = {
       },
     ],
   },
-  select: { deps: [], internalDeps: [mergeClassesHelper] },
+  select: { internalDeps: [mergeClassesHelper] },
   "circular-progress": {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   checkbox: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   dropdown: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   "linear-progress": {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
-  loader: {
-    deps: [],
-    internalDeps: [mergeClassesHelper],
-  },
-  placeholder: {
-    deps: [],
-    internalDeps: [mergeClassesHelper],
-  },
-  tag: {
-    deps: [],
-    internalDeps: [mergeClassesHelper],
-  },
-  input: {
-    deps: [],
-    internalDeps: [mergeClassesHelper],
-  },
-  table: {
-    deps: [],
-    internalDeps: [mergeClassesHelper],
-  },
-  pagination: {
-    deps: ["lucide-react"],
+  "icon-button": {
     internalDeps: [
       mergeClassesHelper,
       {
@@ -140,32 +106,62 @@ export const COMPONENTS_META: Record<string, Deps> = {
       },
     ],
   },
+  loader: {
+    internalDeps: [mergeClassesHelper],
+  },
+  placeholder: {
+    internalDeps: [mergeClassesHelper],
+  },
+  tag: {
+    internalDeps: [mergeClassesHelper],
+  },
+  input: {
+    internalDeps: [mergeClassesHelper],
+  },
+  table: {
+    internalDeps: [mergeClassesHelper],
+  },
+  pagination: {
+    internalDeps: [
+      mergeClassesHelper,
+      {
+        ...iconsData,
+        name: "ArrowLeftIcon",
+      },
+      {
+        ...iconsData,
+        name: "ArrowRightIcon",
+      },
+    ],
+  },
   switch: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   textarea: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   tooltip: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   snackbar: {
-    deps: [],
     internalDeps: [mergeClassesHelper],
   },
   "bottom-sheet": {
-    deps: [],
     internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
   },
   drawer: {
-    deps: [],
     internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
   },
   dialog: {
-    deps: [],
     internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
+  },
+  list: {
+    internalDeps: [mergeClassesHelper],
+  },
+  menu: {
+    internalDeps: [mergeClassesHelper],
+  },
+  tabs: {
+    internalDeps: [mergeClassesHelper],
   },
 };
