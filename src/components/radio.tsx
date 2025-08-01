@@ -9,31 +9,25 @@ export type RadioLabelProps = React.ComponentProps<"label"> & {
   children: ReactNode | string;
 };
 
-export const Radio: React.FC<RadioProps> = ({ className, ...props }) => {
-  return (
-    <input
-      type="radio"
-      className={mergeClasses("moon-radio", className)}
-      {...props}
-    />
-  );
-};
+export const Radio: React.FC<RadioProps> = ({ className, ...props }) => (
+  <input
+    type="radio"
+    className={mergeClasses("moon-radio", className)}
+    {...props}
+  />
+);
 
 export const RadioLabel: React.FC<RadioLabelProps> = ({
   children,
   ...props
-}) => {
-  return <label {...props}>{children}</label>;
-};
+}) => <label {...props}>{children}</label>;
 
 export const RadioWrapper: React.FC<RadioWrapperProps> = ({
   children,
   className,
   ...props
-}) => {
-  return (
-    <div className={mergeClasses("moon-radio-wrapper", className)} {...props}>
-      {children}
-    </div>
-  );
-};
+}) => (
+  <div className={mergeClasses("moon-radio-wrapper", className)} {...props}>
+    {children}
+  </div>
+);
