@@ -140,6 +140,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
   textarea: {
     internalDeps: [mergeClassesHelper],
   },
+  chip: { internalDeps: [mergeClassesHelper] },
   tooltip: {
     internalDeps: [mergeClassesHelper],
   },
@@ -156,6 +157,12 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
   },
   list: {
+    internalDeps: [mergeClassesHelper],
+  },
+  radio: {
+    internalDeps: [mergeClassesHelper],
+  },
+  "segmented-control": {
     internalDeps: [mergeClassesHelper],
   },
   menu: {
