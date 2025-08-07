@@ -12,13 +12,13 @@ enum ButtonSizes {
 enum ButtonVariants {
   soft = "soft",
   outline = "outline",
-  filled = "filled",
+  fill = "fill",
   ghost = "ghost",
 }
 
 function Button({
   className,
-  variant = ButtonVariants.filled,
+  variant = ButtonVariants.fill,
   size = ButtonSizes.md,
   ...props
 }: React.ComponentProps<"button"> & {
@@ -30,7 +30,7 @@ function Button({
       data-slot="button"
       className={mergeClasses(
         "moon-button",
-        variant !== ButtonVariants.filled && `moon-button-${variant}`,
+        variant !== ButtonVariants.fill && `moon-button-${variant}`,
         size !== ButtonSizes.md && `moon-button-${size}`,
         className
       )}

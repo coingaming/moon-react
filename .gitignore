@@ -25,3 +25,5 @@ dist-ssr
 node_modules/*
 *storybook.log
 .env
+storybook-static
+eslint.config.js
