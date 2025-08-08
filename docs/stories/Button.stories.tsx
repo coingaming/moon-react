@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, ButtonSizes, ButtonVariants } from "../components";
+import { Button, ButtonSizes, ButtonVariants } from "@heathmont/moon-react";
 
 type ButtonType = React.ComponentProps<typeof Button>;
 

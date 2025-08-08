@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react-vite";
 import "./globals.css";
-import "../dist/moon-core.css";
-import "../dist/moon-components.css";
+import "../css/moon-core.css";
+import "../css/moon-components.css";
 
 const preview: Preview = {
   parameters: {
