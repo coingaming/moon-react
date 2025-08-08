@@ -6,7 +6,8 @@ RUN rm -rf node_modules package-lock.json dist .storybook/storybook-static .cach
 RUN npm install
 RUN npm rebuild
 COPY . .
-ENV NODE_ENV production
+ENV NODE_ENV=production
+WORKDIR /app/docs
 RUN npm run build-storybook
 FROM node:22-alpine AS runner
 WORKDIR /app
