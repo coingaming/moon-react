@@ -10,8 +10,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@heathmont/moon-react": "*",
     "@heathmont/moon-css": "^1.13.1",
+    "@heathmont/moon-react": "*",
     "@tailwindcss/vite": "^4.1.11",
     "@tanstack/react-table": "^8.21.3",
     "clsx": "^2.1.1",
