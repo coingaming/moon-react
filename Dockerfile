@@ -5,8 +5,15 @@ COPY package*.json ./
 
 COPY docs/package*.json docs/
 
-RUN npm install
+WORKDIR /app/docs
 
+RUN rm -rf node_modules package-lock.json dist .storybook/storybook-static .cache && \
+    npm cache clean --force
+
+RUN npm install
+RUN npm rebuild
+
+WORKDIR /app
 COPY . .
 
 WORKDIR /app/docs
