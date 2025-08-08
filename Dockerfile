@@ -1,4 +1,4 @@
-FROM node:22-alpine AS builder
+FROM node:22-bullseye-slim AS builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -19,7 +19,7 @@ COPY . .
 WORKDIR /app/docs
 RUN npm run build-storybook
 
-FROM node:22-alpine AS runner
+FROM node:22-bullseye-slim AS runner
 WORKDIR /app
 COPY --from=builder /app/docs/storybook-static ./storybook-static
 
