@@ -1,5 +1,5 @@
-import React, { ReactNode, FC } from "react";
-import Button from "./Button";
+import React, { ReactNode } from "react";
+import { Button } from "./Button";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum IconButtonSizes {
@@ -17,20 +17,20 @@ export enum IconButtonVariants {
   ghost = "ghost",
 }
 
-export type IconButtonProps = React.ComponentProps<"button"> & {
+type IconButtonProps = React.ComponentProps<"button"> & {
   children: ReactNode;
   className?: string;
   variant?: IconButtonVariants;
   size?: IconButtonSizes;
 };
 
-const IconButton: FC<IconButtonProps> = ({
+export const IconButton = ({
   children,
   className,
   size = IconButtonSizes.md,
   variant = IconButtonVariants.fill,
   ...props
-}) => (
+}: IconButtonProps) => (
   <Button
     className={mergeClasses(
       "moon-icon-button",
@@ -44,4 +44,3 @@ const IconButton: FC<IconButtonProps> = ({
   </Button>
 );
 
-export default IconButton;

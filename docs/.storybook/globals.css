@@ -5,3 +5,18 @@
 @import "tailwindcss";
 @import "./moon-core.css";
 @import "./moon-components.css";
+
+.sbdocs div:has(.docblock-argstable) {
+  width: 100%;
+  overflow-x: auto;
+
+  table {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+.docs-story,
+.sb-main-padded {
+  background-color: var(--semantic-background-primary);
+}
