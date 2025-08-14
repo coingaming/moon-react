@@ -2,24 +2,21 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button, ButtonSizes, ButtonVariants } from "@heathmont/moon-react";
 import { getMoonLink, getGithubLink } from "../utils/component-links";
+import LinksBlock from "../shared/LinksBlock";
 
 type ButtonType = React.ComponentProps<typeof Button>;
 
 const meta: Meta<ButtonType> = {
   component: Button,
   title: "Actions/Button",
-  tags: ["autodocs"],
   parameters: {
     docs: {
-      description: {
-        component: `
-A versatile button component with multiple variants and sizes.
-
-**Links:**
-- 🌙 [Moon Documentation](${getMoonLink("Button")})
-- 📁 [GitHub Source](${getGithubLink("Button")})
-        `,
-      },
+      container: ({ context }: any) => (
+        <LinksBlock
+          context={context}
+          component="Button"
+        />
+      ),
     },
   },
   argTypes: {

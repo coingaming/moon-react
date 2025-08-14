@@ -27,7 +27,7 @@ export * from "./Select";
 export * from "./Snackbar";
 export * from "./Switch";
 export * from "./Table";
-export * from "./Tabs";
+export * from "./TabList";
 export * from "./Tag";
 export * from "./Textarea";
 export * from "./Tooltip";

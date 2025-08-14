@@ -44,153 +44,43 @@ import { Meta } from "@storybook/addon-docs/blocks";
   </a>
 </div>
 
-# Moon UI
+# 🌙 @heathmont/moon-react
 
-A UI library for generating core and component CSS files from Figma design tokens.
+A modern React component library built to support consistent UI development across projects.
 
-## Quick Start
+---
 
-1. **Set up Figma token**: Add your Figma personal access token to an `.env` file:
+## 📦 Installation
 
-   ```bash
-   FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
-   ```
-
-2. **Generate CSS**: Run the tool to generate your CSS files:
-   ```bash
-   npx @heathmont/moon-ui
-   ```
-
-## Usage
-
-### Command Line Options
+Install the full package:
 
 ```bash
-# Basic usage - generates core CSS only
-npx @heathmont/moon-ui
-
-# Generate both core and component CSS
-npx @heathmont/moon-ui --add-components
-
-# Use custom CSS class prefix (uses projectName as prefix)
-npx @heathmont/moon-ui --custom-prefix
-
-# Customize project name (default: 'moon')
-npx @heathmont/moon-ui --projectName your-project
-
-# Specify output directory (default: 'dist')
-npx @heathmont/moon-ui --outputFolder output-folder
-
-# Use custom Figma file IDs
-npx @heathmont/moon-ui --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_FILE_ID
-
-# Generate vanilla CSS files instead of Tailwind CSS v4 (default: 'tailwindcss')
-npx @heathmont/moon-ui --target css
-
-# Generate vanilla CSS files with browser CSS reset. Not needed with tailwindcss target
-npx @heathmont/moon-ui --target css --preflight
+yarn add @heathmont/moon-react
 ```
 
-### Configuration File
+# Selective Usage via CLI
 
-Add a `FIGMA_TOKEN` variable to your `.env` file and include this file in `.gitignore`:
+npx @heathmont/moon-react --add component-name
 
-```bash
-FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
-```
+component names should be typed in lowercase, e.g:
 
-The tool automatically creates a `moonconfig.json` file with default values if one doesn't exist. You can also create or modify this file manually:
+npx @heathmont/moon-react --add button textarea input
 
-```json
-{
-  "projectName": "PROJECT_NAME",
-  "coreFileId": "CORE_FILE_ID",
-  "componentsFileId": "COMPONENTS_FILE_ID",
-  "outputFolder": "OUTPUT_FOLDER",
-  "customPrefix": false,
-  "target": "tailwindcss",
-  "themes": {}
-}
-```
+As optional flags you can use the following:
 
-#### Multi-theme Support
+--all-components e.g: npx @heathmont/moon-react --all-components just in case
+you want to use them all so you don't have you write every component you want to install.
 
-For additional themes, add theme names and their corresponding Figma file IDs to the `themes` object:
+--outputFolder e.g npx @heathmont/moon-react add button textarea --outputFolder src/css that way you have control over the directory where css components are placed
 
-```json
-{
-  "themes": {
-    "theme1": "THEME_1_CORE_FILE_ID",
-    "theme2": "THEME_2_CORE_FILE_ID"
-  }
-}
-```
+npx @heathmont/moon-react --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_FILE_ID so you can use your own core and components figma files
 
-## CSS Output Targets
+npx @heathmont/moon-react --target css with this flag you can configure moon-react for tailwind projects or non tailwind projects, default is 'tailwindcss'
 
-Moon UI supports two output formats:
+# Prerequisites
 
-### TailwindCSS v4 (Default)
+node 20.9.0 or above
 
-Generates CSS compatible with TailwindCSS v4 using `@theme inline` directives:
+# Configuration
 
-### Vanilla CSS
-
-Generates standard CSS using `:root` selectors for maximum compatibility:
-
-```bash
-npx @heathmont/moon-ui --target css
-```
-
-**Note**: With vanilla CSS output, you'll retain typography and shadow utility classes, but some Tailwind-specific utility classes will not be generated.
-
-## Component Class Prefixes
-
-By default, all component classes use the `moon-` prefix:
-
-```css
-.moon-button {
-  /* styles */
-}
-.moon-tooltip {
-  /* styles */
-}
-```
-
-Enable custom prefixes using `--custom-prefix` to use your `projectName` as the prefix:
-
-```bash
-npx @heathmont/moon-ui --add-components --custom-prefix --projectName company
-```
-
-This generates:
-
-```css
-.company-button {
-  /* styles */
-}
-.company-tooltip {
-  /* styles */
-}
-```
-
-## Generated Files
-
-The following files are created in your specified output directory:
-
-- **`{projectName}-core.css`** - Core CSS variables and utilities
-- **`{projectName}-components.css`** - Component classes (when `--add-components` is used)
-- **`{projectName}-preflight.css`** - CSS reset (when `--preflight` is used)
-- **`{themeName}-core.css`** - Theme-specific CSS files (one per theme in config)
-
-## License
-
-MIT
-
-## Versioning
-
-Moon UI follows [Semantic Versioning](https://semver.org/). View available versions in the [repository tags](https://github.com/coingaming/moon-ui/tags).
-
-- **MAJOR**: Incompatible API changes
-- **MINOR**: New backward-compatible functionality
-- **PATCH**: Backward-compatible bug fixes
+Add an .env file to your project with a FIGMA_TOKEN variable with a valid figma token
