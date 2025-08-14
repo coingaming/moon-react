@@ -18,20 +18,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22.18.0
-          registry-url: https://registry.npmjs.org
-          scope: '@heathmont'
-      - name: Create .npmrc file
-        run: |
-          echo "registry=https://registry.npmjs.org/" > ~/.npmrc
-          echo "@heathmont:registry=https://registry.npmjs.org/" >> ~/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
-          cat ~/.npmrc
-      - name: Verify npm authentication
-        run: |
-          npm whoami
-          npm config get registry
-          npm config get @heathmont:registry
       - name: Install dependencies
         run: npm install
       - name: Build Storybook
