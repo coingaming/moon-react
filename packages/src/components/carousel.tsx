@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button } from "./button";
+import Button from "./Button";
 import mergeClasses from "../helpers/mergeClasses";
 import ArrowLeft from "../assets/icons/ArrowLeftIcon";
 import ArrowRight from "../assets/icons/ArrowRightIcon";
