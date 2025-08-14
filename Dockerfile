@@ -2,17 +2,13 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-COPY package*.json ./
+# Copy the entire project structure first
+COPY . .
 
-COPY docs/package*.json docs/
-
-WORKDIR /app/docs
-
+# Install dependencies for the entire monorepo
 RUN npm install
 
-WORKDIR /app
-
-COPY . .
+WORKDIR /app/docs
 
 ENV NODE_ENV production
 WORKDIR /app/docs

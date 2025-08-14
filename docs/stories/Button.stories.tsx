@@ -16,24 +16,30 @@ const meta: Meta<ButtonType> = {
     },
     size: {
       description: "Defines the button size.",
-      options: ["xs", "sm", "md", "lg", "xl"],
+      options: Object.values(ButtonSizes),
       control: { type: "select" },
       defaultValue: "md",
     },
     disabled: {
       description: "Disables the button when set to true.",
-      options: [true, false],
       control: { type: "boolean" },
       defaultValue: false,
     },
     variant: {
       description: "Sets the button style variant.",
-      options: ["fill", "outline", "soft", "ghost"],
+      options: Object.values(ButtonVariants),
       control: { type: "select" },
       defaultValue: "fill",
     },
   },
-  render: ({ children, ...props }) => <Button {...props}>{children}</Button>,
+  render: ({ children, variant, size, ...props }) => {
+    const buttonProps = {
+      ...props,
+      ...(variant !== ButtonVariants.fill && { variant }),
+      ...(size !== ButtonSizes.md && { size }),
+    };
+    return <Button {...buttonProps}>{children}</Button>;
+  },
 };
 
 export default meta;
