@@ -1,8 +1,22 @@
 {
-  "name": "@heathmont/moon-react-library",
+  "name": "moon-react-monorepo",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
   "private": true,
   "workspaces": [
-    "ui",
+    "packages",
     "docs"
-  ]
+  ],
+  "scripts": {
+    "moon-ui": "npx @heathmont/moon-ui --add-components",
+    "dev": "npm run build:watch --workspace packages & npm run dev --workspace docs",
+    "build": "npm run build --workspace packages",
+    "build-storybook": "npm run build-storybook --workspace docs",
+    "changeset": "changeset",
+    "version": "changeset version && npm install && npm update && npm run build && npm run moon-ui",
+    "release": "changeset publish"
+  }
 }

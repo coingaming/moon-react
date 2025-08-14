@@ -8,7 +8,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "../ui/src"),
+      "@": path.resolve(__dirname, "./src"),
+      "@heathmont/moon-react": path.resolve(__dirname, "../packages/src"),
     },
   },
 });
