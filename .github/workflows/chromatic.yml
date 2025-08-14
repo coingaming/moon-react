@@ -18,6 +18,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22.18.0
+          registry-url: https://registry.npmjs.org
+      - name: Authenticate with npm
+        run: |
+          echo "@heathmont:registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
       - name: Install dependencies
         run: npm install
       - name: Build Storybook
