@@ -3,7 +3,7 @@ export * from "./alert";
 export * from "./authenticator";
 export * from "./breadcrumb";
 export * from "./bottom-sheet";
-export * from "./button";
+export * from "./Button";
 export * from "./carousel";
 export * from "./checkbox";
 export * from "./dropdown";

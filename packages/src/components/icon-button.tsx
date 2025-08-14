@@ -1,5 +1,5 @@
 import React, { ReactNode, FC } from "react";
-import { Button } from "./button";
+import Button from "./Button";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum IconButtonSizes {

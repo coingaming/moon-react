@@ -1,4 +1,4 @@
-name: Moon React docs release
+name: Release new docs
 
 on:
   push:
