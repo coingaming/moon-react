@@ -21,7 +21,7 @@ type Props = {
   className?: string;
 }
 
-const Button = ({
+export const Button = ({
   className,
   variant = ButtonVariants.fill,
   size = ButtonSizes.md,
@@ -39,4 +39,3 @@ const Button = ({
   />
 );
 
-export default Button;

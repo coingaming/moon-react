@@ -1,0 +1,196 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Getting started" />
+
+<div class="sb-unstyled flex flex-col sm:flex-row gap-space-12 mb-space-40">
+  <a
+    href="https://beta.moon.io/"
+    target="_blank"
+    class="overflow-hidden flex items-center border border-primary rounded-4 h-space-48"
+  >
+    <div class="flex items-center justify-center h-full aspect-square bg-tertiary">
+      <img src="/logo.png" alt="Website" class="w-space-40" />
+    </div>
+    <div class="flex flex-col px-space-8">
+      <span class="text-body-300 font-medium">Moon Design System</span>
+      <span class="text-body-200 text-secondary">Website</span>
+    </div>
+  </a>
+  <a
+    href="https://www.npmjs.com/package/@heathmont/moon-react"
+    target="_blank"
+    class="overflow-hidden flex items-center border border-primary rounded-4 h-space-48"
+  >
+    <div class="flex items-center justify-center h-full aspect-square bg-tertiary">
+      <img src="/npm.png" alt="NPM" class="w-space-40" />
+    </div>
+    <div class="flex flex-col px-space-8">
+      <span class="text-body-300 font-medium">View package</span>
+      <span class="text-body-200 text-secondary">NPM</span>
+    </div>
+  </a>
+  <a
+    href="https://github.com/coingaming/moon-react"
+    target="_blank"
+    class="overflow-hidden flex items-center border border-primary rounded-4 h-space-48"
+  >
+    <div class="flex items-center justify-center h-full aspect-square bg-tertiary">
+      <img src="/github.png" alt="GitHub" class="w-space-40" />
+    </div>
+    <div class="flex flex-col px-space-8">
+      <span class="text-body-300 font-medium">View repository</span>
+      <span class="text-body-200 text-secondary">GitHub</span>
+    </div>
+  </a>
+</div>
+
+# Moon UI
+
+A UI library for generating core and component CSS files from Figma design tokens.
+
+## Quick Start
+
+1. **Set up Figma token**: Add your Figma personal access token to an `.env` file:
+
+   ```bash
+   FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
+   ```
+
+2. **Generate CSS**: Run the tool to generate your CSS files:
+   ```bash
+   npx @heathmont/moon-ui
+   ```
+
+## Usage
+
+### Command Line Options
+
+```bash
+# Basic usage - generates core CSS only
+npx @heathmont/moon-ui
+
+# Generate both core and component CSS
+npx @heathmont/moon-ui --add-components
+
+# Use custom CSS class prefix (uses projectName as prefix)
+npx @heathmont/moon-ui --custom-prefix
+
+# Customize project name (default: 'moon')
+npx @heathmont/moon-ui --projectName your-project
+
+# Specify output directory (default: 'dist')
+npx @heathmont/moon-ui --outputFolder output-folder
+
+# Use custom Figma file IDs
+npx @heathmont/moon-ui --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_FILE_ID
+
+# Generate vanilla CSS files instead of Tailwind CSS v4 (default: 'tailwindcss')
+npx @heathmont/moon-ui --target css
+
+# Generate vanilla CSS files with browser CSS reset. Not needed with tailwindcss target
+npx @heathmont/moon-ui --target css --preflight
+```
+
+### Configuration File
+
+Add a `FIGMA_TOKEN` variable to your `.env` file and include this file in `.gitignore`:
+
+```bash
+FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
+```
+
+The tool automatically creates a `moonconfig.json` file with default values if one doesn't exist. You can also create or modify this file manually:
+
+```json
+{
+  "projectName": "PROJECT_NAME",
+  "coreFileId": "CORE_FILE_ID",
+  "componentsFileId": "COMPONENTS_FILE_ID",
+  "outputFolder": "OUTPUT_FOLDER",
+  "customPrefix": false,
+  "target": "tailwindcss",
+  "themes": {}
+}
+```
+
+#### Multi-theme Support
+
+For additional themes, add theme names and their corresponding Figma file IDs to the `themes` object:
+
+```json
+{
+  "themes": {
+    "theme1": "THEME_1_CORE_FILE_ID",
+    "theme2": "THEME_2_CORE_FILE_ID"
+  }
+}
+```
+
+## CSS Output Targets
+
+Moon UI supports two output formats:
+
+### TailwindCSS v4 (Default)
+
+Generates CSS compatible with TailwindCSS v4 using `@theme inline` directives:
+
+### Vanilla CSS
+
+Generates standard CSS using `:root` selectors for maximum compatibility:
+
+```bash
+npx @heathmont/moon-ui --target css
+```
+
+**Note**: With vanilla CSS output, you'll retain typography and shadow utility classes, but some Tailwind-specific utility classes will not be generated.
+
+## Component Class Prefixes
+
+By default, all component classes use the `moon-` prefix:
+
+```css
+.moon-button {
+  /* styles */
+}
+.moon-tooltip {
+  /* styles */
+}
+```
+
+Enable custom prefixes using `--custom-prefix` to use your `projectName` as the prefix:
+
+```bash
+npx @heathmont/moon-ui --add-components --custom-prefix --projectName company
+```
+
+This generates:
+
+```css
+.company-button {
+  /* styles */
+}
+.company-tooltip {
+  /* styles */
+}
+```
+
+## Generated Files
+
+The following files are created in your specified output directory:
+
+- **`{projectName}-core.css`** - Core CSS variables and utilities
+- **`{projectName}-components.css`** - Component classes (when `--add-components` is used)
+- **`{projectName}-preflight.css`** - CSS reset (when `--preflight` is used)
+- **`{themeName}-core.css`** - Theme-specific CSS files (one per theme in config)
+
+## License
+
+MIT
+
+## Versioning
+
+Moon UI follows [Semantic Versioning](https://semver.org/). View available versions in the [repository tags](https://github.com/coingaming/moon-ui/tags).
+
+- **MAJOR**: Incompatible API changes
+- **MINOR**: New backward-compatible functionality
+- **PATCH**: Backward-compatible bug fixes
