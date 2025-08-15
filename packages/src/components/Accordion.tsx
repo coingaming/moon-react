@@ -1,52 +1,58 @@
 import React, { useState, ReactNode } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum AccordionSize {
+export enum AccordionSizes {
   sm = "sm",
   md = "md",
   lg = "lg",
   xl = "xl",
 }
 
-export type AccordionProps = {
-  size?: AccordionSize;
+type Props = {
+  size?: AccordionSizes;
   arrow?: boolean;
   initiallyOpen?: boolean;
   className?: string;
   children: ReactNode;
 };
 
-export default function Accordion({
-  size = AccordionSize.md,
-  arrow = true,
-  initiallyOpen = false,
+export const Accordion = ({
+  size = AccordionSizes.md,
   className,
   children,
-}: AccordionProps) {
+}: Props) => (
+  <div
+    className={mergeClasses(
+      "moon-accordion",
+      size !== AccordionSizes.md && `moon-accordion-${size}`,
+      className
+    )}
+  >
+    {children}
+  </div>
+);
+
+export const AccordionItem = ({
+  arrow = true,
+  initiallyOpen = false,
+  children,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
 
   return (
-    <div
+    <details
       className={mergeClasses(
-        "moon-accordion",
-        size !== AccordionSize.md && `moon-accordion-${size}`,
-        className
+        "moon-accordion-item",
+        arrow && "moon-accordion-arrow",
+        isOpen && "moon-accordion-open"
       )}
+      open={isOpen}
+      onToggle={(e) => setIsOpen(e.currentTarget.open)}
     >
-      <details
-        className={mergeClasses(
-          "moon-accordion-item",
-          arrow && "moon-accordion-arrow",
-          isOpen && "moon-accordion-open"
-        )}
-        open={isOpen}
-        onToggle={(e) => setIsOpen(e.currentTarget.open)}
-      >
-        {children}
-      </details>
-    </div>
+      {children}
+    </details>
   );
-}
+};
 
 export const AccordionTitle = ({
   children,

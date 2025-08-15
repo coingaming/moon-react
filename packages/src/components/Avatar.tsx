@@ -17,28 +17,26 @@ export enum AvatarVariants {
   soft = "soft",
 }
 
-const Avatar = ({
-  size = AvatarSizes.md,
-  variant = AvatarVariants.soft,
-  imgSrc,
-  ...props
-}: React.ComponentProps<"div"> & {
+type Props = React.ComponentProps<"div"> & {
   size?: AvatarSizes;
   variant?: AvatarVariants;
   imgSrc?: string;
-}) => {
-  return (
-    <div
-      className={mergeClasses(
-        "moon-avatar",
-        size !== AvatarSizes.md && `moon-avatar-${size}`,
-        variant !== AvatarVariants.soft && `moon-avatar-${variant}`
-      )}
-      {...props}
-    >
-      {imgSrc ? <img src={imgSrc} /> : <UserIcon />}
-    </div>
-  );
 };
 
-export default Avatar;
+export const Avatar = ({
+  size = AvatarSizes.md,
+  variant = AvatarVariants.fill,
+  imgSrc,
+  ...props
+}: Props) => (
+  <div
+    className={mergeClasses(
+      "moon-avatar",
+      size !== AvatarSizes.md && `moon-avatar-${size}`,
+      variant !== AvatarVariants.fill && `moon-avatar-${variant}`
+    )}
+    {...props}
+  >
+    {imgSrc ? <img src={imgSrc} /> : <UserIcon />}
+  </div>
+);

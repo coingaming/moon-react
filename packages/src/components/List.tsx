@@ -9,14 +9,12 @@ export enum ListSizes {
   "2xl" = "2xl",
 }
 
-const List = ({
-  size = ListSizes.md,
-  children,
-  ...props
-}: React.ComponentProps<"ul"> & {
+type Props = React.ComponentProps<"ul"> & {
   size?: ListSizes;
   children: ReactNode;
-}) => (
+};
+
+export const List = ({ size = ListSizes.md, children, ...props }: Props) => (
   <ul
     className={mergeClasses(
       "moon-list",

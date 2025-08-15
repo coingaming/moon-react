@@ -2,9 +2,17 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
+    "declarationDir": "dist/types",
     "declaration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "composite": true
   },
-  "include": ["src", "cli"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src",
+    "cli"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

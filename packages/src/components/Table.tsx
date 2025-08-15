@@ -8,63 +8,64 @@ export enum TableSizes {
   xl = "xl",
 }
 
-function Table({
-  className,
-  size = TableSizes.md,
-  ...props
-}: React.ComponentProps<"table"> & { size?: TableSizes }) {
-  return (
-    <div data-slot="table-container">
-      <table
-        data-slot="table"
-        className={mergeClasses(
-          "moon-table",
-          size !== TableSizes.md && `moon-table-${size}`
-        )}
-        {...props}
-      />
-    </div>
-  );
-}
+type Props = React.ComponentProps<"table"> & { size?: TableSizes };
 
-function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
-  return <thead data-slot="table-header" className={className} {...props} />;
-}
+export const Table = ({ className, size = TableSizes.md, ...props }: Props) => (
+  <table
+    data-slot="table"
+    className={mergeClasses(
+      "moon-table",
+      size !== TableSizes.md && `moon-table-${size}`
+    )}
+    {...props}
+  />
+);
 
-function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
-  return <tbody data-slot="table-body" className={className} {...props} />;
-}
-
-function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
-  return <tfoot data-slot="table-footer" className={className} {...props} />;
-}
-
-function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
-  return <tr data-slot="table-row" className={className} {...props} />;
-}
-
-function TableHead({ className, ...props }: React.ComponentProps<"th">) {
-  return <th data-slot="table-head" {...props} className={className} />;
-}
-
-function TableCell({ className, ...props }: React.ComponentProps<"td">) {
-  return <td data-slot="table-cell" {...props} className={className} />;
-}
-
-function TableCaption({
+export const TableHead = ({
   className,
   ...props
-}: React.ComponentProps<"caption">) {
-  return <caption data-slot="table-caption" {...props} className={className} />;
-}
+}: React.ComponentProps<"thead">) => (
+  <thead data-slot="table-head" className={className} {...props} />
+);
 
-export {
-  Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableCaption,
-};
+export const TableBody = ({
+  className,
+  ...props
+}: React.ComponentProps<"tbody">) => (
+  <tbody data-slot="table-body" className={className} {...props} />
+);
+
+export const TableFoot = ({
+  className,
+  ...props
+}: React.ComponentProps<"tfoot">) => (
+  <tfoot data-slot="table-foot" className={className} {...props} />
+);
+
+export const TableRow = ({
+  className,
+  ...props
+}: React.ComponentProps<"tr">) => (
+  <tr data-slot="table-row" className={className} {...props} />
+);
+
+export const TableHeadCell = ({
+  className,
+  ...props
+}: React.ComponentProps<"th">) => (
+  <th data-slot="table-head-cell" {...props} className={className} />
+);
+
+export const TableCell = ({
+  className,
+  ...props
+}: React.ComponentProps<"td">) => (
+  <td data-slot="table-cell" {...props} className={className} />
+);
+
+export const TableCaption = ({
+  className,
+  ...props
+}: React.ComponentProps<"caption">) => (
+  <caption data-slot="table-caption" {...props} className={className} />
+);
