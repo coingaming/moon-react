@@ -1,23 +1,38 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LinksBlock from "../shared/LinksBlock";
+import { Radio } from "@heathmont/moon-react";
 
-const meta: Meta = {
-  component: () => <div>Coming soon</div>,
+type Type = React.ComponentProps<typeof Radio>;
+
+const meta: Meta<Type> = {
   title: "Forms & selection controls/Radio",
   parameters: {
     docs: {
       container: ({ context }: any) => (
-        <LinksBlock
-          context={context}
-          component="Radio"
-        />
+        <LinksBlock context={context} component="Radio" />
       ),
     },
+  },
+  argTypes: {
+    label: {
+      description: "Defines Radio label",
+      control: { type: "text" },
+    },
+  },
+  render: ({ ...props }) => {
+    const radioProps = {
+      ...props,
+    };
+    return <Radio id="radio" {...radioProps} />;
   },
 };
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<Type>;
 
-export const RadioStory: Story = {};
+export const RadioStory: Story = {
+  args: {
+    label: "",
+  },
+};
