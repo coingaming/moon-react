@@ -8,19 +8,17 @@ export enum AuthenticatorSizes {
   xl = "xl",
 }
 
-export type AuthenticatorProps = {
+type AuthenticatorProps = {
   length?: number;
   size?: AuthenticatorSizes;
   error?: boolean;
   value?: string;
   onChange?: (char: string | number) => void;
   children: React.ReactNode;
+  className?: string;
 };
 
-export type AuthenticatorSlotProps = Omit<
-  React.ComponentProps<"input">,
-  "size"
-> & {
+type AuthenticatorItemProps = Omit<React.ComponentProps<"input">, "size"> & {
   index: number;
 };
 
@@ -53,7 +51,6 @@ const AuthenticatorContext = createContext<AuthenticatorContextType>(
 
 const useAuthenticatorContext = () => {
   const context = useContext(AuthenticatorContext);
-
   if (!context) {
     throw new Error(
       "Authenticator components should go inside <Authenticator />"
@@ -63,14 +60,15 @@ const useAuthenticatorContext = () => {
   return context;
 };
 
-export const Authenticator: React.FC<AuthenticatorProps> = ({
+export const Authenticator = ({
   length = 6,
   size = AuthenticatorSizes.md,
   error = false,
   value = "",
   onChange,
   children,
-}) => {
+  className,
+}: AuthenticatorProps) => {
   const [internalValue, setInternalValue] = useState(value);
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
 
@@ -110,52 +108,35 @@ export const Authenticator: React.FC<AuthenticatorProps> = ({
     }
   };
   return (
-    <>
-      <AuthenticatorContext.Provider
-        value={{
-          onChange: handleChange,
-          onPaste: handlePaste,
-          onKeyDown: handleKeyDown,
-          size,
-          error,
-          internalValue,
-          inputsRef,
-        }}
+    <AuthenticatorContext.Provider
+      value={{
+        onChange: handleChange,
+        onPaste: handlePaste,
+        onKeyDown: handleKeyDown,
+        size,
+        error,
+        internalValue,
+        inputsRef,
+      }}
+    >
+      <div
+        className={mergeClasses(
+          "moon-authenticator",
+          size !== AuthenticatorSizes.md && `moon-authenticator-${size}`,
+          error && "moon-authenticator-error",
+          className
+        )}
       >
         {children}
-      </AuthenticatorContext.Provider>
-    </>
+      </div>
+    </AuthenticatorContext.Provider>
   );
 };
 
-export type AuthenticatorGroupProps = {
-  children: React.ReactNode;
-  className?: string;
-};
-
-export const AuthenticatorGroup: React.FC<AuthenticatorGroupProps> = ({
-  children,
-  className,
-}) => {
-  const { size, error } = useAuthenticatorContext();
-  return (
-    <div
-      className={mergeClasses(
-        "moon-authenticator",
-        size !== AuthenticatorSizes.md && `moon-authenticator-${size}`,
-        error && "moon-authenticator-error",
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-};
-
-export const AuthenticatorSlot: React.FC<AuthenticatorSlotProps> = ({
+export const AuthenticatorItem = ({
   index,
   ...props
-}) => {
+}: AuthenticatorItemProps) => {
   const { onChange, onKeyDown, internalValue, onPaste, inputsRef } =
     useAuthenticatorContext();
   return (

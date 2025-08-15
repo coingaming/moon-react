@@ -1,21 +1,23 @@
-import * as React from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export type CheckboxProps = Omit<React.ComponentProps<"input">, "type"> & {
+type CheckboxProps = Omit<React.ComponentProps<"input">, "type"> & {
   label?: string;
 };
 
-export const Checkbox: React.FC<CheckboxProps> = ({
-  className,
-  label,
-  ...props
-}) => {
-  return (
-    <p className={mergeClasses("moon-checkbox-wrapper", className)}>
-      <label>
-        {label && label}
+export const Checkbox = ({ className, label, ...props }: CheckboxProps) => {
+  if (label) {
+    return (
+      <div className={mergeClasses("moon-checkbox-wrapper", className)}>
         <input type="checkbox" className="moon-checkbox" {...props} />
-      </label>
-    </p>
+        {label && <label htmlFor={props.id}>{label}</label>}
+      </div>
+    );
+  }
+  return (
+    <input
+      type="checkbox"
+      className={mergeClasses("moon-checkbox", className)}
+      {...props}
+    />
   );
 };

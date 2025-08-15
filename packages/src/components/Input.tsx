@@ -1,4 +1,3 @@
-import * as React from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum InputSizes {
@@ -8,30 +7,27 @@ export enum InputSizes {
   xl = "xl",
 }
 
-export type InputProps = React.ComponentProps<"input"> & {
-  error?: boolean;
+type InputProps = Omit<React.ComponentProps<"input">, "size"> & {
   size?: InputSizes;
+  error?: boolean;
 };
 
-const Input: React.FC<InputProps> = ({
+export const Input = ({
   className,
   type,
   error = false,
-  size,
+  size = InputSizes.md,
   ...props
-}) => {
-  return (
-    <input
-      type={type}
-      data-slot="input"
-      className={mergeClasses(
-        "moon-input",
-        size !== "md" && `moon-input-${size}`,
-        error && "moon-input-error"
-      )}
-      {...props}
-    />
-  );
-};
-
-export { Input };
+}: InputProps) => (
+  <input
+    type={type}
+    data-slot="input"
+    className={mergeClasses(
+      "moon-input",
+      size !== InputSizes.md && `moon-input-${size}`,
+      error && "moon-input-error",
+      className
+    )}
+    {...props}
+  />
+);

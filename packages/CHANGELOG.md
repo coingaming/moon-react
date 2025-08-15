@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 0.5.0
+
+### Minor Changes
+
+- feat: update Authenticator, Checkbox, Chip, Input, Radio
+
 ## 0.4.0
 
 ### Minor Changes
