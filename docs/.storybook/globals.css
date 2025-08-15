@@ -6,6 +6,11 @@
 @import "./moon-core.css";
 @import "./moon-components.css";
 
+* {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
 .sbdocs div:has(.docblock-argstable) {
   width: 100%;
   overflow-x: auto;

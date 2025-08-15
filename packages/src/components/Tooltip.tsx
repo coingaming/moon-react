@@ -1,29 +1,28 @@
-import React, { FC } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum TooltipPosition {
+export enum TooltipPositions {
   top = "top",
   bottom = "bottom",
   start = "start",
   end = "end",
 }
 
-export type TooltipChildren = {
+type TooltipChildren = {
   children: React.ReactNode;
   className?: string;
 };
 
-export type TooltipProps = {
+type TooltipProps = {
   children: React.ReactNode;
-  position?: TooltipPosition;
+  position?: TooltipPositions;
   pointer?: boolean;
 };
 
-const Tooltip: FC<TooltipProps> = ({
+export const Tooltip = ({
   children,
-  position = TooltipPosition.top,
+  position = TooltipPositions.top,
   pointer = false,
-}) => (
+}: TooltipProps) => (
   <div
     className={mergeClasses(
       "moon-tooltip",
@@ -35,18 +34,12 @@ const Tooltip: FC<TooltipProps> = ({
   </div>
 );
 
-export const TooltipTrigger: FC<TooltipChildren> = ({
-  children,
-  className,
-}) => <p className={className}>{children}</p>;
+export const TooltipTrigger = ({ children, className }: TooltipChildren) => (
+  <p className={className}>{children}</p>
+);
 
-export const TooltipContent: FC<TooltipChildren> = ({
-  children,
-  className,
-}) => (
+export const TooltipContent = ({ children, className }: TooltipChildren) => (
   <div className={mergeClasses("moon-tooltip-content", className)}>
     {children}
   </div>
 );
-
-export default Tooltip;

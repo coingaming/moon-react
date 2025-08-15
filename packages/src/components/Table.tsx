@@ -1,4 +1,3 @@
-import * as React from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum TableSizes {

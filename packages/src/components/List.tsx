@@ -1,4 +1,3 @@
-import React, { ReactNode } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum ListSizes {
@@ -11,7 +10,7 @@ export enum ListSizes {
 
 type Props = React.ComponentProps<"ul"> & {
   size?: ListSizes;
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
 export const List = ({ size = ListSizes.md, children, ...props }: Props) => (
@@ -29,8 +28,6 @@ export const List = ({ size = ListSizes.md, children, ...props }: Props) => (
 export const ListItem = ({
   children,
   ...props
-}: React.ComponentProps<"li"> & { children: ReactNode | string }) => (
+}: React.ComponentProps<"li"> & { children: React.ReactNode | string }) => (
   <li {...props}>{children}</li>
 );
-
-export default List;
