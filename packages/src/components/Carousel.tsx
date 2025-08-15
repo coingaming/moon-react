@@ -4,18 +4,18 @@ import mergeClasses from "../helpers/mergeClasses";
 import ArrowLeft from "../assets/icons/ArrowLeftIcon";
 import ArrowRight from "../assets/icons/ArrowRightIcon";
 
-export enum ScrollDirecion {
+export enum ScrollDirecions {
   right = "right",
   left = "left",
 }
 
 type MoonCarouselContextType = {
-  scrollBy: (direction: ScrollDirecion) => void;
+  scrollBy: (direction: ScrollDirecions) => void;
   reelRef: React.RefObject<HTMLDivElement | null> | null;
 };
 
 const CarouselContext = React.createContext<MoonCarouselContextType>({
-  scrollBy: (_direction: ScrollDirecion) => null,
+  scrollBy: (_direction: ScrollDirecions) => null,
   reelRef: null,
 });
 
@@ -28,7 +28,7 @@ export function useCarouselContext() {
 export const Carousel = ({ children }: { children: React.ReactNode }) => {
   const reelRef = React.useRef<HTMLDivElement>(null);
 
-  const scrollBy = (direction: ScrollDirecion) => {
+  const scrollBy = (direction: ScrollDirecions) => {
     if (!reelRef.current) return;
 
     const reel = reelRef.current;
@@ -47,24 +47,12 @@ export const Carousel = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <CarouselContext.Provider value={{ scrollBy, reelRef }}>
-      {children}
-    </CarouselContext.Provider>
-  );
-};
-
-export const CarouselContent = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const { reelRef } = useCarouselContext();
-
-  return (
-    <div className="moon-carousel">
-      <div className="moon-carousel-reel" ref={reelRef}>
-        {children}
+      <div className="moon-carousel">
+        <div className="moon-carousel-reel" ref={reelRef}>
+          {children}
+        </div>
       </div>
-    </div>
+    </CarouselContext.Provider>
   );
 };
 
@@ -77,7 +65,7 @@ export const CarouselControl = ({
   direction,
   ...props
 }: React.ComponentProps<"button"> & {
-  direction: ScrollDirecion;
+  direction: ScrollDirecions;
 }) => {
   const { scrollBy } = useCarouselContext();
 
@@ -90,7 +78,7 @@ export const CarouselControl = ({
       }}
       {...props}
     >
-      {direction === ScrollDirecion.right ? <ArrowRight /> : <ArrowLeft />}
+      {direction === ScrollDirecions.right ? <ArrowRight /> : <ArrowLeft />}
     </Button>
   );
 };

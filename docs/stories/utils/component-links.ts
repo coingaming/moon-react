@@ -1,4 +1,4 @@
-import componentLinks from "./component-links.json";
+import * as componentLinks from "./component-links.json";
 
 type ComponentName = keyof typeof componentLinks.components;
 

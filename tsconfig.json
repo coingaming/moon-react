@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@heathmont/moon-react": [
+        "./packages/src/index.ts",
+        "./packages/dist/index.d.ts"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "./packages"
+    },
+    {
+      "path": "./docs"
+    }
+  ],
+  "files": [],
+  "include": []
+}

@@ -1,23 +1,60 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionSizes,
+  AccordionTitle,
+} from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-const meta: Meta = {
-  component: () => <div>Coming soon</div>,
+type Type = React.ComponentProps<typeof Accordion>;
+
+const meta: Meta<Type> = {
   title: "Content display/Accordion",
   parameters: {
     docs: {
       container: ({ context }: any) => (
-        <LinksBlock
-          context={context}
-          component="Accordion"
-        />
+        <LinksBlock context={context} component="Accordion" />
       ),
     },
+  },
+  argTypes: {
+    size: {
+      description: "Defines Accordion size",
+      options: Object.values(AccordionSizes),
+      control: { type: "select" },
+      table: {
+        defaultValue: { summary: AccordionSizes.md },
+      },
+    },
+  },
+  render: ({ size, ...props }) => {
+    const accordionProps = {
+      ...props,
+      ...(size !== AccordionSizes.md && { size }),
+    };
+    const items = new Array(3).fill("");
+    return (
+      <Accordion {...accordionProps}>
+        {items.map((_, index) => (
+          <AccordionItem key={index}>
+            <AccordionTitle>{`Item ${index + 1}`}</AccordionTitle>
+            <AccordionContent>Content</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    );
   },
 };
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<Type>;
 
-export const AccordionStory: Story = {};
+export const AccordionStory: Story = {
+  args: {
+    size: AccordionSizes.md,
+  },
+};

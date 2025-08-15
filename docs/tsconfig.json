@@ -1,10 +1,25 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": "..",
+    "paths": {
+      "@heathmont/moon-react": [
+        "../packages/src/index.ts",
+        "../packages/dist/index.d.ts"
+      ]
+    },
     "outDir": "dist",
     "declaration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "composite": true,
+    "resolveJsonModule": true
   },
-  "include": ["stories"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "stories",
+    "**/*.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

@@ -7,49 +7,46 @@ import LinksBlock from "../shared/LinksBlock";
 type ButtonType = React.ComponentProps<typeof Button>;
 
 const meta: Meta<ButtonType> = {
-  component: Button,
   title: "Actions/Button",
   parameters: {
     docs: {
       container: ({ context }: any) => (
-        <LinksBlock
-          context={context}
-          component="Button"
-        />
+        <LinksBlock context={context} component="Button" />
       ),
     },
   },
   argTypes: {
-    children: {
-      description: "Sets the content displayed inside the button.",
-      control: "text",
-      defaultValue: "Click me",
-    },
     size: {
-      description: "Defines the button size.",
+      description: "Defines Button size",
       options: Object.values(ButtonSizes),
       control: { type: "select" },
-      defaultValue: "md",
+      table: {
+        defaultValue: { summary: ButtonSizes.md },
+      },
     },
     disabled: {
-      description: "Disables the button when set to true.",
+      description: "Disables Button when set to true",
       control: { type: "boolean" },
-      defaultValue: false,
+      table: {
+        defaultValue: { summary: false },
+      },
     },
     variant: {
-      description: "Sets the button style variant.",
+      description: "Defines Button variant",
       options: Object.values(ButtonVariants),
       control: { type: "select" },
-      defaultValue: "fill",
+      table: {
+        defaultValue: { summary: ButtonVariants.fill },
+      },
     },
   },
-  render: ({ children, variant, size, ...props }) => {
+  render: ({ variant, size, ...props }) => {
     const buttonProps = {
       ...props,
       ...(variant !== ButtonVariants.fill && { variant }),
       ...(size !== ButtonSizes.md && { size }),
     };
-    return <Button {...buttonProps}>{children}</Button>;
+    return <Button {...buttonProps}>Button</Button>;
   },
 };
 
@@ -59,7 +56,6 @@ type Story = StoryObj<ButtonType>;
 
 export const ButtonStory: Story = {
   args: {
-    children: "Click me",
     variant: ButtonVariants.fill,
     size: ButtonSizes.md,
     disabled: false,

@@ -15,18 +15,18 @@ export enum ButtonVariants {
   ghost = "ghost",
 }
 
-type Props = {
+type Props = React.ComponentProps<"button"> & {
   variant?: ButtonVariants;
   size?: ButtonSizes;
   className?: string;
-}
+};
 
 export const Button = ({
   className,
   variant = ButtonVariants.fill,
   size = ButtonSizes.md,
   ...props
-}: React.ComponentProps<"button"> & Props) => (
+}: Props) => (
   <button
     data-slot="button"
     className={mergeClasses(
@@ -38,4 +38,3 @@ export const Button = ({
     {...props}
   />
 );
-
