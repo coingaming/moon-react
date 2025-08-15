@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 0.4.0
+
+### Minor Changes
+
+- feat: update Alert, Snackbar, Tooltip
+
 ## 0.3.0
 
 ### Minor Changes

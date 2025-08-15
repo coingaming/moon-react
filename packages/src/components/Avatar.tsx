@@ -1,4 +1,3 @@
-import React from "react";
 import UserIcon from "../assets/icons/UserIcon";
 import mergeClasses from "../helpers/mergeClasses";
 

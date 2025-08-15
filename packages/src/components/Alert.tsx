@@ -1,4 +1,3 @@
-import { ReactNode, MouseEventHandler, FC } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 import Close from "../assets/icons/CloseIcon";
 
@@ -9,33 +8,25 @@ export enum AlertVariants {
   info = "info",
 }
 
-export type AlertRootProps = React.ComponentProps<"div"> & {
-  variant?: AlertVariants;
-  children: ReactNode;
+type Props = {
+  children: React.ReactNode;
   className?: string;
 };
 
-export type TitleProps = {
-  children: ReactNode;
-  className?: string;
+type AlertRootProps = React.ComponentProps<"div"> &
+  Props & {
+    variant?: AlertVariants;
+  };
+
+type ActionProps = Props & {
+  onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
-export type ActionProps = {
-  children: ReactNode;
-  onClick?: MouseEventHandler<HTMLElement>;
-  className?: string;
-};
-
-export type ContentProps = {
-  children: ReactNode;
-  className?: string;
-};
-
-const Alert: FC<AlertRootProps> = ({
+export const Alert = ({
   variant = AlertVariants.neutral,
   children,
   className,
-}) => (
+}: AlertRootProps) => (
   <div
     className={mergeClasses(
       "moon-alert",
@@ -47,17 +38,13 @@ const Alert: FC<AlertRootProps> = ({
   </div>
 );
 
-export const AlertTitle: FC<TitleProps> = ({ children, className }) => (
-  <div className={mergeClasses("moon-alert-title-wrapper", className)}>
-    <span className="moon-alert-title">{children}</span>
-  </div>
+export const AlertTitle = ({ children, className }: Props) => (
+  <span className={mergeClasses("moon-alert-title", className)}>
+    {children}
+  </span>
 );
 
-export const AlertDismiss: FC<ActionProps> = ({
-  children,
-  onClick,
-  className,
-}) => (
+export const AlertDismiss = ({ children, onClick, className }: ActionProps) => (
   <p
     className={mergeClasses("moon-alert-dismiss", className)}
     onClick={onClick}
@@ -66,17 +53,13 @@ export const AlertDismiss: FC<ActionProps> = ({
   </p>
 );
 
-export const AlertContent: FC<ContentProps> = ({ children, className }) => (
+export const AlertContent = ({ children, className }: Props) => (
   <div className={mergeClasses("moon-alert-content", className)}>
     {children}
   </div>
 );
 
-export const AlertAction: FC<ActionProps> = ({
-  children,
-  onClick,
-  className,
-}) => (
+export const AlertAction = ({ children, onClick, className }: ActionProps) => (
   <button
     className={mergeClasses("moon-alert-action", className)}
     onClick={onClick}
@@ -84,5 +67,3 @@ export const AlertAction: FC<ActionProps> = ({
     {children}
   </button>
 );
-
-export default Alert;

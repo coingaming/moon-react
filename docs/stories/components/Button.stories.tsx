@@ -1,7 +1,5 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button, ButtonSizes, ButtonVariants } from "@heathmont/moon-react";
-import { getMoonLink, getGithubLink } from "../utils/component-links";
 import LinksBlock from "../shared/LinksBlock";
 
 type ButtonType = React.ComponentProps<typeof Button>;
@@ -28,7 +26,7 @@ const meta: Meta<ButtonType> = {
       description: "Disables Button when set to true",
       control: { type: "boolean" },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     variant: {

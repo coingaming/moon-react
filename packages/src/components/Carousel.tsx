@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { createContext, useContext, useRef } from "react";
 import { Button } from "./Button";
 import mergeClasses from "../helpers/mergeClasses";
 import ArrowLeft from "../assets/icons/ArrowLeftIcon";
@@ -14,7 +14,7 @@ type MoonCarouselContextType = {
   reelRef: React.RefObject<HTMLDivElement | null> | null;
 };
 
-const CarouselContext = React.createContext<MoonCarouselContextType>({
+const CarouselContext = createContext<MoonCarouselContextType>({
   scrollBy: (_direction: ScrollDirecions) => null,
   reelRef: null,
 });
@@ -26,7 +26,7 @@ export function useCarouselContext() {
 }
 
 export const Carousel = ({ children }: { children: React.ReactNode }) => {
-  const reelRef = React.useRef<HTMLDivElement>(null);
+  const reelRef = useRef<HTMLDivElement>(null);
 
   const scrollBy = (direction: ScrollDirecions) => {
     if (!reelRef.current) return;
