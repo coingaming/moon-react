@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 0.7.0
+
+### Minor Changes
+
+- feat: update Badge, CircularProgress, LinearProgress, Loader, Placeholder, Tag
+
 ## 0.6.0
 
 ### Minor Changes

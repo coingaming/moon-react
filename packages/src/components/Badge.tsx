@@ -1,19 +1,16 @@
-import React, { FC } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export type BadgeProps = {
+type BadgeProps = {
   children?: React.ReactNode;
   className?: string;
 };
 
-const Badge: FC<BadgeProps> = ({ children, className }) => (
+export const Badge = ({ children, className }: BadgeProps) => (
   <span className={mergeClasses("moon-badge", className)}>{children}</span>
 );
 
-export const BadgeWrapper: FC<BadgeProps> = ({ children, className }) => (
+export const BadgeWrapper = ({ children, className }: BadgeProps) => (
   <div className={mergeClasses("moon-badge-wrapper", className)}>
     {children}
   </div>
 );
-
-export default Badge;
