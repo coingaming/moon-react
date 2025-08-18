@@ -1,9 +1,9 @@
-import { createContext, FC, useContext, useRef } from "react";
-import Close from "../assets/icons/CloseIcon";
+import { createContext, useContext, useRef } from "react";
 import { createPortal } from "react-dom";
+import Close from "../assets/icons/CloseIcon";
 import mergeClasses from "../helpers/mergeClasses";
 
-export type DialogContextType = {
+type DialogContextType = {
   dialogRef: React.RefObject<HTMLDialogElement | null> | null;
 };
 
@@ -13,11 +13,11 @@ const DEFAULT_DIALOG_CONTEXT = {
 
 const DialogContext = createContext<DialogContextType>(DEFAULT_DIALOG_CONTEXT);
 
-export type DialogProps = {
+type DialogProps = {
   children: React.ReactNode;
 };
 
-export const Dialog: FC<DialogProps> = ({ children }) => {
+export const Dialog = ({ children }: DialogProps) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   return (
@@ -27,13 +27,13 @@ export const Dialog: FC<DialogProps> = ({ children }) => {
   );
 };
 
-export const DialogTrigger: FC<DialogProps> = ({ children }) => {
+export const DialogTrigger = ({ children }: DialogProps) => {
   const { dialogRef } = useContext(DialogContext);
 
   return <p onClick={() => dialogRef?.current?.showModal()}>{children}</p>;
 };
 
-export const DialogContent: FC<DialogProps> = ({ children }) => {
+export const DialogContent = ({ children }: DialogProps) => {
   const { dialogRef } = useContext(DialogContext);
 
   return createPortal(
@@ -47,7 +47,7 @@ export const DialogContent: FC<DialogProps> = ({ children }) => {
   );
 };
 
-export const DialogHeader: FC<DialogProps> = ({ children }) => (
+export const DialogHeader = ({ children }: DialogProps) => (
   <header className="moon-dialog-title">{children}</header>
 );
 
