@@ -1,4 +1,3 @@
-import React, { FC, ReactNode } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum TagSizes {
@@ -11,24 +10,22 @@ export enum TagVariants {
   outline = "outline",
 }
 
-export type TagProps = React.ComponentProps<"div"> & {
+type TagProps = React.ComponentProps<"div"> & {
   size?: TagSizes;
   variant?: TagVariants;
   className?: string;
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
-const Tag: FC<TagProps> = ({ size, variant, children, className }) => (
+export const Tag = ({ size, variant, children, className }: TagProps) => (
   <div
     className={mergeClasses(
       "moon-tag",
       size !== TagSizes.xs && `moon-tag-${size}`,
-      variant !== TagVariants.outline && `moon-tag-${variant}`,
+      variant !== TagVariants.fill && `moon-tag-${variant}`,
       className
     )}
   >
     {children}
   </div>
 );
-
-export default Tag;

@@ -1,23 +1,28 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Badge } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-const meta: Meta = {
-  component: () => <div>Coming soon</div>,
+type Type = React.ComponentProps<typeof Badge>;
+
+const meta: Meta<Type> = {
   title: "Indicators & status/Badge",
   parameters: {
     docs: {
       container: ({ context }: any) => (
-        <LinksBlock
-          context={context}
-          component="Badge"
-        />
+        <LinksBlock context={context} component="Badge" />
       ),
     },
+  },
+  render: ({ ...props }) => {
+    const badgeProps = {
+      ...props,
+    };
+    return <Badge {...badgeProps} />;
   },
 };
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<Type>;
 
-export const BadgeStory: Story = {};
+export const BadgeStory: Story = { args: {} };

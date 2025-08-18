@@ -1,23 +1,32 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Placeholder } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-const meta: Meta = {
-  component: () => <div>Coming soon</div>,
+type Type = React.ComponentProps<typeof Placeholder>;
+
+const meta: Meta<Type> = {
   title: "Indicators & status/Placeholder",
   parameters: {
     docs: {
       container: ({ context }: any) => (
-        <LinksBlock
-          context={context}
-          component="Placeholder"
-        />
+        <LinksBlock context={context} component="Placeholder" />
       ),
     },
+  },
+  render: ({ ...props }) => {
+    const placeholderProps = {
+      ...props,
+    };
+    return (
+      <div className="h-space-32">
+        <Placeholder {...placeholderProps} />
+      </div>
+    );
   },
 };
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<Type>;
 
-export const PlaceholderStory: Story = {};
+export const PlaceholderStory: Story = { args: {} };

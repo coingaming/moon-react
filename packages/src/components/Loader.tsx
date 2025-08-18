@@ -1,7 +1,6 @@
-import React, { FC } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum LoaderSize {
+export enum LoaderSizes {
   "2xs" = "2xs",
   xs = "xs",
   sm = "sm",
@@ -9,16 +8,14 @@ export enum LoaderSize {
   lg = "lg",
 }
 
-export type LoaderProps = { size?: LoaderSize; className?: string };
+type LoaderProps = { size?: LoaderSizes; className?: string };
 
-const Loader: FC<LoaderProps> = ({ size = LoaderSize.md, className }) => (
+export const Loader = ({ size = LoaderSizes.md, className }: LoaderProps) => (
   <div
     className={mergeClasses(
       "moon-loader",
-      size !== LoaderSize.md && `moon-loader-${size}`,
+      size !== LoaderSizes.md && `moon-loader-${size}`,
       className
     )}
   />
 );
-
-export default Loader;

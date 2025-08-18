@@ -1,10 +1,7 @@
-import React, { FC } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export type PlaceholderProps = { className?: string };
+type PlaceholderProps = { className?: string };
 
-const Placeholder: FC<PlaceholderProps> = ({ className }) => (
+export const Placeholder = ({ className }: PlaceholderProps) => (
   <div className={mergeClasses("moon-placeholder", className)} />
 );
-
-export default Placeholder;
