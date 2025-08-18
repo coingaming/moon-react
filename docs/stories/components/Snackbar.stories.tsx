@@ -1,6 +1,5 @@
-import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, Snackbar, SnackbarVariants } from "@heathmont/moon-react";
+import { Snackbar, SnackbarVariants } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Snackbar>;
@@ -25,30 +24,12 @@ const meta: Meta<Type> = {
     },
   },
   render: ({ variant, ...props }) => {
-    const [showSnackbar, setShowSnackbar] = useState(false);
-
     const snackbarProps = {
       ...props,
       ...(variant !== SnackbarVariants.neutral && { variant }),
     };
 
-    const handleButtonClick = () => {
-      setShowSnackbar(true);
-      setTimeout(() => {
-        setShowSnackbar(false);
-      }, 3000);
-    };
-
-    return (
-      <>
-        <Button onClick={handleButtonClick}>Click me</Button>
-        {showSnackbar && (
-          <div className="fixed inset-0 z-50">
-            <Snackbar {...snackbarProps}>Snackbar</Snackbar>
-          </div>
-        )}
-      </>
-    );
+    return <Snackbar {...snackbarProps}>Snackbar</Snackbar>;
   },
 };
 

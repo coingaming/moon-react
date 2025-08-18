@@ -1,7 +1,7 @@
-import React, { useContext, createContext, ReactNode } from "react";
+import { useContext, createContext, ReactNode } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum SegmentSizes {
+export enum SegmentedControlSizes {
   sm = "sm",
   md = "md",
 }
@@ -9,7 +9,7 @@ export enum SegmentSizes {
 type SegmentedControlContextType = {
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
-  size: SegmentSizes;
+  size: SegmentedControlSizes;
 };
 
 const SegmentedControlContext =
@@ -25,66 +25,49 @@ function useSegmentedControlContext() {
   return context;
 }
 
-export type SegmentedControlProps = {
+type SegmentedControlProps = {
   children: ReactNode;
-  size?: SegmentSizes;
+  size?: SegmentedControlSizes;
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
-};
-
-export type SegmentListProps = {
-  children: ReactNode;
   className?: string;
 };
 
-export type SegmentProps = React.ComponentProps<"button"> & {
+type SegmentProps = React.ComponentProps<"button"> & {
   children: ReactNode;
   className?: string;
   index: number;
 };
 
-export const SegmentedControl: React.FC<SegmentedControlProps> = ({
+export const SegmentedControl = ({
   children,
-  size = SegmentSizes.md,
+  size = SegmentedControlSizes.md,
   activeIndex,
   setActiveIndex,
-}) => {
-  return (
-    <SegmentedControlContext.Provider
-      value={{ activeIndex, setActiveIndex, size }}
-    >
-      {children}
-    </SegmentedControlContext.Provider>
-  );
-};
-
-export const SegmentList: React.FC<SegmentListProps> = ({
-  children,
   className,
-  ...props
-}) => {
-  const { size } = useSegmentedControlContext();
-  return (
+}: SegmentedControlProps) => (
+  <SegmentedControlContext.Provider
+    value={{ activeIndex, setActiveIndex, size }}
+  >
     <div
       role="tablist"
       className={mergeClasses(
         "moon-segmented-control",
-        size !== SegmentSizes.md && `moon-segmented-control-${size}`,
+        size !== SegmentedControlSizes.md && `moon-segmented-control-${size}`,
         className
       )}
-      {...props}
     >
       {children}
     </div>
-  );
-};
+  </SegmentedControlContext.Provider>
+);
 
-export const Segment: React.FC<SegmentProps> = ({
+export const Segment = ({
   children,
   className,
   index,
   ...props
-}) => {
+}: SegmentProps) => {
   const context = useSegmentedControlContext();
   const isActive = context.activeIndex === index;
   return (
