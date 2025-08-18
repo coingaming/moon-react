@@ -1,4 +1,4 @@
-import React, { createContext, FC, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 type DropdownContextType = {
@@ -6,8 +6,9 @@ type DropdownContextType = {
   setOpen: (open: boolean) => void;
 };
 
-type DropdownProps = DropdownContextType & {
+type DropdownProps = {
   children: React.ReactNode;
+  defaultOpen?: boolean;
 };
 
 type DropdownTriggerProps = {
@@ -28,7 +29,9 @@ export function useDropdownContext() {
   return ctx;
 }
 
-export const Dropdown: FC<DropdownProps> = ({ children, open, setOpen }) => {
+export const Dropdown = ({ children, defaultOpen = false }: DropdownProps) => {
+  const [open, setOpen] = useState(defaultOpen);
+
   return (
     <DropdownContext.Provider value={{ open, setOpen }}>
       {children}
@@ -36,15 +39,15 @@ export const Dropdown: FC<DropdownProps> = ({ children, open, setOpen }) => {
   );
 };
 
-export const DropdownTrigger: FC<DropdownTriggerProps> = ({ children }) => {
+export const DropdownTrigger = ({ children }: DropdownTriggerProps) => {
   const { setOpen, open } = useDropdownContext();
   return <span onClick={() => setOpen(!open)}>{children}</span>;
 };
 
-export const DropdownContent: FC<DropdownContentProps> = ({
+export const DropdownContent = ({
   children,
   className,
-}) => {
+}: DropdownContentProps) => {
   const { open } = useDropdownContext();
   if (!open) return null;
   return (
