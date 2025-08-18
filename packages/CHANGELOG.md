@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 0.6.0
+
+### Minor Changes
+
+- feat: update SegmentedControl, Select, Switch, Textarea
+
 ## 0.5.0
 
 ### Minor Changes

@@ -1,4 +1,3 @@
-import * as React from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum SwitchSizes {
@@ -16,26 +15,24 @@ type SwitchProps = Omit<React.ComponentProps<"input">, "size"> & {
   className?: string;
 };
 
-export const Switch: React.FC<SwitchProps> = ({
+export const Switch = ({
   onChange,
   size = SwitchSizes.sm,
   label,
   className,
   ...props
-}) => {
-  return (
-    <label>
-      {label && label}
-      <input
-        type="checkbox"
-        onChange={() => onChange()}
-        className={mergeClasses(
-          "moon-switch",
-          size !== SwitchSizes.sm && `moon-switch-${size}`,
-          className
-        )}
-        {...props}
-      />
-    </label>
-  );
-};
+}: SwitchProps) => (
+  <label>
+    {label && label}
+    <input
+      type="checkbox"
+      onChange={() => onChange()}
+      className={mergeClasses(
+        "moon-switch",
+        size !== SwitchSizes.sm && `moon-switch-${size}`,
+        className
+      )}
+      {...props}
+    />
+  </label>
+);

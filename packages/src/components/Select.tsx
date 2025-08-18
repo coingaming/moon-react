@@ -1,7 +1,6 @@
-import React, { createContext, useContext } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum Sizes {
+export enum SelectSizes {
   sm = "sm",
   md = "md",
   lg = "lg",
@@ -11,74 +10,49 @@ export enum Sizes {
 type SelectType = Omit<React.ComponentProps<"select">, "size">;
 
 type SelectProps = SelectType & {
-  size?: Sizes;
+  size?: SelectSizes;
   error?: boolean;
-  children: React.ReactNode;
-};
-
-type SelectContextType = Omit<SelectProps, "children">;
-
-const DEFAULT_SELECT_CONTEXT: SelectContextType = {
-  size: Sizes.md,
-  disabled: false,
-  error: false,
-};
-
-const SelectContext = createContext<SelectContextType>(DEFAULT_SELECT_CONTEXT);
-
-export const Select: React.FC<SelectProps> = ({ children, ...props }) => {
-  return (
-    <SelectContext.Provider value={props}>{children}</SelectContext.Provider>
-  );
-};
-
-export type SelectContentProps = React.ComponentProps<"select"> & {
   children: React.ReactNode;
   className?: string;
 };
 
-export const SelectContent: React.FC<SelectContentProps> = ({
+export const Select = ({
   children,
+  size = SelectSizes.md,
+  error = false,
   className,
-  ...rest
-}) => {
-  const { size, disabled, error, ...props } = useContext(SelectContext);
+  ...props
+}: SelectProps) => {
   return (
     <select
       className={mergeClasses(
         "moon-select",
-        size !== Sizes.md && `moon-select-${size}`,
+        size !== SelectSizes.md && `moon-select-${size}`,
         error && "moon-select-error",
         className
       )}
       {...props}
-      {...rest}
     >
       {children}
     </select>
   );
 };
 
-export type SelectItemProps = React.ComponentProps<"option"> & {
+type SelectItemProps = React.ComponentProps<"option"> & {
   children: React.ReactNode;
 };
 
-export const SelectItem: React.FC<SelectItemProps> = ({
-  children,
-  ...props
-}) => {
-  return <option {...props}>{children}</option>;
-};
+export const SelectItem = ({ children, ...props }: SelectItemProps) => (
+  <option {...props}>{children}</option>
+);
 
-export type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
+type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
   children: React.ReactNode;
   label: string;
   disabled?: boolean;
 };
 
-export const SelectItemsGroup: React.FC<SelectItemsGroupProps> = ({
+export const SelectItemsGroup = ({
   children,
   ...props
-}) => {
-  return <optgroup {...props}>{children}</optgroup>;
-};
+}: SelectItemsGroupProps) => <optgroup {...props}>{children}</optgroup>;
