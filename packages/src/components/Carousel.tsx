@@ -1,5 +1,4 @@
 import { createContext, useContext, useRef } from "react";
-import { Button } from "./Button";
 import mergeClasses from "../helpers/mergeClasses";
 import ArrowLeft from "../assets/icons/ArrowLeftIcon";
 import ArrowRight from "../assets/icons/ArrowRightIcon";
@@ -70,7 +69,7 @@ export const CarouselControl = ({
   const { scrollBy } = useCarouselContext();
 
   return (
-    <Button
+    <button
       className={mergeClasses("moon-carousel-control", className)}
       onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
         scrollBy(direction);
@@ -79,6 +78,6 @@ export const CarouselControl = ({
       {...props}
     >
       {direction === ScrollDirecions.right ? <ArrowRight /> : <ArrowLeft />}
-    </Button>
+    </button>
   );
 };
