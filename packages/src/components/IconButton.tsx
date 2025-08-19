@@ -1,4 +1,3 @@
-import React, { ReactNode } from "react";
 import { Button } from "./Button";
 import mergeClasses from "../helpers/mergeClasses";
 
@@ -18,29 +17,25 @@ export enum IconButtonVariants {
 }
 
 type IconButtonProps = React.ComponentProps<"button"> & {
-  children: ReactNode;
   className?: string;
   variant?: IconButtonVariants;
   size?: IconButtonSizes;
 };
 
 export const IconButton = ({
-  children,
   className,
   size = IconButtonSizes.md,
   variant = IconButtonVariants.fill,
   ...props
 }: IconButtonProps) => (
-  <Button
+  <button
+    data-slot="icon-button"
     className={mergeClasses(
       "moon-icon-button",
-      size !== IconButtonSizes.md && `moon-icon-button-${size}`,
       variant !== IconButtonVariants.fill && `moon-icon-button-${variant}`,
+      size !== IconButtonSizes.md && `moon-icon-button-${size}`,
       className
     )}
     {...props}
-  >
-    {children}
-  </Button>
+  />
 );
-

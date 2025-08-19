@@ -1,25 +1,27 @@
-import React, { createContext, FC, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import ArrowLeft from "../assets/icons/ArrowLeftIcon";
 import ArrowRight from "../assets/icons/ArrowRightIcon";
 import mergeClasses from "../helpers/mergeClasses";
 
-export type PaginationContextType = {
+type PaginationContextType = {
   page: number;
   setPage: (page: number | ((page: number) => number)) => void;
   length: number;
 };
 
-export type PaginationProps = React.ComponentProps<"nav"> &
-  PaginationContextType;
-
-export type PaginationContentProps = React.ComponentProps<"ul">;
-
-export type PaginationItemProps = React.ComponentProps<"li"> & {
-  index: number;
-  isActive: boolean;
+type PaginationProps = {
+  children: React.ReactNode;
+  className?: string;
+  defaultPage?: number;
+  length: number;
 };
 
-export type PaginationArrowsProps = React.ComponentProps<"span">;
+type PaginationItemProps = React.ComponentProps<"li"> & {
+  index: number;
+  isActive?: boolean;
+};
+
+type PaginationArrowsProps = React.ComponentProps<"span">;
 
 const PaginationContext = createContext<PaginationContextType>({
   page: 0,
@@ -27,16 +29,24 @@ const PaginationContext = createContext<PaginationContextType>({
   length: 0,
 });
 
-const Pagination: FC<PaginationProps> = ({
+export const Pagination = ({
   children,
-  page,
-  setPage,
+  className,
+  defaultPage = 0,
   length,
-}) => (
-  <PaginationContext.Provider value={{ page, setPage, length }}>
-    {children}
-  </PaginationContext.Provider>
-);
+}: PaginationProps) => {
+  const [page, setPage] = useState(defaultPage);
+
+  return (
+    <PaginationContext.Provider value={{ page, setPage, length }}>
+      <nav role="navigation" aria-label="pagination">
+        <ul className={mergeClasses("moon-pagination", className)}>
+          {children}
+        </ul>
+      </nav>
+    </PaginationContext.Provider>
+  );
+};
 
 function usePaginationContext() {
   const context = useContext(PaginationContext);
@@ -48,24 +58,12 @@ function usePaginationContext() {
   return context;
 }
 
-const PaginationContent: FC<PaginationContentProps> = ({
-  className,
-  children,
-  ...props
-}) => (
-  <nav role="navigation" aria-label="pagination" {...props}>
-    <ul className="moon-pagination" {...props}>
-      {children}
-    </ul>
-  </nav>
-);
-
-const PaginationItem: FC<PaginationItemProps> = ({
+export const PaginationItem = ({
   index,
   isActive,
   className,
   ...props
-}) => {
+}: PaginationItemProps) => {
   const { page, setPage } = usePaginationContext();
   return (
     <li
@@ -82,13 +80,13 @@ const PaginationItem: FC<PaginationItemProps> = ({
   );
 };
 
-const PaginationPrevious: FC<PaginationArrowsProps> = (props) => {
+export const PaginationPrevious = ({ ...props }: PaginationArrowsProps) => {
   const { setPage } = usePaginationContext();
 
   return (
     <span
       onClick={() => {
-        setPage((prevPage) => (prevPage > 0 ? prevPage - 1 : prevPage));
+        setPage((prevPage: number) => (prevPage > 0 ? prevPage - 1 : prevPage));
       }}
       {...props}
     >
@@ -97,13 +95,13 @@ const PaginationPrevious: FC<PaginationArrowsProps> = (props) => {
   );
 };
 
-const PaginationNext: FC<PaginationArrowsProps> = (props) => {
+export const PaginationNext = ({ ...props }: PaginationArrowsProps) => {
   const { setPage, length } = usePaginationContext();
 
   return (
     <span
       onClick={() => {
-        setPage((prevPage) =>
+        setPage((prevPage: number) =>
           prevPage < length - 1 ? prevPage + 1 : prevPage
         );
       }}
@@ -112,12 +110,4 @@ const PaginationNext: FC<PaginationArrowsProps> = (props) => {
       <ArrowRight />
     </span>
   );
-};
-
-export {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationNext,
 };

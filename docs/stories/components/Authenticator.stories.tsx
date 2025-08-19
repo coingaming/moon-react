@@ -1,9 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Authenticator,
-  AuthenticatorItem,
-  AuthenticatorSizes,
-} from "@heathmont/moon-react";
+import { Authenticator, AuthenticatorSizes } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Authenticator>;
@@ -32,14 +28,7 @@ const meta: Meta<Type> = {
       ...props,
       ...(size !== AuthenticatorSizes.md && { size }),
     };
-    const items = new Array(6).fill("");
-    return (
-      <Authenticator {...authenticatorProps}>
-        {items.map((_, index) => (
-          <AuthenticatorItem key={index} index={index} />
-        ))}
-      </Authenticator>
-    );
+    return <Authenticator {...authenticatorProps} />;
   },
 };
 

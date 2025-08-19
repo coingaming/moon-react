@@ -1,11 +1,10 @@
-import { createContext, useContext, useRef, useState } from "react";
-import mergeClasses from "../helpers/mergeClasses";
+import { useState, useRef } from "react";
+import { mergeClasses } from "../helpers/mergeClasses";
 
 export enum AuthenticatorSizes {
   sm = "sm",
   md = "md",
   lg = "lg",
-  xl = "xl",
 }
 
 type AuthenticatorProps = {
@@ -13,51 +12,8 @@ type AuthenticatorProps = {
   size?: AuthenticatorSizes;
   error?: boolean;
   value?: string;
-  onChange?: (char: string | number) => void;
-  children: React.ReactNode;
+  onChange?: (value: string) => void;
   className?: string;
-};
-
-type AuthenticatorItemProps = Omit<React.ComponentProps<"input">, "size"> & {
-  index: number;
-};
-
-type AuthenticatorContextType = {
-  onKeyDown: (
-    _index: number,
-    _e: React.KeyboardEvent<HTMLInputElement>
-  ) => void;
-  onPaste: (_e: React.ClipboardEvent<HTMLInputElement>) => void;
-  onChange: (index: number, char: string) => void;
-  size: AuthenticatorSizes;
-  error: boolean;
-  internalValue: string;
-  inputsRef: React.RefObject<(HTMLInputElement | null)[]> | null;
-};
-
-const AUTHENTICATOR_DEFAULT_CONTEXT = {
-  onKeyDown: (_index: number, _e: React.KeyboardEvent<HTMLInputElement>) => {},
-  onPaste: (_e: React.ClipboardEvent<HTMLInputElement>) => {},
-  onChange: (_index: number, _char: string) => {},
-  size: AuthenticatorSizes.md,
-  internalValue: "",
-  error: false,
-  inputsRef: null,
-};
-
-const AuthenticatorContext = createContext<AuthenticatorContextType>(
-  AUTHENTICATOR_DEFAULT_CONTEXT
-);
-
-const useAuthenticatorContext = () => {
-  const context = useContext(AuthenticatorContext);
-  if (!context) {
-    throw new Error(
-      "Authenticator components should go inside <Authenticator />"
-    );
-  }
-
-  return context;
 };
 
 export const Authenticator = ({
@@ -66,7 +22,6 @@ export const Authenticator = ({
   error = false,
   value = "",
   onChange,
-  children,
   className,
 }: AuthenticatorProps) => {
   const [internalValue, setInternalValue] = useState(value);
@@ -107,55 +62,38 @@ export const Authenticator = ({
       e.preventDefault();
     }
   };
-  return (
-    <AuthenticatorContext.Provider
-      value={{
-        onChange: handleChange,
-        onPaste: handlePaste,
-        onKeyDown: handleKeyDown,
-        size,
-        error,
-        internalValue,
-        inputsRef,
-      }}
-    >
-      <div
-        className={mergeClasses(
-          "moon-authenticator",
-          size !== AuthenticatorSizes.md && `moon-authenticator-${size}`,
-          error && "moon-authenticator-error",
-          className
-        )}
-      >
-        {children}
-      </div>
-    </AuthenticatorContext.Provider>
-  );
-};
 
-export const AuthenticatorItem = ({
-  index,
-  ...props
-}: AuthenticatorItemProps) => {
-  const { onChange, onKeyDown, internalValue, onPaste, inputsRef } =
-    useAuthenticatorContext();
+  const renderInputs = () =>
+    Array.from({ length }, (_, index) => (
+      <input
+        key={index}
+        ref={(el) => {
+          if (inputsRef?.current) {
+            inputsRef.current[index] = el;
+          }
+        }}
+        type="text"
+        maxLength={1}
+        value={internalValue[index] || ""}
+        onChange={(e) => handleChange(index, e.target.value.slice(-1))}
+        onKeyDown={(e) => handleKeyDown(index, e)}
+        onPaste={handlePaste}
+        autoComplete="off"
+        inputMode="text"
+        pattern="[0-9a-zA-Z]*"
+      />
+    ));
+
   return (
-    <input
-      ref={(el) => {
-        if (inputsRef?.current) {
-          inputsRef.current[index] = el;
-        }
-      }}
-      type="text"
-      maxLength={1}
-      value={internalValue[index] || ""}
-      onChange={(e) => onChange(index, e.target.value.slice(-1))}
-      onKeyDown={(e) => onKeyDown(index, e)}
-      onPaste={onPaste}
-      autoComplete="off"
-      inputMode="text"
-      pattern="[0-9a-zA-Z]*"
-      {...props}
-    />
+    <div
+      className={mergeClasses(
+        "moon-authenticator",
+        size !== AuthenticatorSizes.md && `moon-authenticator-${size}`,
+        error && "moon-authenticator-error",
+        className
+      )}
+    >
+      {renderInputs()}
+    </div>
   );
 };

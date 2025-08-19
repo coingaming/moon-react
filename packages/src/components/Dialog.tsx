@@ -46,6 +46,7 @@ export const DialogContent = ({ children }: DialogProps) => {
     document.body
   );
 };
+DialogContent.displayName = "DialogContent";
 
 export const DialogHeader = ({ children }: DialogProps) => (
   <header className="moon-dialog-title">{children}</header>

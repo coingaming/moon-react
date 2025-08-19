@@ -1,90 +1,72 @@
-import React, { ReactNode, createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum TabSizes {
+export enum TabListSizes {
   sm = "sm",
   md = "md",
 }
 
-type TabsContextType = {
+type TabListContextType = {
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
-  size: TabSizes;
+  size: TabListSizes;
 };
 
-const TabsContext = createContext<TabsContextType | null>(null);
+const TabListContext = createContext<TabListContextType | null>(null);
 
-function useTabsContext() {
-  const context = useContext(TabsContext);
+function useTabListContext() {
+  const context = useContext(TabListContext);
   if (!context) {
-    throw new Error("Tabs components must be used within <Tabs> wrapper");
+    throw new Error("Tab components must be used within <TabList> wrapper");
   }
   return context;
 }
 
-export type TabsProps = {
-  children: ReactNode;
-  size?: TabSizes;
-  activeIndex: number;
-  setActiveIndex: (idx: number) => void;
-};
-
-export type TabListProps = React.ComponentProps<"ul"> & {
-  children: ReactNode;
+type TabListProps = {
+  children: React.ReactNode;
+  size?: TabListSizes;
+  defaultActiveIndex?: number;
   className?: string;
 };
 
-export type TabProps = React.ComponentProps<"button"> & {
-  children: ReactNode;
+type TabProps = React.ComponentProps<"button"> & {
+  children: React.ReactNode;
   className?: string;
   index: number;
 };
 
-export type TabPanelProps = React.ComponentProps<"div"> & {
-  children: ReactNode;
+type TabPanelProps = React.ComponentProps<"div"> & {
+  children: React.ReactNode;
   className?: string;
   index: number;
 };
 
-export const Tabs: React.FC<TabsProps> = ({
+export const TabList = ({
   children,
-  size = TabSizes.md,
-  activeIndex,
-  setActiveIndex,
-}) => (
-  <TabsContext.Provider value={{ activeIndex, setActiveIndex, size }}>
-    {children}
-  </TabsContext.Provider>
-);
-
-export const TabList: React.FC<TabListProps> = ({
-  children,
+  size = TabListSizes.md,
+  defaultActiveIndex = 0,
   className,
-  ...props
-}) => {
-  const { size } = useTabsContext();
+}: TabListProps) => {
+  const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
+
   return (
-    <ul
-      role="tablist"
-      className={mergeClasses(
-        "moon-tab-list",
-        size !== TabSizes.md && `moon-tab-list-${size}`,
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </ul>
+    <TabListContext.Provider value={{ activeIndex, setActiveIndex, size }}>
+      <ul
+        role="tablist"
+        className={mergeClasses(
+          "moon-tab-list",
+          size !== TabListSizes.md && `moon-tab-list-${size}`,
+          className
+        )}
+      >
+        {children}
+      </ul>
+    </TabListContext.Provider>
   );
 };
 
-export const Tab: React.FC<TabProps> = ({
-  children,
-  className,
-  index,
-  ...props
-}) => {
-  const context = useTabsContext();
+export const Tab = ({ children, className, index, ...props }: TabProps) => {
+  const context = useTabListContext();
   const isActive = context.activeIndex === index;
   return (
     <li>
@@ -106,13 +88,13 @@ export const Tab: React.FC<TabProps> = ({
   );
 };
 
-export const TabPanel: React.FC<TabPanelProps> = ({
+export const TabPanel = ({
   children,
   className,
   index,
   ...props
-}) => {
-  const context = useTabsContext();
+}: TabPanelProps) => {
+  const context = useTabListContext();
   const isActive = context.activeIndex === index;
   return (
     <div role="tabpanel" className={className} hidden={!isActive} {...props}>
