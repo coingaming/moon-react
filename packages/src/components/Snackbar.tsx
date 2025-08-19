@@ -1,3 +1,4 @@
+import { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum SnackbarVariants {
@@ -7,37 +8,85 @@ export enum SnackbarVariants {
   positive = "positive",
 }
 
-type SnackbarActionProps = {
-  children?: React.ReactNode;
-  className?: string;
+type SnackbarContextType = {
+  variant: SnackbarVariants;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
 };
 
-type SnackbarProps = SnackbarActionProps &
-  React.ComponentProps<"div"> & {
-    variant?: SnackbarVariants;
-  };
+const SnackbarContext = createContext<SnackbarContextType | null>(null);
+
+function useSnackbarContext() {
+  const context = useContext(SnackbarContext);
+  if (!context) {
+    throw new Error(
+      "Snackbar components must be used within <Snackbar> wrapper"
+    );
+  }
+  return context;
+}
+
+type SnackbarProps = {
+  children: React.ReactNode;
+  variant?: SnackbarVariants;
+};
 
 export const Snackbar = ({
   children,
   variant = SnackbarVariants.neutral,
-  className,
-}: SnackbarProps) => (
-  <div
-    className={mergeClasses(
-      "moon-snackbar",
-      variant !== SnackbarVariants.neutral && `moon-snackbar-${variant}`,
-      className
-    )}
-  >
-    {children}
-  </div>
-);
+}: SnackbarProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-export const SnackbackAction = ({
+  return (
+    <SnackbarContext.Provider value={{ variant, isOpen, setIsOpen }}>
+      {children}
+    </SnackbarContext.Provider>
+  );
+};
+
+export const SnackbarTrigger = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const { setIsOpen } = useSnackbarContext();
+
+  return <div onClick={() => setIsOpen(true)}>{children}</div>;
+};
+
+export const SnackbarContent = ({
   children,
   className,
-}: SnackbarActionProps) => (
-  <div className={mergeClasses("moon-snackbar-action", className)}>
-    {children}
-  </div>
-);
+  ...props
+}: React.ComponentProps<"div"> & { children: React.ReactNode }) => {
+  const { variant, isOpen, setIsOpen } = useSnackbarContext();
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className={mergeClasses(
+        "moon-snackbar",
+        variant !== SnackbarVariants.neutral && `moon-snackbar-${variant}`,
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const SnackbarAction = ({
+  children,
+  className,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={mergeClasses("moon-snackbar-action", className)}>
+      {children}
+    </div>
+  );
+};

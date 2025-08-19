@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- feat: update Authenticator, Breadcrumb, Dialog, Drawer, Dropdown, IconButton, Menu, Pagination, TabList
+- feat: update Authenticator, Breadcrumb, Dialog, Drawer, Dropdown, IconButton, Menu, Pagination, TabList, Snackbar
 
 ## 0.8.0
 
