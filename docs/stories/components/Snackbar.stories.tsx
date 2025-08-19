@@ -52,4 +52,8 @@ type Story = StoryObj<Type>;
 
 export const SnackbarStory: Story = {
   args: { variant: SnackbarVariants.neutral },
+  play: async ({ canvasElement, userEvent }) => {
+    const button = canvasElement.querySelector("button");
+    await userEvent.click(button);
+  },
 };
