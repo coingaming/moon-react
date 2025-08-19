@@ -1,5 +1,6 @@
 {
   "onlyChanged": true,
   "projectId": "Project:689c9a33046f611f64a60c66",
-  "zip": true
+  "zip": true,
+  "storybookBaseDir": "docs"
 }

@@ -27,7 +27,11 @@ const meta: Meta<Type> = {
         <BottomSheetTrigger>
           <Button>Open BottomSheet</Button>
         </BottomSheetTrigger>
-        <BottomSheetContent>BottomSheet content</BottomSheetContent>
+        <BottomSheetContent>
+          <div className="w-full flex items-center justify-center h-full bg-brand-subtle text-brand overflow-y-auto">
+            Content
+          </div>
+        </BottomSheetContent>
       </BottomSheet>
     );
   },
@@ -37,4 +41,10 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const BottomSheetStory: Story = { args: {} };
+export const BottomSheetStory: Story = {
+  args: {},
+  play: async ({ canvasElement, userEvent }) => {
+    const button = canvasElement.querySelector("button");
+    await userEvent.click(button);
+  },
+};

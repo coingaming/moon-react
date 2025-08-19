@@ -1,5 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Snackbar, SnackbarVariants } from "@heathmont/moon-react";
+import {
+  Snackbar,
+  Button,
+  SnackbarVariants,
+  SnackbarTrigger,
+  SnackbarContent,
+} from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Snackbar>;
@@ -29,7 +35,14 @@ const meta: Meta<Type> = {
       ...(variant !== SnackbarVariants.neutral && { variant }),
     };
 
-    return <Snackbar {...snackbarProps}>Snackbar</Snackbar>;
+    return (
+      <Snackbar {...snackbarProps}>
+        <SnackbarTrigger>
+          <Button>Open Snackbar</Button>
+        </SnackbarTrigger>
+        <SnackbarContent>Content</SnackbarContent>
+      </Snackbar>
+    );
   },
 };
 
@@ -39,4 +52,8 @@ type Story = StoryObj<Type>;
 
 export const SnackbarStory: Story = {
   args: { variant: SnackbarVariants.neutral },
+  play: async ({ canvasElement, userEvent }) => {
+    const button = canvasElement.querySelector("button");
+    await userEvent.click(button);
+  },
 };

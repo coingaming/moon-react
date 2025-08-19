@@ -27,7 +27,11 @@ const meta: Meta<Type> = {
         <DropdownTrigger>
           <Button>Open Dropdown</Button>
         </DropdownTrigger>
-        <DropdownContent>Dropdown content</DropdownContent>
+        <DropdownContent>
+          <div className="w-full flex items-center justify-center h-space-80 bg-brand-subtle text-brand">
+            Content
+          </div>
+        </DropdownContent>
       </Dropdown>
     );
   },
@@ -37,4 +41,10 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const DropdownStory: Story = {};
+export const DropdownStory: Story = {
+  args: {},
+  play: async ({ canvasElement, userEvent }) => {
+    const button = canvasElement.querySelector("button");
+    await userEvent.click(button);
+  },
+};

@@ -1,18 +1,18 @@
-import React, { createContext, FC, ReactNode, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export type BreadCrumbContext = {
+type BreadCrumbContext = {
   currentPage: number;
   setCurrentPage: (page: number) => void;
 };
 
-export type BreadcrumbProps = BreadCrumbContext & {
-  children: ReactNode;
+type BreadcrumbProps = {
+  children: React.ReactNode;
+  className?: string;
+  defaultCurrentPage?: number;
 };
 
-export type BreadcrumbListProps = React.ComponentProps<"ol">;
-
-export type BreadcrumpItemProps = React.ComponentProps<"li"> & {
+type BreadcrumpItemProps = React.ComponentProps<"li"> & {
   index: number;
 };
 
@@ -33,27 +33,29 @@ const useBreadcrumbContext = () => {
   return context;
 };
 
-const Breadcrumb: FC<BreadcrumbProps> = ({
+export const Breadcrumb = ({
   children,
-  currentPage,
-  setCurrentPage,
-}) => (
-  <BreadcrumbContext.Provider value={{ currentPage, setCurrentPage }}>
-    {children}
-  </BreadcrumbContext.Provider>
-);
+  className,
+  defaultCurrentPage = 1,
+}: BreadcrumbProps) => {
+  const [currentPage, setCurrentPage] = useState(defaultCurrentPage);
 
-const BreadcrumbList: FC<BreadcrumbListProps> = ({ className, ...props }) => (
-  <nav>
-    <ol className={mergeClasses("moon-breadcrumb", className)} {...props} />
-  </nav>
-);
+  return (
+    <BreadcrumbContext.Provider value={{ currentPage, setCurrentPage }}>
+      <nav>
+        <ol className={mergeClasses("moon-breadcrumb", className)}>
+          {children}
+        </ol>
+      </nav>
+    </BreadcrumbContext.Provider>
+  );
+};
 
-const BreadcrumbItem: FC<BreadcrumpItemProps> = ({
+export const BreadcrumbItem = ({
   className,
   index,
   ...props
-}) => {
+}: BreadcrumpItemProps) => {
   const { currentPage, setCurrentPage } = useBreadcrumbContext();
   const isCurrentItemSelected = currentPage === index;
   return (
@@ -71,5 +73,3 @@ const BreadcrumbItem: FC<BreadcrumpItemProps> = ({
     />
   );
 };
-
-export { Breadcrumb, BreadcrumbList, BreadcrumbItem };

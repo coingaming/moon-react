@@ -28,7 +28,11 @@ const meta: Meta<Type> = {
         <DialogTrigger>
           <Button>Open Dialog</Button>
         </DialogTrigger>
-        <DialogContent>Dialog content</DialogContent>
+        <DialogContent>
+          <div className="w-full flex items-center justify-center h-space-160 bg-brand-subtle text-brand">
+            Content
+          </div>
+        </DialogContent>
       </Dialog>
     );
   },
@@ -38,4 +42,10 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const DialogStory: Story = { args: {} };
+export const DialogStory: Story = {
+  args: {},
+  play: async ({ canvasElement, userEvent }) => {
+    const button = canvasElement.querySelector("button");
+    await userEvent.click(button);
+  },
+};

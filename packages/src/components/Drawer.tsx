@@ -73,6 +73,7 @@ export const DrawerContent = ({ children, className }: DrawerContentProps) => {
     document.body
   );
 };
+DrawerContent.displayName = "DrawerContent";
 
 type DrawerCloseProps = {
   onClick?: () => void;

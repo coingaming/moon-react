@@ -1,4 +1,3 @@
-import React, { FC, ReactNode } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum MenuSizes {
@@ -9,16 +8,20 @@ export enum MenuSizes {
   "2xl" = "2xl",
 }
 
-export type BaseProps = {
-  children: ReactNode;
+type BaseProps = {
+  children: React.ReactNode;
   className?: string;
 };
 
-export type MenuProps = BaseProps & {
+type MenuProps = BaseProps & {
   size?: MenuSizes;
 };
 
-const Menu: FC<MenuProps> = ({ size = MenuSizes.md, children, className }) => (
+export const Menu = ({
+  size = MenuSizes.md,
+  children,
+  className,
+}: MenuProps) => (
   <ul
     className={mergeClasses(
       "moon-menu",
@@ -30,8 +33,6 @@ const Menu: FC<MenuProps> = ({ size = MenuSizes.md, children, className }) => (
   </ul>
 );
 
-export const MenuItem: FC<BaseProps> = ({ children, className }) => (
+export const MenuItem = ({ children, className }: BaseProps) => (
   <li className={className}>{children}</li>
 );
-
-export default Menu;

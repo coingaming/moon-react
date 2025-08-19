@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button, ButtonSizes, ButtonVariants } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type ButtonType = React.ComponentProps<typeof Button>;
+type Type = React.ComponentProps<typeof Button>;
 
-const meta: Meta<ButtonType> = {
+const meta: Meta<Type> = {
   title: "Actions/Button",
   parameters: {
     docs: {
@@ -50,7 +50,7 @@ const meta: Meta<ButtonType> = {
 
 export default meta;
 
-type Story = StoryObj<ButtonType>;
+type Story = StoryObj<Type>;
 
 export const ButtonStory: Story = {
   args: {

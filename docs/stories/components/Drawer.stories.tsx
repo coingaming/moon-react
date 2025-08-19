@@ -28,7 +28,11 @@ const meta: Meta<Type> = {
         <DrawerTrigger>
           <Button>Open Drawer</Button>
         </DrawerTrigger>
-        <DrawerContent>Drawer content</DrawerContent>
+        <DrawerContent>
+          <div className="w-full flex items-center justify-center h-full bg-brand-subtle text-brand">
+            Content
+          </div>
+        </DrawerContent>
       </Drawer>
     );
   },
@@ -38,4 +42,10 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const DrawerStory: Story = { args: {} };
+export const DrawerStory: Story = {
+  args: {},
+  play: async ({ canvasElement, userEvent }) => {
+    const button = canvasElement.querySelector("button");
+    await userEvent.click(button);
+  },
+};

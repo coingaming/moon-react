@@ -28,7 +28,7 @@ const meta: Meta<Type> = {
       ...props,
       ...(size !== CircularProgressSizes.md && { size }),
     };
-    return <CircularProgress {...circularProgressProps} />;
+    return <CircularProgress {...circularProgressProps} value={25} />;
   },
 };
 
