@@ -1,7 +1,6 @@
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum CircularProgressSizes {
-  "2xs" = "2xs",
   xs = "xs",
   sm = "sm",
   md = "md",

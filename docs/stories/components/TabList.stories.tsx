@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines TabList size",
       options: Object.values(TabListSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: TabListSizes.md },
       },

@@ -2,10 +2,9 @@ import mergeClasses from "../helpers/mergeClasses";
 import Close from "../assets/icons/CloseIcon";
 
 export enum AlertVariants {
-  neutral = "neutral",
-  negative = "negative",
-  positive = "positive",
-  info = "info",
+  fill = "fill",
+  soft = "soft",
+  outline = "outline",
 }
 
 type Props = {
@@ -23,14 +22,14 @@ type ActionProps = Props & {
 };
 
 export const Alert = ({
-  variant = AlertVariants.neutral,
+  variant = AlertVariants.fill,
   children,
   className,
 }: AlertRootProps) => (
   <div
     className={mergeClasses(
       "moon-alert",
-      variant !== AlertVariants.neutral && `moon-alert-${variant}`,
+      variant !== AlertVariants.fill && `moon-alert-${variant}`,
       className
     )}
   >

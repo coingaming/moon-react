@@ -7,8 +7,14 @@ export enum InputSizes {
   xl = "xl",
 }
 
+export enum InputVariants {
+  fill = "fill",
+  outline = "outline",
+}
+
 type InputProps = Omit<React.ComponentProps<"input">, "size"> & {
   size?: InputSizes;
+  variant?: InputVariants;
   error?: boolean;
 };
 
@@ -17,6 +23,7 @@ export const Input = ({
   type,
   error = false,
   size = InputSizes.md,
+  variant = InputVariants.fill,
   ...props
 }: InputProps) => (
   <input
@@ -25,6 +32,7 @@ export const Input = ({
     className={mergeClasses(
       "moon-input",
       size !== InputSizes.md && `moon-input-${size}`,
+      variant !== InputVariants.fill && `moon-input-${variant}`,
       error && "moon-input-error",
       className
     )}

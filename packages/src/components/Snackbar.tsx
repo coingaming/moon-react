@@ -2,10 +2,8 @@ import { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum SnackbarVariants {
-  caution = "caution",
-  info = "info",
-  neutral = "neutral",
-  positive = "positive",
+  fill = "fill",
+  soft = "soft",
 }
 
 type SnackbarContextType = {
@@ -33,7 +31,7 @@ type SnackbarProps = {
 
 export const Snackbar = ({
   children,
-  variant = SnackbarVariants.neutral,
+  variant = SnackbarVariants.fill,
 }: SnackbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -67,7 +65,7 @@ export const SnackbarContent = ({
     <div
       className={mergeClasses(
         "moon-snackbar",
-        variant !== SnackbarVariants.neutral && `moon-snackbar-${variant}`,
+        variant !== SnackbarVariants.fill && `moon-snackbar-${variant}`,
         className
       )}
       {...props}

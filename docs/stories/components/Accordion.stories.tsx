@@ -4,6 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionSizes,
+  AccordionVariants,
   AccordionTitle,
 } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
@@ -23,9 +24,17 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Accordion size",
       options: Object.values(AccordionSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: AccordionSizes.md },
+      },
+    },
+    variant: {
+      description: "Variant of Accordion",
+      control: "select",
+      options: Object.values(AccordionVariants),
+      table: {
+        defaultValue: { summary: AccordionVariants.fill },
       },
     },
   },
@@ -55,5 +64,6 @@ type Story = StoryObj<Type>;
 export const AccordionStory: Story = {
   args: {
     size: AccordionSizes.md,
+    variant: AccordionVariants.fill,
   },
 };

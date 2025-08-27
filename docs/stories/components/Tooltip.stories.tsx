@@ -22,7 +22,7 @@ const meta: Meta<Type> = {
     position: {
       description: "Defines Tooltip position",
       options: Object.values(TooltipPositions),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: TooltipPositions.top },
       },

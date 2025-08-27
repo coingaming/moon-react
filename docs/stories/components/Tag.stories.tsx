@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Tag size",
       options: Object.values(TagSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: TagSizes.xs },
       },
@@ -25,7 +25,7 @@ const meta: Meta<Type> = {
     variant: {
       description: "Defines Tag variant",
       options: Object.values(TagVariants),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: TagVariants.fill },
       },

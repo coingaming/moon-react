@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Loader size",
       options: Object.values(LoaderSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: LoaderSizes.md },
       },

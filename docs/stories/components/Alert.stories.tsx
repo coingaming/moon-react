@@ -17,16 +17,16 @@ const meta: Meta<Type> = {
     variant: {
       description: "Defines Alert variant",
       options: Object.values(AlertVariants),
-      control: { type: "select" },
+      control: "select",
       table: {
-        defaultValue: { summary: AlertVariants.neutral },
+        defaultValue: { summary: AlertVariants.fill },
       },
     },
   },
   render: ({ variant, ...props }) => {
     const alertProps = {
       ...props,
-      ...(variant !== AlertVariants.neutral && { variant }),
+      ...(variant !== AlertVariants.fill && { variant }),
     };
     return (
       <Alert {...alertProps}>
@@ -40,4 +40,4 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const AlertStory: Story = { args: { variant: AlertVariants.neutral } };
+export const AlertStory: Story = { args: { variant: AlertVariants.fill } };

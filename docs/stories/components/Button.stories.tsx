@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Button size",
       options: Object.values(ButtonSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: ButtonSizes.md },
       },
@@ -32,7 +32,7 @@ const meta: Meta<Type> = {
     variant: {
       description: "Defines Button variant",
       options: Object.values(ButtonVariants),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: ButtonVariants.fill },
       },

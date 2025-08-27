@@ -7,10 +7,16 @@ export enum SelectSizes {
   xl = "xl",
 }
 
+export enum SelectVariants {
+  fill = "fill",
+  outline = "outline",
+}
+
 type SelectType = Omit<React.ComponentProps<"select">, "size">;
 
 type SelectProps = SelectType & {
   size?: SelectSizes;
+  variant?: SelectVariants;
   error?: boolean;
   children: React.ReactNode;
   className?: string;
@@ -19,6 +25,7 @@ type SelectProps = SelectType & {
 export const Select = ({
   children,
   size = SelectSizes.md,
+  variant = SelectVariants.fill,
   error = false,
   className,
   ...props
@@ -28,6 +35,7 @@ export const Select = ({
       className={mergeClasses(
         "moon-select",
         size !== SelectSizes.md && `moon-select-${size}`,
+        variant !== SelectVariants.fill && `moon-select-${variant}`,
         error && "moon-select-error",
         className
       )}

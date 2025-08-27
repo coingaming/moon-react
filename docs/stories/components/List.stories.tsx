@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines List item size",
       options: Object.values(ListSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: ListSizes.md },
       },

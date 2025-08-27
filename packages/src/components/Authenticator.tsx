@@ -5,11 +5,18 @@ export enum AuthenticatorSizes {
   sm = "sm",
   md = "md",
   lg = "lg",
+  xl = "xl",
+}
+
+export enum AuthenticatorVariants {
+  fill = "fill",
+  outline = "outline",
 }
 
 type AuthenticatorProps = {
   length?: number;
   size?: AuthenticatorSizes;
+  variant?: AuthenticatorVariants;
   error?: boolean;
   value?: string;
   onChange?: (value: string) => void;
@@ -19,6 +26,7 @@ type AuthenticatorProps = {
 export const Authenticator = ({
   length = 6,
   size = AuthenticatorSizes.md,
+  variant = AuthenticatorVariants.fill,
   error = false,
   value = "",
   onChange,
@@ -89,6 +97,8 @@ export const Authenticator = ({
       className={mergeClasses(
         "moon-authenticator",
         size !== AuthenticatorSizes.md && `moon-authenticator-${size}`,
+        variant !== AuthenticatorVariants.fill &&
+          `moon-authenticator-${variant}`,
         error && "moon-authenticator-error",
         className
       )}

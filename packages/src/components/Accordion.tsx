@@ -8,8 +8,15 @@ export enum AccordionSizes {
   xl = "xl",
 }
 
+export enum AccordionVariants {
+  fill = "fill",
+  ghost = "ghost",
+  outline = "outline",
+}
+
 type Props = {
   size?: AccordionSizes;
+  variant?: AccordionVariants;
   arrow?: boolean;
   initiallyOpen?: boolean;
   className?: string;
@@ -18,6 +25,7 @@ type Props = {
 
 export const Accordion = ({
   size = AccordionSizes.md,
+  variant = AccordionVariants.fill,
   className,
   children,
 }: Props) => (
@@ -25,6 +33,7 @@ export const Accordion = ({
     className={mergeClasses(
       "moon-accordion",
       size !== AccordionSizes.md && `moon-accordion-${size}`,
+      variant !== AccordionVariants.fill && `moon-accordion-${variant}`,
       className
     )}
   >

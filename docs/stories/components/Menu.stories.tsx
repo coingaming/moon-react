@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Menu size",
       options: Object.values(MenuSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: MenuSizes.md },
       },
