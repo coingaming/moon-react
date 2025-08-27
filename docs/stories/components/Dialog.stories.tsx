@@ -29,7 +29,7 @@ const meta: Meta<Type> = {
           <Button>Open Dialog</Button>
         </DialogTrigger>
         <DialogContent>
-          <div className="w-full flex items-center justify-center h-160 bg-brand-subtle text-brand">
+          <div className="w-full flex items-center justify-center h-space-160 bg-brand-subtle text-brand">
             Content
           </div>
         </DialogContent>
