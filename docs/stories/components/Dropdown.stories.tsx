@@ -28,7 +28,7 @@ const meta: Meta<Type> = {
           <Button>Open Dropdown</Button>
         </DropdownTrigger>
         <DropdownContent>
-          <div className="w-full flex items-center justify-center h-80 bg-brand-subtle text-brand">
+          <div className="w-full flex items-center justify-center h-space-80 bg-brand-subtle text-brand">
             Content
           </div>
         </DropdownContent>

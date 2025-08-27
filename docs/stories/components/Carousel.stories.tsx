@@ -22,7 +22,7 @@ const meta: Meta<Type> = {
       <Carousel {...carouselProps}>
         {items.map((_, index) => (
           <CarouselItem key={index}>
-            <div className="flex items-center justify-center h-160 w-2xs bg-brand-subtle text-brand">
+            <div className="flex items-center justify-center h-space-160 w-2xs bg-brand-subtle text-brand">
               Item {index + 1}
             </div>
           </CarouselItem>

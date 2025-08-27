@@ -1,18 +1,18 @@
-/* Moon UI v2.4.0 */
+/* Moon UI v2.5.0 */
 @layer components {
 .moon-form-hint {
   font: var(--text-body-200-font-weight) var(--text-body-200-font-size)/var(--text-body-200-line-height) var(--text-body-200-font-family);
-  color: var(--semantic-text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .moon-form-group-error :where(.moon-form-hint) {
-  color: var(--semantic-text-negative);
+  color: var(--color-text-negative);
 }
 .moon-form-group-error :where(input, textarea, select) {
-  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--semantic-border-negative);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 }
 .moon-form-group-error :where(input, textarea, select):hover, .moon-form-group-error :where(input, textarea, select):focus {
-  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--semantic-border-negative);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 }
 
 .moon-form-group {
@@ -20,17 +20,17 @@
   flex-direction: column;
   width: 100%;
   gap: var(--spacing-space-8);
-  opacity: var(--effect-opacity-100);
+  opacity: 1;
 }
 .moon-form-group :where(label) {
   font: var(--text-body-300-font-weight) var(--text-body-300-font-size)/var(--text-body-300-line-height) var(--text-body-300-font-family);
-  color: var(--semantic-text-primary);
+  color: var(--color-text-primary);
 }
 .moon-form-group :where(.required) {
-  color: var(--semantic-text-negative);
+  color: var(--color-text-negative);
 }
 .moon-form-group:has(:disabled) label, .moon-form-group:has(:disabled) .moon-form-hint {
-  opacity: var(--effect-opacity-disabled);
+  opacity: var(--style-opacity-disabled);
 }
 
 .moon-backdrop {
@@ -81,7 +81,7 @@
   z-index: 1;
   width: 100%;
   padding: var(--sizing-padding-500) 0;
-  padding-inline-end: calc(var(--spacing-20) * 2);
+  padding-inline-end: calc(var(--spacing-space-20) * 2);
   min-height: var(--sizing-height-800);
   transition: background-color 0.2s ease-out;
 }
@@ -94,7 +94,7 @@
   min-height: fit-content;
 }
 .moon-accordion :where(.moon-accordion-item):focus-visible, .moon-accordion :where(.moon-accordion-item):has(> input:is([type=checkbox], [type=radio]):focus-visible) {
-  outline: var(--spacing-2) solid var(--color-border-info);
+  outline: var(--spacing-space-2) solid var(--color-border-info);
 }
 .moon-accordion :where(.moon-accordion-item):not(.moon-accordion-close) > input[type=checkbox], .moon-accordion :where(.moon-accordion-item):not(.moon-accordion-close) > input[type=radio]:not(:checked), .moon-accordion :where(.moon-accordion-item):not(.moon-accordion-close) > .moon-accordion-title {
   cursor: pointer;
@@ -113,7 +113,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--spacing-1);
+  height: var(--spacing-space-1);
+  background-color: var(--component-accordion-fill-border);
 }
 .moon-accordion :where(.moon-accordion-item):is([open]).moon-accordion-arrow > .moon-accordion-title::after {
   transform: translateY(-50%) rotate(225deg);
@@ -166,14 +167,14 @@
   inset-inline-end: 1.4rem;
   content: "";
   transform-origin: 75% 75%;
-  box-shadow: var(--spacing-2) var(--spacing-2);
+  box-shadow: var(--spacing-space-2) var(--spacing-space-2);
   pointer-events: none;
 }
 .moon-accordion :where(.moon-accordion-item) .moon-accordion-title {
   position: relative;
   width: 100%;
   padding: var(--sizing-padding-500) 0;
-  padding-inline-end: calc(var(--spacing-20) * 2);
+  padding-inline-end: calc(var(--spacing-space-20) * 2);
   transition: background-color 0.2s ease-out;
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
 }
@@ -194,7 +195,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--spacing-1);
+  height: var(--spacing-space-1);
   background-color: var(--color-border-secondary);
 }
 .moon-accordion.moon-accordion-sm {
@@ -206,7 +207,7 @@
 }
 .moon-accordion.moon-accordion-sm :where(.moon-accordion-item) > input:is([type=checkbox], [type=radio]) {
   padding: var(--sizing-padding-400) 0;
-  padding-inline-end: calc(var(--spacing-20) * 2);
+  padding-inline-end: calc(var(--spacing-space-20) * 2);
   min-height: var(--sizing-height-700);
 }
 .moon-accordion.moon-accordion-sm :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content), .moon-accordion.moon-accordion-sm :where(.moon-accordion-item):not(.moon-accordion-close) > :where(input:is([type=checkbox], [type=radio]):checked ~ .moon-accordion-content) {
@@ -214,7 +215,7 @@
 }
 .moon-accordion.moon-accordion-sm :where(.moon-accordion-item) .moon-accordion-title {
   padding: var(--sizing-padding-400) 0;
-  padding-inline-end: calc(var(--spacing-20) * 2);
+  padding-inline-end: calc(var(--spacing-space-20) * 2);
   min-height: var(--sizing-height-700);
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
 }
@@ -234,7 +235,7 @@
 }
 .moon-accordion.moon-accordion-lg :where(.moon-accordion-item) > input:is([type=checkbox], [type=radio]) {
   padding: var(--sizing-padding-600) 0;
-  padding-inline-end: calc(var(--spacing-20) * 2);
+  padding-inline-end: calc(var(--spacing-space-20) * 2);
   min-height: var(--sizing-height-900);
 }
 .moon-accordion.moon-accordion-lg :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content), .moon-accordion.moon-accordion-lg :where(.moon-accordion-item):not(.moon-accordion-close) > :where(input:is([type=checkbox], [type=radio]):checked ~ .moon-accordion-content) {
@@ -242,7 +243,7 @@
 }
 .moon-accordion.moon-accordion-lg :where(.moon-accordion-item) .moon-accordion-title {
   padding: var(--sizing-padding-600) 0;
-  padding-inline-end: calc(var(--spacing-20) * 2);
+  padding-inline-end: calc(var(--spacing-space-20) * 2);
   min-height: var(--sizing-height-900);
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
 }
@@ -262,7 +263,7 @@
 }
 .moon-accordion.moon-accordion-xl :where(.moon-accordion-item) > input:is([type=checkbox], [type=radio]) {
   padding: var(--sizing-padding-700) 0;
-  padding-inline-end: calc(var(--spacing-20) * 2);
+  padding-inline-end: calc(var(--spacing-space-20) * 2);
   min-height: var(--sizing-height-1000);
 }
 .moon-accordion.moon-accordion-xl :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content), .moon-accordion.moon-accordion-xl :where(.moon-accordion-item):not(.moon-accordion-close) > :where(input:is([type=checkbox], [type=radio]):checked ~ .moon-accordion-content) {
@@ -270,7 +271,7 @@
 }
 .moon-accordion.moon-accordion-xl :where(.moon-accordion-item) .moon-accordion-title {
   padding: var(--sizing-padding-700) 0;
-  padding-inline-end: calc(var(--spacing-20) * 2);
+  padding-inline-end: calc(var(--spacing-space-20) * 2);
   min-height: var(--sizing-height-1000);
   font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
 }
@@ -286,6 +287,9 @@
   color: var(--component-accordion-fill-text);
   box-shadow: inset 0 0 0 var(--component-accordion-fill-stroke) var(--component-accordion-fill-border);
 }
+.moon-accordion.moon-accordion-fill :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content)::after, .moon-accordion.moon-accordion-fill :where(.moon-accordion-item):not(.moon-accordion-close) > :where(input:is([type=checkbox], [type=radio]):checked ~ .moon-accordion-content)::after {
+  background-color: var(--component-accordion-fill-border);
+}
 .moon-accordion.moon-accordion-fill :where(.moon-accordion-item) .moon-accordion-content {
   color: var(--component-accordion-fill-text);
 }
@@ -294,6 +298,9 @@
   color: var(--component-accordion-ghost-text);
   box-shadow: inset 0 0 0 var(--component-accordion-ghost-stroke) var(--component-accordion-ghost-border);
 }
+.moon-accordion.moon-accordion-ghost :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content)::after, .moon-accordion.moon-accordion-ghost :where(.moon-accordion-item):not(.moon-accordion-close) > :where(input:is([type=checkbox], [type=radio]):checked ~ .moon-accordion-content)::after {
+  background-color: var(--component-accordion-ghost-border);
+}
 .moon-accordion.moon-accordion-ghost :where(.moon-accordion-item) .moon-accordion-content {
   color: var(--component-accordion-fill-text);
 }
@@ -301,6 +308,9 @@
   background: var(--component-accordion-outline-background);
   color: var(--component-accordion-outline-text);
   box-shadow: inset 0 0 0 var(--component-accordion-outline-stroke) var(--component-accordion-outline-border);
+}
+.moon-accordion.moon-accordion-outline :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content)::after, .moon-accordion.moon-accordion-outline :where(.moon-accordion-item):not(.moon-accordion-close) > :where(input:is([type=checkbox], [type=radio]):checked ~ .moon-accordion-content)::after {
+  background-color: var(--component-accordion-outline-border);
 }
 .moon-accordion.moon-accordion-outline :where(.moon-accordion-item) .moon-accordion-content {
   color: var(--component-accordion-fill-text);
@@ -742,8 +752,8 @@
 }
 .moon-alert :where(svg, .moon-icon), .moon-snackbar :where(svg, .moon-icon) {
   color: var(--component-alert-fill-icon);
-  width: var(--spacing-20);
-  height: var(--spacing-20);
+  width: var(--spacing-space-20);
+  height: var(--spacing-space-20);
 }
 .moon-alert :where(.moon-alert-title), .moon-snackbar :where(.moon-alert-title) {
   flex-grow: 1;
@@ -922,16 +932,16 @@
   background-color: var(--color-background-hover);
 }
 .moon-authenticator :where(input):not(:-moz-read-only, :disabled):focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-info);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-info);
 }
 .moon-authenticator :where(input):not(:read-only, :disabled):focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-info);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-info);
 }
 .moon-authenticator.moon-authenticator-error :where(input) {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 }
 .moon-authenticator.moon-authenticator-error :where(input):hover, .moon-authenticator.moon-authenticator-error :where(input):focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 }
 .moon-authenticator.moon-authenticator-sm {
   gap: var(--sizing-gap-300);
@@ -1064,7 +1074,7 @@
   display: inline-block;
   min-width: var(--sizing-width-100);
   min-height: var(--sizing-width-100);
-  padding: 0 var(--spacing-4);
+  padding: 0 var(--spacing-space-4);
   border-radius: var(--radius-9999);
   background-color: var(--component-badge-fill-background);
   color: var(--component-badge-fill-text);
@@ -1159,8 +1169,8 @@
 }
 .moon-badge-wrapper :where(.moon-badge) {
   position: absolute;
-  bottom: calc(100% - var(--spacing-2));
-  inset-inline-start: calc(100% - var(--spacing-2));
+  bottom: calc(100% - var(--spacing-space-2));
+  inset-inline-start: calc(100% - var(--spacing-space-2));
 }
 
 .moon-bottom-sheet {
@@ -1237,7 +1247,7 @@
 }
 .moon-bottom-sheet-box :where(.moon-bottom-sheet-handle) {
   position: absolute;
-  top: calc((var(--spacing-8) + var(--component-bottom-sheet-handle-height)) * -1);
+  top: calc((var(--spacing-space-8) + var(--component-bottom-sheet-handle-height)) * -1);
   left: 50%;
   transform: translateX(-50%);
   width: var(--component-bottom-sheet-handle-width);
@@ -1248,7 +1258,7 @@
 
 .moon-breadcrumb {
   display: flex;
-  gap: var(--spacing-6);
+  gap: var(--spacing-space-6);
 }
 
 .moon-breadcrumb-item * {
@@ -1257,13 +1267,13 @@
 .moon-breadcrumb-item:not(:first-child) {
   display: flex;
   align-items: center;
-  gap: var(--spacing-6);
+  gap: var(--spacing-space-6);
 }
 .moon-breadcrumb-item:not(:first-child)::before {
   content: "";
   display: block;
-  width: var(--spacing-16);
-  height: var(--spacing-16);
+  width: var(--spacing-space-16);
+  height: var(--spacing-space-16);
   -webkit-mask-size: contain;
           mask-size: contain;
   -webkit-mask-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="chevron-right"><path id="Icon" d="M6.50351 11.5974C6.61109 11.5162 6.93225 11.2736 7.11739 11.1291C7.4882 10.8397 7.98093 10.4443 8.47219 10.0178C8.96593 9.58907 9.44679 9.13873 9.80029 8.73865C9.97754 8.53804 10.1122 8.36182 10.1999 8.2164C10.2823 8.07963 10.2995 7.99884 10.2995 7.99884C10.2995 7.99884 10.2823 7.92043 10.1999 7.78366C10.1122 7.63825 9.97755 7.46202 9.80029 7.26141C9.4468 6.86134 8.96593 6.411 8.47218 5.9823C7.98091 5.55577 7.48818 5.16036 7.11737 4.87098C6.93223 4.72649 6.61152 4.48423 6.50393 4.40297C6.28159 4.23921 6.23363 3.92588 6.39738 3.70353C6.56114 3.48118 6.87414 3.43368 7.09649 3.59744L7.09818 3.59871C7.21102 3.68394 7.54369 3.93521 7.7326 4.08263C8.11178 4.37855 8.61905 4.7855 9.12779 5.2272C9.63404 5.66675 10.1532 6.15053 10.5497 6.59928C10.7474 6.82308 10.9252 7.04994 11.0563 7.26738C11.1791 7.4711 11.3 7.72903 11.3 8.00004C11.3 8.27104 11.1791 8.52897 11.0563 8.73269C10.9252 8.95013 10.7474 9.17699 10.5497 9.40079C10.1532 9.84953 9.63404 10.3333 9.1278 10.7729C8.61907 11.2146 8.11181 11.6215 7.73262 11.9174C7.54359 12.065 7.2109 12.3162 7.09829 12.4013L7.09684 12.4024C6.87449 12.5662 6.56117 12.5189 6.39742 12.2965C6.23367 12.0742 6.28118 11.7612 6.50351 11.5974Z" fill="currentColor"/></g></svg>');
@@ -1279,7 +1289,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: var(--spacing-12);
+  gap: var(--spacing-space-12);
   align-items: center;
 }
 .moon-carousel :where(.moon-carousel-reel) {
@@ -1287,7 +1297,7 @@
   overflow-x: scroll;
   display: inline-flex;
   flex-direction: row;
-  gap: var(--spacing-12);
+  gap: var(--spacing-space-12);
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -1309,10 +1319,10 @@
   transform: translateY(-50%) scale(0.95);
 }
 .moon-carousel :where(.moon-carousel-control):first-of-type {
-  inset-inline-start: var(--spacing-8);
+  inset-inline-start: var(--spacing-space-8);
 }
 .moon-carousel :where(.moon-carousel-control):last-of-type {
-  inset-inline-end: var(--spacing-8);
+  inset-inline-end: var(--spacing-space-8);
 }
 .moon-carousel :where(.moon-carousel-control):dir(rtl) :where(svg, .moon-icon) {
   transform: rotate(180deg);
@@ -1380,7 +1390,7 @@
 
 .moon-checkbox-wrapper {
   display: flex;
-  gap: var(--spacing-8);
+  gap: var(--spacing-space-8);
   align-items: center;
 }
 .moon-checkbox-wrapper :where(label) {
@@ -1420,7 +1430,7 @@
   background-color: var(--color-background-transparent);
 }
 .moon-chip:hover {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-info);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-info);
 }
 .moon-chip:hover::after {
   background-color: var(--color-background-hover);
@@ -1486,7 +1496,7 @@
 .moon-circular-progress {
   --value: attr(data-value type(<number>), 0);
   --size: var(--sizing-height-800);
-  --thickness: var(--spacing-2);
+  --thickness: var(--spacing-space-2);
   --circularprogress: calc(var(--value) * 1%);
   position: relative;
   display: inline-grid;
@@ -1498,7 +1508,7 @@
   vertical-align: middle;
   box-sizing: content-box;
   transition: --circularprogress 0.3s linear;
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--component-circular-progress-track);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--component-circular-progress-track);
   color: var(--component-circular-progress-progress);
 }
 .moon-circular-progress::before {
@@ -1729,18 +1739,18 @@
   opacity: var(--style-opacity-disabled);
 }
 .moon-input:not(:-moz-read-only, :disabled):hover {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-primary);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-primary);
   background-color: var(--color-background-hover);
 }
 .moon-input:not(:read-only, :disabled):hover {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-primary);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-primary);
   background-color: var(--color-background-hover);
 }
 .moon-input:not(:-moz-read-only, :disabled):focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-info);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-info);
 }
 .moon-input:not(:read-only, :disabled):focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-info);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-info);
 }
 .moon-input :where(svg, .moon-icon) {
   color: var(--color-icon-primary);
@@ -1795,10 +1805,10 @@
   color: var(--component-input-outline-text-placeholder);
 }
 .moon-input.moon-input-error {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 }
 .moon-input.moon-input-error:hover, .moon-input.moon-input-error:focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 }
 
 .moon-linear-progress {
@@ -1832,7 +1842,7 @@
 .moon-linear-progress-wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--spacing-space-2);
 }
 .moon-linear-progress-wrapper :where(label) {
   font: var(--text-body-300-font-weight) var(--text-body-300-font-size)/var(--text-body-300-line-height) var(--text-body-300-font-family);
@@ -1864,7 +1874,7 @@
   position: absolute;
   bottom: 0;
   inset-inline: 0;
-  height: var(--spacing-1);
+  height: var(--spacing-space-1);
   background-color: var(--color-border-secondary);
 }
 .moon-list > * :where(svg, .moon-icon), .moon-menu > * :where(svg, .moon-icon) {
@@ -1902,7 +1912,7 @@
   height: var(--sizing-height-800);
   border-radius: 50%;
   animation: rotate 1s linear infinite;
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--component-loader-track);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--component-loader-track);
 }
 .moon-loader::after {
   content: "";
@@ -1910,7 +1920,7 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: var(--spacing-2) solid var(--component-loader-progress);
+  border: var(--spacing-space-2) solid var(--component-loader-progress);
   animation: prix-clip-fix 2s ease-in-out infinite;
 }
 .moon-loader.moon-loader-2xs {
@@ -2062,8 +2072,8 @@
 .moon-radio::before {
   content: "";
   display: block;
-  width: var(--spacing-0);
-  height: var(--spacing-0);
+  width: var(--spacing-space-0);
+  height: var(--spacing-space-0);
   border-radius: var(--radius-9999);
   background-color: var(--component-radio-icon-selected);
   transition: width 150ms ease-in-out, height 150ms ease-in-out;
@@ -2086,7 +2096,7 @@
 
 .moon-radio-wrapper {
   display: flex;
-  gap: var(--spacing-8);
+  gap: var(--spacing-space-8);
   align-items: center;
 }
 .moon-radio-wrapper :where(label) {
@@ -2221,11 +2231,11 @@
   opacity: var(--style-opacity-disabled);
 }
 .moon-select:not(:disabled):hover {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-primary);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-primary);
   background-color: var(--color-background-hover);
 }
 .moon-select:not(:disabled):focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-info);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-info);
 }
 .moon-select.moon-select-sm {
   min-height: var(--sizing-height-700);
@@ -2257,10 +2267,10 @@
   background-color: var(--component-select-outline-background);
 }
 .moon-select.moon-select-error {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 }
 .moon-select.moon-select-error:hover, .moon-select.moon-select-error:focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 }
 
 .moon-snackbar {
@@ -2372,18 +2382,18 @@
      -moz-appearance: none;
           appearance: none;
   border-radius: var(--radius-9999);
-  border-width: var(--spacing-1);
+  border-width: var(--spacing-space-1);
   border-color: var(--component-switch-border-default);
   background-color: currentcolor;
   color: var(--component-switch-icon-unselected);
   transition: color 150ms ease-in-out, box-shadow 150ms ease-in-out, border-color 150ms ease-in-out;
-  box-shadow: calc(var(--sizing-height-700) * -1) 0 0 var(--spacing-1) var(--component-switch-background-default) inset, 0 0 0 var(--spacing-1) var(--component-switch-background-default) inset, 0 0;
+  box-shadow: calc(var(--sizing-height-700) * -1) 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset, 0 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset, 0 0;
 }
 .moon-switch:checked {
   background-image: none;
   color: var(--component-switch-icon-selected);
   border-color: var(--component-switch-background-selected);
-  box-shadow: var(--sizing-height-700) 0 0 var(--spacing-1) var(--component-switch-background-selected) inset, 0 0 0 var(--spacing-1) var(--component-switch-background-selected) inset, 0 0;
+  box-shadow: var(--sizing-height-700) 0 0 var(--spacing-space-1) var(--component-switch-background-selected) inset, 0 0 0 var(--spacing-space-1) var(--component-switch-background-selected) inset, 0 0;
 }
 .moon-switch:disabled {
   opacity: var(--style-opacity-disabled);
@@ -2392,36 +2402,36 @@
 .moon-switch.moon-switch-2xs {
   height: var(--sizing-height-400);
   width: calc(var(--sizing-width-400) * 2);
-  box-shadow: calc(var(--sizing-height-400) * -1) 0 0 var(--spacing-1) var(--component-switch-background-default) inset, 0 0 0 var(--spacing-1) var(--component-switch-background-default) inset, 0 0;
+  box-shadow: calc(var(--sizing-height-400) * -1) 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset, 0 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset, 0 0;
 }
 .moon-switch.moon-switch-2xs:checked {
-  box-shadow: var(--sizing-height-400) 0 0 var(--spacing-1) var(--component-switch-background-selected) inset, 0 0 0 var(--spacing-1) var(--component-switch-background-selected) inset, 0 0;
+  box-shadow: var(--sizing-height-400) 0 0 var(--spacing-space-1) var(--component-switch-background-selected) inset, 0 0 0 var(--spacing-space-1) var(--component-switch-background-selected) inset, 0 0;
 }
 .moon-switch.moon-switch-xs {
   height: var(--sizing-height-600);
   width: calc(var(--sizing-width-600) * 2);
-  box-shadow: calc(var(--sizing-height-600) * -1) 0 0 var(--spacing-1) var(--component-switch-background-default) inset, 0 0 0 var(--spacing-1) var(--component-switch-background-default) inset, 0 0;
+  box-shadow: calc(var(--sizing-height-600) * -1) 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset, 0 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset, 0 0;
 }
 .moon-switch.moon-switch-xs:checked {
-  box-shadow: var(--sizing-height-600) 0 0 var(--spacing-1) var(--component-switch-background-selected) inset, 0 0 0 var(--spacing-1) var(--component-switch-background-selected) inset, 0 0;
+  box-shadow: var(--sizing-height-600) 0 0 var(--spacing-space-1) var(--component-switch-background-selected) inset, 0 0 0 var(--spacing-space-1) var(--component-switch-background-selected) inset, 0 0;
 }
 .moon-switch:dir(rtl) {
-  box-shadow: var(--sizing-height-700) 0 0 var(--spacing-1) var(--component-switch-background-default) inset, 0 0 0 var(--spacing-1) var(--component-switch-background-default) inset, 0 0;
+  box-shadow: var(--sizing-height-700) 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset, 0 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset, 0 0;
 }
 .moon-switch:dir(rtl):checked {
-  box-shadow: calc(var(--sizing-height-700) * -1) 0 0 var(--spacing-1) var(--component-switch-background-selected) inset, 0 0 0 var(--spacing-1) var(--component-switch-background-selected) inset, 0 0;
+  box-shadow: calc(var(--sizing-height-700) * -1) 0 0 var(--spacing-space-1) var(--component-switch-background-selected) inset, 0 0 0 var(--spacing-space-1) var(--component-switch-background-selected) inset, 0 0;
 }
 .moon-switch:dir(rtl).moon-switch-2xs {
-  box-shadow: var(--sizing-height-400) 0 0 var(--spacing-1) var(--switch-unselected-background) inset, 0 0 0 var(--spacing-1) var(--switch-unselected-background) inset, 0 0;
+  box-shadow: var(--sizing-height-400) 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset, 0 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset, 0 0;
 }
 .moon-switch:dir(rtl).moon-switch-2xs:checked {
-  box-shadow: calc(var(--sizing-height-400) * -1) 0 0 var(--spacing-1) var(--switch-selected-background) inset, 0 0 0 var(--spacing-1) var(--switch-selected-background) inset, 0 0;
+  box-shadow: calc(var(--sizing-height-400) * -1) 0 0 var(--spacing-space-1) var(--switch-selected-background) inset, 0 0 0 var(--spacing-space-1) var(--switch-selected-background) inset, 0 0;
 }
 .moon-switch:dir(rtl).moon-switch-xs {
-  box-shadow: var(--sizing-height-600) 0 0 var(--spacing-1) var(--switch-unselected-background) inset, 0 0 0 var(--spacing-1) var(--switch-unselected-background) inset, 0 0;
+  box-shadow: var(--sizing-height-600) 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset, 0 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset, 0 0;
 }
 .moon-switch:dir(rtl).moon-switch-xs:checked {
-  box-shadow: calc(var(--sizing-height-600) * -1) 0 0 var(--spacing-1) var(--switch-selected-background) inset, 0 0 0 var(--spacing-1) var(--switch-selected-background) inset, 0 0;
+  box-shadow: calc(var(--sizing-height-600) * -1) 0 0 var(--spacing-space-1) var(--switch-selected-background) inset, 0 0 0 var(--spacing-space-1) var(--switch-selected-background) inset, 0 0;
 }
 
 .moon-tab-list {
@@ -2504,7 +2514,7 @@
   background-color: var(--color-background-secondary);
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   font-weight: var(--style-font-weight-regular);
-  box-shadow: 0 0 0 var(--spacing-1) var(--color-border-secondary);
+  box-shadow: 0 0 0 var(--spacing-space-1) var(--color-border-secondary);
 }
 .moon-table :where(thead), .moon-table:not(:has(thead)) tr:first-child {
   white-space: nowrap;
@@ -2521,7 +2531,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: var(--spacing-1);
+  height: var(--spacing-space-1);
   background-color: var(--color-border-secondary);
 }
 .moon-table :where(th) {
@@ -2538,7 +2548,7 @@
   position: absolute;
   inset-inline-end: 0;
   inset-block: 0;
-  width: var(--spacing-1);
+  width: var(--spacing-space-1);
   background-color: var(--color-border-secondary);
 }
 .moon-table.moon-table-sm {
@@ -2760,24 +2770,24 @@
   opacity: var(--style-opacity-disabled);
 }
 .moon-textarea:not(:-moz-read-only, :disabled):hover {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-primary);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-primary);
   background-color: var(--color-background-hover);
 }
 .moon-textarea:not(:read-only, :disabled):hover {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-primary);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-primary);
   background-color: var(--color-background-hover);
 }
 .moon-textarea:not(:-moz-read-only, :disabled):focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-info);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-info);
 }
 .moon-textarea:not(:read-only, :disabled):focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-info);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-info);
 }
 .moon-textarea.moon-textarea-error {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 }
 .moon-textarea.moon-textarea-error:hover, .moon-textarea.moon-textarea-error:focus {
-  box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 }
 .moon-textarea.moon-textarea-sm {
   padding: var(--sizing-padding-400);
@@ -2810,8 +2820,8 @@
   position: relative;
   display: inline-block;
   --tt-bg: var(--component-tooltip-background);
-  --tt-off: calc(100% + var(--spacing-8));
-  --tt-tail: calc(100% + var(--spacing-1) + var(--spacing-4));
+  --tt-off: calc(100% + var(--spacing-space-8));
+  --tt-tail: calc(100% + var(--spacing-space-1) + var(--spacing-space-4));
 }
 .moon-tooltip > :where(.moon-tooltip-content) {
   position: absolute;
@@ -2831,7 +2841,7 @@
   z-index: 1;
   --tw-content: attr(data-tip);
   content: var(--tw-content);
-  transform: translateX(-50%) translateY(var(--tt-pos, var(--spacing-4)));
+  transform: translateX(-50%) translateY(var(--tt-pos, var(--spacing-space-4)));
   inset: auto auto var(--tt-off) 50%;
 }
 .moon-tooltip.moon-tooltip-pointer::after {
@@ -2841,43 +2851,43 @@
   transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1) 75ms, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) 75ms;
   content: "";
   pointer-events: none;
-  width: var(--spacing-10);
-  height: var(--spacing-4);
+  width: var(--spacing-space-10);
+  height: var(--spacing-space-4);
   display: block;
   position: absolute;
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
-  -webkit-mask-position: calc(var(--spacing-1) * -1) 0;
-          mask-position: calc(var(--spacing-1) * -1) 0;
+  -webkit-mask-position: calc(var(--spacing-space-1) * -1) 0;
+          mask-position: calc(var(--spacing-space-1) * -1) 0;
   --mask-tooltip: url("data:image/svg+xml,%3Csvg width='10' height='4' viewBox='0 0 8 4' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.500009 1C3.5 1 3.00001 4 5.00001 4C7 4 6.5 1 9.5 1C10 1 10 0.499897 10 0H0C-1.99338e-08 0.5 0 1 0.500009 1Z' fill='black'/%3E%3C/svg%3E%0A");
   -webkit-mask-image: var(--mask-tooltip);
           mask-image: var(--mask-tooltip);
-  transform: translateX(-50%) translateY(var(--tt-pos, var(--spacing-4)));
+  transform: translateX(-50%) translateY(var(--tt-pos, var(--spacing-space-4)));
   inset: auto auto var(--tt-tail) 50%;
 }
 .moon-tooltip.moon-tooltip-bottom > :where(.moon-tooltip-content) {
-  transform: translateX(-50%) translateY(var(--tt-pos, calc(var(--spacing-4) * -1)));
+  transform: translateX(-50%) translateY(var(--tt-pos, calc(var(--spacing-space-4) * -1)));
   inset: var(--tt-off) auto auto 50%;
 }
 .moon-tooltip.moon-tooltip-bottom.moon-tooltip-pointer::after {
-  transform: translateX(-50%) translateY(var(--tt-pos, calc(var(--spacing-4) * -1))) rotate(180deg);
+  transform: translateX(-50%) translateY(var(--tt-pos, calc(var(--spacing-space-4) * -1))) rotate(180deg);
   inset: var(--tt-tail) auto auto 50%;
 }
 .moon-tooltip.moon-tooltip-start > :where(.moon-tooltip-content) {
-  transform: translateX(calc(var(--tt-pos, var(--spacing-4)) - var(--spacing-4))) translateY(-50%);
+  transform: translateX(calc(var(--tt-pos, var(--spacing-space-4)) - var(--spacing-space-4))) translateY(-50%);
   inset: 50% var(--tt-off) auto auto;
 }
 .moon-tooltip.moon-tooltip-start.moon-tooltip-pointer::after {
-  transform: translateX(var(--tt-pos, var(--spacing-4))) translateY(-50%) rotate(-90deg);
-  inset: 50% calc(var(--tt-tail) + var(--spacing-1)) auto auto;
+  transform: translateX(var(--tt-pos, var(--spacing-space-4))) translateY(-50%) rotate(-90deg);
+  inset: 50% calc(var(--tt-tail) + var(--spacing-space-1)) auto auto;
 }
 .moon-tooltip.moon-tooltip-end > :where(.moon-tooltip-content) {
-  transform: translateX(calc(var(--tt-pos, calc(var(--spacing-4) * -1)) + var(--spacing-4))) translateY(-50%);
+  transform: translateX(calc(var(--tt-pos, calc(var(--spacing-space-4) * -1)) + var(--spacing-space-4))) translateY(-50%);
   inset: 50% auto auto var(--tt-off);
 }
 .moon-tooltip.moon-tooltip-end.moon-tooltip-pointer::after {
-  transform: translateX(var(--tt-pos, calc(var(--spacing-4) * -1))) translateY(-50%) rotate(90deg);
-  inset: 50% auto auto calc(var(--tt-tail) + var(--spacing-1));
+  transform: translateX(var(--tt-pos, calc(var(--spacing-space-4) * -1))) translateY(-50%) rotate(90deg);
+  inset: 50% auto auto calc(var(--tt-tail) + var(--spacing-space-1));
 }
 
 .moon-tooltip.moon-tooltip-open > :where(.moon-tooltip-content), .moon-tooltip.moon-tooltip-open.moon-tooltip-pointer::after, .moon-tooltip[data-tip]:hover > :where(.moon-tooltip-content), .moon-tooltip[data-tip]:hover.moon-tooltip-pointer::after, .moon-tooltip:hover > :where(.moon-tooltip-content), .moon-tooltip:hover.moon-tooltip-pointer::after, .moon-tooltip:has(:focus-visible) > :where(.moon-tooltip-content), .moon-tooltip:has(:focus-visible).moon-tooltip-pointer::after {
