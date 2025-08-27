@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LinksBlock from "../shared/LinksBlock";
-import { Alert, AlertTitle, AlertVariants } from "@heathmont/moon-react";
+import {
+  Alert,
+  AlertTitle,
+  AlertVariants,
+  Contexts,
+} from "@heathmont/moon-react";
 
 type Type = React.ComponentProps<typeof Alert>;
 
@@ -22,11 +27,20 @@ const meta: Meta<Type> = {
         defaultValue: { summary: AlertVariants.fill },
       },
     },
+    context: {
+      description: "Defines Alert context",
+      options: Object.values(Contexts),
+      control: "select",
+      table: {
+        defaultValue: { summary: Contexts.brand },
+      },
+    },
   },
-  render: ({ variant, ...props }) => {
+  render: ({ variant, context, ...props }) => {
     const alertProps = {
       ...props,
       ...(variant !== AlertVariants.fill && { variant }),
+      ...(context !== Contexts.brand && { context }),
     };
     return (
       <Alert {...alertProps}>
@@ -40,4 +54,6 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const AlertStory: Story = { args: { variant: AlertVariants.fill } };
+export const AlertStory: Story = {
+  args: { variant: AlertVariants.fill, context: Contexts.brand },
+};

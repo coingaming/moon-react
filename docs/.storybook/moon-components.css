@@ -1,4 +1,4 @@
-/* Moon UI v2.3.0 */
+/* Moon UI v2.4.0 */
 @layer components {
 .moon-form-hint {
   font: var(--text-body-200-font-weight) var(--text-body-200-font-size)/var(--text-body-200-line-height) var(--text-body-200-font-family);
@@ -304,96 +304,6 @@
 }
 .moon-accordion.moon-accordion-outline :where(.moon-accordion-item) .moon-accordion-content {
   color: var(--component-accordion-fill-text);
-}
-
-.moon-accordion-brand {
-  --component-accordion-fill-text: var(--context-brand-fill-text);
-  --component-accordion-fill-icon: var(--context-brand-fill-icon);
-  --component-accordion-fill-background: var(--context-brand-fill-background);
-  --component-accordion-fill-border: var(--context-brand-fill-border);
-  --component-accordion-ghost-text: var(--context-brand-ghost-text);
-  --component-accordion-ghost-icon: var(--context-brand-ghost-icon);
-  --component-accordion-ghost-background: var(--context-brand-ghost-background);
-  --component-accordion-ghost-border: var(--context-brand-ghost-border);
-  --component-accordion-outline-text: var(--context-brand-outline-text);
-  --component-accordion-outline-icon: var(--context-brand-outline-icon);
-  --component-accordion-outline-background: var(--context-brand-outline-background);
-  --component-accordion-outline-border: var(--context-brand-outline-border);
-}
-
-.moon-accordion-neutral {
-  --component-accordion-fill-text: var(--context-neutral-fill-text);
-  --component-accordion-fill-icon: var(--context-neutral-fill-icon);
-  --component-accordion-fill-background: var(--context-neutral-fill-background);
-  --component-accordion-fill-border: var(--context-neutral-fill-border);
-  --component-accordion-ghost-text: var(--context-neutral-ghost-text);
-  --component-accordion-ghost-icon: var(--context-neutral-ghost-icon);
-  --component-accordion-ghost-background: var(--context-neutral-ghost-background);
-  --component-accordion-ghost-border: var(--context-neutral-ghost-border);
-  --component-accordion-outline-text: var(--context-neutral-outline-text);
-  --component-accordion-outline-icon: var(--context-neutral-outline-icon);
-  --component-accordion-outline-background: var(--context-neutral-outline-background);
-  --component-accordion-outline-border: var(--context-neutral-outline-border);
-}
-
-.moon-accordion-positive {
-  --component-accordion-fill-text: var(--context-positive-fill-text);
-  --component-accordion-fill-icon: var(--context-positive-fill-icon);
-  --component-accordion-fill-background: var(--context-positive-fill-background);
-  --component-accordion-fill-border: var(--context-positive-fill-border);
-  --component-accordion-ghost-text: var(--context-positive-ghost-text);
-  --component-accordion-ghost-icon: var(--context-positive-ghost-icon);
-  --component-accordion-ghost-background: var(--context-positive-ghost-background);
-  --component-accordion-ghost-border: var(--context-positive-ghost-border);
-  --component-accordion-outline-text: var(--context-positive-outline-text);
-  --component-accordion-outline-icon: var(--context-positive-outline-icon);
-  --component-accordion-outline-background: var(--context-positive-outline-background);
-  --component-accordion-outline-border: var(--context-positive-outline-border);
-}
-
-.moon-accordion-caution {
-  --component-accordion-fill-text: var(--context-caution-fill-text);
-  --component-accordion-fill-icon: var(--context-caution-fill-icon);
-  --component-accordion-fill-background: var(--context-caution-fill-background);
-  --component-accordion-fill-border: var(--context-caution-fill-border);
-  --component-accordion-ghost-text: var(--context-caution-ghost-text);
-  --component-accordion-ghost-icon: var(--context-caution-ghost-icon);
-  --component-accordion-ghost-background: var(--context-caution-ghost-background);
-  --component-accordion-ghost-border: var(--context-caution-ghost-border);
-  --component-accordion-outline-text: var(--context-caution-outline-text);
-  --component-accordion-outline-icon: var(--context-caution-outline-icon);
-  --component-accordion-outline-background: var(--context-caution-outline-background);
-  --component-accordion-outline-border: var(--context-caution-outline-border);
-}
-
-.moon-accordion-negative {
-  --component-accordion-fill-text: var(--context-negative-fill-text);
-  --component-accordion-fill-icon: var(--context-negative-fill-icon);
-  --component-accordion-fill-background: var(--context-negative-fill-background);
-  --component-accordion-fill-border: var(--context-negative-fill-border);
-  --component-accordion-ghost-text: var(--context-negative-ghost-text);
-  --component-accordion-ghost-icon: var(--context-negative-ghost-icon);
-  --component-accordion-ghost-background: var(--context-negative-ghost-background);
-  --component-accordion-ghost-border: var(--context-negative-ghost-border);
-  --component-accordion-outline-text: var(--context-negative-outline-text);
-  --component-accordion-outline-icon: var(--context-negative-outline-icon);
-  --component-accordion-outline-background: var(--context-negative-outline-background);
-  --component-accordion-outline-border: var(--context-negative-outline-border);
-}
-
-.moon-accordion-info {
-  --component-accordion-fill-text: var(--context-info-fill-text);
-  --component-accordion-fill-icon: var(--context-info-fill-icon);
-  --component-accordion-fill-background: var(--context-info-fill-background);
-  --component-accordion-fill-border: var(--context-info-fill-border);
-  --component-accordion-ghost-text: var(--context-info-ghost-text);
-  --component-accordion-ghost-icon: var(--context-info-ghost-icon);
-  --component-accordion-ghost-background: var(--context-info-ghost-background);
-  --component-accordion-ghost-border: var(--context-info-ghost-border);
-  --component-accordion-outline-text: var(--context-info-outline-text);
-  --component-accordion-outline-icon: var(--context-info-outline-icon);
-  --component-accordion-outline-background: var(--context-info-outline-background);
-  --component-accordion-outline-border: var(--context-info-outline-border);
 }
 
 .moon-button, .moon-snackbar :where(.moon-snackbar-action), .moon-breadcrumb-item *, .moon-alert :where(.moon-alert-action), .moon-snackbar :where(.moon-alert-action) {

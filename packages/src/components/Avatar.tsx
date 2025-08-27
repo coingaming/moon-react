@@ -19,19 +19,22 @@ type Props = React.ComponentProps<"div"> & {
   size?: AvatarSizes;
   variant?: AvatarVariants;
   imgSrc?: string;
+  className?: string;
 };
 
 export const Avatar = ({
   size = AvatarSizes.md,
   variant = AvatarVariants.fill,
   imgSrc,
+  className,
   ...props
 }: Props) => (
   <div
     className={mergeClasses(
       "moon-avatar",
       size !== AvatarSizes.md && `moon-avatar-${size}`,
-      variant !== AvatarVariants.fill && `moon-avatar-${variant}`
+      variant !== AvatarVariants.fill && `moon-avatar-${variant}`,
+      className
     )}
     {...props}
   >

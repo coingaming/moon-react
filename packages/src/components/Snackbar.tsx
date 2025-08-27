@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import { Contexts } from "../constants/contexts";
 
 export enum SnackbarVariants {
   fill = "fill",
@@ -8,6 +9,7 @@ export enum SnackbarVariants {
 
 type SnackbarContextType = {
   variant: SnackbarVariants;
+  context: Contexts;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 };
@@ -27,16 +29,18 @@ function useSnackbarContext() {
 type SnackbarProps = {
   children: React.ReactNode;
   variant?: SnackbarVariants;
+  context?: Contexts;
 };
 
 export const Snackbar = ({
   children,
   variant = SnackbarVariants.fill,
+  context = Contexts.brand,
 }: SnackbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <SnackbarContext.Provider value={{ variant, isOpen, setIsOpen }}>
+    <SnackbarContext.Provider value={{ variant, context, isOpen, setIsOpen }}>
       {children}
     </SnackbarContext.Provider>
   );
@@ -57,7 +61,7 @@ export const SnackbarContent = ({
   className,
   ...props
 }: React.ComponentProps<"div"> & { children: React.ReactNode }) => {
-  const { variant, isOpen, setIsOpen } = useSnackbarContext();
+  const { variant, context, isOpen, setIsOpen } = useSnackbarContext();
 
   if (!isOpen) return null;
 
@@ -66,6 +70,7 @@ export const SnackbarContent = ({
       className={mergeClasses(
         "moon-snackbar",
         variant !== SnackbarVariants.fill && `moon-snackbar-${variant}`,
+        context !== Contexts.brand && `moon-snackbar-${context}`,
         className
       )}
       {...props}

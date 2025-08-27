@@ -5,6 +5,7 @@ import {
   SnackbarVariants,
   SnackbarTrigger,
   SnackbarContent,
+  Contexts,
 } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
@@ -28,11 +29,20 @@ const meta: Meta<Type> = {
         defaultValue: { summary: SnackbarVariants.fill },
       },
     },
+    context: {
+      description: "Defines Snackbar context",
+      options: Object.values(Contexts),
+      control: "select",
+      table: {
+        defaultValue: { summary: Contexts.brand },
+      },
+    },
   },
-  render: ({ variant, ...props }) => {
+  render: ({ variant, context, ...props }) => {
     const snackbarProps = {
       ...props,
       ...(variant !== SnackbarVariants.fill && { variant }),
+      ...(context !== Contexts.brand && { context }),
     };
 
     return (
@@ -51,7 +61,7 @@ export default meta;
 type Story = StoryObj<Type>;
 
 export const SnackbarStory: Story = {
-  args: { variant: SnackbarVariants.fill },
+  args: { variant: SnackbarVariants.fill, context: Contexts.brand },
   play: async ({ canvasElement, userEvent }) => {
     const button = canvasElement.querySelector("button");
     await userEvent.click(button);

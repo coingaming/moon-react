@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
+  Contexts,
   IconButton,
   IconButtonSizes,
   IconButtonVariants,
@@ -42,6 +43,14 @@ const meta: Meta<Type> = {
         defaultValue: { summary: IconButtonVariants.fill },
       },
     },
+    context: {
+      description: "Defines IconButton context",
+      options: Object.values(Contexts),
+      control: "select",
+      table: {
+        defaultValue: { summary: Contexts.brand },
+      },
+    },
   },
   render: ({ variant, size, ...props }) => {
     const buttonProps = {
@@ -63,8 +72,9 @@ type Story = StoryObj<Type>;
 
 export const IconButtonStory: Story = {
   args: {
-    variant: IconButtonVariants.fill,
     size: IconButtonSizes.md,
+    variant: IconButtonVariants.fill,
+    context: Contexts.brand,
     disabled: false,
   },
 };

@@ -1,5 +1,6 @@
 import mergeClasses from "../helpers/mergeClasses";
 import Close from "../assets/icons/CloseIcon";
+import { Contexts } from "../constants/contexts";
 
 export enum AlertVariants {
   fill = "fill",
@@ -15,6 +16,7 @@ type Props = {
 type AlertRootProps = React.ComponentProps<"div"> &
   Props & {
     variant?: AlertVariants;
+    context?: Contexts;
   };
 
 type ActionProps = Props & {
@@ -23,6 +25,7 @@ type ActionProps = Props & {
 
 export const Alert = ({
   variant = AlertVariants.fill,
+  context = Contexts.brand,
   children,
   className,
 }: AlertRootProps) => (
@@ -30,6 +33,7 @@ export const Alert = ({
     className={mergeClasses(
       "moon-alert",
       variant !== AlertVariants.fill && `moon-alert-${variant}`,
+      context !== Contexts.brand && `moon-alert-${context}`,
       className
     )}
   >
