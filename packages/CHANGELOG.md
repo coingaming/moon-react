@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 1.0.0
+
+### Major Changes
+
+- feat: add context to Alert, Snackbar, Badge, Tag, Button, IconButton
+
 ## 0.10.0
 
 ### Minor Changes
