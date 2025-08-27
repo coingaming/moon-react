@@ -1,7 +1,8 @@
 {
   "projectName": "moon",
-  "coreFileId": "BZiHkvF7pXFHrFH8P0cG2T",
+  "coreFileId": "tvIuWlowgVG4gzXjDuVIEw",
   "componentsFileId": "S3q1SkVngbwHuwpxHKCsgtJj",
+  "componentsProjectId": "408714341",
   "outputFolder": "docs/.storybook",
   "customPrefix": false,
   "target": "tailwindcss",

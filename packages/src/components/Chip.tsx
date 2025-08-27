@@ -7,6 +7,7 @@ export enum ChipSizes {
 
 export enum ChipVariants {
   fill = "fill",
+  soft = "soft",
   outline = "outline",
 }
 

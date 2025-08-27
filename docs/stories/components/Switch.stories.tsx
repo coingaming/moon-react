@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Switch size",
       options: Object.values(SwitchSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: SwitchSizes.sm },
       },

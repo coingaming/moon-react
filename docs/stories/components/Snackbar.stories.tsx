@@ -23,16 +23,16 @@ const meta: Meta<Type> = {
     variant: {
       description: "Defines Snackbar variant",
       options: Object.values(SnackbarVariants),
-      control: { type: "select" },
+      control: "select",
       table: {
-        defaultValue: { summary: SnackbarVariants.neutral },
+        defaultValue: { summary: SnackbarVariants.fill },
       },
     },
   },
   render: ({ variant, ...props }) => {
     const snackbarProps = {
       ...props,
-      ...(variant !== SnackbarVariants.neutral && { variant }),
+      ...(variant !== SnackbarVariants.fill && { variant }),
     };
 
     return (
@@ -51,7 +51,7 @@ export default meta;
 type Story = StoryObj<Type>;
 
 export const SnackbarStory: Story = {
-  args: { variant: SnackbarVariants.neutral },
+  args: { variant: SnackbarVariants.fill },
   play: async ({ canvasElement, userEvent }) => {
     const button = canvasElement.querySelector("button");
     await userEvent.click(button);

@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 0.10.0
+
+### Minor Changes
+
+- feat: updated components to new concept
+
 ## 0.9.0
 
 ### Minor Changes

@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Authenticator, AuthenticatorSizes } from "@heathmont/moon-react";
+import {
+  Authenticator,
+  AuthenticatorSizes,
+  AuthenticatorVariants,
+} from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Authenticator>;
@@ -17,16 +21,25 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Authenticator size",
       options: Object.values(AuthenticatorSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: AuthenticatorSizes.md },
       },
     },
+    variant: {
+      description: "Defines Authenticator variant",
+      options: Object.values(AuthenticatorVariants),
+      control: "select",
+      table: {
+        defaultValue: { summary: AuthenticatorVariants.fill },
+      },
+    },
   },
-  render: ({ size, ...props }) => {
+  render: ({ size, variant, ...props }) => {
     const authenticatorProps = {
       ...props,
       ...(size !== AuthenticatorSizes.md && { size }),
+      ...(variant !== AuthenticatorVariants.fill && { variant }),
     };
     return <Authenticator {...authenticatorProps} />;
   },
@@ -37,5 +50,5 @@ export default meta;
 type Story = StoryObj<Type>;
 
 export const AuthenticatorStory: Story = {
-  args: { size: AuthenticatorSizes.md },
+  args: { size: AuthenticatorSizes.md, variant: AuthenticatorVariants.fill },
 };

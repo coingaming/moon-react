@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Chip size",
       options: Object.values(ChipSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: ChipSizes.md },
       },
@@ -25,7 +25,7 @@ const meta: Meta<Type> = {
     variant: {
       description: "Defines Chip variant",
       options: Object.values(ChipVariants),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: ChipVariants.fill },
       },
@@ -47,7 +47,7 @@ type Story = StoryObj<Type>;
 
 export const ChipStory: Story = {
   args: {
-    variant: ChipVariants.fill,
     size: ChipSizes.md,
+    variant: ChipVariants.fill,
   },
 };

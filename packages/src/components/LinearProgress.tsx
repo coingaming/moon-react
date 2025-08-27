@@ -1,6 +1,8 @@
 import mergeClasses from "../helpers/mergeClasses";
 
 export enum LinearProgressSizes {
+  "5xs" = "5xs",
+  "4xs" = "4xs",
   "3xs" = "3xs",
   "2xs" = "2xs",
 }

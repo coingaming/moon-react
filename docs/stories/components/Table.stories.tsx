@@ -25,7 +25,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Table row size",
       options: Object.values(TableSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: TableSizes.md },
       },

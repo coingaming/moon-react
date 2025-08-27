@@ -7,14 +7,21 @@ export enum TextareaSizes {
   xl = "xl",
 }
 
+export enum TextareaVariants {
+  fill = "fill",
+  outline = "outline",
+}
+
 type TextareaProps = React.ComponentProps<"textarea"> & {
   size?: TextareaSizes;
+  variant?: TextareaVariants;
   error?: boolean;
 };
 
 export const Textarea = ({
   className,
   size = TextareaSizes.md,
+  variant = TextareaVariants.fill,
   error = false,
   ...props
 }: TextareaProps) => (
@@ -22,6 +29,7 @@ export const Textarea = ({
     className={mergeClasses(
       "moon-textarea",
       size !== TextareaSizes.md && `moon-textarea-${size}`,
+      variant !== TextareaVariants.fill && `moon-textarea-${variant}`,
       error && "moon-textarea-error",
       className
     )}

@@ -22,7 +22,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines IconButton size",
       options: Object.values(IconButtonSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: IconButtonSizes.md },
       },
@@ -37,7 +37,7 @@ const meta: Meta<Type> = {
     variant: {
       description: "Defines IconButton variant",
       options: Object.values(IconButtonVariants),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: IconButtonVariants.fill },
       },

@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Avatar size",
       options: Object.values(AvatarSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: AvatarSizes.md },
       },
@@ -25,7 +25,7 @@ const meta: Meta<Type> = {
     variant: {
       description: "Defines Avatar variant",
       options: Object.values(AvatarVariants),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: AvatarVariants.fill },
       },

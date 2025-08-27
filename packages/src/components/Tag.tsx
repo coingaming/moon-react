@@ -8,6 +8,8 @@ export enum TagSizes {
 export enum TagVariants {
   fill = "fill",
   outline = "outline",
+  soft = "soft",
+  ghost = "ghost",
 }
 
 type TagProps = React.ComponentProps<"div"> & {

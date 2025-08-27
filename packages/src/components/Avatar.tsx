@@ -12,7 +12,6 @@ export enum AvatarSizes {
 
 export enum AvatarVariants {
   fill = "fill",
-  outline = "outline",
   soft = "soft",
 }
 

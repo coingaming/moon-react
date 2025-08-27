@@ -21,7 +21,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Segmented Control size",
       options: Object.values(SegmentedControlSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: SegmentedControlSizes.md },
       },

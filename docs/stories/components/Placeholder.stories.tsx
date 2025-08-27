@@ -18,7 +18,7 @@ const meta: Meta<Type> = {
       ...props,
     };
     return (
-      <div className="h-space-32">
+      <div className="w-160 h-80">
         <Placeholder {...placeholderProps} />
       </div>
     );

@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines CircularProgress size",
       options: Object.values(CircularProgressSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: CircularProgressSizes.md },
       },

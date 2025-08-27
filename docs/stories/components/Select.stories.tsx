@@ -1,5 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Select, SelectItem, SelectSizes } from "@heathmont/moon-react";
+import {
+  Select,
+  SelectItem,
+  SelectSizes,
+  SelectVariants,
+} from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Select>;
@@ -17,16 +22,25 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines Select size",
       options: Object.values(SelectSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: SelectSizes.md },
       },
     },
+    variant: {
+      description: "Defines Select variant",
+      options: Object.values(SelectVariants),
+      control: "select",
+      table: {
+        defaultValue: { summary: SelectVariants.fill },
+      },
+    },
   },
-  render: ({ size, ...props }) => {
+  render: ({ size, variant, ...props }) => {
     const selectProps = {
       ...props,
       ...(size !== SelectSizes.md && { size }),
+      ...(variant !== SelectVariants.fill && { variant }),
     };
     const items = new Array(3).fill("");
     return (
@@ -46,5 +60,5 @@ export default meta;
 type Story = StoryObj<Type>;
 
 export const SelectStory: Story = {
-  args: { size: SelectSizes.md },
+  args: { size: SelectSizes.md, variant: SelectVariants.fill },
 };

@@ -17,7 +17,7 @@ const meta: Meta<Type> = {
     size: {
       description: "Defines LinearProgress size",
       options: Object.values(LinearProgressSizes),
-      control: { type: "select" },
+      control: "select",
       table: {
         defaultValue: { summary: LinearProgressSizes["2xs"] },
       },
