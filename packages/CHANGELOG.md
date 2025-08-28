@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 1.0.1
+
+### Patch Changes
+
+- fix: cli commands
+
 ## 1.0.0
 
 ### Major Changes

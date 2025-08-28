@@ -1,7 +1,7 @@
 {
   "name": "@heathmont/moon-react",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -27,7 +27,7 @@
     "build-storybook": "storybook build"
   },
   "bin": {
-    "moon-react-cli": "dist/cli/index.js"
+    "moon-react": "dist/cli/index.js"
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
