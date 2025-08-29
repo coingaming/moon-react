@@ -12,18 +12,33 @@ async function copyComponent(
 ) {
   if (copied.has(componentName)) return;
 
-  const src = path.join(baseDir, `${componentName}.tsx`);
-  const dest = path.join(process.cwd(), destDir, `${componentName}.tsx`);
+  // Capitalize the component name for the file lookup
+  const capitalizedName =
+    componentName.charAt(0).toUpperCase() + componentName.slice(1);
+
+  // Try .tsx first, then .ts
+  let src = path.join(baseDir, `${capitalizedName}.tsx`);
+  let dest = path.join(process.cwd(), destDir, `${capitalizedName}.tsx`);
 
   if (!fs.existsSync(src)) {
-    logger.nonExistingComponent(componentName);
-    process.exit(1);
+    // Try .ts extension
+    src = path.join(baseDir, `${componentName}.ts`);
+    dest = path.join(process.cwd(), destDir, `${componentName}.ts`);
+
+    if (!fs.existsSync(src)) {
+      logger.nonExistingComponent(componentName);
+      process.exit(1);
+    }
   }
 
   await fs.ensureDir(path.dirname(dest));
   await fs.copy(src, dest);
 
-  logger.copiedComponent(componentName, `${destDir}/${componentName}.tsx`);
+  const extension = src.endsWith(".tsx") ? ".tsx" : ".ts";
+  const fileName = src.endsWith(".tsx")
+    ? `${capitalizedName}${extension}`
+    : `${componentName}${extension}`;
+  logger.copiedComponent(componentName, `${destDir}/${fileName}`);
 
   copied.add(componentName);
 

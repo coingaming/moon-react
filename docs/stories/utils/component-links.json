@@ -1,135 +1,135 @@
 {
   "components": {
     "Accordion": {
-      "moon": "content-display/accordion-E9XfQUMP",
+      "moon": "content-display/accordion",
       "github": "Accordion.tsx"
     },
     "Alert": {
-      "moon": "messaging-and-feedback/alert-pHlCZcnN",
+      "moon": "messaging-and-feedback/alert",
       "github": "Alert.tsx"
     },
     "Authenticator": {
-      "moon": "forms-and-selection-controls/authenticator-Vjp3l9gH",
+      "moon": "forms-and-selection-controls/authenticator",
       "github": "Authenticator.tsx"
     },
     "Avatar": {
-      "moon": "content-display/avatar-m0aYYxhj",
+      "moon": "content-display/avatar",
       "github": "Avatar.tsx"
     },
     "Badge": {
-      "moon": "indicators-and-status/badge-Zo8Ufqsg",
+      "moon": "indicators-and-status/badge",
       "github": "Badge.tsx"
     },
     "BottomSheet": {
-      "moon": "containers-and-layout/bottom-sheet-qsmy4AdA",
+      "moon": "containers-and-layout/bottom-sheet",
       "github": "BottomSheet.tsx"
     },
     "Breadcrumb": {
-      "moon": "navigation/breadcrumb-fmvO4kmF",
+      "moon": "navigation/breadcrumb",
       "github": "Breadcrumb.tsx"
     },
     "Button": {
-      "moon": "navigation/breadcrumb-fmvO4kmF",
+      "moon": "actions/button",
       "github": "Button.tsx"
     },
     "Carousel": {
-      "moon": "content-display/carousel-oPVnjD6U",
+      "moon": "content-display/carousel",
       "github": "Carousel.tsx"
     },
     "Checkbox": {
-      "moon": "forms-and-selection-controls/checkbox-qTGrcEvB",
+      "moon": "forms-and-selection-controls/checkbox",
       "github": "Checkbox.tsx"
     },
     "Chip": {
-      "moon": "forms-and-selection-controls/chip-KxJbxHjO",
+      "moon": "forms-and-selection-controls/chip",
       "github": "Chip.tsx"
     },
     "CircularProgress": {
-      "moon": "indicators-and-status/circular-progress-oh6jQAgy",
+      "moon": "indicators-and-status/circular-progress",
       "github": "CircularProgress.tsx"
     },
     "Dialog": {
-      "moon": "containers-and-layout/dialog-YEd9j6uo",
+      "moon": "containers-and-layout/dialog",
       "github": "Dialog.tsx"
     },
     "Drawer": {
-      "moon": "containers-and-layout/drawer-eg6vuUa8",
+      "moon": "containers-and-layout/drawer",
       "github": "Drawer.tsx"
     },
     "Dropdown": {
-      "moon": "containers-and-layout/dropdown-7PTKuVFo-7PTKuVFo",
+      "moon": "containers-and-layout/dropdown",
       "github": "Dropdown.tsx"
     },
     "IconButton": {
-      "moon": "actions/icon-button-jcDPiXWF-jcDPiXWF",
+      "moon": "actions/icon-button",
       "github": "IconButton.tsx"
     },
     "Input": {
-      "moon": "forms-and-selection-controls/input-7idv2lm3",
+      "moon": "forms-and-selection-controls/input",
       "github": "Input.tsx"
     },
     "LinearProgress": {
-      "moon": "indicators-and-status/linear-progress-21B8jv1D",
+      "moon": "indicators-and-status/linear-progress",
       "github": "LinearProgress.tsx"
     },
     "List": {
-      "moon": "content-display/list-zn1TMgX6",
+      "moon": "content-display/list",
       "github": "List.tsx"
     },
     "Loader": {
-      "moon": "indicators-and-status/loader-f9YNrGZD",
+      "moon": "indicators-and-status/loader",
       "github": "Loader.tsx"
     },
     "Menu": {
-      "moon": "navigation/menu-eeIWIkLY-eeIWIkLY",
+      "moon": "navigation/menu",
       "github": "Menu.tsx"
     },
     "Pagination": {
-      "moon": "navigation/pagination-0eAoS12R",
+      "moon": "navigation/pagination",
       "github": "Pagination.tsx"
     },
     "Placeholder": {
-      "moon": "indicators-and-status/placeholder-nS1N1Pht",
+      "moon": "indicators-and-status/placeholder",
       "github": "Placeholder.tsx"
     },
     "Radio": {
-      "moon": "forms-and-selection-controls/radio-0WSJs8Jn",
+      "moon": "forms-and-selection-controls/radio",
       "github": "Radio.tsx"
     },
     "SegmentedControl": {
-      "moon": "forms-and-selection-controls/segmented-control-4LpDPTEq",
+      "moon": "forms-and-selection-controls/segmented-control",
       "github": "SegmentedControl.tsx"
     },
     "Select": {
-      "moon": "forms-and-selection-controls/select-1pez5Tuw",
+      "moon": "forms-and-selection-controls/select",
       "github": "Select.tsx"
     },
     "Snackbar": {
-      "moon": "messaging-and-feedback/snackbar-MAmMffP9",
+      "moon": "messaging-and-feedback/snackbar",
       "github": "Snackbar.tsx"
     },
     "Switch": {
-      "moon": "forms-and-selection-controls/switch-5jjecI2N",
+      "moon": "forms-and-selection-controls/switch",
       "github": "Switch.tsx"
     },
     "Table": {
-      "moon": "content-display/table-djm1mitt",
+      "moon": "content-display/table",
       "github": "Table.tsx"
     },
     "TabList": {
-      "moon": "navigation/tab-list-xPXqwb2q",
+      "moon": "navigation/tab-list",
       "github": "TabList.tsx"
     },
     "Tag": {
-      "moon": "indicators-and-status/tag-WbODLvEF",
+      "moon": "indicators-and-status/tag",
       "github": "Tag.tsx"
     },
     "Textarea": {
-      "moon": "forms-and-selection-controls/textarea-gQJz078t",
+      "moon": "forms-and-selection-controls/textarea",
       "github": "Textarea.tsx"
     },
     "Tooltip": {
-      "moon": "messaging-and-feedback/tooltip-67OcVL5b",
+      "moon": "messaging-and-feedback/tooltip",
       "github": "Tooltip.tsx"
     }
   }

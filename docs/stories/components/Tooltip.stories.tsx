@@ -14,7 +14,7 @@ const meta: Meta<Type> = {
   parameters: {
     docs: {
       container: ({ context }: any) => (
-        <LinksBlock context={context} component="List" />
+        <LinksBlock context={context} component="Tooltip" />
       ),
     },
   },
