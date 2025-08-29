@@ -1,5 +1,29 @@
 # @heathmont/moon-react
 
+## 1.0.4
+
+### Patch Changes
+
+- fix: constans build
+
+## 1.0.3
+
+### Patch Changes
+
+- fix: add constantsHelper to cli
+
+## 1.0.2
+
+### Patch Changes
+
+- fix: package files
+
+## 1.0.1
+
+### Patch Changes
+
+- fix: cli commands
+
 ## 1.0.0
 
 ### Major Changes

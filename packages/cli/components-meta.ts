@@ -16,6 +16,12 @@ type Deps = {
   internalDeps: InternalDeps[];
 };
 
+const constantsHelper = {
+  name: "contexts",
+  srcPath: path.resolve(path.join(__dirname, "constants")),
+  destPath: "src/constants",
+};
+
 const mergeClassesHelper = {
   name: "mergeClasses",
   srcPath: path.resolve(path.join(__dirname, "helpers")),
@@ -50,6 +56,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
   alert: {
     internalDeps: [
       mergeClassesHelper,
+      constantsHelper,
       {
         ...iconsData,
         name: "CloseIcon",
@@ -60,13 +67,13 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [mergeClassesHelper],
   },
   badge: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, constantsHelper],
   },
   breadcrumb: {
     internalDeps: [mergeClassesHelper],
   },
   button: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, constantsHelper],
   },
   carousel: {
     internalDeps: [
@@ -100,6 +107,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
   "icon-button": {
     internalDeps: [
       mergeClassesHelper,
+      constantsHelper,
       {
         ...componentsData,
         name: "button",
@@ -145,7 +153,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [mergeClassesHelper],
   },
   snackbar: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, constantsHelper],
   },
   "bottom-sheet": {
     internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],

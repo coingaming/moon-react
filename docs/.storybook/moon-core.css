@@ -1,4 +1,4 @@
-/* Moon UI v2.5.0 */
+/* Moon UI v2.5.2 */
 @theme inline {
 --color-background-backdrop: var(--color-gray-alpha-72);
 --color-background-brand-alpha: var(--color-mystic-indigo-alpha-12);
@@ -114,7 +114,9 @@
 --component-alert-outline-icon: var(--context-brand-outline-icon);
 --component-alert-outline-stroke: var(--sizing-stroke-100);
 --component-alert-outline-text: var(--context-brand-outline-text);
---component-alert-radius: var(--radius-400);
+--component-alert-radius-lg: var(--radius-400);
+--component-alert-radius-md: var(--radius-400);
+--component-alert-radius-sm: var(--radius-200);
 --component-alert-soft-background: var(--context-brand-soft-background);
 --component-alert-soft-border: var(--context-brand-soft-border);
 --component-alert-soft-icon: var(--context-brand-soft-icon);

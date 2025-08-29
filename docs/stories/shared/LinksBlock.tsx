@@ -15,9 +15,7 @@ const LinksBlock = ({ context, component }: Props) => (
   <DocsContainer context={context}>
     <div className="sb-unstyled flex flex-col sm:flex-row gap-space-12 mb-space-40">
       <a
-        href={`https://beta.moon.io/latest/components/${getMoonLink(
-          component
-        )}`}
+        href={`https://beta.moon.io/docs/components/${getMoonLink(component)}`}
         target="_blank"
         className="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
       >

@@ -4,8 +4,6 @@ export enum ListSizes {
   sm = "sm",
   md = "md",
   lg = "lg",
-  xl = "xl",
-  "2xl" = "2xl",
 }
 
 type Props = React.ComponentProps<"ul"> & {
