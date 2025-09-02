@@ -1,7 +1,7 @@
-/* Moon UI v2.5.2 */
+/* Moon UI v2.6.1 */
 @layer components {
 .moon-form-hint {
-  font: var(--text-body-200-font-weight) var(--text-body-200-font-size)/var(--text-body-200-line-height) var(--text-body-200-font-family);
+  font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
   color: var(--color-text-secondary);
 }
 
@@ -23,7 +23,7 @@
   opacity: 1;
 }
 .moon-form-group :where(label) {
-  font: var(--text-body-300-font-weight) var(--text-body-300-font-size)/var(--text-body-300-line-height) var(--text-body-300-font-family);
+  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   color: var(--color-text-primary);
 }
 .moon-form-group :where(.required) {
@@ -62,7 +62,7 @@
   grid-template-rows: max-content 0fr;
   transition: grid-template-rows 0.2s;
   background: var(--component-accordion-fill-background);
-  color: var(--component-accordion-fill-text);
+  color: var(--component-accordion-fill-title);
   border-radius: var(--component-accordion-radius-md);
   box-shadow: inset 0 0 0 var(--component-accordion-fill-stroke) var(--component-accordion-fill-border);
   padding: 0 var(--sizing-padding-500);
@@ -140,7 +140,7 @@
   cursor: unset;
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   font-weight: var(--style-font-weight-regular);
-  color: var(--component-accordion-fill-text);
+  color: var(--component-accordion-fill-title);
   transition: visibility 0.2s ease-out, padding 0.2s ease-out, background-color 0.2s ease-out;
 }
 .moon-accordion :where(.moon-accordion-item):is(details) {
@@ -284,36 +284,36 @@
 }
 .moon-accordion.moon-accordion-fill :where(.moon-accordion-item) {
   background: var(--component-accordion-fill-background);
-  color: var(--component-accordion-fill-text);
+  color: var(--component-accordion-fill-title);
   box-shadow: inset 0 0 0 var(--component-accordion-fill-stroke) var(--component-accordion-fill-border);
 }
 .moon-accordion.moon-accordion-fill :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content)::after, .moon-accordion.moon-accordion-fill :where(.moon-accordion-item):not(.moon-accordion-close) > :where(input:is([type=checkbox], [type=radio]):checked ~ .moon-accordion-content)::after {
   background-color: var(--component-accordion-fill-border);
 }
 .moon-accordion.moon-accordion-fill :where(.moon-accordion-item) .moon-accordion-content {
-  color: var(--component-accordion-fill-text);
+  color: var(--component-accordion-fill-title);
 }
 .moon-accordion.moon-accordion-ghost :where(.moon-accordion-item) {
   background: var(--component-accordion-ghost-background);
-  color: var(--component-accordion-ghost-text);
+  color: var(--component-accordion-ghost-title);
   box-shadow: inset 0 0 0 var(--component-accordion-ghost-stroke) var(--component-accordion-ghost-border);
 }
 .moon-accordion.moon-accordion-ghost :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content)::after, .moon-accordion.moon-accordion-ghost :where(.moon-accordion-item):not(.moon-accordion-close) > :where(input:is([type=checkbox], [type=radio]):checked ~ .moon-accordion-content)::after {
   background-color: var(--component-accordion-ghost-border);
 }
 .moon-accordion.moon-accordion-ghost :where(.moon-accordion-item) .moon-accordion-content {
-  color: var(--component-accordion-fill-text);
+  color: var(--component-accordion-fill-title);
 }
 .moon-accordion.moon-accordion-outline :where(.moon-accordion-item) {
   background: var(--component-accordion-outline-background);
-  color: var(--component-accordion-outline-text);
+  color: var(--component-accordion-outline-title);
   box-shadow: inset 0 0 0 var(--component-accordion-outline-stroke) var(--component-accordion-outline-border);
 }
 .moon-accordion.moon-accordion-outline :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content)::after, .moon-accordion.moon-accordion-outline :where(.moon-accordion-item):not(.moon-accordion-close) > :where(input:is([type=checkbox], [type=radio]):checked ~ .moon-accordion-content)::after {
   background-color: var(--component-accordion-outline-border);
 }
 .moon-accordion.moon-accordion-outline :where(.moon-accordion-item) .moon-accordion-content {
-  color: var(--component-accordion-fill-text);
+  color: var(--component-accordion-fill-title);
 }
 
 .moon-button, .moon-snackbar :where(.moon-snackbar-action), .moon-breadcrumb-item *, .moon-alert :where(.moon-alert-action), .moon-snackbar :where(.moon-alert-action) {
@@ -734,7 +734,7 @@
   text-align: start;
   min-height: var(--sizing-height-1000);
   padding: var(--sizing-padding-600);
-  border-radius: var(--component-alert-radius);
+  border-radius: var(--component-alert-radius-radius);
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   color: var(--component-alert-fill-text);
   background-color: var(--component-alert-fill-background);
@@ -1240,7 +1240,8 @@
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  font: var(--text-heading-200-font-weight) var(--text-heading-200-font-size)/var(--text-heading-200-line-height) var(--text-heading-200-font-family);
+  padding: var(--sizing-padding-700) var(--sizing-padding-900);
+  font: var(--style-font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--style-font-family-default);
 }
 .moon-bottom-sheet-box :where(.moon-bottom-sheet-close) {
   justify-self: end;
@@ -1394,7 +1395,7 @@
   align-items: center;
 }
 .moon-checkbox-wrapper :where(label) {
-  font: var(--text-body-300-font-weight) var(--text-body-300-font-size)/var(--text-body-300-line-height) var(--text-body-300-font-family);
+  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   color: var(--color-text-primary);
   cursor: pointer;
 }
@@ -1610,7 +1611,8 @@
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  font: var(--text-heading-200-font-weight) var(--text-heading-200-font-size)/var(--text-heading-200-line-height) var(--text-heading-200-font-family);
+  padding: var(--sizing-padding-700) var(--sizing-padding-900);
+  font: var(--style-font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--style-font-family-default);
 }
 .moon-dialog-box :where(.moon-dialog-close) {
   justify-self: end;
@@ -1687,7 +1689,8 @@
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  font: var(--text-heading-200-font-weight) var(--text-heading-200-font-size)/var(--text-heading-200-line-height) var(--text-heading-200-font-family);
+  padding: var(--sizing-padding-700) var(--sizing-padding-900);
+  font: var(--style-font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--style-font-family-default);
 }
 .moon-drawer-box :where(.moon-drawer-close) {
   justify-self: end;
@@ -1845,7 +1848,7 @@
   gap: var(--spacing-space-2);
 }
 .moon-linear-progress-wrapper :where(label) {
-  font: var(--text-body-300-font-weight) var(--text-body-300-font-size)/var(--text-body-300-line-height) var(--text-body-300-font-family);
+  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   color: var(--color-text-primary);
   font-weight: var(--style-font-weight-medium);
   text-align: center;
@@ -2100,7 +2103,7 @@
   align-items: center;
 }
 .moon-radio-wrapper :where(label) {
-  font: var(--text-body-300-font-weight) var(--text-body-300-font-size)/var(--text-body-300-line-height) var(--text-body-300-font-family);
+  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   color: var(--color-text-primary);
   cursor: pointer;
 }
@@ -2451,7 +2454,6 @@
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   text-align: center;
