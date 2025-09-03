@@ -1,40 +1,96 @@
-# 🌙 @heathmont/moon-react
+# Moon React
 
 A modern React component library built to support consistent UI development across projects.
 
----
-
 ## 📦 Installation
 
-Install the full package:
+### Full Package Installation
+
+Install the complete component library:
 
 ```bash
+npm install @heathmont/moon-react
+# or
 yarn add @heathmont/moon-react
+# or
+pnpm install @heathmont/moon-react
 ```
 
-# Selective Usage via CLI
+### Component Installation via CLI
 
-npx @heathmont/moon-react --add component-name
+Install selective components using the CLI:
 
-component names should be typed in lowercase, e.g:
+```bash
+# Add a single component
+npx @heathmont/moon-react --add button
 
-npx @heathmont/moon-react --add button textarea input
+# Add multiple components
+npx @heathmont/moon-react --add button input
+```
 
-As optional flags you can use the following:
+Or install all components at once:
 
---all-components e.g: npx @heathmont/moon-react --all-components just in case
-you want to use them all so you don't have you write every component you want to install.
+```bash
+npx @heathmont/moon-react --add-components
+```
 
---outputFolder e.g npx @heathmont/moon-react add button textarea --outputFolder src/css that way you have control over the directory where css components are placed
+## Moon UI Integration
 
-npx @heathmont/moon-react --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_FILE_ID so you can use your own core and components figma files
+[Moon UI](https://ui.moon.io/) is a standalone library for generating core and component CSS files from Figma design tokens.
 
-npx @heathmont/moon-react --target css with this flag you can configure moon-react for tailwind projects or non tailwind projects, default is 'tailwindcss'
+### Configuration
 
-# Prerequisites
+Create a `.env` file in your project root with your Figma token:
 
-node 20.9.0 or above
+```env
+FIGMA_TOKEN=your-figma-token-here
+```
 
-# Configuration
+### CLI Options for Moon UI
 
-Add an .env file to your project with a FIGMA_TOKEN variable with a valid figma token
+```bash
+# Specify custom prefix for component classes
+npx @heathmont/moon-react --customPrefix your-prefix
+
+# Specify your project name for css files generation
+npx @heathmont/moon-react --projectName your-project
+
+# Use custom Figma files
+npx @heathmont/moon-react --coreFileId CORE_FILE_ID --componentsProjectId COMPONENTS_PROJECT_ID
+
+# Configure for non-Tailwind projects (default is 'tailwindcss')
+npx @heathmont/moon-react --target css
+
+# Generate vanilla CSS files with browser CSS reset. Not needed with tailwindcss target
+npx @heathmont/moon-ui --target css --preflight
+```
+
+## 📝 Component Usage
+
+### When installed via package.json
+
+```typescript
+import { Button } from "@heathmont/moon-react";
+
+const App = () => <Button>Click me</Button>;
+```
+
+### When installed locally in your project directory
+
+```typescript
+import { Button } from "../local-path-to-moon-components;
+
+const App = () => <Button>Click me</Button>;
+```
+
+## License
+
+MIT
+
+## Versioning
+
+Moon UI follows [Semantic Versioning](https://semver.org/). View available versions in the [repository tags](https://github.com/coingaming/moon-react/tags).
+
+- **MAJOR**: Incompatible API changes
+- **MINOR**: New backward-compatible functionality
+- **PATCH**: Backward-compatible bug fixes

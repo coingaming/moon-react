@@ -7,8 +7,11 @@ const PROMP_MOON_UI = "We are installing css components, do you agree?";
 const ARGS = [
   "--outputFolder",
   "--coreFileId",
-  "--componentsFileId",
+  "--componentsProjectId",
   "--target",
+  "--preflight",
+  "--customPrefix",
+  "--projectName",
 ];
 
 export const logger = {
@@ -26,9 +29,9 @@ export const logger = {
   },
   failureInstallingMoonCss: (err: unknown) => {
     if (typeof err === "object" && err !== null && "stderr" in err) {
-      console.error("❌ Moon CSS install failed:", (err as ExecaError).stderr);
+      console.error("❌ Moon UI install failed:", (err as ExecaError).stderr);
     } else {
-      console.error("❌ Moon CSS install failed:", String(err));
+      console.error("❌ Moon UI install failed:", String(err));
     }
   },
 };
