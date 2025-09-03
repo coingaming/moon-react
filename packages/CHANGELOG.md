@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 1.1.0
+
+### Minor Changes
+
+- feat: aligin moon-react cli with moon-ui
+
 ## 1.0.4
 
 ### Patch Changes

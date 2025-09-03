@@ -7,13 +7,13 @@ import { filterArgs, initMoonCss, logger } from "./helpers.js";
 const addCommand = await import("./commands/add.js");
 
 enum MOON_REACT_ARGS {
-  ALL_COMPONENTS = "--all-components",
+  ADD_COMPONENTS = "--add-components",
   ADD = "--add",
 }
 
 const args = process.argv.slice(2);
 const hasAllComponentsFlag = args.find(
-  (arg) => arg === MOON_REACT_ARGS.ALL_COMPONENTS
+  (arg) => arg === MOON_REACT_ARGS.ADD_COMPONENTS
 );
 
 const addComponents = () => {
