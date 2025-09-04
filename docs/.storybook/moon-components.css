@@ -1,7 +1,7 @@
-/* Moon UI v2.7.0 */
+/* Moon UI v2.8.0 */
 @layer components {
 .moon-form-hint {
-  font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--font-default);
   color: var(--color-text-secondary);
 }
 
@@ -23,7 +23,7 @@
   opacity: 1;
 }
 .moon-form-group :where(label) {
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   color: var(--color-text-primary);
 }
 .moon-form-group :where(.required) {
@@ -138,8 +138,8 @@
   grid-row-start: 2;
   min-height: 0;
   cursor: unset;
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
-  font-weight: var(--style-font-weight-regular);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
+  font-weight: var(--font-weight-default);
   color: var(--component-accordion-fill-title);
   transition: visibility 0.2s ease-out, padding 0.2s ease-out, background-color 0.2s ease-out;
 }
@@ -176,7 +176,7 @@
   padding: var(--sizing-padding-500) 0;
   padding-inline-end: calc(var(--spacing-space-20) * 2);
   transition: background-color 0.2s ease-out;
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-accordion :where(.moon-accordion-item) .moon-accordion-open {
   grid-template-rows: max-content 1fr;
@@ -217,11 +217,11 @@
   padding: var(--sizing-padding-400) 0;
   padding-inline-end: calc(var(--spacing-space-20) * 2);
   min-height: var(--sizing-height-700);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-accordion.moon-accordion-sm :where(.moon-accordion-item) .moon-accordion-content {
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
-  font-weight: var(--style-font-weight-regular);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
+  font-weight: var(--font-weight-default);
 }
 .moon-accordion.moon-accordion-sm :where(.moon-accordion-item) .moon-accordion-open > .moon-accordion-content {
   padding: var(--sizing-padding-400) 0;
@@ -245,11 +245,11 @@
   padding: var(--sizing-padding-600) 0;
   padding-inline-end: calc(var(--spacing-space-20) * 2);
   min-height: var(--sizing-height-900);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-accordion.moon-accordion-lg :where(.moon-accordion-item) .moon-accordion-content {
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
-  font-weight: var(--style-font-weight-regular);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
+  font-weight: var(--font-weight-default);
 }
 .moon-accordion.moon-accordion-lg :where(.moon-accordion-item) .moon-accordion-open > .moon-accordion-content {
   padding: var(--sizing-padding-600) 0;
@@ -273,11 +273,11 @@
   padding: var(--sizing-padding-700) 0;
   padding-inline-end: calc(var(--spacing-space-20) * 2);
   min-height: var(--sizing-height-1000);
-  font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
 }
 .moon-accordion.moon-accordion-xl :where(.moon-accordion-item) .moon-accordion-content {
-  font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
-  font-weight: var(--style-font-weight-regular);
+  font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
+  font-weight: var(--font-weight-default);
 }
 .moon-accordion.moon-accordion-xl :where(.moon-accordion-item) .moon-accordion-open > .moon-accordion-content {
   padding: var(--sizing-padding-700) 0;
@@ -332,7 +332,7 @@
   background-color: var(--component-button-fill-background);
   border-radius: var(--component-button-radius-md);
   color: var(--component-button-fill-text);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-button :where(svg, .moon-icon), .moon-snackbar :where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item * :where(svg, .moon-icon), .moon-alert :where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--component-button-fill-icon);
@@ -363,7 +363,7 @@
   padding: 0 var(--sizing-padding-300);
   gap: var(--sizing-gap-200);
   border-radius: var(--component-button-radius-xs);
-  font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--font-default);
 }
 .moon-button.moon-button-xs :where(svg, .moon-icon), .moon-snackbar .moon-button-xs:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-xs :where(svg, .moon-icon), .moon-alert .moon-button-xs:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-xs:where(.moon-alert-action) :where(svg, .moon-icon) {
   width: var(--sizing-height-300);
@@ -374,7 +374,7 @@
   padding: 0 var(--sizing-padding-400);
   gap: var(--sizing-gap-300);
   border-radius: var(--component-button-radius-sm);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-button.moon-button-sm :where(svg, .moon-icon), .moon-snackbar :where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item * :where(svg, .moon-icon), .moon-alert :where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
   width: var(--sizing-height-400);
@@ -385,7 +385,7 @@
   padding: 0 var(--sizing-padding-600);
   gap: var(--sizing-gap-400);
   border-radius: var(--component-button-radius-lg);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-button.moon-button-lg :where(svg, .moon-icon), .moon-snackbar .moon-button-lg:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-lg :where(svg, .moon-icon), .moon-alert .moon-button-lg:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-lg:where(.moon-alert-action) :where(svg, .moon-icon) {
   width: var(--sizing-height-500);
@@ -396,7 +396,7 @@
   padding: 0 var(--sizing-padding-700);
   gap: var(--sizing-gap-600);
   border-radius: var(--component-button-radius-xl);
-  font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
 }
 .moon-button.moon-button-xl :where(svg, .moon-icon), .moon-snackbar .moon-button-xl:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-xl :where(svg, .moon-icon), .moon-alert .moon-button-xl:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-xl:where(.moon-alert-action) :where(svg, .moon-icon) {
   width: var(--sizing-height-500);
@@ -735,7 +735,7 @@
   min-height: var(--sizing-height-1000);
   padding: var(--sizing-padding-600);
   border-radius: var(--component-alert-radius-radius);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   color: var(--component-alert-fill-text);
   background-color: var(--component-alert-fill-background);
   box-shadow: inset 0 0 0 var(--component-alert-fill-stroke) var(--component-alert-fill-border);
@@ -748,7 +748,7 @@
   align-items: center;
   width: 100%;
   gap: var(--sizing-gap-400);
-  font-weight: var(--style-font-weight-medium);
+  font-weight: var(--font-weight-medium);
 }
 .moon-alert :where(svg, .moon-icon), .moon-snackbar :where(svg, .moon-icon) {
   color: var(--component-alert-fill-icon);
@@ -757,7 +757,7 @@
 }
 .moon-alert :where(.moon-alert-title), .moon-snackbar :where(.moon-alert-title) {
   flex-grow: 1;
-  font-weight: var(--style-font-weight-medium);
+  font-weight: var(--font-weight-medium);
 }
 .moon-alert :where(.moon-alert-content), .moon-snackbar :where(.moon-alert-content) {
   width: 100%;
@@ -905,7 +905,7 @@
   background-color: var(--component-authenticator-fill-background);
   border-radius: var(--component-forms-radius-md);
   text-align: center;
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   transition: box-shadow 150ms ease-in-out, opacity 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 .moon-authenticator :where(input)::-moz-placeholder {
@@ -950,7 +950,7 @@
   max-width: var(--sizing-width-700);
   height: var(--sizing-height-700);
   border-radius: var(--component-forms-radius-sm);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-authenticator.moon-authenticator-lg {
   gap: var(--sizing-gap-400);
@@ -959,7 +959,7 @@
   max-width: var(--sizing-width-900);
   height: var(--sizing-height-900);
   border-radius: var(--component-forms-radius-lg);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-authenticator.moon-authenticator-xl {
   gap: var(--sizing-gap-600);
@@ -968,7 +968,7 @@
   max-width: var(--sizing-width-1000);
   height: var(--sizing-height-1000);
   border-radius: var(--component-forms-radius-xl);
-  font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
 }
 .moon-authenticator.moon-authenticator-outline :where(input) {
   box-shadow: inset 0 0 0 var(--component-authenticator-outline-stroke) var(--component-authenticator-outline-border);
@@ -994,7 +994,7 @@
   border-width: var(--component-avatar-fill-stroke);
   border-color: var(--component-avatar-fill-border);
   color: var(--component-avatar-fill-text);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   width: var(--sizing-width-800);
   height: var(--sizing-height-800);
   border-radius: var(--component-avatar-radius-md);
@@ -1010,7 +1010,7 @@
   height: var(--sizing-height-500);
 }
 .moon-avatar.moon-avatar-xs {
-  font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--font-default);
   width: var(--sizing-width-600);
   height: var(--sizing-height-600);
   border-radius: var(--component-avatar-radius-xs);
@@ -1020,7 +1020,7 @@
   height: var(--sizing-height-300);
 }
 .moon-avatar.moon-avatar-sm {
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   width: var(--sizing-width-700);
   height: var(--sizing-height-700);
   border-radius: var(--component-avatar-radius-sm);
@@ -1030,7 +1030,7 @@
   height: var(--sizing-height-400);
 }
 .moon-avatar.moon-avatar-lg {
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   width: var(--sizing-width-900);
   height: var(--sizing-height-900);
   border-radius: var(--component-avatar-radius-lg);
@@ -1040,7 +1040,7 @@
   height: var(--sizing-height-500);
 }
 .moon-avatar.moon-avatar-xl {
-  font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
   width: var(--sizing-width-1000);
   height: var(--sizing-height-1000);
   border-radius: var(--component-avatar-radius-xl);
@@ -1050,7 +1050,7 @@
   height: var(--sizing-height-500);
 }
 .moon-avatar.moon-avatar-2xl {
-  font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
   width: var(--sizing-width-1100);
   height: var(--sizing-height-1100);
   border-radius: var(--component-avatar-radius-2xl);
@@ -1079,7 +1079,7 @@
   background-color: var(--component-badge-fill-background);
   color: var(--component-badge-fill-text);
   box-shadow: inset 0 0 0 var(--component-badge-fill-stroke) var(--component-badge-fill-border);
-  font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--font-default);
 }
 .moon-badge.moon-badge-outline {
   background-color: var(--component-badge-outline-background);
@@ -1241,7 +1241,7 @@
   grid-auto-flow: column;
   align-items: center;
   padding: var(--sizing-padding-700) var(--sizing-padding-900);
-  font: var(--style-font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--font-default);
 }
 .moon-bottom-sheet-box :where(.moon-bottom-sheet-close) {
   justify-self: end;
@@ -1395,7 +1395,7 @@
   align-items: center;
 }
 .moon-checkbox-wrapper :where(label) {
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   color: var(--color-text-primary);
   cursor: pointer;
 }
@@ -1416,7 +1416,7 @@
   -moz-column-gap: var(--sizing-gap-400);
        column-gap: var(--sizing-gap-400);
   color: var(--component-chip-fill-unselected-text);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   border-radius: var(--component-chip-radius-md);
   box-shadow: inset 0 0 0 var(--component-chip-fill-unselected-stroke) var(--component-chip-fill-unselected-border);
   background-color: var(--component-chip-fill-unselected-background);
@@ -1455,7 +1455,7 @@
   -moz-column-gap: var(--sizing-gap-300);
        column-gap: var(--sizing-gap-300);
   border-radius: var(--component-chip-radius-sm);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-chip.moon-chip-sm :where(svg, .moon-icon) {
   width: var(--sizing-height-400);
@@ -1612,7 +1612,7 @@
   grid-auto-flow: column;
   align-items: center;
   padding: var(--sizing-padding-700) var(--sizing-padding-900);
-  font: var(--style-font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--font-default);
 }
 .moon-dialog-box :where(.moon-dialog-close) {
   justify-self: end;
@@ -1690,7 +1690,7 @@
   grid-auto-flow: column;
   align-items: center;
   padding: var(--sizing-padding-700) var(--sizing-padding-900);
-  font: var(--style-font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--font-default);
 }
 .moon-drawer-box :where(.moon-drawer-close) {
   justify-self: end;
@@ -1721,7 +1721,7 @@
   height: var(--sizing-height-800);
   padding: 0 var(--sizing-padding-500);
   border-radius: var(--component-forms-radius-md);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   box-shadow: inset 0 0 0 var(--component-input-fill-stroke) var(--component-input-fill-border);
   color: var(--component-input-fill-text-default);
   background-color: var(--component-input-fill-background);
@@ -1766,7 +1766,7 @@
   -moz-column-gap: var(--sizing-height-700);
        column-gap: var(--sizing-height-700);
   border-radius: var(--component-forms-radius-sm);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-input.moon-input-sm :where(svg, .moon-icon) {
   width: var(--sizing-height-400);
@@ -1778,7 +1778,7 @@
   -moz-column-gap: var(--sizing-height-900);
        column-gap: var(--sizing-height-900);
   border-radius: var(--component-forms-radius-lg);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-input.moon-input-lg :where(svg, .moon-icon) {
   width: var(--sizing-height-500);
@@ -1790,7 +1790,7 @@
   -moz-column-gap: var(--sizing-height-1000);
        column-gap: var(--sizing-height-1000);
   border-radius: var(--component-forms-radius-xl);
-  font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
 }
 .moon-input.moon-input-xl :where(svg, .moon-icon) {
   width: var(--sizing-height-500);
@@ -1848,9 +1848,9 @@
   gap: var(--spacing-space-2);
 }
 .moon-linear-progress-wrapper :where(label) {
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   color: var(--color-text-primary);
-  font-weight: var(--style-font-weight-medium);
+  font-weight: var(--font-weight-medium);
   text-align: center;
 }
 
@@ -1869,7 +1869,7 @@
   gap: var(--sizing-gap-400);
   padding: var(--sizing-padding-500);
   height: var(--sizing-height-800);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   color: var(--component-list-text-default);
 }
 .moon-list > *:not(:last-child)::after, .moon-menu > *:not(:last-child)::after {
@@ -1890,7 +1890,7 @@
 }
 .moon-list.moon-list-sm > *, .moon-list-sm.moon-menu > * {
   height: var(--sizing-height-700);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   gap: var(--sizing-gap-300);
   padding: var(--sizing-padding-400);
 }
@@ -1900,7 +1900,7 @@
 }
 .moon-list.moon-list-lg > *, .moon-list-lg.moon-menu > * {
   height: var(--sizing-height-900);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   gap: var(--sizing-gap-400);
   padding: var(--sizing-padding-600);
 }
@@ -1980,7 +1980,7 @@
 }
 .moon-menu.moon-menu-sm > * {
   height: var(--sizing-height-700);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   gap: var(--sizing-gap-300);
   padding: var(--sizing-padding-400);
 }
@@ -1990,7 +1990,7 @@
 }
 .moon-menu.moon-menu-lg > * {
   height: var(--sizing-height-900);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   gap: var(--sizing-gap-400);
   padding: var(--sizing-padding-600);
 }
@@ -2013,7 +2013,7 @@
   gap: var(--scale-sm-gap);
 }
 .moon-pagination :where(.moon-pagination-item) {
-  font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--font-default);
   background-color: var(--component-pagination-background-default);
   color: var(--component-pagination-text-default);
   box-shadow: inset 0 0 0 var(--component-pagination-stroke-default) var(--component-pagination-border-default);
@@ -2103,7 +2103,7 @@
   align-items: center;
 }
 .moon-radio-wrapper :where(label) {
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   color: var(--color-text-primary);
   cursor: pointer;
 }
@@ -2145,7 +2145,7 @@
   padding: 0 var(--sizing-padding-500);
   gap: var(--sizing-gap-400);
   border-radius: var(--component-segmented-control-segment-radius-md);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   box-shadow: inset 0 0 0 var(--component-segmented-control-segment-stroke-default) var(--component-segmented-control-segment-border-default);
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
@@ -2188,7 +2188,7 @@
   padding: 0 var(--sizing-padding-400);
   gap: var(--sizing-gap-300);
   border-radius: var(--component-segmented-control-segment-radius-sm);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-segmented-control.moon-segmented-control-sm :where(.moon-segment) :where(svg, .moon-icon) {
   width: var(--sizing-height-400);
@@ -2203,7 +2203,7 @@
   padding: 0 var(--sizing-padding-600);
   gap: var(--sizing-gap-400);
   border-radius: var(--component-segmented-control-segment-radius-lg);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-segmented-control.moon-segmented-control-lg :where(.moon-segment) :where(svg, .moon-icon) {
   width: var(--sizing-height-500);
@@ -2224,7 +2224,7 @@
   padding: 0 var(--sizing-padding-500);
   gap: var(--sizing-gap-400);
   border-radius: var(--component-forms-radius-md);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   box-shadow: inset 0 0 0 var(--component-select-fill-stroke) var(--component-select-fill-border);
   color: var(--component-select-fill-text-default);
   background-color: var(--component-select-fill-background);
@@ -2246,7 +2246,7 @@
   -moz-column-gap: var(--sizing-gap-300);
        column-gap: var(--sizing-gap-300);
   border-radius: var(--component-forms-radius-sm);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-select.moon-select-lg {
   min-height: var(--sizing-height-900);
@@ -2254,7 +2254,7 @@
   -moz-column-gap: var(--sizing-gap-400);
        column-gap: var(--sizing-gap-400);
   border-radius: var(--component-forms-radius-lg);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-select.moon-select-xl {
   min-height: var(--sizing-height-1000);
@@ -2262,7 +2262,7 @@
   -moz-column-gap: var(--sizing-gap-600);
        column-gap: var(--sizing-gap-600);
   border-radius: var(--component-forms-radius-xl);
-  font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
 }
 .moon-select.moon-select-outline {
   box-shadow: inset 0 0 0 var(--component-select-outline-stroke) var(--component-select-outline-border);
@@ -2283,7 +2283,7 @@
   grid-auto-flow: column;
   justify-content: start;
   justify-items: start;
-  font-weight: var(--style-font-weight-medium);
+  font-weight: var(--font-weight-medium);
   color: var(--component-snackbar-fill-text);
   background-color: var(--component-snackbar-fill-background);
   box-shadow: var(--style-shadow-500-layer-1-x) var(--style-shadow-500-layer-1-y) var(--style-shadow-500-layer-1-blur) var(--style-shadow-500-layer-1-spread) var(--style-shadow-500-layer-1-color), var(--style-shadow-500-layer-2-x) var(--style-shadow-500-layer-2-y) var(--style-shadow-500-layer-2-blur) var(--style-shadow-500-layer-2-spread) var(--style-shadow-500-layer-2-color), inset 0 0 0 var(--component-snackbar-fill-stroke) var(--component-snackbar-fill-border);
@@ -2464,8 +2464,8 @@
   border-top-left-radius: var(--component-tab-list-tab-radius-md);
   border-top-right-radius: var(--component-tab-list-tab-radius-md);
   border-bottom: var(--component-tab-list-tab-stroke-default) solid var(--component-tab-list-tab-border-default);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
-  font-weight: var(--style-font-weight-medium);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
+  font-weight: var(--font-weight-medium);
 }
 .moon-tab-list .moon-tab :where(svg, .moon-icon) {
   width: var(--sizing-height-500);
@@ -2499,7 +2499,7 @@
   gap: var(--sizing-gap-300);
   border-top-left-radius: var(--component-tab-list-tab-radius-sm);
   border-top-right-radius: var(--component-tab-list-tab-radius-sm);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-tab-list.moon-tab-list-sm .moon-tab :where(svg, .moon-icon) {
   width: var(--sizing-height-400);
@@ -2514,8 +2514,8 @@
   border-radius: var(--component-forms-radius-md);
   color: var(--color-text-primary);
   background-color: var(--color-background-secondary);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
-  font-weight: var(--style-font-weight-regular);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
+  font-weight: var(--font-weight-default);
   box-shadow: 0 0 0 var(--spacing-space-1) var(--color-border-secondary);
 }
 .moon-table :where(thead), .moon-table:not(:has(thead)) tr:first-child {
@@ -2537,7 +2537,7 @@
   background-color: var(--color-border-secondary);
 }
 .moon-table :where(th) {
-  font-weight: var(--style-font-weight-medium);
+  font-weight: var(--font-weight-medium);
 }
 .moon-table :where(th, td) {
   position: relative;
@@ -2555,21 +2555,21 @@
 }
 .moon-table.moon-table-sm {
   border-radius: var(--component-forms-radius-sm);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-table.moon-table-sm :where(th, td) {
   padding: var(--sizing-padding-400);
 }
 .moon-table.moon-table-lg {
   border-radius: var(--component-forms-radius-lg);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-table.moon-table-lg :where(th, td) {
   padding: var(--sizing-padding-600);
 }
 .moon-table.moon-table-xl {
   border-radius: var(--component-forms-radius-xl);
-  font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
 }
 .moon-table.moon-table-xl :where(th, td) {
   padding: var(--sizing-padding-700);
@@ -2582,7 +2582,7 @@
   padding: 0 var(--sizing-padding-300);
   border-radius: var(--component-tag-radius-xs);
   gap: var(--sizing-gap-200);
-  font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--font-default);
   box-shadow: inset 0 0 0 var(--component-tag-fill-stroke) var(--component-tag-fill-border);
   background-color: var(--component-tag-fill-background);
   color: var(--component-tag-fill-text);
@@ -2597,7 +2597,7 @@
   padding: 0 var(--sizing-padding-200);
   border-radius: var(--component-tag-radius-2xs);
   gap: var(--sizing-gap-100);
-  font: var(--style-font-weight-medium) var(--style-text-2xs-font-size)/var(--style-text-2xs-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-2xs-font-size)/var(--style-text-2xs-line-height) var(--font-default);
 }
 .moon-tag.moon-tag-2xs :where(svg, .moon-icon) {
   width: var(--sizing-height-200);
@@ -2751,7 +2751,7 @@
   transition: box-shadow 150ms ease-in-out, opacity 150ms ease-in-out, background-color 150ms ease-in-out;
   padding: var(--sizing-padding-500);
   border-radius: var(--component-forms-radius-md);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   box-shadow: inset 0 0 0 var(--component-textarea-fill-stroke) var(--component-textarea-fill-border);
   color: var(--component-textarea-fill-text-default);
   background-color: var(--component-textarea-fill-background);
@@ -2794,17 +2794,17 @@
 .moon-textarea.moon-textarea-sm {
   padding: var(--sizing-padding-400);
   border-radius: var(--component-forms-radius-sm);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-textarea.moon-textarea-lg {
   padding: var(--sizing-padding-600);
   border-radius: var(--component-forms-radius-lg);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
 .moon-textarea.moon-textarea-xl {
   padding: var(--sizing-padding-700);
   border-radius: var(--component-forms-radius-xl);
-  font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
 }
 .moon-textarea.moon-textarea-outline {
   box-shadow: inset 0 0 0 var(--component-textarea-outline-stroke) var(--component-textarea-outline-border);
@@ -2834,7 +2834,7 @@
   padding: var(--sizing-padding-400);
   color: var(--component-tooltip-text);
   border-radius: var(--component-tooltip-radius);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   text-align: center;
   white-space: normal;
   transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1) 75ms, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) 75ms;
