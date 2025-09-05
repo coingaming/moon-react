@@ -40,7 +40,8 @@ export const Carousel = ({ children }: { children: React.ReactNode }) => {
       reel.scrollBy({
         top: 0,
         // left: direction === "end" ? -scrollAmount : scrollAmount,
-        left: getScrollAmount(scrollAmount, direction, reel),
+        // left: direction === "left" ? -scrollAmount : scrollAmount,
+        left: getScrollAmount({ scrollAmount, direction, reel }),
 
         behavior: "smooth",
       });
@@ -58,19 +59,22 @@ export const Carousel = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const getScrollAmount = (
-  scrollAmount: number,
-  direction: ScrollDirecions,
-  reel: HTMLDivElement
-) => {
-  const computedDirection = getComputedStyle(reel).direction;
+function getScrollAmount({
+  scrollAmount,
+  direction,
+  reel,
+}: {
+  scrollAmount: number;
+  direction: ScrollDirecions;
+  reel: HTMLDivElement;
+}): number {
+  const isRTL = getComputedStyle(reel).direction === "rtl";
 
-  if (computedDirection === "rtl") {
-    return direction === "end" ? -scrollAmount : scrollAmount;
+  if (isRTL) {
+    return direction === ScrollDirecions.end ? -scrollAmount : scrollAmount;
   }
-
-  return direction === "start" ? scrollAmount : -scrollAmount;
-};
+  return direction === ScrollDirecions.start ? -scrollAmount : scrollAmount;
+}
 
 export const CarouselItem = ({ children }: { children: React.ReactNode }) => {
   return <div className="moon-carousel-item">{children}</div>;
