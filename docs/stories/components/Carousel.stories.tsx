@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Carousel, CarouselItem } from "@heathmont/moon-react";
+import { Carousel, CarouselItem, CarouselControl } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Carousel>;
@@ -13,6 +13,15 @@ const meta: Meta<Type> = {
       ),
     },
   },
+  argTypes: {
+    hasControls: {
+      description: "Has controls or not",
+      control: { type: "boolean" },
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
+  },
   render: ({ ...props }) => {
     const carouselProps = {
       ...props,
@@ -20,6 +29,7 @@ const meta: Meta<Type> = {
     const items = new Array(5).fill("");
     return (
       <Carousel {...carouselProps}>
+        <CarouselControl direction="start" />
         {items.map((_, index) => (
           <CarouselItem key={index}>
             <div className="flex items-center justify-center h-space-160 w-2xs bg-brand-subtle text-brand">
@@ -27,6 +37,7 @@ const meta: Meta<Type> = {
             </div>
           </CarouselItem>
         ))}
+        <CarouselControl direction="end" />
       </Carousel>
     );
   },
@@ -36,4 +47,8 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const CarouselStory: Story = { args: {} };
+export const CarouselStory: Story = {
+  args: {
+    hasControls: false,
+  },
+};
