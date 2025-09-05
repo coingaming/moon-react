@@ -4,8 +4,8 @@ import ArrowLeft from "../assets/icons/ArrowLeftIcon";
 import ArrowRight from "../assets/icons/ArrowRightIcon";
 
 export enum ScrollDirecions {
-  right = "right",
-  left = "left",
+  end = "end",
+  start = "start",
 }
 
 type MoonCarouselContextType = {
@@ -38,7 +38,8 @@ export const Carousel = ({ children }: { children: React.ReactNode }) => {
         item.offsetWidth + parseInt(getComputedStyle(reel).gap || "0", 10);
 
       reel.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
+        top: 0,
+        left: getScrollAmount({ scrollAmount, direction, reel }),
         behavior: "smooth",
       });
     }
@@ -54,6 +55,23 @@ export const Carousel = ({ children }: { children: React.ReactNode }) => {
     </CarouselContext.Provider>
   );
 };
+
+function getScrollAmount({
+  scrollAmount,
+  direction,
+  reel,
+}: {
+  scrollAmount: number;
+  direction: ScrollDirecions;
+  reel: HTMLDivElement;
+}): number {
+  const isRTL = getComputedStyle(reel).direction === "rtl";
+
+  if (isRTL) {
+    return direction === ScrollDirecions.end ? -scrollAmount : scrollAmount;
+  }
+  return direction === ScrollDirecions.start ? -scrollAmount : scrollAmount;
+}
 
 export const CarouselItem = ({ children }: { children: React.ReactNode }) => {
   return <div className="moon-carousel-item">{children}</div>;
@@ -77,7 +95,7 @@ export const CarouselControl = ({
       }}
       {...props}
     >
-      {direction === ScrollDirecions.right ? <ArrowRight /> : <ArrowLeft />}
+      {direction === ScrollDirecions.end ? <ArrowRight /> : <ArrowLeft />}
     </button>
   );
 };
