@@ -22,14 +22,14 @@ const meta: Meta<Type> = {
       },
     },
   },
-  render: ({ ...props }) => {
+  render: ({ hasControls, ...props }) => {
     const carouselProps = {
       ...props,
     };
     const items = new Array(5).fill("");
     return (
       <Carousel {...carouselProps}>
-        <CarouselControl direction="start" />
+        {hasControls && <CarouselControl direction="start" />}
         {items.map((_, index) => (
           <CarouselItem key={index}>
             <div className="flex items-center justify-center h-space-160 w-2xs bg-brand-subtle text-brand">
@@ -37,7 +37,7 @@ const meta: Meta<Type> = {
             </div>
           </CarouselItem>
         ))}
-        <CarouselControl direction="end" />
+        {hasControls && <CarouselControl direction="end" />}
       </Carousel>
     );
   },

@@ -39,10 +39,7 @@ export const Carousel = ({ children }: { children: React.ReactNode }) => {
 
       reel.scrollBy({
         top: 0,
-        // left: direction === "end" ? -scrollAmount : scrollAmount,
-        // left: direction === "left" ? -scrollAmount : scrollAmount,
         left: getScrollAmount({ scrollAmount, direction, reel }),
-
         behavior: "smooth",
       });
     }

@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 1.2.0
+
+### Minor Changes
+
+- add controls functionality [MDS-1983]
+
 ## 1.1.0
 
 ### Minor Changes
