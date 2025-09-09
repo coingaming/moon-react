@@ -1,16 +1,16 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum LinearProgressSizes {
-  "5xs" = "5xs",
-  "4xs" = "4xs",
-  "3xs" = "3xs",
-  "2xs" = "2xs",
-}
+export const LinearProgressSizes = {
+  "5xs": "5xs",
+  "4xs": "4xs",
+  "3xs": "3xs",
+  "2xs": "2xs",
+} as const;
 
 type LinearProgressProps = {
   children?: React.ReactNode;
   className?: string;
-  size?: LinearProgressSizes;
+  size?: keyof typeof LinearProgressSizes;
   value: number;
 };
 

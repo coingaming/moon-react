@@ -2,14 +2,14 @@ import { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 import { Contexts } from "../constants/contexts";
 
-export enum SnackbarVariants {
-  fill = "fill",
-  soft = "soft",
-}
+export const SnackbarVariants = {
+  fill: "fill",
+  soft: "soft",
+} as const;
 
 type SnackbarContextType = {
-  variant: SnackbarVariants;
-  context: Contexts;
+  variant: keyof typeof SnackbarVariants;
+  context: keyof typeof Contexts;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 };
@@ -28,8 +28,8 @@ function useSnackbarContext() {
 
 type SnackbarProps = {
   children: React.ReactNode;
-  variant?: SnackbarVariants;
-  context?: Contexts;
+  variant?: keyof typeof SnackbarVariants;
+  context?: keyof typeof Contexts;
 };
 
 export const Snackbar = ({

@@ -1,22 +1,22 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum SelectSizes {
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-  xl = "xl",
-}
+export const SelectSizes = {
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+} as const;
 
-export enum SelectVariants {
-  fill = "fill",
-  outline = "outline",
-}
+export const SelectVariants = {
+  fill: "fill",
+  outline: "outline",
+} as const;
 
 type SelectType = Omit<React.ComponentProps<"select">, "size">;
 
 type SelectProps = SelectType & {
-  size?: SelectSizes;
-  variant?: SelectVariants;
+  size?: keyof typeof SelectSizes;
+  variant?: keyof typeof SelectVariants;
   error?: boolean;
   children: React.ReactNode;
   className?: string;

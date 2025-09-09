@@ -3,18 +3,18 @@ import mergeClasses from "../helpers/mergeClasses";
 import ArrowLeft from "../assets/icons/ArrowLeftIcon";
 import ArrowRight from "../assets/icons/ArrowRightIcon";
 
-export enum ScrollDirecions {
-  end = "end",
-  start = "start",
-}
+export const ScrollDirections = {
+  end: "end",
+  start: "start",
+} as const;
 
 type MoonCarouselContextType = {
-  scrollBy: (direction: ScrollDirecions) => void;
+  scrollBy: (direction: keyof typeof ScrollDirections) => void;
   reelRef: React.RefObject<HTMLDivElement | null> | null;
 };
 
 const CarouselContext = createContext<MoonCarouselContextType>({
-  scrollBy: (_direction: ScrollDirecions) => null,
+  scrollBy: (_direction: keyof typeof ScrollDirections) => null,
   reelRef: null,
 });
 
@@ -27,7 +27,7 @@ export function useCarouselContext() {
 export const Carousel = ({ children }: { children: React.ReactNode }) => {
   const reelRef = useRef<HTMLDivElement>(null);
 
-  const scrollBy = (direction: ScrollDirecions) => {
+  const scrollBy = (direction: keyof typeof ScrollDirections) => {
     if (!reelRef.current) return;
 
     const reel = reelRef.current;
@@ -62,15 +62,15 @@ function getScrollAmount({
   reel,
 }: {
   scrollAmount: number;
-  direction: ScrollDirecions;
+  direction: keyof typeof ScrollDirections;
   reel: HTMLDivElement;
 }): number {
   const isRTL = getComputedStyle(reel).direction === "rtl";
 
   if (isRTL) {
-    return direction === ScrollDirecions.end ? -scrollAmount : scrollAmount;
+    return direction === ScrollDirections.end ? -scrollAmount : scrollAmount;
   }
-  return direction === ScrollDirecions.start ? -scrollAmount : scrollAmount;
+  return direction === ScrollDirections.start ? -scrollAmount : scrollAmount;
 }
 
 export const CarouselItem = ({ children }: { children: React.ReactNode }) => {
@@ -82,7 +82,7 @@ export const CarouselControl = ({
   direction,
   ...props
 }: React.ComponentProps<"button"> & {
-  direction: ScrollDirecions;
+  direction: keyof typeof ScrollDirections;
 }) => {
   const { scrollBy } = useCarouselContext();
 
@@ -95,7 +95,7 @@ export const CarouselControl = ({
       }}
       {...props}
     >
-      {direction === ScrollDirecions.end ? <ArrowRight /> : <ArrowLeft />}
+      {direction === ScrollDirections.end ? <ArrowRight /> : <ArrowLeft />}
     </button>
   );
 };

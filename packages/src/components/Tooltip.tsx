@@ -1,11 +1,11 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum TooltipPositions {
-  top = "top",
-  bottom = "bottom",
-  start = "start",
-  end = "end",
-}
+export const TooltipPositions = {
+  top: "top",
+  bottom: "bottom",
+  start: "start",
+  end: "end",
+} as const;
 
 type TooltipChildren = {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ type TooltipChildren = {
 
 type TooltipProps = {
   children: React.ReactNode;
-  position?: TooltipPositions;
+  position?: keyof typeof TooltipPositions;
   pointer?: boolean;
 };
 

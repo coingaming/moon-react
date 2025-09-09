@@ -1,15 +1,15 @@
 import { useContext, createContext, ReactNode } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum SegmentedControlSizes {
-  sm = "sm",
-  md = "md",
-}
+export const SegmentedControlSizes = {
+  sm: "sm",
+  md: "md",
+} as const;
 
 type SegmentedControlContextType = {
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
-  size: SegmentedControlSizes;
+  size: keyof typeof SegmentedControlSizes;
 };
 
 const SegmentedControlContext =
@@ -27,7 +27,7 @@ function useSegmentedControlContext() {
 
 type SegmentedControlProps = {
   children: ReactNode;
-  size?: SegmentedControlSizes;
+  size?: keyof typeof SegmentedControlSizes;
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
   className?: string;

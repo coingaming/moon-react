@@ -1,23 +1,23 @@
 import UserIcon from "../assets/icons/UserIcon";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum AvatarSizes {
-  xs = "xs",
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-  xl = "xl",
-  "2xl" = "2xl",
-}
+export const AvatarSizes = {
+  xs: "xs",
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+  "2xl": "2xl",
+} as const;
 
-export enum AvatarVariants {
-  fill = "fill",
-  soft = "soft",
-}
+export const AvatarVariants = {
+  fill: "fill",
+  soft: "soft",
+} as const;
 
 type Props = React.ComponentProps<"div"> & {
-  size?: AvatarSizes;
-  variant?: AvatarVariants;
+  size?: keyof typeof AvatarSizes;
+  variant?: keyof typeof AvatarVariants;
   imgSrc?: string;
   className?: string;
 };

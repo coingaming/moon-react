@@ -1,22 +1,22 @@
 import { Contexts } from "../constants/contexts";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum TagSizes {
-  "2xs" = "2xs",
-  xs = "xs",
-}
+export const TagSizes = {
+  "2xs": "2xs",
+  xs: "xs",
+} as const;
 
-export enum TagVariants {
-  fill = "fill",
-  outline = "outline",
-  soft = "soft",
-  ghost = "ghost",
-}
+export const TagVariants = {
+  fill: "fill",
+  outline: "outline",
+  soft: "soft",
+  ghost: "ghost",
+} as const;
 
 type TagProps = React.ComponentProps<"div"> & {
-  size?: TagSizes;
-  variant?: TagVariants;
-  context?: Contexts;
+  size?: keyof typeof TagSizes;
+  variant?: keyof typeof TagVariants;
+  context?: keyof typeof Contexts;
   className?: string;
   children: React.ReactNode;
 };

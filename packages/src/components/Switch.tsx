@@ -1,17 +1,17 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum SwitchSizes {
-  "2xs" = "2xs",
-  xs = "xs",
-  sm = "sm",
-}
+export const SwitchSizes = {
+  "2xs": "2xs",
+  xs: "xs",
+  sm: "sm",
+} as const;
 
 type SwitchProps = Omit<React.ComponentProps<"input">, "size"> & {
   checked: boolean;
   onChange: () => void;
   disabled?: boolean;
   label?: string;
-  size?: SwitchSizes;
+  size?: keyof typeof SwitchSizes;
   className?: string;
 };
 

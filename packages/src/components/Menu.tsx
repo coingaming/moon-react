@@ -1,10 +1,10 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum MenuSizes {
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-}
+export const MenuSizes = {
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+} as const;
 
 type BaseProps = {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ type BaseProps = {
 };
 
 type MenuProps = BaseProps & {
-  size?: MenuSizes;
+  size?: keyof typeof MenuSizes;
 };
 
 export const Menu = ({

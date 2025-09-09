@@ -1,14 +1,14 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum LoaderSizes {
-  "2xs" = "2xs",
-  xs = "xs",
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-}
+export const LoaderSizes = {
+  "2xs": "2xs",
+  xs: "xs",
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+} as const;
 
-type LoaderProps = { size?: LoaderSizes; className?: string };
+type LoaderProps = { size?: keyof typeof LoaderSizes; className?: string };
 
 export const Loader = ({ size = LoaderSizes.md, className }: LoaderProps) => (
   <div

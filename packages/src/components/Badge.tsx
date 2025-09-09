@@ -1,17 +1,17 @@
 import { Contexts } from "../constants/contexts";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum BadgeVariants {
-  fill = "fill",
-  soft = "soft",
-  outline = "outline",
-}
+export const BadgeVariants = {
+  fill: "fill",
+  soft: "soft",
+  outline: "outline",
+} as const;
 
 type BadgeProps = {
   children?: React.ReactNode;
   className?: string;
-  variant?: BadgeVariants;
-  context?: Contexts;
+  variant?: keyof typeof BadgeVariants;
+  context?: keyof typeof Contexts;
 };
 
 export const Badge = ({

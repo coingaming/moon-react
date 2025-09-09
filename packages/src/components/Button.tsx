@@ -1,25 +1,25 @@
 import { Contexts } from "../constants/contexts";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum ButtonSizes {
-  xs = "xs",
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-  xl = "xl",
-}
+export const ButtonSizes = {
+  xs: "xs",
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+} as const;
 
-export enum ButtonVariants {
-  soft = "soft",
-  outline = "outline",
-  fill = "fill",
-  ghost = "ghost",
-}
+export const ButtonVariants = {
+  soft: "soft",
+  outline: "outline",
+  fill: "fill",
+  ghost: "ghost",
+} as const;
 
 type Props = React.ComponentProps<"button"> & {
-  variant?: ButtonVariants;
-  size?: ButtonSizes;
-  context?: Contexts;
+  variant?: keyof typeof ButtonVariants;
+  size?: keyof typeof ButtonSizes;
+  context?: keyof typeof Contexts;
   className?: string;
 };
 

@@ -1,19 +1,19 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum ChipSizes {
-  sm = "sm",
-  md = "md",
-}
+export const ChipSizes = {
+  sm: "sm",
+  md: "md",
+} as const;
 
-export enum ChipVariants {
-  fill = "fill",
-  soft = "soft",
-  outline = "outline",
-}
+export const ChipVariants = {
+  fill: "fill",
+  soft: "soft",
+  outline: "outline",
+} as const;
 
 type ChipProps = {
-  size?: ChipSizes;
-  variant?: ChipVariants;
+  size?: keyof typeof ChipSizes;
+  variant?: keyof typeof ChipVariants;
   selected?: boolean;
   children: React.ReactNode;
 };
