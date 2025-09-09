@@ -1,34 +1,29 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes, Variants } from "../types";
 
-export const ChipSizes = {
-  sm: "sm",
-  md: "md",
-} as const;
+export type ChipSizes = Extract<Sizes, "sm" | "md">;
 
-export const ChipVariants = {
-  fill: "fill",
-  soft: "soft",
-  outline: "outline",
-} as const;
+export type ChipVariants = Extract<Variants, "fill" | "soft" | "outline">;
 
-type ChipProps = {
-  size?: keyof typeof ChipSizes;
-  variant?: keyof typeof ChipVariants;
+export type ChipProps = {
+  size?: ChipSizes;
+  variant?: ChipVariants;
   selected?: boolean;
   children: React.ReactNode;
 };
 
 export const Chip = ({
-  size = ChipSizes.md,
+  size = "md",
   selected = false,
-  variant = ChipVariants.fill,
+  variant = "fill",
   children,
 }: ChipProps) => (
   <button
     className={mergeClasses(
       "moon-chip",
-      size !== ChipSizes.md && `moon-chip-${size}`,
-      variant !== ChipVariants.fill && `moon-chip-${variant}`,
+      size !== "md" && `moon-chip-${size}`,
+      variant !== "fill" && `moon-chip-${variant}`,
       selected && `moon-chip-selected`
     )}
   >

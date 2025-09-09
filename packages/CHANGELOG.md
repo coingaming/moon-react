@@ -1,5 +1,17 @@
 # @heathmont/moon-react
 
+## 1.4.0
+
+### Minor Changes
+
+- feat: rebuild type definitions
+
+## 1.3.1
+
+### Patch Changes
+
+- fix: type build issue
+
 ## 1.3.0
 
 ### Minor Changes

@@ -1,29 +1,23 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const MenuSizes = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-} as const;
+export type MenuSizes = Extract<Sizes, "sm" | "md" | "lg">;
 
-type BaseProps = {
+export type BaseProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-type MenuProps = BaseProps & {
-  size?: keyof typeof MenuSizes;
+export type MenuProps = BaseProps & {
+  size?: MenuSizes;
 };
 
-export const Menu = ({
-  size = MenuSizes.md,
-  children,
-  className,
-}: MenuProps) => (
+export const Menu = ({ size = "md", children, className }: MenuProps) => (
   <ul
     className={mergeClasses(
       "moon-menu",
-      size !== MenuSizes.md && `moon-menu-${size}`,
+      size !== "md" && `moon-menu-${size}`,
       className
     )}
   >

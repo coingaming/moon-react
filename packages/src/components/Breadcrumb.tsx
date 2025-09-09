@@ -1,18 +1,18 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-type BreadCrumbContext = {
+export type BreadCrumbContext = {
   currentPage: number;
   setCurrentPage: (page: number) => void;
 };
 
-type BreadcrumbProps = {
+export type BreadcrumbProps = {
   children: React.ReactNode;
   className?: string;
   defaultCurrentPage?: number;
 };
 
-type BreadcrumpItemProps = React.ComponentProps<"li"> & {
+export type BreadcrumpItemProps = React.ComponentProps<"li"> & {
   index: number;
 };
 

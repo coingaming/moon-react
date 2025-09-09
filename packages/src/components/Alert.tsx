@@ -1,39 +1,36 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
 import Close from "../assets/icons/CloseIcon";
-import { Contexts } from "../constants/contexts";
+import type { Variants, Contexts } from "../types";
 
-export const AlertVariants = {
-  fill: "fill",
-  soft: "soft",
-  outline: "outline",
-} as const;
+export type AlertVariants = Extract<Variants, "fill" | "soft" | "outline">;
 
-type Props = {
+export type AlertProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-type AlertRootProps = React.ComponentProps<"div"> &
-  Props & {
-    variant?: keyof typeof AlertVariants;
-    context?: keyof typeof Contexts;
+export type AlertRootProps = React.ComponentProps<"div"> &
+  AlertProps & {
+    variant?: AlertVariants;
+    context?: Contexts;
   };
 
-type ActionProps = Props & {
+export type ActionProps = AlertProps & {
   onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
 export const Alert = ({
-  variant = AlertVariants.fill,
-  context = Contexts.brand,
+  variant = "fill",
+  context = "brand",
   children,
   className,
 }: AlertRootProps) => (
   <div
     className={mergeClasses(
       "moon-alert",
-      variant !== AlertVariants.fill && `moon-alert-${variant}`,
-      context !== Contexts.brand && `moon-alert-${context}`,
+      variant !== "fill" && `moon-alert-${variant}`,
+      context !== "brand" && `moon-alert-${context}`,
       className
     )}
   >
@@ -41,7 +38,7 @@ export const Alert = ({
   </div>
 );
 
-export const AlertTitle = ({ children, className }: Props) => (
+export const AlertTitle = ({ children, className }: AlertProps) => (
   <span className={mergeClasses("moon-alert-title", className)}>
     {children}
   </span>
@@ -56,7 +53,7 @@ export const AlertDismiss = ({ children, onClick, className }: ActionProps) => (
   </p>
 );
 
-export const AlertContent = ({ children, className }: Props) => (
+export const AlertContent = ({ children, className }: AlertProps) => (
   <div className={mergeClasses("moon-alert-content", className)}>
     {children}
   </div>

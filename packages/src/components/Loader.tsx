@@ -1,20 +1,18 @@
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const LoaderSizes = {
-  "2xs": "2xs",
-  xs: "xs",
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-} as const;
+export type LoaderSizes = Extract<Sizes, "2xs" | "xs" | "sm" | "md" | "lg">;
 
-type LoaderProps = { size?: keyof typeof LoaderSizes; className?: string };
+export type LoaderProps = {
+  size?: LoaderSizes;
+  className?: string;
+};
 
-export const Loader = ({ size = LoaderSizes.md, className }: LoaderProps) => (
+export const Loader = ({ size = "md", className }: LoaderProps) => (
   <div
     className={mergeClasses(
       "moon-loader",
-      size !== LoaderSizes.md && `moon-loader-${size}`,
+      size !== "md" && `moon-loader-${size}`,
       className
     )}
   />

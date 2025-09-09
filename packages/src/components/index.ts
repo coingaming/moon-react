@@ -1,4 +1,4 @@
-export * from "../constants/contexts";
+export * from "../types";
 export * from "./Accordion";
 export * from "./Alert";
 export * from "./Authenticator";

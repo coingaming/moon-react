@@ -1,42 +1,32 @@
-import { Contexts } from "../constants/contexts";
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes, Variants, Contexts } from "../types";
 
-export const ButtonSizes = {
-  xs: "xs",
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-} as const;
+export type ButtonSizes = Extract<Sizes, "xs" | "sm" | "md" | "lg" | "xl">;
 
-export const ButtonVariants = {
-  soft: "soft",
-  outline: "outline",
-  fill: "fill",
-  ghost: "ghost",
-} as const;
+export type ButtonVariants = Variants;
 
-type Props = React.ComponentProps<"button"> & {
-  variant?: keyof typeof ButtonVariants;
-  size?: keyof typeof ButtonSizes;
-  context?: keyof typeof Contexts;
+export type ButtonProps = React.ComponentProps<"button"> & {
+  variant?: ButtonVariants;
+  size?: ButtonSizes;
+  context?: Contexts;
   className?: string;
 };
 
 export const Button = ({
   className,
-  variant = ButtonVariants.fill,
-  size = ButtonSizes.md,
-  context = Contexts.brand,
+  variant = "fill",
+  size = "md",
+  context = "brand",
   ...props
-}: Props) => (
+}: ButtonProps) => (
   <button
     data-slot="button"
     className={mergeClasses(
       "moon-button",
-      variant !== ButtonVariants.fill && `moon-button-${variant}`,
-      size !== ButtonSizes.md && `moon-button-${size}`,
-      context !== Contexts.brand && `moon-button-${context}`,
+      variant !== "fill" && `moon-button-${variant}`,
+      size !== "md" && `moon-button-${size}`,
+      context !== "brand" && `moon-button-${context}`,
       className
     )}
     {...props}

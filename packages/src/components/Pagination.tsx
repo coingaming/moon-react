@@ -1,27 +1,27 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import ArrowLeft from "../assets/icons/ArrowLeftIcon";
 import ArrowRight from "../assets/icons/ArrowRightIcon";
 import mergeClasses from "../helpers/mergeClasses";
 
-type PaginationContextType = {
+export type PaginationContextType = {
   page: number;
   setPage: (page: number | ((page: number) => number)) => void;
   length: number;
 };
 
-type PaginationProps = {
+export type PaginationProps = {
   children: React.ReactNode;
   className?: string;
   defaultPage?: number;
   length: number;
 };
 
-type PaginationItemProps = React.ComponentProps<"li"> & {
+export type PaginationItemProps = React.ComponentProps<"li"> & {
   index: number;
   isActive?: boolean;
 };
 
-type PaginationArrowsProps = React.ComponentProps<"span">;
+export type PaginationArrowsProps = React.ComponentProps<"span">;
 
 const PaginationContext = createContext<PaginationContextType>({
   page: 0,

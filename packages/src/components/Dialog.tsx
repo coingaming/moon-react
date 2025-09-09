@@ -1,9 +1,9 @@
-import { createContext, useContext, useRef } from "react";
+import React, { createContext, useContext, useRef } from "react";
 import { createPortal } from "react-dom";
 import Close from "../assets/icons/CloseIcon";
 import mergeClasses from "../helpers/mergeClasses";
 
-type DialogContextType = {
+export type DialogContextType = {
   dialogRef: React.RefObject<HTMLDialogElement | null> | null;
 };
 
@@ -13,7 +13,7 @@ const DEFAULT_DIALOG_CONTEXT = {
 
 const DialogContext = createContext<DialogContextType>(DEFAULT_DIALOG_CONTEXT);
 
-type DialogProps = {
+export type DialogProps = {
   children: React.ReactNode;
 };
 

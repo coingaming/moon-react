@@ -1,21 +1,21 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-type DropdownContextType = {
+export type DropdownContextType = {
   open: boolean;
   setOpen: (open: boolean) => void;
 };
 
-type DropdownProps = {
+export type DropdownProps = {
   children: React.ReactNode;
   defaultOpen?: boolean;
 };
 
-type DropdownTriggerProps = {
+export type DropdownTriggerProps = {
   children: React.ReactNode;
 };
 
-type DropdownContentProps = {
+export type DropdownContentProps = {
   children: React.ReactNode;
   className?: string;
 };

@@ -1,9 +1,9 @@
-import { createContext, useContext, useRef, ReactNode } from "react";
+import React, { createContext, useContext, useRef, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import mergeClasses from "../helpers/mergeClasses";
 import Close from "../assets/icons/CloseIcon";
 
-type DrawerContextType = {
+export type DrawerContextType = {
   drawerRef: React.RefObject<HTMLDialogElement | null> | null;
 };
 
@@ -17,7 +17,7 @@ export function useDrawerContext() {
   return ctx;
 }
 
-type DrawerProps = {
+export type DrawerProps = {
   children: ReactNode;
 };
 
@@ -30,7 +30,7 @@ export const Drawer = ({ children }: DrawerProps) => {
   );
 };
 
-type DrawerTriggerProps = {
+export type DrawerTriggerProps = {
   children: ReactNode;
   className?: string;
 };
@@ -47,12 +47,12 @@ export const DrawerTrigger = ({ children, className }: DrawerTriggerProps) => {
   );
 };
 
-type DrawerContentProps = {
+export type DrawerContentProps = {
   children: ReactNode;
   className?: string;
 };
 
-type DrawerTitleProps = {
+export type DrawerTitleProps = {
   children: ReactNode;
   className?: string;
 };
@@ -75,7 +75,7 @@ export const DrawerContent = ({ children, className }: DrawerContentProps) => {
 };
 DrawerContent.displayName = "DrawerContent";
 
-type DrawerCloseProps = {
+export type DrawerCloseProps = {
   onClick?: () => void;
   className?: string;
   children?: ReactNode;

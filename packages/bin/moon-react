@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+const { spawn } = require('child_process');
+const path = require('path');
+
+// Use tsx to run the TypeScript CLI file
+const cliPath = path.join(__dirname, '..', 'cli', 'index.ts');
+const child = spawn('npx', ['tsx', cliPath, ...process.argv.slice(2)], {
+  stdio: 'inherit'
+});
+
+child.on('exit', (code) => {
+  process.exit(code);
+});

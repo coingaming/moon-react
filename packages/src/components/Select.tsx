@@ -1,22 +1,16 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes, Variants } from "../types";
 
-export const SelectSizes = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-} as const;
+export type SelectSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
-export const SelectVariants = {
-  fill: "fill",
-  outline: "outline",
-} as const;
+export type SelectVariants = Extract<Variants, "fill" | "outline">;
 
-type SelectType = Omit<React.ComponentProps<"select">, "size">;
+export type SelectType = Omit<React.ComponentProps<"select">, "size">;
 
-type SelectProps = SelectType & {
-  size?: keyof typeof SelectSizes;
-  variant?: keyof typeof SelectVariants;
+export type SelectProps = SelectType & {
+  size?: SelectSizes;
+  variant?: SelectVariants;
   error?: boolean;
   children: React.ReactNode;
   className?: string;
@@ -24,8 +18,8 @@ type SelectProps = SelectType & {
 
 export const Select = ({
   children,
-  size = SelectSizes.md,
-  variant = SelectVariants.fill,
+  size = "md",
+  variant = "fill",
   error = false,
   className,
   ...props
@@ -34,8 +28,8 @@ export const Select = ({
     <select
       className={mergeClasses(
         "moon-select",
-        size !== SelectSizes.md && `moon-select-${size}`,
-        variant !== SelectVariants.fill && `moon-select-${variant}`,
+        size !== "md" && `moon-select-${size}`,
+        variant !== "fill" && `moon-select-${variant}`,
         error && "moon-select-error",
         className
       )}
@@ -46,7 +40,7 @@ export const Select = ({
   );
 };
 
-type SelectItemProps = React.ComponentProps<"option"> & {
+export type SelectItemProps = React.ComponentProps<"option"> & {
   children: React.ReactNode;
 };
 
@@ -54,7 +48,7 @@ export const SelectItem = ({ children, ...props }: SelectItemProps) => (
   <option {...props}>{children}</option>
 );
 
-type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
+export type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
   children: React.ReactNode;
   label: string;
   disabled?: boolean;

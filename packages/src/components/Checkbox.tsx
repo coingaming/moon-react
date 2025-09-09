@@ -1,6 +1,7 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-type CheckboxProps = Omit<React.ComponentProps<"input">, "type"> & {
+export type CheckboxProps = Omit<React.ComponentProps<"input">, "type"> & {
   label?: string;
 };
 

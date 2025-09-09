@@ -16,10 +16,10 @@ type Deps = {
   internalDeps: InternalDeps[];
 };
 
-const constantsHelper = {
-  name: "contexts",
-  srcPath: path.resolve(path.join(__dirname, "constants")),
-  destPath: "src/constants",
+const typesHelper = {
+  name: "index",
+  srcPath: path.resolve(path.join(__dirname, "types")),
+  destPath: "src/types",
 };
 
 const mergeClassesHelper = {
@@ -44,6 +44,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
   avatar: {
     internalDeps: [
       mergeClassesHelper,
+      typesHelper,
       {
         ...iconsData,
         name: "UserIcon",
@@ -51,12 +52,12 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   accordion: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   alert: {
     internalDeps: [
       mergeClassesHelper,
-      constantsHelper,
+      typesHelper,
       {
         ...iconsData,
         name: "CloseIcon",
@@ -64,19 +65,21 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   authenticator: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   badge: {
-    internalDeps: [mergeClassesHelper, constantsHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   breadcrumb: {
     internalDeps: [mergeClassesHelper],
   },
   button: {
-    internalDeps: [mergeClassesHelper, constantsHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   carousel: {
     internalDeps: [
+      mergeClassesHelper,
+      typesHelper,
       {
         ...componentsData,
         name: "button",
@@ -91,7 +94,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
       },
     ],
   },
-  select: { internalDeps: [mergeClassesHelper] },
+  select: { internalDeps: [mergeClassesHelper, typesHelper] },
   "circular-progress": {
     internalDeps: [mergeClassesHelper],
   },
@@ -102,12 +105,12 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [mergeClassesHelper],
   },
   "linear-progress": {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   "icon-button": {
     internalDeps: [
       mergeClassesHelper,
-      constantsHelper,
+      typesHelper,
       {
         ...componentsData,
         name: "button",
@@ -115,19 +118,19 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   loader: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   placeholder: {
     internalDeps: [mergeClassesHelper],
   },
   tag: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   input: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   table: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   pagination: {
     internalDeps: [
@@ -143,17 +146,17 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   switch: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   textarea: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   chip: { internalDeps: [mergeClassesHelper] },
   tooltip: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   snackbar: {
-    internalDeps: [mergeClassesHelper, constantsHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   "bottom-sheet": {
     internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
@@ -165,7 +168,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
   },
   list: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
   radio: {
     internalDeps: [mergeClassesHelper],
@@ -174,9 +177,9 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [mergeClassesHelper],
   },
   menu: {
-    internalDeps: [mergeClassesHelper],
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
-  tabs: {
-    internalDeps: [mergeClassesHelper],
+  "tab-list": {
+    internalDeps: [mergeClassesHelper, typesHelper],
   },
 };

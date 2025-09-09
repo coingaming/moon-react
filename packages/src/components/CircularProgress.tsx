@@ -1,22 +1,19 @@
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const CircularProgressSizes = {
-  xs: "xs",
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-  "2xl": "2xl",
-} as const;
+export type CircularProgressSizes = Extract<
+  Sizes,
+  "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
+>;
 
-type CircularProgressType = {
-  size?: keyof typeof CircularProgressSizes;
+export type CircularProgressType = {
+  size?: CircularProgressSizes;
   value: number;
   className?: string;
 };
 
 export const CircularProgress = ({
-  size = CircularProgressSizes.md,
+  size = "md",
   className,
   value,
 }: CircularProgressType) => (
@@ -24,7 +21,7 @@ export const CircularProgress = ({
     data-value={value}
     className={mergeClasses(
       "moon-circular-progress",
-      size !== CircularProgressSizes.md && `moon-circular-progress-${size}`,
+      size !== "md" && `moon-circular-progress-${size}`,
       className
     )}
   />

@@ -1,15 +1,13 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const TabListSizes = {
-  sm: "sm",
-  md: "md",
-} as const;
+export type TabListSizes = Extract<Sizes, "sm" | "md">;
 
-type TabListContextType = {
+export type TabListContextType = {
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
-  size: keyof typeof TabListSizes;
+  size: TabListSizes;
 };
 
 const TabListContext = createContext<TabListContextType | null>(null);
@@ -22,20 +20,20 @@ function useTabListContext() {
   return context;
 }
 
-type TabListProps = {
+export type TabListProps = {
   children: React.ReactNode;
-  size?: keyof typeof TabListSizes;
+  size?: TabListSizes;
   defaultActiveIndex?: number;
   className?: string;
 };
 
-type TabProps = React.ComponentProps<"button"> & {
+export type TabProps = React.ComponentProps<"button"> & {
   children: React.ReactNode;
   className?: string;
   index: number;
 };
 
-type TabPanelProps = React.ComponentProps<"div"> & {
+export type TabPanelProps = React.ComponentProps<"div"> & {
   children: React.ReactNode;
   className?: string;
   index: number;
@@ -43,7 +41,7 @@ type TabPanelProps = React.ComponentProps<"div"> & {
 
 export const TabList = ({
   children,
-  size = TabListSizes.md,
+  size = "md",
   defaultActiveIndex = 0,
   className,
 }: TabListProps) => {
@@ -55,7 +53,7 @@ export const TabList = ({
         role="tablist"
         className={mergeClasses(
           "moon-tab-list",
-          size !== TabListSizes.md && `moon-tab-list-${size}`,
+          size !== "md" && `moon-tab-list-${size}`,
           className
         )}
       >

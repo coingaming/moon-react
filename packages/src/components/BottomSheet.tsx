@@ -1,17 +1,17 @@
-import { createContext, useContext, useRef } from "react";
+import React, { createContext, useContext, useRef } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 import Close from "../assets/icons/CloseIcon";
 
-type BottomSheetContextType = {
+export type BottomSheetContextType = {
   bottomSheetRef: React.RefObject<HTMLDialogElement | null> | null;
 };
 
-type BottomSheetProps = {
+export type BottomSheetProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-type HandleProps = {
+export type HandleProps = {
   className?: string;
 };
 

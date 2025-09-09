@@ -1,22 +1,14 @@
-import { useState, ReactNode } from "react";
+import React, { useState, ReactNode } from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes, Variants } from "../types";
 
-export const AccordionSizes = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-} as const;
+export type AccordionSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
-export const AccordionVariants = {
-  fill: "fill",
-  ghost: "ghost",
-  outline: "outline",
-} as const;
+export type AccordionVariants = Extract<Variants, "fill" | "ghost" | "outline">;
 
-type Props = {
-  size?: keyof typeof AccordionSizes;
-  variant?: keyof typeof AccordionVariants;
+export type AccordionProps = {
+  size?: AccordionSizes;
+  variant?: AccordionVariants;
   arrow?: boolean;
   initiallyOpen?: boolean;
   className?: string;
@@ -24,16 +16,16 @@ type Props = {
 };
 
 export const Accordion = ({
-  size = AccordionSizes.md,
-  variant = AccordionVariants.fill,
+  size = "md",
+  variant = "fill",
   className,
   children,
-}: Props) => (
+}: AccordionProps) => (
   <div
     className={mergeClasses(
       "moon-accordion",
-      size !== AccordionSizes.md && `moon-accordion-${size}`,
-      variant !== AccordionVariants.fill && `moon-accordion-${variant}`,
+      size !== "md" && `moon-accordion-${size}`,
+      variant !== "fill" && `moon-accordion-${variant}`,
       className
     )}
   >
@@ -45,7 +37,7 @@ export const AccordionItem = ({
   arrow = true,
   initiallyOpen = false,
   children,
-}: Props) => {
+}: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
 
   return (

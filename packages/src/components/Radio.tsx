@@ -1,6 +1,7 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-type RadioProps = Omit<React.ComponentProps<"input">, "type"> & {
+export type RadioProps = Omit<React.ComponentProps<"input">, "type"> & {
   label?: string;
 };
 

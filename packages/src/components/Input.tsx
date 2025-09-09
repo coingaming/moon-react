@@ -1,20 +1,14 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes, Variants } from "../types";
 
-export const InputSizes = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-} as const;
+export type InputSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
-export const InputVariants = {
-  fill: "fill",
-  outline: "outline",
-} as const;
+export type InputVariants = Extract<Variants, "fill" | "outline">;
 
-type InputProps = Omit<React.ComponentProps<"input">, "size"> & {
-  size?: keyof typeof InputSizes;
-  variant?: keyof typeof InputVariants;
+export type InputProps = Omit<React.ComponentProps<"input">, "size"> & {
+  size?: InputSizes;
+  variant?: InputVariants;
   error?: boolean;
 };
 
@@ -22,8 +16,8 @@ export const Input = ({
   className,
   type,
   error = false,
-  size = InputSizes.md,
-  variant = InputVariants.fill,
+  size = "md",
+  variant = "fill",
   ...props
 }: InputProps) => (
   <input
@@ -31,8 +25,8 @@ export const Input = ({
     data-slot="input"
     className={mergeClasses(
       "moon-input",
-      size !== InputSizes.md && `moon-input-${size}`,
-      variant !== InputVariants.fill && `moon-input-${variant}`,
+      size !== "md" && `moon-input-${size}`,
+      variant !== "fill" && `moon-input-${variant}`,
       error && "moon-input-error",
       className
     )}

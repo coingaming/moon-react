@@ -1,15 +1,13 @@
-import { useContext, createContext, ReactNode } from "react";
+import React, { useContext, createContext, ReactNode } from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const SegmentedControlSizes = {
-  sm: "sm",
-  md: "md",
-} as const;
+export type SegmentedControlSizes = Extract<Sizes, "sm" | "md">;
 
-type SegmentedControlContextType = {
+export type SegmentedControlContextType = {
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
-  size: keyof typeof SegmentedControlSizes;
+  size: SegmentedControlSizes;
 };
 
 const SegmentedControlContext =
@@ -19,21 +17,21 @@ function useSegmentedControlContext() {
   const context = useContext(SegmentedControlContext);
   if (!context) {
     throw new Error(
-      "SegmentedControl components must be used within <Tabs> wrapper"
+      "SegmentedControl components must be used within <TabList> wrapper"
     );
   }
   return context;
 }
 
-type SegmentedControlProps = {
+export type SegmentedControlProps = {
   children: ReactNode;
-  size?: keyof typeof SegmentedControlSizes;
+  size?: SegmentedControlSizes;
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
   className?: string;
 };
 
-type SegmentProps = React.ComponentProps<"button"> & {
+export type SegmentProps = React.ComponentProps<"button"> & {
   children: ReactNode;
   className?: string;
   index: number;
@@ -41,7 +39,7 @@ type SegmentProps = React.ComponentProps<"button"> & {
 
 export const SegmentedControl = ({
   children,
-  size = SegmentedControlSizes.md,
+  size = "md",
   activeIndex,
   setActiveIndex,
   className,
@@ -53,7 +51,7 @@ export const SegmentedControl = ({
       role="tablist"
       className={mergeClasses(
         "moon-segmented-control",
-        size !== SegmentedControlSizes.md && `moon-segmented-control-${size}`,
+        size !== "md" && `moon-segmented-control-${size}`,
         className
       )}
     >

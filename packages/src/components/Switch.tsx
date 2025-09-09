@@ -1,23 +1,21 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const SwitchSizes = {
-  "2xs": "2xs",
-  xs: "xs",
-  sm: "sm",
-} as const;
+export type SwitchSizes = Extract<Sizes, "2xs" | "xs" | "sm">;
 
-type SwitchProps = Omit<React.ComponentProps<"input">, "size"> & {
+export type SwitchProps = Omit<React.ComponentProps<"input">, "size"> & {
   checked: boolean;
   onChange: () => void;
   disabled?: boolean;
   label?: string;
-  size?: keyof typeof SwitchSizes;
+  size?: SwitchSizes;
   className?: string;
 };
 
 export const Switch = ({
   onChange,
-  size = SwitchSizes.sm,
+  size = "sm",
   label,
   className,
   ...props
@@ -29,7 +27,7 @@ export const Switch = ({
       onChange={() => onChange()}
       className={mergeClasses(
         "moon-switch",
-        size !== SwitchSizes.sm && `moon-switch-${size}`,
+        size !== "sm" && `moon-switch-${size}`,
         className
       )}
       {...props}

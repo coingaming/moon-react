@@ -1,32 +1,29 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Positions } from "../types";
 
-export const TooltipPositions = {
-  top: "top",
-  bottom: "bottom",
-  start: "start",
-  end: "end",
-} as const;
+export type TooltipPositions = Positions;
 
-type TooltipChildren = {
+export type TooltipChildren = {
   children: React.ReactNode;
   className?: string;
 };
 
-type TooltipProps = {
+export type TooltipProps = {
   children: React.ReactNode;
-  position?: keyof typeof TooltipPositions;
+  position?: TooltipPositions;
   pointer?: boolean;
 };
 
 export const Tooltip = ({
   children,
-  position = TooltipPositions.top,
+  position = "top",
   pointer = false,
 }: TooltipProps) => (
   <div
     className={mergeClasses(
       "moon-tooltip",
-      `moon-tooltip-${position}`,
+      position !== "top" && `moon-tooltip-${position}`,
       pointer && "moon-tooltip-pointer"
     )}
   >

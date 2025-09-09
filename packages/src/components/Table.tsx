@@ -1,20 +1,19 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const TableSizes = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-} as const;
+export type TableSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
-type Props = React.ComponentProps<"table"> & { size?: keyof typeof TableSizes };
+export type TableProps = React.ComponentProps<"table"> & {
+  size?: TableSizes;
+};
 
-export const Table = ({ className, size = TableSizes.md, ...props }: Props) => (
+export const Table = ({ className, size = "md", ...props }: TableProps) => (
   <table
     data-slot="table"
     className={mergeClasses(
       "moon-table",
-      size !== TableSizes.md && `moon-table-${size}`
+      size !== "md" && `moon-table-${size}`
     )}
     {...props}
   />
