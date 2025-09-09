@@ -2,11 +2,11 @@ import mergeClasses from "../helpers/mergeClasses";
 import Close from "../assets/icons/CloseIcon";
 import { Contexts } from "../constants/contexts";
 
-export enum AlertVariants {
-  fill = "fill",
-  soft = "soft",
-  outline = "outline",
-}
+export const AlertVariants = {
+  fill: "fill",
+  soft: "soft",
+  outline: "outline",
+} as const;
 
 type Props = {
   children: React.ReactNode;
@@ -15,8 +15,8 @@ type Props = {
 
 type AlertRootProps = React.ComponentProps<"div"> &
   Props & {
-    variant?: AlertVariants;
-    context?: Contexts;
+    variant?: keyof typeof AlertVariants;
+    context?: keyof typeof Contexts;
   };
 
 type ActionProps = Props & {

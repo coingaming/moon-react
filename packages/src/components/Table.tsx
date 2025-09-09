@@ -1,13 +1,13 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum TableSizes {
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-  xl = "xl",
-}
+export const TableSizes = {
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+} as const;
 
-type Props = React.ComponentProps<"table"> & { size?: TableSizes };
+type Props = React.ComponentProps<"table"> & { size?: keyof typeof TableSizes };
 
 export const Table = ({ className, size = TableSizes.md, ...props }: Props) => (
   <table

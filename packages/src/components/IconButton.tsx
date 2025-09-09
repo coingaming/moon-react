@@ -1,27 +1,26 @@
-import { Button } from "./Button";
 import mergeClasses from "../helpers/mergeClasses";
 import { Contexts } from "../constants/contexts";
 
-export enum IconButtonSizes {
-  xs = "xs",
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-  xl = "xl",
-}
+export const IconButtonSizes = {
+  xs: "xs",
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+} as const;
 
-export enum IconButtonVariants {
-  soft = "soft",
-  outline = "outline",
-  fill = "fill",
-  ghost = "ghost",
-}
+export const IconButtonVariants = {
+  soft: "soft",
+  outline: "outline",
+  fill: "fill",
+  ghost: "ghost",
+} as const;
 
 type IconButtonProps = React.ComponentProps<"button"> & {
   className?: string;
-  variant?: IconButtonVariants;
-  size?: IconButtonSizes;
-  context?: Contexts;
+  variant?: keyof typeof IconButtonVariants;
+  size?: keyof typeof IconButtonSizes;
+  context?: keyof typeof Contexts;
 };
 
 export const IconButton = ({

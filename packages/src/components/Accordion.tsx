@@ -1,22 +1,22 @@
 import { useState, ReactNode } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum AccordionSizes {
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-  xl = "xl",
-}
+export const AccordionSizes = {
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+} as const;
 
-export enum AccordionVariants {
-  fill = "fill",
-  ghost = "ghost",
-  outline = "outline",
-}
+export const AccordionVariants = {
+  fill: "fill",
+  ghost: "ghost",
+  outline: "outline",
+} as const;
 
 type Props = {
-  size?: AccordionSizes;
-  variant?: AccordionVariants;
+  size?: keyof typeof AccordionSizes;
+  variant?: keyof typeof AccordionVariants;
   arrow?: boolean;
   initiallyOpen?: boolean;
   className?: string;

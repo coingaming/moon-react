@@ -1,22 +1,22 @@
 import { useState, useRef } from "react";
 import { mergeClasses } from "../helpers/mergeClasses";
 
-export enum AuthenticatorSizes {
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-  xl = "xl",
-}
+export const AuthenticatorSizes = {
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+} as const;
 
-export enum AuthenticatorVariants {
-  fill = "fill",
-  outline = "outline",
-}
+export const AuthenticatorVariants = {
+  fill: "fill",
+  outline: "outline",
+} as const;
 
 type AuthenticatorProps = {
   length?: number;
-  size?: AuthenticatorSizes;
-  variant?: AuthenticatorVariants;
+  size?: keyof typeof AuthenticatorSizes;
+  variant?: keyof typeof AuthenticatorVariants;
   error?: boolean;
   value?: string;
   onChange?: (value: string) => void;

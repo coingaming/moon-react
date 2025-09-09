@@ -1,13 +1,13 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum ListSizes {
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-}
+export const ListSizes = {
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+} as const;
 
 type Props = React.ComponentProps<"ul"> & {
-  size?: ListSizes;
+  size?: keyof typeof ListSizes;
   children: React.ReactNode;
 };
 

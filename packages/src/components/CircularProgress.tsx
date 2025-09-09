@@ -1,16 +1,16 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum CircularProgressSizes {
-  xs = "xs",
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-  xl = "xl",
-  "2xl" = "2xl",
-}
+export const CircularProgressSizes = {
+  xs: "xs",
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+  "2xl": "2xl",
+} as const;
 
 type CircularProgressType = {
-  size?: CircularProgressSizes;
+  size?: keyof typeof CircularProgressSizes;
   value: number;
   className?: string;
 };

@@ -1,15 +1,15 @@
 import { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum TabListSizes {
-  sm = "sm",
-  md = "md",
-}
+export const TabListSizes = {
+  sm: "sm",
+  md: "md",
+} as const;
 
 type TabListContextType = {
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
-  size: TabListSizes;
+  size: keyof typeof TabListSizes;
 };
 
 const TabListContext = createContext<TabListContextType | null>(null);
@@ -24,7 +24,7 @@ function useTabListContext() {
 
 type TabListProps = {
   children: React.ReactNode;
-  size?: TabListSizes;
+  size?: keyof typeof TabListSizes;
   defaultActiveIndex?: number;
   className?: string;
 };

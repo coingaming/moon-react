@@ -1,20 +1,20 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum InputSizes {
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-  xl = "xl",
-}
+export const InputSizes = {
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+} as const;
 
-export enum InputVariants {
-  fill = "fill",
-  outline = "outline",
-}
+export const InputVariants = {
+  fill: "fill",
+  outline: "outline",
+} as const;
 
 type InputProps = Omit<React.ComponentProps<"input">, "size"> & {
-  size?: InputSizes;
-  variant?: InputVariants;
+  size?: keyof typeof InputSizes;
+  variant?: keyof typeof InputVariants;
   error?: boolean;
 };
 

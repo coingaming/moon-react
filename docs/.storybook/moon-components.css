@@ -54,9 +54,6 @@
   overflow: hidden;
   gap: var(--sizing-gap-400);
 }
-.moon-accordion :where(.moon-accordion-item):not(td, tr, colgroup) {
-  visibility: visible;
-}
 .moon-accordion :where(.moon-accordion-item) {
   position: relative;
   display: grid;
@@ -69,6 +66,9 @@
   border-radius: var(--component-accordion-radius-md);
   box-shadow: inset 0 0 0 var(--component-accordion-fill-stroke) var(--component-accordion-fill-border);
   padding: 0 var(--sizing-padding-500);
+}
+.moon-accordion :where(.moon-accordion-item):not(td, tr, colgroup) {
+  visibility: visible;
 }
 .moon-accordion :where(.moon-accordion-item) > input:is([type=checkbox], [type=radio]) {
   grid-column-start: 1;

@@ -1,20 +1,20 @@
 import mergeClasses from "../helpers/mergeClasses";
 
-export enum TextareaSizes {
-  sm = "sm",
-  md = "md",
-  lg = "lg",
-  xl = "xl",
-}
+export const TextareaSizes = {
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+} as const;
 
-export enum TextareaVariants {
-  fill = "fill",
-  outline = "outline",
-}
+export const TextareaVariants = {
+  fill: "fill",
+  outline: "outline",
+} as const;
 
 type TextareaProps = React.ComponentProps<"textarea"> & {
-  size?: TextareaSizes;
-  variant?: TextareaVariants;
+  size?: keyof typeof TextareaSizes;
+  variant?: keyof typeof TextareaVariants;
   error?: boolean;
 };
 
