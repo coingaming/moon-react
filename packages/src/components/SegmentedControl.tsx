@@ -1,15 +1,13 @@
-import { useContext, createContext, ReactNode } from "react";
+import React, { useContext, createContext, ReactNode } from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const SegmentedControlSizes = {
-  sm: "sm",
-  md: "md",
-} as const;
+export type SegmentedControlSizes = Extract<Sizes, "sm" | "md">;
 
 type SegmentedControlContextType = {
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
-  size: keyof typeof SegmentedControlSizes;
+  size: SegmentedControlSizes;
 };
 
 const SegmentedControlContext =
@@ -19,7 +17,7 @@ function useSegmentedControlContext() {
   const context = useContext(SegmentedControlContext);
   if (!context) {
     throw new Error(
-      "SegmentedControl components must be used within <Tabs> wrapper"
+      "SegmentedControl components must be used within <TabList> wrapper"
     );
   }
   return context;
@@ -27,7 +25,7 @@ function useSegmentedControlContext() {
 
 type SegmentedControlProps = {
   children: ReactNode;
-  size?: keyof typeof SegmentedControlSizes;
+  size?: SegmentedControlSizes;
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
   className?: string;
@@ -39,9 +37,30 @@ type SegmentProps = React.ComponentProps<"button"> & {
   index: number;
 };
 
-export const SegmentedControl = ({
+const Item = ({ children, className, index, ...props }: SegmentProps) => {
+  const context = useSegmentedControlContext();
+  const isActive = context.activeIndex === index;
+  return (
+    <button
+      role="tab"
+      aria-selected={isActive}
+      className={mergeClasses(
+        "moon-segmented-control-item",
+        isActive && "moon-segmented-control-item-active",
+        className
+      )}
+      onClick={() => context.setActiveIndex(index)}
+      tabIndex={isActive ? 0 : -1}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+const Root = ({
   children,
-  size = SegmentedControlSizes.md,
+  size = "md",
   activeIndex,
   setActiveIndex,
   className,
@@ -53,7 +72,7 @@ export const SegmentedControl = ({
       role="tablist"
       className={mergeClasses(
         "moon-segmented-control",
-        size !== SegmentedControlSizes.md && `moon-segmented-control-${size}`,
+        size !== "md" && `moon-segmented-control-${size}`,
         className
       )}
     >
@@ -62,28 +81,9 @@ export const SegmentedControl = ({
   </SegmentedControlContext.Provider>
 );
 
-export const Segment = ({
-  children,
-  className,
-  index,
-  ...props
-}: SegmentProps) => {
-  const context = useSegmentedControlContext();
-  const isActive = context.activeIndex === index;
-  return (
-    <button
-      role="tab"
-      aria-selected={isActive}
-      className={mergeClasses(
-        "moon-segment",
-        isActive && "moon-segment-active",
-        className
-      )}
-      onClick={() => context.setActiveIndex(index)}
-      tabIndex={isActive ? 0 : -1}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
+Root.displayName = "SegmentedControl";
+Item.displayName = "SegmentedControl.Item";
+
+const SegmentedControl = Object.assign(Root, { Item });
+
+export default SegmentedControl;

@@ -1,38 +1,36 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes, Variants } from "../types";
 
-export const TextareaSizes = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-} as const;
+export type TextareaSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
-export const TextareaVariants = {
-  fill: "fill",
-  outline: "outline",
-} as const;
+export type TextareaVariants = Extract<Variants, "fill" | "outline">;
 
 type TextareaProps = React.ComponentProps<"textarea"> & {
-  size?: keyof typeof TextareaSizes;
-  variant?: keyof typeof TextareaVariants;
+  size?: TextareaSizes;
+  variant?: TextareaVariants;
   error?: boolean;
 };
 
-export const Textarea = ({
+const Textarea = ({
   className,
-  size = TextareaSizes.md,
-  variant = TextareaVariants.fill,
+  size = "md",
+  variant = "fill",
   error = false,
   ...props
 }: TextareaProps) => (
   <textarea
     className={mergeClasses(
       "moon-textarea",
-      size !== TextareaSizes.md && `moon-textarea-${size}`,
-      variant !== TextareaVariants.fill && `moon-textarea-${variant}`,
+      size !== "md" && `moon-textarea-${size}`,
+      variant !== "fill" && `moon-textarea-${variant}`,
       error && "moon-textarea-error",
       className
     )}
     {...props}
   />
 );
+
+Textarea.displayName = "Textarea";
+
+export default Textarea;

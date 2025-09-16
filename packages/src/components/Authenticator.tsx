@@ -1,32 +1,25 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { mergeClasses } from "../helpers/mergeClasses";
+import type { Variants, Sizes } from "../types";
 
-export const AuthenticatorSizes = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-} as const;
+export type AuthenticatorSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
-export const AuthenticatorVariants = {
-  fill: "fill",
-  outline: "outline",
-} as const;
+export type AuthenticatorVariants = Extract<Variants, "fill" | "outline">;
 
 type AuthenticatorProps = {
   length?: number;
-  size?: keyof typeof AuthenticatorSizes;
-  variant?: keyof typeof AuthenticatorVariants;
+  size?: AuthenticatorSizes;
+  variant?: AuthenticatorVariants;
   error?: boolean;
   value?: string;
   onChange?: (value: string) => void;
   className?: string;
 };
 
-export const Authenticator = ({
+const Authenticator = ({
   length = 6,
-  size = AuthenticatorSizes.md,
-  variant = AuthenticatorVariants.fill,
+  size = "md",
+  variant = "fill",
   error = false,
   value = "",
   onChange,
@@ -96,9 +89,8 @@ export const Authenticator = ({
     <div
       className={mergeClasses(
         "moon-authenticator",
-        size !== AuthenticatorSizes.md && `moon-authenticator-${size}`,
-        variant !== AuthenticatorVariants.fill &&
-          `moon-authenticator-${variant}`,
+        size !== "md" && `moon-authenticator-${size}`,
+        variant !== "fill" && `moon-authenticator-${variant}`,
         error && "moon-authenticator-error",
         className
       )}
@@ -107,3 +99,7 @@ export const Authenticator = ({
     </div>
   );
 };
+
+Authenticator.displayName = "Authenticator";
+
+export default Authenticator;

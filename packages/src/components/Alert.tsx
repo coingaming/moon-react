@@ -1,68 +1,48 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
-import Close from "../assets/icons/CloseIcon";
-import { Contexts } from "../constants/contexts";
+import CloseIcon from "../assets/icons/Close";
+import type { Variants, Contexts } from "../types";
 
-export const AlertVariants = {
-  fill: "fill",
-  soft: "soft",
-  outline: "outline",
-} as const;
+export type AlertVariants = Extract<Variants, "fill" | "soft" | "outline">;
 
-type Props = {
+type AlertProps = {
   children: React.ReactNode;
   className?: string;
 };
 
 type AlertRootProps = React.ComponentProps<"div"> &
-  Props & {
-    variant?: keyof typeof AlertVariants;
-    context?: keyof typeof Contexts;
+  AlertProps & {
+    variant?: AlertVariants;
+    context?: Contexts;
   };
 
-type ActionProps = Props & {
+type ActionProps = AlertProps & {
   onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
-export const Alert = ({
-  variant = AlertVariants.fill,
-  context = Contexts.brand,
-  children,
-  className,
-}: AlertRootProps) => (
-  <div
-    className={mergeClasses(
-      "moon-alert",
-      variant !== AlertVariants.fill && `moon-alert-${variant}`,
-      context !== Contexts.brand && `moon-alert-${context}`,
-      className
-    )}
-  >
-    {children}
-  </div>
-);
-
-export const AlertTitle = ({ children, className }: Props) => (
-  <span className={mergeClasses("moon-alert-title", className)}>
+const Header = ({ children, className }: AlertProps) => (
+  <span className={mergeClasses("moon-alert-header", className)}>
     {children}
   </span>
 );
 
-export const AlertDismiss = ({ children, onClick, className }: ActionProps) => (
-  <p
-    className={mergeClasses("moon-alert-dismiss", className)}
-    onClick={onClick}
-  >
-    {children ? children : <Close />}
+const Close = ({ children, onClick, className }: ActionProps) => (
+  <p className={mergeClasses("moon-alert-close", className)} onClick={onClick}>
+    {children ? children : <CloseIcon />}
   </p>
 );
 
-export const AlertContent = ({ children, className }: Props) => (
+const Meta = ({ children, className }: AlertProps) => (
+  <p className={mergeClasses("moon-alert-meta", className)}>{children}</p>
+);
+
+const Content = ({ children, className }: AlertProps) => (
   <div className={mergeClasses("moon-alert-content", className)}>
     {children}
   </div>
 );
 
-export const AlertAction = ({ children, onClick, className }: ActionProps) => (
+const Action = ({ children, onClick, className }: ActionProps) => (
   <button
     className={mergeClasses("moon-alert-action", className)}
     onClick={onClick}
@@ -70,3 +50,37 @@ export const AlertAction = ({ children, onClick, className }: ActionProps) => (
     {children}
   </button>
 );
+
+const Root = ({
+  variant = "fill",
+  context = "brand",
+  children,
+  className,
+}: AlertRootProps) => (
+  <div
+    className={mergeClasses(
+      "moon-alert",
+      variant !== "fill" && `moon-alert-${variant}`,
+      context !== "brand" && `moon-alert-${context}`,
+      className
+    )}
+  >
+    {children}
+  </div>
+);
+
+Root.displayName = "Alert";
+Action.displayName = "Alert.Action";
+Content.displayName = "Alert.Content";
+Header.displayName = "Alert.Header";
+Meta.displayName = "Alert.Meta";
+
+const Alert = Object.assign(Root, {
+  Header,
+  Close,
+  Content,
+  Action,
+  Meta,
+});
+
+export default Alert;

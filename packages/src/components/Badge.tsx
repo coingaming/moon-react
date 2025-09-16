@@ -1,30 +1,27 @@
-import { Contexts } from "../constants/contexts";
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Variants, Contexts } from "../types";
 
-export const BadgeVariants = {
-  fill: "fill",
-  soft: "soft",
-  outline: "outline",
-} as const;
+export type BadgeVariants = Extract<Variants, "fill" | "soft" | "outline">;
 
 type BadgeProps = {
   children?: React.ReactNode;
   className?: string;
-  variant?: keyof typeof BadgeVariants;
-  context?: keyof typeof Contexts;
+  variant?: BadgeVariants;
+  context?: Contexts;
 };
 
-export const Badge = ({
+const Badge = ({
   children,
   className,
-  variant = BadgeVariants.fill,
-  context = Contexts.brand,
+  variant = "fill",
+  context = "brand",
 }: BadgeProps) => (
   <span
     className={mergeClasses(
       "moon-badge",
-      variant !== BadgeVariants.fill && `moon-badge-${variant}`,
-      context !== Contexts.brand && `moon-badge-${context}`,
+      variant !== "fill" && `moon-badge-${variant}`,
+      context !== "brand" && `moon-badge-${context}`,
       className
     )}
   >
@@ -32,8 +29,6 @@ export const Badge = ({
   </span>
 );
 
-export const BadgeWrapper = ({ children, className }: BadgeProps) => (
-  <div className={mergeClasses("moon-badge-wrapper", className)}>
-    {children}
-  </div>
-);
+Badge.displayName = "Badge";
+
+export default Badge;

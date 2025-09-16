@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 type DropdownContextType = {
@@ -22,14 +22,27 @@ type DropdownContentProps = {
 
 const DropdownContext = createContext<DropdownContextType | null>(null);
 
-export function useDropdownContext() {
+function useDropdownContext() {
   const ctx = useContext(DropdownContext);
   if (!ctx)
     throw new Error("Dropdown components must be used within <Dropdown>");
   return ctx;
 }
 
-export const Dropdown = ({ children, defaultOpen = false }: DropdownProps) => {
+const Trigger = ({ children }: DropdownTriggerProps) => {
+  const { setOpen, open } = useDropdownContext();
+  return <span onClick={() => setOpen(!open)}>{children}</span>;
+};
+
+const Content = ({ children, className }: DropdownContentProps) => {
+  const { open } = useDropdownContext();
+  if (!open) return null;
+  return (
+    <div className={mergeClasses("moon-dropdown", className)}>{children}</div>
+  );
+};
+
+const Root = ({ children, defaultOpen = false }: DropdownProps) => {
   const [open, setOpen] = useState(defaultOpen);
 
   return (
@@ -39,45 +52,13 @@ export const Dropdown = ({ children, defaultOpen = false }: DropdownProps) => {
   );
 };
 
-export const DropdownTrigger = ({ children }: DropdownTriggerProps) => {
-  const { setOpen, open } = useDropdownContext();
-  return <span onClick={() => setOpen(!open)}>{children}</span>;
-};
+Root.displayName = "Dropdown";
+Trigger.displayName = "Dropdown.Trigger";
+Content.displayName = "Dropdown.Content";
 
-export const DropdownContent = ({
-  children,
-  className,
-}: DropdownContentProps) => {
-  const { open } = useDropdownContext();
-  if (!open) return null;
-  return (
-    <div className={mergeClasses("moon-dropdown", className)}>{children}</div>
-  );
-};
+const Dropdown = Object.assign(Root, {
+  Trigger,
+  Content,
+});
 
-/* 
-  TODO: Waiting for new css rules to apply Daisy UI approach
- ------ 
-export const Dropdown: FC<DropdownProps> = ({ children }) => {
-  return <div>{children}</div>;
-};
-
-export const DropdownTrigger: FC<DropdownTriggerProps> = ({ children }) => {
-  return (
-    <div role="button" tabIndex={0}>
-      {children}
-    </div>
-  );
-};
-
-export const DropdownContent: FC<DropdownContentProps> = ({
-  children,
-  className,
-}) => {
-  return (
-    <div tabIndex={0} className={mergeClasses("moon-dropdown", className)}>
-      {children}
-    </div>
-  );
-};
- */
+export default Dropdown;

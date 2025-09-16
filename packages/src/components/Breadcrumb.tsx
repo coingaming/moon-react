@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 type BreadCrumbContext = {
@@ -33,29 +33,7 @@ const useBreadcrumbContext = () => {
   return context;
 };
 
-export const Breadcrumb = ({
-  children,
-  className,
-  defaultCurrentPage = 1,
-}: BreadcrumbProps) => {
-  const [currentPage, setCurrentPage] = useState(defaultCurrentPage);
-
-  return (
-    <BreadcrumbContext.Provider value={{ currentPage, setCurrentPage }}>
-      <nav>
-        <ol className={mergeClasses("moon-breadcrumb", className)}>
-          {children}
-        </ol>
-      </nav>
-    </BreadcrumbContext.Provider>
-  );
-};
-
-export const BreadcrumbItem = ({
-  className,
-  index,
-  ...props
-}: BreadcrumpItemProps) => {
+const Item = ({ className, index, ...props }: BreadcrumpItemProps) => {
   const { currentPage, setCurrentPage } = useBreadcrumbContext();
   const isCurrentItemSelected = currentPage === index;
   return (
@@ -73,3 +51,30 @@ export const BreadcrumbItem = ({
     />
   );
 };
+
+const Root = ({
+  children,
+  className,
+  defaultCurrentPage = 1,
+}: BreadcrumbProps) => {
+  const [currentPage, setCurrentPage] = useState(defaultCurrentPage);
+
+  return (
+    <BreadcrumbContext.Provider value={{ currentPage, setCurrentPage }}>
+      <nav>
+        <ol className={mergeClasses("moon-breadcrumb", className)}>
+          {children}
+        </ol>
+      </nav>
+    </BreadcrumbContext.Provider>
+  );
+};
+
+Root.displayName = "Breadcrumb";
+Item.displayName = "Breadcrumb.Item";
+
+const Breadcrumb = Object.assign(Root, {
+  Item,
+});
+
+export default Breadcrumb;

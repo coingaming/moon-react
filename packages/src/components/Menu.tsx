@@ -1,10 +1,8 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const MenuSizes = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-} as const;
+export type MenuSizes = Extract<Sizes, "sm" | "md" | "lg">;
 
 type BaseProps = {
   children: React.ReactNode;
@@ -12,18 +10,22 @@ type BaseProps = {
 };
 
 type MenuProps = BaseProps & {
-  size?: keyof typeof MenuSizes;
+  size?: MenuSizes;
 };
 
-export const Menu = ({
-  size = MenuSizes.md,
-  children,
-  className,
-}: MenuProps) => (
+const Item = ({ children, className }: BaseProps) => (
+  <li className={mergeClasses("moon-menu-item", className)}>{children}</li>
+);
+
+const Meta = ({ children, className }: BaseProps) => (
+  <div className={mergeClasses("moon-menu-meta", className)}>{children}</div>
+);
+
+const Root = ({ size = "md", children, className }: MenuProps) => (
   <ul
     className={mergeClasses(
       "moon-menu",
-      size !== MenuSizes.md && `moon-menu-${size}`,
+      size !== "md" && `moon-menu-${size}`,
       className
     )}
   >
@@ -31,6 +33,10 @@ export const Menu = ({
   </ul>
 );
 
-export const MenuItem = ({ children, className }: BaseProps) => (
-  <li className={className}>{children}</li>
-);
+Root.displayName = "Menu";
+Item.displayName = "Menu.Item";
+Meta.displayName = "Menu.Meta";
+
+const Menu = Object.assign(Root, { Item, Meta });
+
+export default Menu;

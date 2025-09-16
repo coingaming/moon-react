@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  BottomSheet,
-  BottomSheetContent,
-  BottomSheetTrigger,
-  Button,
-} from "@heathmont/moon-react";
+import { BottomSheet, Button } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof BottomSheet>;
@@ -24,14 +19,14 @@ const meta: Meta<Type> = {
     };
     return (
       <BottomSheet {...bottomSheetProps}>
-        <BottomSheetTrigger>
+        <BottomSheet.Trigger>
           <Button>Open BottomSheet</Button>
-        </BottomSheetTrigger>
-        <BottomSheetContent>
+        </BottomSheet.Trigger>
+        <BottomSheet.Content>
           <div className="w-full flex items-center justify-center h-full bg-brand-subtle text-brand overflow-y-auto">
             Content
           </div>
-        </BottomSheetContent>
+        </BottomSheet.Content>
       </BottomSheet>
     );
   },

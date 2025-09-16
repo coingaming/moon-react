@@ -1,33 +1,75 @@
-import { createContext, useContext, useRef } from "react";
+import React, { createContext, useContext, useRef } from "react";
 import mergeClasses from "../helpers/mergeClasses";
-import ArrowLeft from "../assets/icons/ArrowLeftIcon";
-import ArrowRight from "../assets/icons/ArrowRightIcon";
+import ArrowLeft from "../assets/icons/ArrowLeft";
+import ArrowRight from "../assets/icons/ArrowRight";
+import type { Directions } from "../types";
 
-export const ScrollDirections = {
-  end: "end",
-  start: "start",
-} as const;
+export type ScrollDirections = Directions;
 
-type MoonCarouselContextType = {
-  scrollBy: (direction: keyof typeof ScrollDirections) => void;
+type CarouselContextType = {
+  scrollBy: (direction: ScrollDirections) => void;
   reelRef: React.RefObject<HTMLDivElement | null> | null;
 };
 
-const CarouselContext = createContext<MoonCarouselContextType>({
-  scrollBy: (_direction: keyof typeof ScrollDirections) => null,
+const CarouselContext = createContext<CarouselContextType>({
+  scrollBy: (_direction: ScrollDirections) => null,
   reelRef: null,
 });
 
-export function useCarouselContext() {
+function useCarouselContext() {
   const ctx = useContext(CarouselContext);
   if (!ctx) throw new Error("Carousel components must be inside <Carousel>");
   return ctx;
 }
 
-export const Carousel = ({ children }: { children: React.ReactNode }) => {
+function getScrollAmount({
+  scrollAmount,
+  direction,
+  reel,
+}: {
+  scrollAmount: number;
+  direction: ScrollDirections;
+  reel: HTMLDivElement;
+}): number {
+  const isRTL = getComputedStyle(reel).direction === "rtl";
+
+  if (isRTL) {
+    return direction === "end" ? -scrollAmount : scrollAmount;
+  }
+  return direction === "start" ? -scrollAmount : scrollAmount;
+}
+
+const Item = ({ children }: { children: React.ReactNode }) => {
+  return <div className="moon-carousel-item">{children}</div>;
+};
+
+const Control = ({
+  className,
+  direction,
+  ...props
+}: React.ComponentProps<"button"> & {
+  direction: ScrollDirections;
+}) => {
+  const { scrollBy } = useCarouselContext();
+
+  return (
+    <button
+      className={mergeClasses("moon-carousel-control", className)}
+      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+        scrollBy(direction);
+        props?.onClick?.(e);
+      }}
+      {...props}
+    >
+      {direction === "end" ? <ArrowRight /> : <ArrowLeft />}
+    </button>
+  );
+};
+
+const Root = ({ children }: { children: React.ReactNode }) => {
   const reelRef = useRef<HTMLDivElement>(null);
 
-  const scrollBy = (direction: keyof typeof ScrollDirections) => {
+  const scrollBy = (direction: ScrollDirections) => {
     if (!reelRef.current) return;
 
     const reel = reelRef.current;
@@ -56,46 +98,10 @@ export const Carousel = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-function getScrollAmount({
-  scrollAmount,
-  direction,
-  reel,
-}: {
-  scrollAmount: number;
-  direction: keyof typeof ScrollDirections;
-  reel: HTMLDivElement;
-}): number {
-  const isRTL = getComputedStyle(reel).direction === "rtl";
+Root.displayName = "Carousel";
+Item.displayName = "Carousel.Item";
+Control.displayName = "Carousel.Control";
 
-  if (isRTL) {
-    return direction === ScrollDirections.end ? -scrollAmount : scrollAmount;
-  }
-  return direction === ScrollDirections.start ? -scrollAmount : scrollAmount;
-}
+const Carousel = Object.assign(Root, { Item, Control });
 
-export const CarouselItem = ({ children }: { children: React.ReactNode }) => {
-  return <div className="moon-carousel-item">{children}</div>;
-};
-
-export const CarouselControl = ({
-  className,
-  direction,
-  ...props
-}: React.ComponentProps<"button"> & {
-  direction: keyof typeof ScrollDirections;
-}) => {
-  const { scrollBy } = useCarouselContext();
-
-  return (
-    <button
-      className={mergeClasses("moon-carousel-control", className)}
-      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-        scrollBy(direction);
-        props?.onClick?.(e);
-      }}
-      {...props}
-    >
-      {direction === ScrollDirections.end ? <ArrowRight /> : <ArrowLeft />}
-    </button>
-  );
-};
+export default Carousel;

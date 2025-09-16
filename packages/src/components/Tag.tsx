@@ -1,42 +1,39 @@
-import { Contexts } from "../constants/contexts";
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes, Variants, Contexts } from "../types";
 
-export const TagSizes = {
-  "2xs": "2xs",
-  xs: "xs",
-} as const;
+export type TagSizes = Extract<Sizes, "2xs" | "xs">;
 
-export const TagVariants = {
-  fill: "fill",
-  outline: "outline",
-  soft: "soft",
-  ghost: "ghost",
-} as const;
+export type TagVariants = Variants;
 
 type TagProps = React.ComponentProps<"div"> & {
-  size?: keyof typeof TagSizes;
-  variant?: keyof typeof TagVariants;
-  context?: keyof typeof Contexts;
+  size?: TagSizes;
+  variant?: TagVariants;
+  context?: Contexts;
   className?: string;
   children: React.ReactNode;
 };
 
-export const Tag = ({
-  size,
-  variant,
-  context,
+const Tag = ({
+  size = "xs",
+  variant = "fill",
+  context = "brand",
   children,
   className,
 }: TagProps) => (
   <div
     className={mergeClasses(
       "moon-tag",
-      size !== TagSizes.xs && `moon-tag-${size}`,
-      variant !== TagVariants.fill && `moon-tag-${variant}`,
-      context !== Contexts.brand && `moon-tag-${context}`,
+      size !== "xs" && `moon-tag-${size}`,
+      variant !== "fill" && `moon-tag-${variant}`,
+      context !== "brand" && `moon-tag-${context}`,
       className
     )}
   >
     {children}
   </div>
 );
+
+Tag.displayName = "Tag";
+
+export default Tag;

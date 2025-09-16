@@ -1,31 +1,43 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes, Variants } from "../types";
 
-export const SelectSizes = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-} as const;
+export type SelectSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
-export const SelectVariants = {
-  fill: "fill",
-  outline: "outline",
-} as const;
+export type SelectVariants = Extract<Variants, "fill" | "outline">;
 
 type SelectType = Omit<React.ComponentProps<"select">, "size">;
 
 type SelectProps = SelectType & {
-  size?: keyof typeof SelectSizes;
-  variant?: keyof typeof SelectVariants;
+  size?: SelectSizes;
+  variant?: SelectVariants;
   error?: boolean;
   children: React.ReactNode;
   className?: string;
 };
 
-export const Select = ({
+type SelectItemProps = React.ComponentProps<"option"> & {
+  children: React.ReactNode;
+};
+
+const Option = ({ children, ...props }: SelectItemProps) => (
+  <option {...props}>{children}</option>
+);
+
+type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
+  children: React.ReactNode;
+  label: string;
+  disabled?: boolean;
+};
+
+const OptionGroup = ({ children, ...props }: SelectItemsGroupProps) => (
+  <optgroup {...props}>{children}</optgroup>
+);
+
+const Root = ({
   children,
-  size = SelectSizes.md,
-  variant = SelectVariants.fill,
+  size = "md",
+  variant = "fill",
   error = false,
   className,
   ...props
@@ -34,8 +46,8 @@ export const Select = ({
     <select
       className={mergeClasses(
         "moon-select",
-        size !== SelectSizes.md && `moon-select-${size}`,
-        variant !== SelectVariants.fill && `moon-select-${variant}`,
+        size !== "md" && `moon-select-${size}`,
+        variant !== "fill" && `moon-select-${variant}`,
         error && "moon-select-error",
         className
       )}
@@ -46,21 +58,10 @@ export const Select = ({
   );
 };
 
-type SelectItemProps = React.ComponentProps<"option"> & {
-  children: React.ReactNode;
-};
+Root.displayName = "Select";
+Option.displayName = "Select.Option";
+OptionGroup.displayName = "Select.OptionGroup";
 
-export const SelectItem = ({ children, ...props }: SelectItemProps) => (
-  <option {...props}>{children}</option>
-);
+const Select = Object.assign(Root, { Option, OptionGroup });
 
-type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
-  children: React.ReactNode;
-  label: string;
-  disabled?: boolean;
-};
-
-export const SelectItemsGroup = ({
-  children,
-  ...props
-}: SelectItemsGroupProps) => <optgroup {...props}>{children}</optgroup>;
+export default Select;

@@ -1,11 +1,8 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Positions } from "../types";
 
-export const TooltipPositions = {
-  top: "top",
-  bottom: "bottom",
-  start: "start",
-  end: "end",
-} as const;
+export type TooltipPositions = Positions;
 
 type TooltipChildren = {
   children: React.ReactNode;
@@ -14,19 +11,29 @@ type TooltipChildren = {
 
 type TooltipProps = {
   children: React.ReactNode;
-  position?: keyof typeof TooltipPositions;
+  position?: TooltipPositions;
   pointer?: boolean;
 };
 
-export const Tooltip = ({
+const Trigger = ({ children, className }: TooltipChildren) => (
+  <p className={className}>{children}</p>
+);
+
+const Content = ({ children, className }: TooltipChildren) => (
+  <div className={mergeClasses("moon-tooltip-content", className)}>
+    {children}
+  </div>
+);
+
+const Root = ({
   children,
-  position = TooltipPositions.top,
+  position = "top",
   pointer = false,
 }: TooltipProps) => (
   <div
     className={mergeClasses(
       "moon-tooltip",
-      `moon-tooltip-${position}`,
+      position !== "top" && `moon-tooltip-${position}`,
       pointer && "moon-tooltip-pointer"
     )}
   >
@@ -34,12 +41,10 @@ export const Tooltip = ({
   </div>
 );
 
-export const TooltipTrigger = ({ children, className }: TooltipChildren) => (
-  <p className={className}>{children}</p>
-);
+Root.displayName = "Tooltip";
+Trigger.displayName = "Tooltip.Trigger";
+Content.displayName = "Tooltip.Content";
 
-export const TooltipContent = ({ children, className }: TooltipChildren) => (
-  <div className={mergeClasses("moon-tooltip-content", className)}>
-    {children}
-  </div>
-);
+const Tooltip = Object.assign(Root, { Trigger, Content });
+
+export default Tooltip;

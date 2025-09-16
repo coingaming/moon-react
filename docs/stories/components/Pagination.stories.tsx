@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Pagination, PaginationItem } from "@heathmont/moon-react";
+import { Pagination } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Pagination>;
@@ -21,9 +21,9 @@ const meta: Meta<Type> = {
     return (
       <Pagination {...paginationProps}>
         {items.map((_, index) => (
-          <PaginationItem key={index} index={index}>
+          <Pagination.Item key={index} index={index}>
             {index + 1}
-          </PaginationItem>
+          </Pagination.Item>
         ))}
       </Pagination>
     );

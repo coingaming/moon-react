@@ -1,10 +1,11 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
 
 type RadioProps = Omit<React.ComponentProps<"input">, "type"> & {
   label?: string;
 };
 
-export const Radio = ({ className, label, ...props }: RadioProps) => {
+const Radio = ({ className, label, ...props }: RadioProps) => {
   if (label) {
     return (
       <div className={mergeClasses("moon-radio-wrapper", className)}>
@@ -21,3 +22,7 @@ export const Radio = ({ className, label, ...props }: RadioProps) => {
     />
   );
 };
+
+Radio.displayName = "Radio";
+
+export default Radio;

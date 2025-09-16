@@ -1,6 +1,6 @@
-import { createContext, useContext, useRef } from "react";
+import React, { createContext, useContext, useRef } from "react";
 import { createPortal } from "react-dom";
-import Close from "../assets/icons/CloseIcon";
+import CloseIcon from "../assets/icons/Close";
 import mergeClasses from "../helpers/mergeClasses";
 
 type DialogContextType = {
@@ -17,23 +17,13 @@ type DialogProps = {
   children: React.ReactNode;
 };
 
-export const Dialog = ({ children }: DialogProps) => {
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
-
-  return (
-    <DialogContext.Provider value={{ dialogRef }}>
-      {children}
-    </DialogContext.Provider>
-  );
-};
-
-export const DialogTrigger = ({ children }: DialogProps) => {
+const Trigger = ({ children }: DialogProps) => {
   const { dialogRef } = useContext(DialogContext);
 
   return <p onClick={() => dialogRef?.current?.showModal()}>{children}</p>;
 };
 
-export const DialogContent = ({ children }: DialogProps) => {
+const Content = ({ children }: DialogProps) => {
   const { dialogRef } = useContext(DialogContext);
 
   return createPortal(
@@ -46,13 +36,12 @@ export const DialogContent = ({ children }: DialogProps) => {
     document.body
   );
 };
-DialogContent.displayName = "DialogContent";
 
-export const DialogHeader = ({ children }: DialogProps) => (
-  <header className="moon-dialog-title">{children}</header>
+const Header = ({ children }: DialogProps) => (
+  <header className="moon-dialog-header">{children}</header>
 );
 
-export function DialogClose() {
+const Close = () => {
   const { dialogRef } = useContext(DialogContext);
 
   return (
@@ -60,7 +49,27 @@ export function DialogClose() {
       className="moon-dialog-close"
       onClick={() => dialogRef?.current?.close()}
     >
-      <Close />
+      <CloseIcon />
     </button>
   );
-}
+};
+
+const Root = ({ children }: DialogProps) => {
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+
+  return (
+    <DialogContext.Provider value={{ dialogRef }}>
+      {children}
+    </DialogContext.Provider>
+  );
+};
+
+Root.displayName = "Dialog";
+Trigger.displayName = "Dialog.Trigger";
+Close.displayName = "Dialog.Close";
+Header.displayName = "Dialog.Header";
+Content.displayName = "Dialog.Content";
+
+const Dialog = Object.assign(Root, { Trigger, Content, Close, Header });
+
+export default Dialog;

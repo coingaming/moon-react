@@ -1,4 +1,4 @@
-const UserIcon = () => (
+const User = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
     <path
       fill-rule="evenodd"
@@ -15,4 +15,4 @@ const UserIcon = () => (
   </svg>
 );
 
-export default UserIcon;
+export default User;

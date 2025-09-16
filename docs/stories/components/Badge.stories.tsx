@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Badge, BadgeVariants, Contexts } from "@heathmont/moon-react";
+import { Badge } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Badge>;
@@ -16,26 +16,26 @@ const meta: Meta<Type> = {
   argTypes: {
     variant: {
       description: "Defines Badge variant",
-      options: Object.values(BadgeVariants),
+      options: ["fill", "soft", "outline"],
       control: "select",
       table: {
-        defaultValue: { summary: BadgeVariants.fill },
+        defaultValue: { summary: "fill" },
       },
     },
     context: {
       description: "Defines Badge context",
-      options: Object.values(Contexts),
+      options: ["brand", "neutral", "positive", "negative", "caution", "info"],
       control: "select",
       table: {
-        defaultValue: { summary: Contexts.brand },
+        defaultValue: { summary: "brand" },
       },
     },
   },
   render: ({ variant, context, ...props }) => {
     const badgeProps = {
       ...props,
-      ...(variant !== BadgeVariants.fill && { variant }),
-      ...(context !== Contexts.brand && { context }),
+      ...(variant !== "fill" && { variant }),
+      ...(context !== "brand" && { context }),
     };
     return <Badge {...badgeProps} />;
   },
@@ -46,5 +46,5 @@ export default meta;
 type Story = StoryObj<Type>;
 
 export const BadgeStory: Story = {
-  args: { variant: BadgeVariants.fill, context: Contexts.brand },
+  args: { variant: "fill", context: "brand" },
 };

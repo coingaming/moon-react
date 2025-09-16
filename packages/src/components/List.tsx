@@ -1,21 +1,46 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const ListSizes = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-} as const;
+export type ListSizes = Extract<Sizes, "sm" | "md" | "lg">;
 
-type Props = React.ComponentProps<"ul"> & {
-  size?: keyof typeof ListSizes;
+type ListProps = React.ComponentProps<"ul"> & {
+  size?: ListSizes;
   children: React.ReactNode;
 };
 
-export const List = ({ size = ListSizes.md, children, ...props }: Props) => (
+const Item = ({
+  children,
+  className,
+  ...props
+}: React.ComponentProps<"li"> & {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <li className={mergeClasses("moon-list-item", className)} {...props}>
+    {children}
+  </li>
+);
+
+const Meta = ({
+  children,
+  className,
+  ...props
+}: React.ComponentProps<"li"> & {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <li className={mergeClasses("moon-list-item-meta", className)} {...props}>
+    {children}
+  </li>
+);
+
+const Root = ({ size = "md", children, className, ...props }: ListProps) => (
   <ul
     className={mergeClasses(
       "moon-list",
-      size !== ListSizes.md && `moon-list-${size}`
+      size !== "md" && `moon-list-${size}`,
+      className
     )}
     {...props}
   >
@@ -23,9 +48,10 @@ export const List = ({ size = ListSizes.md, children, ...props }: Props) => (
   </ul>
 );
 
-export const ListItem = ({
-  children,
-  ...props
-}: React.ComponentProps<"li"> & { children: React.ReactNode | string }) => (
-  <li {...props}>{children}</li>
-);
+Root.displayName = "List";
+Item.displayName = "List.Item";
+Meta.displayName = "List.Meta";
+
+const List = Object.assign(Root, { Item, Meta });
+
+export default List;

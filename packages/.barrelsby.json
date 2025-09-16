@@ -1,0 +1,16 @@
+{
+  "directory": ["./src/components"],
+  "exclude": [
+    "__tests__",
+    "\\.test\\.(ts|tsx)$",
+    "\\.spec\\.(ts|tsx)$",
+    "\\.stories\\.(ts|tsx)$"
+  ],
+  "delete": true,
+  "include": ["tsx"],
+  "location": "top",
+  "structure": "flat",
+  "local": false,
+  "exportDefault": ["tsx"],
+  "noHeader": false
+}

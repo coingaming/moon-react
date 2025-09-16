@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { List, ListItem, ListSizes } from "@heathmont/moon-react";
+import { List } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof List>;
@@ -16,23 +16,23 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines List item size",
-      options: Object.values(ListSizes),
+      options: ["sm", "md", "lg"],
       control: "select",
       table: {
-        defaultValue: { summary: ListSizes.md },
+        defaultValue: { summary: "md" },
       },
     },
   },
   render: ({ size, ...props }) => {
     const listProps = {
       ...props,
-      ...(size !== ListSizes.md && { size }),
+      ...(size !== "md" && { size }),
     };
     const items = new Array(3).fill("");
     return (
       <List {...listProps}>
         {items.map((_, index) => (
-          <ListItem key={index}>Item {index + 1}</ListItem>
+          <List.Item key={index}>Item {index + 1}</List.Item>
         ))}
       </List>
     );
@@ -45,6 +45,6 @@ type Story = StoryObj<Type>;
 
 export const ListStory: Story = {
   args: {
-    size: ListSizes.md,
+    size: "md",
   },
 };

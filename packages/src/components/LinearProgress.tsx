@@ -1,23 +1,20 @@
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const LinearProgressSizes = {
-  "5xs": "5xs",
-  "4xs": "4xs",
-  "3xs": "3xs",
-  "2xs": "2xs",
-} as const;
+export type LinearProgressSizes = Extract<Sizes, "5xs" | "4xs" | "3xs" | "2xs">;
 
 type LinearProgressProps = {
   children?: React.ReactNode;
   className?: string;
-  size?: keyof typeof LinearProgressSizes;
+  size?: LinearProgressSizes;
   value: number;
 };
 
-export const LinearProgress = ({
+const LinearProgress = ({
   className,
   value,
-  size = LinearProgressSizes["2xs"],
+  size = "2xs",
   children,
 }: LinearProgressProps) => (
   <div className={mergeClasses("moon-linear-progress-wrapper", className)}>
@@ -27,8 +24,12 @@ export const LinearProgress = ({
       max="100"
       className={mergeClasses(
         "moon-linear-progress",
-        size !== LinearProgressSizes["2xs"] && `moon-linear-progress-${size}`
+        size !== "2xs" && `moon-linear-progress-${size}`
       )}
     ></progress>
   </div>
 );
+
+LinearProgress.displayName = "LinearProgress";
+
+export default LinearProgress;

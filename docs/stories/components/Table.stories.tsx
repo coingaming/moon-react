@@ -1,13 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Table,
-  TableHead,
-  TableBody,
-  TableHeadCell,
-  TableCell,
-  TableRow,
-  TableSizes,
-} from "@heathmont/moon-react";
+import { Table } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Table>;
@@ -24,38 +16,38 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines Table row size",
-      options: Object.values(TableSizes),
+      options: ["sm", "md", "lg", "xl"],
       control: "select",
       table: {
-        defaultValue: { summary: TableSizes.md },
+        defaultValue: { summary: "md" },
       },
     },
   },
   render: ({ size, ...props }) => {
     const tableProps = {
       ...props,
-      ...(size !== TableSizes.md && { size }),
+      ...(size !== "md" && { size }),
     };
     const rows = new Array(5).fill("");
     const cols = new Array(3).fill("");
     return (
       <Table {...tableProps}>
-        <TableHead>
-          <TableRow>
+        <Table.Head>
+          <Table.Row>
             {cols.map((_, index) => (
-              <TableHeadCell key={index}>Title</TableHeadCell>
+              <Table.HeadCell key={index}>Title</Table.HeadCell>
             ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           {rows.map((_, rowIndex) => (
-            <TableRow key={rowIndex}>
+            <Table.Row key={rowIndex}>
               {cols.map((_, colIndex) => (
-                <TableCell key={colIndex}>Cell</TableCell>
+                <Table.Cell key={colIndex}>Cell</Table.Cell>
               ))}
-            </TableRow>
+            </Table.Row>
           ))}
-        </TableBody>
+        </Table.Body>
       </Table>
     );
   },
@@ -65,4 +57,4 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const TableStory: Story = { args: { size: TableSizes.md } };
+export const TableStory: Story = { args: { size: "md" } };

@@ -1,15 +1,13 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
+import type { Sizes } from "../types";
 
-export const TabListSizes = {
-  sm: "sm",
-  md: "md",
-} as const;
+export type TabListSizes = Extract<Sizes, "sm" | "md">;
 
 type TabListContextType = {
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
-  size: keyof typeof TabListSizes;
+  size: TabListSizes;
 };
 
 const TabListContext = createContext<TabListContextType | null>(null);
@@ -24,7 +22,7 @@ function useTabListContext() {
 
 type TabListProps = {
   children: React.ReactNode;
-  size?: keyof typeof TabListSizes;
+  size?: TabListSizes;
   defaultActiveIndex?: number;
   className?: string;
 };
@@ -41,31 +39,7 @@ type TabPanelProps = React.ComponentProps<"div"> & {
   index: number;
 };
 
-export const TabList = ({
-  children,
-  size = TabListSizes.md,
-  defaultActiveIndex = 0,
-  className,
-}: TabListProps) => {
-  const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
-
-  return (
-    <TabListContext.Provider value={{ activeIndex, setActiveIndex, size }}>
-      <ul
-        role="tablist"
-        className={mergeClasses(
-          "moon-tab-list",
-          size !== TabListSizes.md && `moon-tab-list-${size}`,
-          className
-        )}
-      >
-        {children}
-      </ul>
-    </TabListContext.Provider>
-  );
-};
-
-export const Tab = ({ children, className, index, ...props }: TabProps) => {
+const Item = ({ children, className, index, ...props }: TabProps) => {
   const context = useTabListContext();
   const isActive = context.activeIndex === index;
   return (
@@ -74,8 +48,8 @@ export const Tab = ({ children, className, index, ...props }: TabProps) => {
         role="tab"
         aria-selected={isActive}
         className={mergeClasses(
-          "moon-tab",
-          isActive && "moon-tab-active",
+          "moon-tab-list-item",
+          isActive && "moon-tab-list-item-active",
           className
         )}
         onClick={() => context.setActiveIndex(index)}
@@ -88,12 +62,7 @@ export const Tab = ({ children, className, index, ...props }: TabProps) => {
   );
 };
 
-export const TabPanel = ({
-  children,
-  className,
-  index,
-  ...props
-}: TabPanelProps) => {
+const ItemPanel = ({ children, className, index, ...props }: TabPanelProps) => {
   const context = useTabListContext();
   const isActive = context.activeIndex === index;
   return (
@@ -102,3 +71,35 @@ export const TabPanel = ({
     </div>
   );
 };
+
+const Root = ({
+  children,
+  size = "md",
+  defaultActiveIndex = 0,
+  className,
+}: TabListProps) => {
+  const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
+
+  return (
+    <TabListContext.Provider value={{ activeIndex, setActiveIndex, size }}>
+      <ul
+        role="tablist"
+        className={mergeClasses(
+          "moon-tab-list",
+          size !== "md" && `moon-tab-list-${size}`,
+          className
+        )}
+      >
+        {children}
+      </ul>
+    </TabListContext.Provider>
+  );
+};
+
+Root.displayName = "TabList";
+Item.displayName = "TabList.Item";
+ItemPanel.displayName = "TabList.ItemPanel";
+
+const TabList = Object.assign(Root, { Item, ItemPanel });
+
+export default TabList;
