@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Contexts, Tag, TagSizes, TagVariants } from "@heathmont/moon-react";
+import { Tag } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Tag>;
@@ -16,35 +16,35 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines Tag size",
-      options: Object.values(TagSizes),
+      options: ["2xs", "xs"],
       control: "select",
       table: {
-        defaultValue: { summary: TagSizes.xs },
+        defaultValue: { summary: "xs" },
       },
     },
     variant: {
       description: "Defines Tag variant",
-      options: Object.values(TagVariants),
+      options: ["fill", "soft", "outline", "ghost"],
       control: "select",
       table: {
-        defaultValue: { summary: TagVariants.fill },
+        defaultValue: { summary: "fill" },
       },
     },
     context: {
       description: "Defines Tag context",
-      options: Object.values(Contexts),
+      options: ["brand", "neutral", "positive", "negative", "caution", "info"],
       control: "select",
       table: {
-        defaultValue: { summary: Contexts.brand },
+        defaultValue: { summary: "brand" },
       },
     },
   },
   render: ({ size, context, variant, ...props }) => {
     const tagProps = {
       ...props,
-      ...(size !== TagSizes.xs && { size }),
-      ...(variant !== TagVariants.fill && { variant }),
-      ...(context !== Contexts.brand && { context }),
+      ...(size !== "xs" && { size }),
+      ...(variant !== "fill" && { variant }),
+      ...(context !== "brand" && { context }),
     };
     return <Tag {...tagProps}>Tag</Tag>;
   },
@@ -56,8 +56,8 @@ type Story = StoryObj<Type>;
 
 export const TagStory: Story = {
   args: {
-    size: TagSizes.xs,
-    variant: TagVariants.fill,
-    context: Contexts.brand,
+    size: "xs",
+    variant: "fill",
+    context: "brand",
   },
 };

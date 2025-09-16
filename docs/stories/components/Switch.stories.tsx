@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Switch, SwitchSizes } from "@heathmont/moon-react";
+import { Switch } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Switch>;
@@ -16,17 +16,17 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines Switch size",
-      options: Object.values(SwitchSizes),
+      options: ["2xs", "xs", "sm"],
       control: "select",
       table: {
-        defaultValue: { summary: SwitchSizes.sm },
+        defaultValue: { summary: "sm" },
       },
     },
   },
   render: ({ size, ...props }) => {
     const switchProps = {
       ...props,
-      ...(size !== SwitchSizes.sm && { size }),
+      ...(size !== "sm" && { size }),
     };
     return <Switch {...switchProps} />;
   },
@@ -37,5 +37,5 @@ export default meta;
 type Story = StoryObj<Type>;
 
 export const SwitchStory: Story = {
-  args: { size: SwitchSizes.sm },
+  args: { size: "sm" },
 };

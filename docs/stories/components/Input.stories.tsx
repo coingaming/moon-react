@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Input, InputSizes, InputVariants } from "@heathmont/moon-react";
+import { Input } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Input>;
@@ -16,26 +16,26 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines Input size",
-      options: Object.values(InputSizes),
+      options: ["sm", "md", "lg", "xl"],
       control: "select",
       table: {
-        defaultValue: { summary: InputSizes.md },
+        defaultValue: { summary: "md" },
       },
     },
     variant: {
       description: "Defines Input variant",
-      options: Object.values(InputVariants),
+      options: ["fill", "outline"],
       control: "select",
       table: {
-        defaultValue: { summary: InputVariants.fill },
+        defaultValue: { summary: "fill" },
       },
     },
   },
   render: ({ size, variant, ...props }) => {
     const inputProps = {
       ...props,
-      ...(size !== InputSizes.md && { size }),
-      ...(variant !== InputVariants.fill && { variant }),
+      ...(size !== "md" && { size }),
+      ...(variant !== "fill" && { variant }),
     };
     return <Input {...inputProps} />;
   },
@@ -47,7 +47,7 @@ type Story = StoryObj<Type>;
 
 export const InputStory: Story = {
   args: {
-    size: InputSizes.md,
-    variant: InputVariants.fill,
+    size: "md",
+    variant: "fill",
   },
 };

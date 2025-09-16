@@ -6,13 +6,13 @@ export type TextareaSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
 export type TextareaVariants = Extract<Variants, "fill" | "outline">;
 
-export type TextareaProps = React.ComponentProps<"textarea"> & {
+type TextareaProps = React.ComponentProps<"textarea"> & {
   size?: TextareaSizes;
   variant?: TextareaVariants;
   error?: boolean;
 };
 
-export const Textarea = ({
+const Textarea = ({
   className,
   size = "md",
   variant = "fill",
@@ -30,3 +30,7 @@ export const Textarea = ({
     {...props}
   />
 );
+
+Textarea.displayName = "Textarea";
+
+export default Textarea;

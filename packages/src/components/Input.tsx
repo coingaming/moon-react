@@ -6,13 +6,13 @@ export type InputSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
 export type InputVariants = Extract<Variants, "fill" | "outline">;
 
-export type InputProps = Omit<React.ComponentProps<"input">, "size"> & {
+type InputProps = Omit<React.ComponentProps<"input">, "size"> & {
   size?: InputSizes;
   variant?: InputVariants;
   error?: boolean;
 };
 
-export const Input = ({
+const Input = ({
   className,
   type,
   error = false,
@@ -22,7 +22,6 @@ export const Input = ({
 }: InputProps) => (
   <input
     type={type}
-    data-slot="input"
     className={mergeClasses(
       "moon-input",
       size !== "md" && `moon-input-${size}`,
@@ -33,3 +32,7 @@ export const Input = ({
     {...props}
   />
 );
+
+Input.displayName = "Input";
+
+export default Input;

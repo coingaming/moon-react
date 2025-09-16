@@ -4,7 +4,7 @@ import type { Sizes } from "../types";
 
 export type SegmentedControlSizes = Extract<Sizes, "sm" | "md">;
 
-export type SegmentedControlContextType = {
+type SegmentedControlContextType = {
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
   size: SegmentedControlSizes;
@@ -23,7 +23,7 @@ function useSegmentedControlContext() {
   return context;
 }
 
-export type SegmentedControlProps = {
+type SegmentedControlProps = {
   children: ReactNode;
   size?: SegmentedControlSizes;
   activeIndex: number;
@@ -31,13 +31,34 @@ export type SegmentedControlProps = {
   className?: string;
 };
 
-export type SegmentProps = React.ComponentProps<"button"> & {
+type SegmentProps = React.ComponentProps<"button"> & {
   children: ReactNode;
   className?: string;
   index: number;
 };
 
-export const SegmentedControl = ({
+const Item = ({ children, className, index, ...props }: SegmentProps) => {
+  const context = useSegmentedControlContext();
+  const isActive = context.activeIndex === index;
+  return (
+    <button
+      role="tab"
+      aria-selected={isActive}
+      className={mergeClasses(
+        "moon-segmented-control-item",
+        isActive && "moon-segmented-control-item-active",
+        className
+      )}
+      onClick={() => context.setActiveIndex(index)}
+      tabIndex={isActive ? 0 : -1}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+const Root = ({
   children,
   size = "md",
   activeIndex,
@@ -60,28 +81,9 @@ export const SegmentedControl = ({
   </SegmentedControlContext.Provider>
 );
 
-export const Segment = ({
-  children,
-  className,
-  index,
-  ...props
-}: SegmentProps) => {
-  const context = useSegmentedControlContext();
-  const isActive = context.activeIndex === index;
-  return (
-    <button
-      role="tab"
-      aria-selected={isActive}
-      className={mergeClasses(
-        "moon-segment",
-        isActive && "moon-segment-active",
-        className
-      )}
-      onClick={() => context.setActiveIndex(index)}
-      tabIndex={isActive ? 0 : -1}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
+Root.displayName = "SegmentedControl";
+Item.displayName = "SegmentedControl.Item";
+
+const SegmentedControl = Object.assign(Root, { Item });
+
+export default SegmentedControl;

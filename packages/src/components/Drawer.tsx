@@ -1,41 +1,32 @@
 import React, { createContext, useContext, useRef, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import mergeClasses from "../helpers/mergeClasses";
-import Close from "../assets/icons/CloseIcon";
+import CloseIcon from "../assets/icons/Close";
 
-export type DrawerContextType = {
+type DrawerContextType = {
   drawerRef: React.RefObject<HTMLDialogElement | null> | null;
 };
 
-export const DrawerContext = createContext<DrawerContextType>({
+const DrawerContext = createContext<DrawerContextType>({
   drawerRef: null,
 });
 
-export function useDrawerContext() {
+function useDrawerContext() {
   const ctx = useContext(DrawerContext);
   if (!ctx) throw new Error("Drawer components must be used within <Drawer>");
   return ctx;
 }
 
-export type DrawerProps = {
+type DrawerProps = {
   children: ReactNode;
 };
 
-export const Drawer = ({ children }: DrawerProps) => {
-  const drawerRef = useRef<HTMLDialogElement | null>(null);
-  return (
-    <DrawerContext.Provider value={{ drawerRef }}>
-      {children}
-    </DrawerContext.Provider>
-  );
-};
-
-export type DrawerTriggerProps = {
+type DrawerTriggerProps = {
   children: ReactNode;
   className?: string;
 };
 
-export const DrawerTrigger = ({ children, className }: DrawerTriggerProps) => {
+const Trigger = ({ children, className }: DrawerTriggerProps) => {
   const { drawerRef } = useDrawerContext();
   return (
     <button
@@ -47,21 +38,23 @@ export const DrawerTrigger = ({ children, className }: DrawerTriggerProps) => {
   );
 };
 
-export type DrawerContentProps = {
+type DrawerContentProps = {
   children: ReactNode;
   className?: string;
 };
 
-export type DrawerTitleProps = {
+type DrawerTitleProps = {
   children: ReactNode;
   className?: string;
 };
 
-export const DrawerTitle = ({ children, className }: DrawerTitleProps) => (
-  <div className={mergeClasses("moon-drawer-title", className)}>{children}</div>
+const Header = ({ children, className }: DrawerTitleProps) => (
+  <div className={mergeClasses("moon-drawer-header", className)}>
+    {children}
+  </div>
 );
 
-export const DrawerContent = ({ children, className }: DrawerContentProps) => {
+const Content = ({ children, className }: DrawerContentProps) => {
   const { drawerRef } = useDrawerContext();
   return createPortal(
     <dialog className={mergeClasses("moon-drawer", className)} ref={drawerRef}>
@@ -73,15 +66,14 @@ export const DrawerContent = ({ children, className }: DrawerContentProps) => {
     document.body
   );
 };
-DrawerContent.displayName = "DrawerContent";
 
-export type DrawerCloseProps = {
+type DrawerCloseProps = {
   onClick?: () => void;
   className?: string;
   children?: ReactNode;
 };
 
-export const DrawerClose = ({ onClick, className }: DrawerCloseProps) => {
+const Close = ({ onClick, className }: DrawerCloseProps) => {
   const { drawerRef } = useDrawerContext();
   const handleClick = () => {
     drawerRef?.current?.close();
@@ -92,7 +84,26 @@ export const DrawerClose = ({ onClick, className }: DrawerCloseProps) => {
       onClick={handleClick}
       className={mergeClasses("moon-drawer-close", className)}
     >
-      <Close />
+      <CloseIcon />
     </button>
   );
 };
+
+const Root = ({ children }: DrawerProps) => {
+  const drawerRef = useRef<HTMLDialogElement | null>(null);
+  return (
+    <DrawerContext.Provider value={{ drawerRef }}>
+      {children}
+    </DrawerContext.Provider>
+  );
+};
+
+Root.displayName = "Drawer";
+Trigger.displayName = "Drawer.Trigger";
+Close.displayName = "Drawer.Close";
+Header.displayName = "Drawer.Header";
+Content.displayName = "Drawer.Content";
+
+const Drawer = Object.assign(Root, { Trigger, Content, Close, Header });
+
+export default Drawer;

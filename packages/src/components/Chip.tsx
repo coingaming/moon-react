@@ -6,14 +6,14 @@ export type ChipSizes = Extract<Sizes, "sm" | "md">;
 
 export type ChipVariants = Extract<Variants, "fill" | "soft" | "outline">;
 
-export type ChipProps = {
+type ChipProps = {
   size?: ChipSizes;
   variant?: ChipVariants;
   selected?: boolean;
   children: React.ReactNode;
 };
 
-export const Chip = ({
+const Chip = ({
   size = "md",
   selected = false,
   variant = "fill",
@@ -30,3 +30,7 @@ export const Chip = ({
     {children}
   </button>
 );
+
+Chip.displayName = "Chip";
+
+export default Chip;

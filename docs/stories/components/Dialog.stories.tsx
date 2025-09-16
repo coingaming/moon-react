@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  Button,
-} from "@heathmont/moon-react";
+import { Dialog, Button } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Dialog>;
@@ -25,14 +20,14 @@ const meta: Meta<Type> = {
     };
     return (
       <Dialog {...dialogProps}>
-        <DialogTrigger>
+        <Dialog.Trigger>
           <Button>Open Dialog</Button>
-        </DialogTrigger>
-        <DialogContent>
+        </Dialog.Trigger>
+        <Dialog.Content>
           <div className="w-full flex items-center justify-center h-space-160 bg-brand-subtle text-brand">
             Content
           </div>
-        </DialogContent>
+        </Dialog.Content>
       </Dialog>
     );
   },

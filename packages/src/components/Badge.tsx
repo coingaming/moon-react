@@ -4,14 +4,14 @@ import type { Variants, Contexts } from "../types";
 
 export type BadgeVariants = Extract<Variants, "fill" | "soft" | "outline">;
 
-export type BadgeProps = {
+type BadgeProps = {
   children?: React.ReactNode;
   className?: string;
   variant?: BadgeVariants;
   context?: Contexts;
 };
 
-export const Badge = ({
+const Badge = ({
   children,
   className,
   variant = "fill",
@@ -29,8 +29,6 @@ export const Badge = ({
   </span>
 );
 
-export const BadgeWrapper = ({ children, className }: BadgeProps) => (
-  <div className={mergeClasses("moon-badge-wrapper", className)}>
-    {children}
-  </div>
-);
+Badge.displayName = "Badge";
+
+export default Badge;

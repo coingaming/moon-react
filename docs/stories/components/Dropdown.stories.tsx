@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Button,
-  Dropdown,
-  DropdownContent,
-  DropdownTrigger,
-} from "@heathmont/moon-react";
+import { Button, Dropdown } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Dropdown>;
@@ -24,14 +19,14 @@ const meta: Meta<Type> = {
     };
     return (
       <Dropdown {...dropdownProps}>
-        <DropdownTrigger>
+        <Dropdown.Trigger>
           <Button>Open Dropdown</Button>
-        </DropdownTrigger>
-        <DropdownContent>
+        </Dropdown.Trigger>
+        <Dropdown.Content>
           <div className="w-full flex items-center justify-center h-space-80 bg-brand-subtle text-brand">
             Content
           </div>
-        </DropdownContent>
+        </Dropdown.Content>
       </Dropdown>
     );
   },

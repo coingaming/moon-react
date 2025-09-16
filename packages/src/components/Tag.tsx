@@ -6,7 +6,7 @@ export type TagSizes = Extract<Sizes, "2xs" | "xs">;
 
 export type TagVariants = Variants;
 
-export type TagProps = React.ComponentProps<"div"> & {
+type TagProps = React.ComponentProps<"div"> & {
   size?: TagSizes;
   variant?: TagVariants;
   context?: Contexts;
@@ -14,7 +14,7 @@ export type TagProps = React.ComponentProps<"div"> & {
   children: React.ReactNode;
 };
 
-export const Tag = ({
+const Tag = ({
   size = "xs",
   variant = "fill",
   context = "brand",
@@ -33,3 +33,7 @@ export const Tag = ({
     {children}
   </div>
 );
+
+Tag.displayName = "Tag";
+
+export default Tag;

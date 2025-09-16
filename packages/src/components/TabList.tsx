@@ -4,7 +4,7 @@ import type { Sizes } from "../types";
 
 export type TabListSizes = Extract<Sizes, "sm" | "md">;
 
-export type TabListContextType = {
+type TabListContextType = {
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
   size: TabListSizes;
@@ -20,26 +20,59 @@ function useTabListContext() {
   return context;
 }
 
-export type TabListProps = {
+type TabListProps = {
   children: React.ReactNode;
   size?: TabListSizes;
   defaultActiveIndex?: number;
   className?: string;
 };
 
-export type TabProps = React.ComponentProps<"button"> & {
+type TabProps = React.ComponentProps<"button"> & {
   children: React.ReactNode;
   className?: string;
   index: number;
 };
 
-export type TabPanelProps = React.ComponentProps<"div"> & {
+type TabPanelProps = React.ComponentProps<"div"> & {
   children: React.ReactNode;
   className?: string;
   index: number;
 };
 
-export const TabList = ({
+const Item = ({ children, className, index, ...props }: TabProps) => {
+  const context = useTabListContext();
+  const isActive = context.activeIndex === index;
+  return (
+    <li>
+      <button
+        role="tab"
+        aria-selected={isActive}
+        className={mergeClasses(
+          "moon-tab-list-item",
+          isActive && "moon-tab-list-item-active",
+          className
+        )}
+        onClick={() => context.setActiveIndex(index)}
+        tabIndex={isActive ? 0 : -1}
+        {...props}
+      >
+        {children}
+      </button>
+    </li>
+  );
+};
+
+const ItemPanel = ({ children, className, index, ...props }: TabPanelProps) => {
+  const context = useTabListContext();
+  const isActive = context.activeIndex === index;
+  return (
+    <div role="tabpanel" className={className} hidden={!isActive} {...props}>
+      {children}
+    </div>
+  );
+};
+
+const Root = ({
   children,
   size = "md",
   defaultActiveIndex = 0,
@@ -63,40 +96,10 @@ export const TabList = ({
   );
 };
 
-export const Tab = ({ children, className, index, ...props }: TabProps) => {
-  const context = useTabListContext();
-  const isActive = context.activeIndex === index;
-  return (
-    <li>
-      <button
-        role="tab"
-        aria-selected={isActive}
-        className={mergeClasses(
-          "moon-tab",
-          isActive && "moon-tab-active",
-          className
-        )}
-        onClick={() => context.setActiveIndex(index)}
-        tabIndex={isActive ? 0 : -1}
-        {...props}
-      >
-        {children}
-      </button>
-    </li>
-  );
-};
+Root.displayName = "TabList";
+Item.displayName = "TabList.Item";
+ItemPanel.displayName = "TabList.ItemPanel";
 
-export const TabPanel = ({
-  children,
-  className,
-  index,
-  ...props
-}: TabPanelProps) => {
-  const context = useTabListContext();
-  const isActive = context.activeIndex === index;
-  return (
-    <div role="tabpanel" className={className} hidden={!isActive} {...props}>
-      {children}
-    </div>
-  );
-};
+const TabList = Object.assign(Root, { Item, ItemPanel });
+
+export default TabList;

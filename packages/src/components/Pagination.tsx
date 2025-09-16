@@ -1,52 +1,33 @@
 import React, { createContext, useContext, useState } from "react";
-import ArrowLeft from "../assets/icons/ArrowLeftIcon";
-import ArrowRight from "../assets/icons/ArrowRightIcon";
+import ArrowLeft from "../assets/icons/ArrowLeft";
+import ArrowRight from "../assets/icons/ArrowRight";
 import mergeClasses from "../helpers/mergeClasses";
 
-export type PaginationContextType = {
+type PaginationContextType = {
   page: number;
   setPage: (page: number | ((page: number) => number)) => void;
   length: number;
 };
 
-export type PaginationProps = {
+type PaginationProps = {
   children: React.ReactNode;
   className?: string;
   defaultPage?: number;
   length: number;
 };
 
-export type PaginationItemProps = React.ComponentProps<"li"> & {
+type PaginationItemProps = React.ComponentProps<"li"> & {
   index: number;
   isActive?: boolean;
 };
 
-export type PaginationArrowsProps = React.ComponentProps<"span">;
+type PaginationArrowsProps = React.ComponentProps<"span">;
 
 const PaginationContext = createContext<PaginationContextType>({
   page: 0,
   setPage: () => {},
   length: 0,
 });
-
-export const Pagination = ({
-  children,
-  className,
-  defaultPage = 0,
-  length,
-}: PaginationProps) => {
-  const [page, setPage] = useState(defaultPage);
-
-  return (
-    <PaginationContext.Provider value={{ page, setPage, length }}>
-      <nav role="navigation" aria-label="pagination">
-        <ul className={mergeClasses("moon-pagination", className)}>
-          {children}
-        </ul>
-      </nav>
-    </PaginationContext.Provider>
-  );
-};
 
 function usePaginationContext() {
   const context = useContext(PaginationContext);
@@ -58,7 +39,7 @@ function usePaginationContext() {
   return context;
 }
 
-export const PaginationItem = ({
+const Item = ({
   index,
   isActive,
   className,
@@ -80,7 +61,7 @@ export const PaginationItem = ({
   );
 };
 
-export const PaginationPrevious = ({ ...props }: PaginationArrowsProps) => {
+const Previous = ({ ...props }: PaginationArrowsProps) => {
   const { setPage } = usePaginationContext();
 
   return (
@@ -95,7 +76,7 @@ export const PaginationPrevious = ({ ...props }: PaginationArrowsProps) => {
   );
 };
 
-export const PaginationNext = ({ ...props }: PaginationArrowsProps) => {
+const Next = ({ ...props }: PaginationArrowsProps) => {
   const { setPage, length } = usePaginationContext();
 
   return (
@@ -111,3 +92,31 @@ export const PaginationNext = ({ ...props }: PaginationArrowsProps) => {
     </span>
   );
 };
+
+const Root = ({
+  children,
+  className,
+  defaultPage = 0,
+  length,
+}: PaginationProps) => {
+  const [page, setPage] = useState(defaultPage);
+
+  return (
+    <PaginationContext.Provider value={{ page, setPage, length }}>
+      <nav role="navigation" aria-label="pagination">
+        <ul className={mergeClasses("moon-pagination", className)}>
+          {children}
+        </ul>
+      </nav>
+    </PaginationContext.Provider>
+  );
+};
+
+Root.displayName = "Pagination";
+Item.displayName = "Pagination.Item";
+Previous.displayName = "Pagination.Previous";
+Next.displayName = "Pagination.Next";
+
+const Pagination = Object.assign(Root, { Item, Previous, Next });
+
+export default Pagination;

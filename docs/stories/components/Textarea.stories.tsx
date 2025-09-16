@@ -1,9 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Textarea,
-  TextareaSizes,
-  TextareaVariants,
-} from "@heathmont/moon-react";
+import { Textarea } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Textarea>;
@@ -20,26 +16,26 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines Textarea size",
-      options: Object.values(TextareaSizes),
+      options: ["sm", "md", "lg", "xl"],
       control: "select",
       table: {
-        defaultValue: { summary: TextareaSizes.md },
+        defaultValue: { summary: "md" },
       },
     },
     variant: {
       description: "Defines Textarea variant",
-      options: Object.values(TextareaVariants),
+      options: ["fill", "outline"],
       control: "select",
       table: {
-        defaultValue: { summary: TextareaVariants.fill },
+        defaultValue: { summary: "fill" },
       },
     },
   },
   render: ({ size, variant, ...props }) => {
     const textareaProps = {
       ...props,
-      ...(size !== TextareaSizes.md && { size }),
-      ...(variant !== TextareaVariants.fill && { variant }),
+      ...(size !== "md" && { size }),
+      ...(variant !== "fill" && { variant }),
     };
     return <Textarea {...textareaProps} />;
   },
@@ -51,7 +47,7 @@ type Story = StoryObj<Type>;
 
 export const TextareaStory: Story = {
   args: {
-    size: TextareaSizes.md,
-    variant: TextareaVariants.fill,
+    size: "md",
+    variant: "fill",
   },
 };

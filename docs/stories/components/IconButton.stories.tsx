@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Contexts,
-  IconButton,
-  IconButtonSizes,
-  IconButtonVariants,
-} from "@heathmont/moon-react";
+import { IconButton } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 import UserIcon from "../shared/icons/UserIcon";
 
@@ -22,10 +17,10 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines IconButton size",
-      options: Object.values(IconButtonSizes),
+      options: ["xs", "sm", "md", "lg", "xl"],
       control: "select",
       table: {
-        defaultValue: { summary: IconButtonSizes.md },
+        defaultValue: { summary: "md" },
       },
     },
     disabled: {
@@ -37,26 +32,26 @@ const meta: Meta<Type> = {
     },
     variant: {
       description: "Defines IconButton variant",
-      options: Object.values(IconButtonVariants),
+      options: ["fill", "outline", "soft", "ghost"],
       control: "select",
       table: {
-        defaultValue: { summary: IconButtonVariants.fill },
+        defaultValue: { summary: "fill" },
       },
     },
     context: {
       description: "Defines IconButton context",
-      options: Object.values(Contexts),
+      options: ["brand", "neutral", "positive", "negative", "caution", "info"],
       control: "select",
       table: {
-        defaultValue: { summary: Contexts.brand },
+        defaultValue: { summary: "brand" },
       },
     },
   },
   render: ({ variant, size, ...props }) => {
     const buttonProps = {
       ...props,
-      ...(variant !== IconButtonVariants.fill && { variant }),
-      ...(size !== IconButtonSizes.md && { size }),
+      ...(variant !== "fill" && { variant }),
+      ...(size !== "md" && { size }),
     };
     return (
       <IconButton {...buttonProps}>
@@ -72,9 +67,9 @@ type Story = StoryObj<Type>;
 
 export const IconButtonStory: Story = {
   args: {
-    size: IconButtonSizes.md,
-    variant: IconButtonVariants.fill,
-    context: Contexts.brand,
+    size: "md",
+    variant: "fill",
+    context: "brand",
     disabled: false,
   },
 };

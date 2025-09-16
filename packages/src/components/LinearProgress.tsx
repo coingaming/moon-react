@@ -4,14 +4,14 @@ import type { Sizes } from "../types";
 
 export type LinearProgressSizes = Extract<Sizes, "5xs" | "4xs" | "3xs" | "2xs">;
 
-export type LinearProgressProps = {
+type LinearProgressProps = {
   children?: React.ReactNode;
   className?: string;
   size?: LinearProgressSizes;
   value: number;
 };
 
-export const LinearProgress = ({
+const LinearProgress = ({
   className,
   value,
   size = "2xs",
@@ -29,3 +29,7 @@ export const LinearProgress = ({
     ></progress>
   </div>
 );
+
+LinearProgress.displayName = "LinearProgress";
+
+export default LinearProgress;

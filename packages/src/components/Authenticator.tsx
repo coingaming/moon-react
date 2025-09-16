@@ -6,7 +6,7 @@ export type AuthenticatorSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
 export type AuthenticatorVariants = Extract<Variants, "fill" | "outline">;
 
-export type AuthenticatorProps = {
+type AuthenticatorProps = {
   length?: number;
   size?: AuthenticatorSizes;
   variant?: AuthenticatorVariants;
@@ -16,7 +16,7 @@ export type AuthenticatorProps = {
   className?: string;
 };
 
-export const Authenticator = ({
+const Authenticator = ({
   length = 6,
   size = "md",
   variant = "fill",
@@ -99,3 +99,7 @@ export const Authenticator = ({
     </div>
   );
 };
+
+Authenticator.displayName = "Authenticator";
+
+export default Authenticator;

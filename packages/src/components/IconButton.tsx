@@ -6,14 +6,14 @@ export type IconButtonSizes = Extract<Sizes, "xs" | "sm" | "md" | "lg" | "xl">;
 
 export type IconButtonVariants = Variants;
 
-export type IconButtonProps = React.ComponentProps<"button"> & {
+type IconButtonProps = React.ComponentProps<"button"> & {
   className?: string;
   variant?: IconButtonVariants;
   size?: IconButtonSizes;
   context?: Contexts;
 };
 
-export const IconButton = ({
+const IconButton = ({
   className,
   variant = "fill",
   size = "md",
@@ -31,3 +31,7 @@ export const IconButton = ({
     {...props}
   />
 );
+
+IconButton.displayName = "IconButton";
+
+export default IconButton;

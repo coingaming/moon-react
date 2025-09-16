@@ -1,5 +1,17 @@
 # @heathmont/moon-react
 
+## 2.0.0
+
+### Major Changes
+
+- feat: introduce Compound Pattern to components
+
+## 1.4.1
+
+### Patch Changes
+
+- fix: remove React from dependencies
+
 ## 1.4.0
 
 ### Minor Changes

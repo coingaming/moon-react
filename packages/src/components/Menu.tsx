@@ -4,16 +4,24 @@ import type { Sizes } from "../types";
 
 export type MenuSizes = Extract<Sizes, "sm" | "md" | "lg">;
 
-export type BaseProps = {
+type BaseProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-export type MenuProps = BaseProps & {
+type MenuProps = BaseProps & {
   size?: MenuSizes;
 };
 
-export const Menu = ({ size = "md", children, className }: MenuProps) => (
+const Item = ({ children, className }: BaseProps) => (
+  <li className={mergeClasses("moon-menu-item", className)}>{children}</li>
+);
+
+const Meta = ({ children, className }: BaseProps) => (
+  <div className={mergeClasses("moon-menu-meta", className)}>{children}</div>
+);
+
+const Root = ({ size = "md", children, className }: MenuProps) => (
   <ul
     className={mergeClasses(
       "moon-menu",
@@ -25,6 +33,10 @@ export const Menu = ({ size = "md", children, className }: MenuProps) => (
   </ul>
 );
 
-export const MenuItem = ({ children, className }: BaseProps) => (
-  <li className={className}>{children}</li>
-);
+Root.displayName = "Menu";
+Item.displayName = "Menu.Item";
+Meta.displayName = "Menu.Meta";
+
+const Menu = Object.assign(Root, { Item, Meta });
+
+export default Menu;

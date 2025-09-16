@@ -6,9 +6,9 @@ export type SelectSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
 export type SelectVariants = Extract<Variants, "fill" | "outline">;
 
-export type SelectType = Omit<React.ComponentProps<"select">, "size">;
+type SelectType = Omit<React.ComponentProps<"select">, "size">;
 
-export type SelectProps = SelectType & {
+type SelectProps = SelectType & {
   size?: SelectSizes;
   variant?: SelectVariants;
   error?: boolean;
@@ -16,7 +16,25 @@ export type SelectProps = SelectType & {
   className?: string;
 };
 
-export const Select = ({
+type SelectItemProps = React.ComponentProps<"option"> & {
+  children: React.ReactNode;
+};
+
+const Option = ({ children, ...props }: SelectItemProps) => (
+  <option {...props}>{children}</option>
+);
+
+type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
+  children: React.ReactNode;
+  label: string;
+  disabled?: boolean;
+};
+
+const OptionGroup = ({ children, ...props }: SelectItemsGroupProps) => (
+  <optgroup {...props}>{children}</optgroup>
+);
+
+const Root = ({
   children,
   size = "md",
   variant = "fill",
@@ -40,21 +58,10 @@ export const Select = ({
   );
 };
 
-export type SelectItemProps = React.ComponentProps<"option"> & {
-  children: React.ReactNode;
-};
+Root.displayName = "Select";
+Option.displayName = "Select.Option";
+OptionGroup.displayName = "Select.OptionGroup";
 
-export const SelectItem = ({ children, ...props }: SelectItemProps) => (
-  <option {...props}>{children}</option>
-);
+const Select = Object.assign(Root, { Option, OptionGroup });
 
-export type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
-  children: React.ReactNode;
-  label: string;
-  disabled?: boolean;
-};
-
-export const SelectItemsGroup = ({
-  children,
-  ...props
-}: SelectItemsGroupProps) => <optgroup {...props}>{children}</optgroup>;
+export default Select;

@@ -4,18 +4,28 @@ import type { Positions } from "../types";
 
 export type TooltipPositions = Positions;
 
-export type TooltipChildren = {
+type TooltipChildren = {
   children: React.ReactNode;
   className?: string;
 };
 
-export type TooltipProps = {
+type TooltipProps = {
   children: React.ReactNode;
   position?: TooltipPositions;
   pointer?: boolean;
 };
 
-export const Tooltip = ({
+const Trigger = ({ children, className }: TooltipChildren) => (
+  <p className={className}>{children}</p>
+);
+
+const Content = ({ children, className }: TooltipChildren) => (
+  <div className={mergeClasses("moon-tooltip-content", className)}>
+    {children}
+  </div>
+);
+
+const Root = ({
   children,
   position = "top",
   pointer = false,
@@ -31,12 +41,10 @@ export const Tooltip = ({
   </div>
 );
 
-export const TooltipTrigger = ({ children, className }: TooltipChildren) => (
-  <p className={className}>{children}</p>
-);
+Root.displayName = "Tooltip";
+Trigger.displayName = "Tooltip.Trigger";
+Content.displayName = "Tooltip.Content";
 
-export const TooltipContent = ({ children, className }: TooltipChildren) => (
-  <div className={mergeClasses("moon-tooltip-content", className)}>
-    {children}
-  </div>
-);
+const Tooltip = Object.assign(Root, { Trigger, Content });
+
+export default Tooltip;

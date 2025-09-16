@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Chip, ChipSizes, ChipVariants } from "@heathmont/moon-react";
+import { Chip } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Chip>;
@@ -16,26 +16,26 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines Chip size",
-      options: Object.values(ChipSizes),
+      options: ["sm", "md"],
       control: "select",
       table: {
-        defaultValue: { summary: ChipSizes.md },
+        defaultValue: { summary: "md" },
       },
     },
     variant: {
       description: "Defines Chip variant",
-      options: Object.values(ChipVariants),
+      options: ["fill", "outline", "soft"],
       control: "select",
       table: {
-        defaultValue: { summary: ChipVariants.fill },
+        defaultValue: { summary: "fill" },
       },
     },
   },
   render: ({ variant, size, ...props }) => {
     const chipProps = {
       ...props,
-      ...(variant !== ChipVariants.fill && { variant }),
-      ...(size !== ChipSizes.md && { size }),
+      ...(variant !== "fill" && { variant }),
+      ...(size !== "md" && { size }),
     };
     return <Chip {...chipProps}>Chip</Chip>;
   },
@@ -47,7 +47,7 @@ type Story = StoryObj<Type>;
 
 export const ChipStory: Story = {
   args: {
-    size: ChipSizes.md,
-    variant: ChipVariants.fill,
+    size: "md",
+    variant: "fill",
   },
 };

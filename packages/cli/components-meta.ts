@@ -47,7 +47,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
       typesHelper,
       {
         ...iconsData,
-        name: "UserIcon",
+        name: "User",
       },
     ],
   },

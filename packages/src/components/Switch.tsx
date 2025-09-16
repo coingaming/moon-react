@@ -4,7 +4,7 @@ import type { Sizes } from "../types";
 
 export type SwitchSizes = Extract<Sizes, "2xs" | "xs" | "sm">;
 
-export type SwitchProps = Omit<React.ComponentProps<"input">, "size"> & {
+type SwitchProps = Omit<React.ComponentProps<"input">, "size"> & {
   checked: boolean;
   onChange: () => void;
   disabled?: boolean;
@@ -13,7 +13,7 @@ export type SwitchProps = Omit<React.ComponentProps<"input">, "size"> & {
   className?: string;
 };
 
-export const Switch = ({
+const Switch = ({
   onChange,
   size = "sm",
   label,
@@ -34,3 +34,7 @@ export const Switch = ({
     />
   </label>
 );
+
+Switch.displayName = "Switch";
+
+export default Switch;

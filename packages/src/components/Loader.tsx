@@ -3,12 +3,12 @@ import type { Sizes } from "../types";
 
 export type LoaderSizes = Extract<Sizes, "2xs" | "xs" | "sm" | "md" | "lg">;
 
-export type LoaderProps = {
+type LoaderProps = {
   size?: LoaderSizes;
   className?: string;
 };
 
-export const Loader = ({ size = "md", className }: LoaderProps) => (
+const Loader = ({ size = "md", className }: LoaderProps) => (
   <div
     className={mergeClasses(
       "moon-loader",
@@ -17,3 +17,7 @@ export const Loader = ({ size = "md", className }: LoaderProps) => (
     )}
   />
 );
+
+Loader.displayName = "Loader";
+
+export default Loader;

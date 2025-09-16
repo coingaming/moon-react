@@ -1,5 +1,5 @@
 import React from "react";
-import UserIcon from "../assets/icons/UserIcon";
+import User from "../assets/icons/User";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes, Variants } from "../types";
 
@@ -10,14 +10,14 @@ export type AvatarSizes = Extract<
 
 export type AvatarVariants = Extract<Variants, "fill" | "soft">;
 
-export type AvatarProps = React.ComponentProps<"div"> & {
+type AvatarProps = React.ComponentProps<"div"> & {
   size?: AvatarSizes;
   variant?: AvatarVariants;
   imgSrc?: string;
   className?: string;
 };
 
-export const Avatar = ({
+const Avatar = ({
   size = "md",
   variant = "fill",
   imgSrc,
@@ -33,6 +33,10 @@ export const Avatar = ({
     )}
     {...props}
   >
-    {imgSrc ? <img src={imgSrc} /> : <UserIcon />}
+    {imgSrc ? <img src={imgSrc} /> : <User />}
   </div>
 );
+
+Avatar.displayName = "Avatar";
+
+export default Avatar;

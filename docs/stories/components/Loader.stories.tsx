@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Loader, LoaderSizes } from "@heathmont/moon-react";
+import { Loader } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Loader>;
@@ -16,17 +16,17 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines Loader size",
-      options: Object.values(LoaderSizes),
+      options: ["2xs", "xs", "sm", "md", "lg"],
       control: "select",
       table: {
-        defaultValue: { summary: LoaderSizes.md },
+        defaultValue: { summary: "md" },
       },
     },
   },
   render: ({ size, ...props }) => {
     const loaderProps = {
       ...props,
-      ...(size !== LoaderSizes.md && { size }),
+      ...(size !== "md" && { size }),
     };
     return <Loader {...loaderProps} />;
   },
@@ -38,6 +38,6 @@ type Story = StoryObj<Type>;
 
 export const LoaderStory: Story = {
   args: {
-    size: LoaderSizes.md,
+    size: "md",
   },
 };

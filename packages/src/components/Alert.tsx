@@ -1,26 +1,57 @@
 import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
-import Close from "../assets/icons/CloseIcon";
+import CloseIcon from "../assets/icons/Close";
 import type { Variants, Contexts } from "../types";
 
 export type AlertVariants = Extract<Variants, "fill" | "soft" | "outline">;
 
-export type AlertProps = {
+type AlertProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-export type AlertRootProps = React.ComponentProps<"div"> &
+type AlertRootProps = React.ComponentProps<"div"> &
   AlertProps & {
     variant?: AlertVariants;
     context?: Contexts;
   };
 
-export type ActionProps = AlertProps & {
+type ActionProps = AlertProps & {
   onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
-export const Alert = ({
+const Header = ({ children, className }: AlertProps) => (
+  <span className={mergeClasses("moon-alert-header", className)}>
+    {children}
+  </span>
+);
+
+const Close = ({ children, onClick, className }: ActionProps) => (
+  <p className={mergeClasses("moon-alert-close", className)} onClick={onClick}>
+    {children ? children : <CloseIcon />}
+  </p>
+);
+
+const Meta = ({ children, className }: AlertProps) => (
+  <p className={mergeClasses("moon-alert-meta", className)}>{children}</p>
+);
+
+const Content = ({ children, className }: AlertProps) => (
+  <div className={mergeClasses("moon-alert-content", className)}>
+    {children}
+  </div>
+);
+
+const Action = ({ children, onClick, className }: ActionProps) => (
+  <button
+    className={mergeClasses("moon-alert-action", className)}
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
+
+const Root = ({
   variant = "fill",
   context = "brand",
   children,
@@ -38,32 +69,18 @@ export const Alert = ({
   </div>
 );
 
-export const AlertTitle = ({ children, className }: AlertProps) => (
-  <span className={mergeClasses("moon-alert-title", className)}>
-    {children}
-  </span>
-);
+Root.displayName = "Alert";
+Action.displayName = "Alert.Action";
+Content.displayName = "Alert.Content";
+Header.displayName = "Alert.Header";
+Meta.displayName = "Alert.Meta";
 
-export const AlertDismiss = ({ children, onClick, className }: ActionProps) => (
-  <p
-    className={mergeClasses("moon-alert-dismiss", className)}
-    onClick={onClick}
-  >
-    {children ? children : <Close />}
-  </p>
-);
+const Alert = Object.assign(Root, {
+  Header,
+  Close,
+  Content,
+  Action,
+  Meta,
+});
 
-export const AlertContent = ({ children, className }: AlertProps) => (
-  <div className={mergeClasses("moon-alert-content", className)}>
-    {children}
-  </div>
-);
-
-export const AlertAction = ({ children, onClick, className }: ActionProps) => (
-  <button
-    className={mergeClasses("moon-alert-action", className)}
-    onClick={onClick}
-  >
-    {children}
-  </button>
-);
+export default Alert;

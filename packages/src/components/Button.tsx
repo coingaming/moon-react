@@ -6,14 +6,14 @@ export type ButtonSizes = Extract<Sizes, "xs" | "sm" | "md" | "lg" | "xl">;
 
 export type ButtonVariants = Variants;
 
-export type ButtonProps = React.ComponentProps<"button"> & {
+type ButtonProps = React.ComponentProps<"button"> & {
   variant?: ButtonVariants;
   size?: ButtonSizes;
   context?: Contexts;
   className?: string;
 };
 
-export const Button = ({
+const Button = ({
   className,
   variant = "fill",
   size = "md",
@@ -21,7 +21,6 @@ export const Button = ({
   ...props
 }: ButtonProps) => (
   <button
-    data-slot="button"
     className={mergeClasses(
       "moon-button",
       variant !== "fill" && `moon-button-${variant}`,
@@ -32,3 +31,7 @@ export const Button = ({
     {...props}
   />
 );
+
+Button.displayName = "Button";
+
+export default Button;

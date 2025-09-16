@@ -6,13 +6,13 @@ export type CircularProgressSizes = Extract<
   "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
 >;
 
-export type CircularProgressType = {
+type CircularProgressType = {
   size?: CircularProgressSizes;
   value: number;
   className?: string;
 };
 
-export const CircularProgress = ({
+const CircularProgress = ({
   size = "md",
   className,
   value,
@@ -26,3 +26,7 @@ export const CircularProgress = ({
     )}
   />
 );
+
+CircularProgress.displayName = "CircularProgress";
+
+export default CircularProgress;

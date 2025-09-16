@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionSizes,
-  AccordionVariants,
-  AccordionTitle,
-} from "@heathmont/moon-react";
+import { Accordion } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Accordion>;
@@ -23,34 +16,39 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines Accordion size",
-      options: Object.values(AccordionSizes),
+      options: ["sm", "md", "lg", "xl"],
       control: "select",
       table: {
-        defaultValue: { summary: AccordionSizes.md },
+        defaultValue: { summary: "md" },
       },
     },
     variant: {
       description: "Variant of Accordion",
       control: "select",
-      options: Object.values(AccordionVariants),
+      options: ["fill", "ghost", "outline"],
       table: {
-        defaultValue: { summary: AccordionVariants.fill },
+        defaultValue: { summary: "fill" },
       },
     },
   },
   render: ({ size, ...props }) => {
     const accordionProps = {
       ...props,
-      ...(size !== AccordionSizes.md && { size }),
+      ...(size !== "md" && { size }),
     };
     const items = new Array(3).fill("");
     return (
       <Accordion {...accordionProps}>
         {items.map((_, index) => (
-          <AccordionItem key={index}>
-            <AccordionTitle>{`Item ${index + 1}`}</AccordionTitle>
-            <AccordionContent>Content</AccordionContent>
-          </AccordionItem>
+          <Accordion.Item key={index}>
+            <Accordion.Header>
+              {`Item ${index + 1}`}
+              <Accordion.Meta>
+                <Accordion.Toggle />
+              </Accordion.Meta>
+            </Accordion.Header>
+            <Accordion.Content>Content</Accordion.Content>
+          </Accordion.Item>
         ))}
       </Accordion>
     );
@@ -63,7 +61,7 @@ type Story = StoryObj<Type>;
 
 export const AccordionStory: Story = {
   args: {
-    size: AccordionSizes.md,
-    variant: AccordionVariants.fill,
+    size: "md",
+    variant: "fill",
   },
 };

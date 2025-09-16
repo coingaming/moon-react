@@ -4,7 +4,7 @@ import type { Variants, Contexts } from "../types";
 
 export type SnackbarVariants = Extract<Variants, "fill" | "soft">;
 
-export type SnackbarContextType = {
+type SnackbarContextType = {
   variant: SnackbarVariants;
   context: Contexts;
   isOpen: boolean;
@@ -23,37 +23,19 @@ function useSnackbarContext() {
   return context;
 }
 
-export type SnackbarProps = {
+type SnackbarProps = {
   children: React.ReactNode;
   variant?: SnackbarVariants;
   context?: Contexts;
 };
 
-export const Snackbar = ({
-  children,
-  variant = "fill",
-  context = "brand",
-}: SnackbarProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <SnackbarContext.Provider value={{ variant, context, isOpen, setIsOpen }}>
-      {children}
-    </SnackbarContext.Provider>
-  );
-};
-
-export const SnackbarTrigger = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const Trigger = ({ children }: { children: React.ReactNode }) => {
   const { setIsOpen } = useSnackbarContext();
 
   return <div onClick={() => setIsOpen(true)}>{children}</div>;
 };
 
-export const SnackbarContent = ({
+const Content = ({
   children,
   className,
   ...props
@@ -77,7 +59,7 @@ export const SnackbarContent = ({
   );
 };
 
-export const SnackbarAction = ({
+const Action = ({
   children,
   className,
 }: {
@@ -90,3 +72,41 @@ export const SnackbarAction = ({
     </div>
   );
 };
+
+const Meta = ({
+  children,
+  className,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={mergeClasses("moon-snackbar-meta", className)}>
+      {children}
+    </div>
+  );
+};
+
+const Root = ({
+  children,
+  variant = "fill",
+  context = "brand",
+}: SnackbarProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <SnackbarContext.Provider value={{ variant, context, isOpen, setIsOpen }}>
+      {children}
+    </SnackbarContext.Provider>
+  );
+};
+
+Root.displayName = "Snackbar";
+Trigger.displayName = "Snackbar.Trigger";
+Content.displayName = "Snackbar.Content";
+Action.displayName = "Snackbar.Action";
+Meta.displayName = "Snackbar.Meta";
+
+const Snackbar = Object.assign(Root, { Trigger, Content, Action, Meta });
+
+export default Snackbar;

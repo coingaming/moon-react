@@ -1,9 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  SegmentedControl,
-  Segment,
-  SegmentedControlSizes,
-} from "@heathmont/moon-react";
+import { SegmentedControl } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof SegmentedControl>;
@@ -20,25 +16,25 @@ const meta: Meta<Type> = {
   argTypes: {
     size: {
       description: "Defines Segmented Control size",
-      options: Object.values(SegmentedControlSizes),
+      options: ["sm", "md"],
       control: "select",
       table: {
-        defaultValue: { summary: SegmentedControlSizes.md },
+        defaultValue: { summary: "md" },
       },
     },
   },
   render: ({ size, ...props }) => {
     const segmentedControlProps = {
       ...props,
-      ...(size !== SegmentedControlSizes.md && { size }),
+      ...(size !== "md" && { size }),
     };
     const items = new Array(3).fill("");
     return (
       <SegmentedControl {...segmentedControlProps} activeIndex={1}>
         {items.map((_, index) => (
-          <Segment key={index} index={index}>
+          <SegmentedControl.Item key={index} index={index}>
             Item {index + 1}
-          </Segment>
+          </SegmentedControl.Item>
         ))}
       </SegmentedControl>
     );
@@ -50,5 +46,5 @@ export default meta;
 type Story = StoryObj<Type>;
 
 export const SegmentedControlStory: Story = {
-  args: { size: SegmentedControlSizes.md },
+  args: { size: "md" },
 };

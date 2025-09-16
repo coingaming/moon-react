@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Tooltip,
-  TooltipPositions,
-  TooltipContent,
-  Button,
-} from "@heathmont/moon-react";
+import { Tooltip, Button } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Tooltip>;
@@ -21,22 +16,22 @@ const meta: Meta<Type> = {
   argTypes: {
     position: {
       description: "Defines Tooltip position",
-      options: Object.values(TooltipPositions),
+      options: ["end", "start", "top", "bottom"],
       control: "select",
       table: {
-        defaultValue: { summary: TooltipPositions.top },
+        defaultValue: { summary: "top" },
       },
     },
   },
   render: ({ position, ...props }) => {
     const tooltipProps = {
       ...props,
-      ...(position !== TooltipPositions.top && { position }),
+      ...(position !== "top" && { position }),
     };
     return (
       <Tooltip {...tooltipProps}>
         <Button>Hover me</Button>
-        <TooltipContent>Tooltip</TooltipContent>
+        <Tooltip.Content>Tooltip</Tooltip.Content>
       </Tooltip>
     );
   },
@@ -48,6 +43,6 @@ type Story = StoryObj<Type>;
 
 export const TooltipStory: Story = {
   args: {
-    position: TooltipPositions.top,
+    position: "top",
   },
 };

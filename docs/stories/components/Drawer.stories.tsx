@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-  Button,
-} from "@heathmont/moon-react";
+import { Drawer, Button } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof Drawer>;
@@ -25,14 +20,14 @@ const meta: Meta<Type> = {
     };
     return (
       <Drawer {...drawerProps}>
-        <DrawerTrigger>
+        <Drawer.Trigger>
           <Button>Open Drawer</Button>
-        </DrawerTrigger>
-        <DrawerContent>
+        </Drawer.Trigger>
+        <Drawer.Content>
           <div className="w-full flex items-center justify-center h-full bg-brand-subtle text-brand">
             Content
           </div>
-        </DrawerContent>
+        </Drawer.Content>
       </Drawer>
     );
   },
