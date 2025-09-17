@@ -41,12 +41,7 @@ const meta: Meta<Type> = {
       <Accordion {...accordionProps}>
         {items.map((_, index) => (
           <Accordion.Item key={index}>
-            <Accordion.Header>
-              {`Item ${index + 1}`}
-              <Accordion.Meta>
-                <Accordion.Toggle />
-              </Accordion.Meta>
-            </Accordion.Header>
+            <Accordion.Header>{`Item ${index + 1}`}</Accordion.Header>
             <Accordion.Content>Content</Accordion.Content>
           </Accordion.Item>
         ))}
