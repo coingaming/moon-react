@@ -20,12 +20,6 @@ type ActionProps = AlertProps & {
   onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
-const Header = ({ children, className }: AlertProps) => (
-  <span className={mergeClasses("moon-alert-header", className)}>
-    {children}
-  </span>
-);
-
 const Close = ({ children, onClick, className }: ActionProps) => (
   <p className={mergeClasses("moon-alert-close", className)} onClick={onClick}>
     {children ? children : <CloseIcon />}
@@ -72,11 +66,9 @@ const Root = ({
 Root.displayName = "Alert";
 Action.displayName = "Alert.Action";
 Content.displayName = "Alert.Content";
-Header.displayName = "Alert.Header";
 Meta.displayName = "Alert.Meta";
 
 const Alert = Object.assign(Root, {
-  Header,
   Close,
   Content,
   Action,
