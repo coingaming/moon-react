@@ -1,11 +1,17 @@
 {
   "name": "@heathmont/moon-react",
-  "private": false,
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
+  "author": "Yolo Group",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coingaming/moon-react.git"
+  },
+  "homepage": "https://react.moon.io",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

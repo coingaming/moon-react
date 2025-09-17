@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 2.0.2
+
+### Patch Changes
+
+- fix: update package.json file
+
 ## 2.0.1
 
 ### Patch Changes
