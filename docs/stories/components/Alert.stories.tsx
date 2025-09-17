@@ -37,11 +37,7 @@ const meta: Meta<Type> = {
       ...(variant !== "fill" && { variant }),
       ...(context !== "brand" && { context }),
     };
-    return (
-      <Alert {...alertProps}>
-        <Alert.Header>Alert</Alert.Header>
-      </Alert>
-    );
+    return <Alert {...alertProps}>Alert</Alert>;
   },
 };
 

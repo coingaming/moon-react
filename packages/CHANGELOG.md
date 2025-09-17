@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 2.0.3
+
+### Patch Changes
+
+- fix: remove unnecessary Alert.Header
+
 ## 2.0.2
 
 ### Patch Changes
