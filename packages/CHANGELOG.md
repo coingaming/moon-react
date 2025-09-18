@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 2.0.4
+
+### Patch Changes
+
+- fix: BottomSheet styling
+
 ## 2.0.3
 
 ### Patch Changes

@@ -1,4 +1,4 @@
-/* Moon UI v3.1.3 */
+/* Moon UI v3.1.4 */
 @layer components {
 .moon-form-hint {
   font: var(--font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--font-default);
@@ -1261,7 +1261,7 @@
   align-self: end;
   border-radius: var(--component-bottom-sheet-radius) var(--component-bottom-sheet-radius) 0 0;
   color: var(--color-text-primary);
-  background-color: var(--component-bottom-sheet-background);
+  background-color: var(--color-background-primary);
   box-shadow: var(--style-shadow-300-layer-1-x) var(--style-shadow-300-layer-1-y) var(--style-shadow-300-layer-1-blur) var(--style-shadow-300-layer-1-spread) var(--style-shadow-300-layer-1-color), var(--style-shadow-300-layer-2-x) var(--style-shadow-300-layer-2-y) var(--style-shadow-300-layer-2-blur) var(--style-shadow-300-layer-2-spread) var(--style-shadow-300-layer-2-color);
   scale: 95%;
   opacity: 0;
@@ -1279,11 +1279,12 @@
 }
 .moon-bottom-sheet-box :where(.moon-bottom-sheet-handle) {
   position: absolute;
-  top: calc((var(--spacing-space-8) + var(--component-bottom-sheet-handle-height)) * -1);
+  cursor: grab;
+  top: var(--spacing-space-8);
   left: 50%;
   transform: translateX(-50%);
-  width: var(--component-bottom-sheet-handle-width);
-  height: var(--component-bottom-sheet-handle-height);
+  width: var(--spacing-width-40);
+  height: var(--spacing-height-4);
   border-radius: var(--radius-9999);
   background-color: var(--color-border-primary);
 }
