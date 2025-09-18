@@ -19,6 +19,11 @@ const preview: Preview = {
     },
   },
   parameters: {
+    options: {
+      storySort: {
+        order: ["Getting started", "*"],
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
