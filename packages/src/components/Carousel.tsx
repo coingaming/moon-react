@@ -43,8 +43,18 @@ const getScrollAmount = (
     : scrollAmount;
 };
 
-const Item = ({ children }: { children: React.ReactNode }) => {
-  return <div className="moon-carousel-item">{children}</div>;
+const Item = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={mergeClasses("moon-carousel-item", className)}>
+      {children}
+    </div>
+  );
 };
 
 const Control = ({
