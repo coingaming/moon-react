@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useRef } from "react";
+import React, {
+  createContext,
+  useContext,
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import mergeClasses from "../helpers/mergeClasses";
 import ArrowLeft from "../assets/icons/ArrowLeft";
 import ArrowRight from "../assets/icons/ArrowRight";
@@ -6,15 +13,14 @@ import type { Directions } from "../types";
 
 export type ScrollDirections = Directions;
 
-type CarouselContextType = {
+type ContextType = {
   scrollBy: (direction: ScrollDirections) => void;
-  reelRef: React.RefObject<HTMLDivElement | null> | null;
+  reelRef: React.RefObject<HTMLDivElement | null>;
+  canScrollStart: boolean;
+  canScrollEnd: boolean;
 };
 
-const CarouselContext = createContext<CarouselContextType>({
-  scrollBy: (_direction: ScrollDirections) => null,
-  reelRef: null,
-});
+const CarouselContext = createContext<ContextType | null>(null);
 
 function useCarouselContext() {
   const ctx = useContext(CarouselContext);
@@ -22,22 +28,20 @@ function useCarouselContext() {
   return ctx;
 }
 
-function getScrollAmount({
-  scrollAmount,
-  direction,
-  reel,
-}: {
-  scrollAmount: number;
-  direction: ScrollDirections;
-  reel: HTMLDivElement;
-}): number {
+const getScrollAmount = (
+  scrollAmount: number,
+  direction: ScrollDirections,
+  reel: HTMLDivElement
+): number => {
   const isRTL = getComputedStyle(reel).direction === "rtl";
-
-  if (isRTL) {
-    return direction === "end" ? -scrollAmount : scrollAmount;
-  }
-  return direction === "start" ? -scrollAmount : scrollAmount;
-}
+  return isRTL
+    ? direction === "end"
+      ? -scrollAmount
+      : scrollAmount
+    : direction === "start"
+    ? -scrollAmount
+    : scrollAmount;
+};
 
 const Item = ({ children }: { children: React.ReactNode }) => {
   return <div className="moon-carousel-item">{children}</div>;
@@ -50,14 +54,17 @@ const Control = ({
 }: React.ComponentProps<"button"> & {
   direction: ScrollDirections;
 }) => {
-  const { scrollBy } = useCarouselContext();
-
+  const { scrollBy, canScrollStart, canScrollEnd } = useCarouselContext();
+  const isDisabled = direction === "start" ? !canScrollStart : !canScrollEnd;
   return (
     <button
       className={mergeClasses("moon-carousel-control", className)}
+      disabled={isDisabled}
       onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-        scrollBy(direction);
-        props?.onClick?.(e);
+        if (!isDisabled) {
+          scrollBy(direction);
+          props?.onClick?.(e);
+        }
       }}
       {...props}
     >
@@ -66,33 +73,68 @@ const Control = ({
   );
 };
 
-const Root = ({ children }: { children: React.ReactNode }) => {
+const Root = ({
+  hasControls,
+  children,
+}: {
+  children: React.ReactNode;
+  hasControls?: boolean;
+}) => {
   const reelRef = useRef<HTMLDivElement>(null);
-
-  const scrollBy = (direction: ScrollDirections) => {
+  const [canScrollStart, setCanScrollStart] = useState(false);
+  const [canScrollEnd, setCanScrollEnd] = useState(true);
+  const updateScrollState = useCallback(() => {
     if (!reelRef.current) return;
+    const reel = reelRef.current;
+    const isRTL = getComputedStyle(reel).direction === "rtl";
+    const maxScrollLeft = reel.scrollWidth - reel.clientWidth;
+    if (isRTL) {
+      setCanScrollStart(Math.abs(reel.scrollLeft) < maxScrollLeft);
+      setCanScrollEnd(reel.scrollLeft < 0);
+    } else {
+      setCanScrollStart(reel.scrollLeft > 0);
+      setCanScrollEnd(reel.scrollLeft < maxScrollLeft);
+    }
+  }, []);
 
+  const scrollBy = useCallback((direction: ScrollDirections) => {
+    if (!reelRef.current) return;
     const reel = reelRef.current;
     const item = reel.querySelector(".moon-carousel-item") as HTMLElement;
-
     if (item) {
       const scrollAmount =
         item.offsetWidth + parseInt(getComputedStyle(reel).gap || "0", 10);
-
       reel.scrollBy({
         top: 0,
-        left: getScrollAmount({ scrollAmount, direction, reel }),
+        left: getScrollAmount(scrollAmount, direction, reel),
         behavior: "smooth",
       });
     }
-  };
+  }, []);
 
+  useEffect(() => {
+    const reel = reelRef.current;
+    if (!reel) return;
+    updateScrollState();
+    const handleScroll = () => updateScrollState();
+    const handleResize = () => updateScrollState();
+    reel.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      reel.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [updateScrollState]);
   return (
-    <CarouselContext.Provider value={{ scrollBy, reelRef }}>
+    <CarouselContext.Provider
+      value={{ scrollBy, reelRef, canScrollStart, canScrollEnd }}
+    >
       <div className="moon-carousel">
+        {hasControls && <Control direction="start" />}
         <div className="moon-carousel-reel" ref={reelRef}>
           {children}
         </div>
+        {hasControls && <Control direction="end" />}
       </div>
     </CarouselContext.Provider>
   );
@@ -100,7 +142,6 @@ const Root = ({ children }: { children: React.ReactNode }) => {
 
 Root.displayName = "Carousel";
 Item.displayName = "Carousel.Item";
-Control.displayName = "Carousel.Control";
 
 const Carousel = Object.assign(Root, { Item, Control });
 

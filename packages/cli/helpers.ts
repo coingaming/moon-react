@@ -10,7 +10,6 @@ const ARGS = [
   "--componentsProjectId",
   "--target",
   "--preflight",
-  "--customPrefix",
   "--projectName",
 ];
 
