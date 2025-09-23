@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
-import ArrowLeft from "../assets/icons/ArrowLeft";
-import ArrowRight from "../assets/icons/ArrowRight";
+import ChevronLeft from "../assets/icons/ChevronLeft";
+import ChevronRight from "../assets/icons/ChevronRight";
 import mergeClasses from "../helpers/mergeClasses";
 
 type PaginationContextType = {
@@ -71,7 +71,7 @@ const Previous = ({ ...props }: PaginationArrowsProps) => {
       }}
       {...props}
     >
-      <ArrowLeft />
+      <ChevronLeft />
     </span>
   );
 };
@@ -88,7 +88,7 @@ const Next = ({ ...props }: PaginationArrowsProps) => {
       }}
       {...props}
     >
-      <ArrowRight />
+      <ChevronRight />
     </span>
   );
 };

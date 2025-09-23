@@ -7,8 +7,8 @@ import React, {
   useCallback,
 } from "react";
 import mergeClasses from "../helpers/mergeClasses";
-import ArrowLeft from "../assets/icons/ArrowLeft";
-import ArrowRight from "../assets/icons/ArrowRight";
+import ChevronLeft from "../assets/icons/ChevronLeft";
+import ChevronRight from "../assets/icons/ChevronRight";
 import type { Directions } from "../types";
 
 export type ScrollDirections = Directions;
@@ -78,7 +78,7 @@ const Control = ({
       }}
       {...props}
     >
-      {direction === "end" ? <ArrowRight /> : <ArrowLeft />}
+      {direction === "end" ? <ChevronRight /> : <ChevronLeft />}
     </button>
   );
 };
