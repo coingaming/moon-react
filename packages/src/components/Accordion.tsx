@@ -1,30 +1,37 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes, Variants } from "../types";
 import ChevronDown from "../assets/icons/ChevronDown";
 
 export type AccordionSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
-
 export type AccordionVariants = Extract<Variants, "fill" | "ghost" | "outline">;
 
 type Props = {
   size?: AccordionSizes;
   variant?: AccordionVariants;
+  className?: string;
+  children: React.ReactNode;
+};
+
+type ItemProps = {
   arrow?: boolean;
   initiallyOpen?: boolean;
   className?: string;
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
-const Item = ({ arrow = true, initiallyOpen = false, children }: Props) => {
+const Item = ({ initiallyOpen = false, children, className }: ItemProps) => {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
+
+  const classes = mergeClasses(
+    "moon-accordion-item",
+    isOpen && "moon-accordion-open",
+    className
+  );
+
   return (
     <details
-      className={mergeClasses(
-        "moon-accordion-item",
-        arrow && "moon-accordion-arrow",
-        isOpen && "moon-accordion-open"
-      )}
+      className={classes}
       open={isOpen}
       onToggle={(e) => setIsOpen(e.currentTarget.open)}
     >
@@ -37,15 +44,11 @@ const Header = ({
   children,
   className,
   ...props
-}: React.ComponentProps<"summary"> & {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+}: React.ComponentProps<"summary">) => {
+  const classes = mergeClasses("moon-accordion-item-header", className);
+
   return (
-    <summary
-      className={mergeClasses("moon-accordion-item-header", className)}
-      {...props}
-    >
+    <summary className={classes} {...props}>
       {children}
     </summary>
   );
@@ -55,31 +58,25 @@ const Toggle = ({
   children,
   className,
   ...props
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) => (
-  <button
-    className={mergeClasses("moon-accordion-item-toggle", className)}
-    {...props}
-  >
-    {children ? children : <ChevronDown />}
-  </button>
-);
+}: React.ComponentProps<"button">) => {
+  const classes = mergeClasses("moon-accordion-item-toggle", className);
+
+  return (
+    <button className={classes} {...props}>
+      {children || <ChevronDown />}
+    </button>
+  );
+};
 
 const Content = ({
   children,
   className,
   ...props
-}: React.ComponentProps<"div"> & {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+}: React.ComponentProps<"div">) => {
+  const classes = mergeClasses("moon-accordion-item-content", className);
+
   return (
-    <div
-      className={mergeClasses("moon-accordion-item-content", className)}
-      {...props}
-    >
+    <div className={classes} {...props}>
       {children}
     </div>
   );
@@ -89,15 +86,11 @@ const Meta = ({
   children,
   className,
   ...props
-}: React.ComponentProps<"div"> & {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+}: React.ComponentProps<"div">) => {
+  const classes = mergeClasses("moon-accordion-item-meta", className);
+
   return (
-    <div
-      className={mergeClasses("moon-accordion-item-meta", className)}
-      {...props}
-    >
+    <div className={classes} {...props}>
       {children}
     </div>
   );
@@ -108,30 +101,29 @@ const Root = ({
   variant = "fill",
   className,
   children,
-}: Props) => (
-  <div
-    className={mergeClasses(
-      "moon-accordion",
-      size !== "md" && `moon-accordion-${size}`,
-      variant !== "fill" && `moon-accordion-${variant}`,
-      className
-    )}
-  >
-    {children}
-  </div>
-);
+}: Props) => {
+  const classes = mergeClasses(
+    "moon-accordion",
+    size !== "md" && `moon-accordion-${size}`,
+    variant !== "fill" && `moon-accordion-${variant}`,
+    className
+  );
+
+  return <div className={classes}>{children}</div>;
+};
+
 Root.displayName = "Accordion";
 Item.displayName = "Accordion.Item";
-Content.displayName = "Accordion.Content";
 Header.displayName = "Accordion.Header";
 Toggle.displayName = "Accordion.Toggle";
+Content.displayName = "Accordion.Content";
 Meta.displayName = "Accordion.Meta";
 
 const Accordion = Object.assign(Root, {
   Item,
   Header,
-  Content,
   Toggle,
+  Content,
   Meta,
 });
 

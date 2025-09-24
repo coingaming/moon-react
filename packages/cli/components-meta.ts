@@ -52,7 +52,14 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   accordion: {
-    internalDeps: [mergeClassesHelper, typesHelper],
+    internalDeps: [
+      mergeClassesHelper,
+      typesHelper,
+      {
+        ...iconsData,
+        name: "ChevronDown",
+      },
+    ],
   },
   alert: {
     internalDeps: [
@@ -60,7 +67,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
       typesHelper,
       {
         ...iconsData,
-        name: "CloseIcon",
+        name: "Close",
       },
     ],
   },
@@ -86,11 +93,11 @@ export const COMPONENTS_META: Record<string, Deps> = {
       },
       {
         ...iconsData,
-        name: "ArrowLeftIcon",
+        name: "ChevronLeft",
       },
       {
         ...iconsData,
-        name: "ArrowRightIcon",
+        name: "ChevronRight",
       },
     ],
   },

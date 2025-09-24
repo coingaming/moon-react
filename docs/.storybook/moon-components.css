@@ -1,4 +1,4 @@
-/* Moon UI v3.2.1 */
+/* Moon UI v3.3.0 */
 @layer components {
 .moon-form-hint {
   font: var(--font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--font-default);
@@ -1736,18 +1736,96 @@
 }
 
 .moon-dropdown {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  display: inline-block;
+  position-area: var(--anchor-v, bottom) var(--anchor-h, span-right);
+}
+.moon-dropdown > *:not(summary):focus {
+  outline: none;
+}
+.moon-dropdown .moon-dropdown-content {
+  position: absolute;
   height: -moz-fit-content;
   height: fit-content;
-  overflow: auto;
   max-height: var(--component-dropdown-max-height);
-  width: 100%;
-  max-width: var(--component-dropdown-max-width);
+  width: var(--component-dropdown-max-width);
   border-radius: var(--component-dropdown-radius);
   color: var(--color-text-primary);
   background-color: var(--component-dropdown-background);
   box-shadow: inset 0 0 0 var(--component-dropdown-stroke) var(--component-dropdown-border), var(--style-shadow-300-layer-1-x) var(--style-shadow-300-layer-1-y) var(--style-shadow-300-layer-1-blur) var(--style-shadow-300-layer-1-spread) var(--style-shadow-300-layer-1-color), var(--style-shadow-300-layer-2-x) var(--style-shadow-300-layer-2-y) var(--style-shadow-300-layer-2-blur) var(--style-shadow-300-layer-2-spread) var(--style-shadow-300-layer-2-color);
+  flex-direction: column;
+  display: flex;
+  overflow: auto;
+  top: calc(100% + var(--spacing-gap-8));
+}
+.moon-dropdown:not(details, .moon-dropdown-open, .moon-dropdown-hover:hover, :focus-within) .moon-dropdown-content {
+  display: none;
+  transform-origin: top;
+  opacity: 0;
+  scale: 95%;
+}
+.moon-dropdown[popover],
+.moon-dropdown .moon-dropdown-content {
+  z-index: 999;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .moon-dropdown[popover],
+  .moon-dropdown .moon-dropdown-content {
+    transition-property: opacity, scale, display;
+    transition-behavior: allow-discrete;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+@starting-style {
+  .moon-dropdown[popover],
+  .moon-dropdown .moon-dropdown-content {
+    scale: 95%;
+    opacity: 0;
+  }
+}
+.moon-dropdown.moon-dropdown-open > [tabindex]:first-child, .moon-dropdown:not(.moon-dropdown-hover):focus > [tabindex]:first-child, .moon-dropdown:focus-within > [tabindex]:first-child {
+  pointer-events: none;
+}
+.moon-dropdown.moon-dropdown-open .moon-dropdown-content, .moon-dropdown:not(.moon-dropdown-hover):focus .moon-dropdown-content, .moon-dropdown:focus-within .moon-dropdown-content {
+  opacity: 1;
+}
+.moon-dropdown.moon-dropdown-hover:hover .moon-dropdown-content {
+  opacity: 1;
+  scale: 100%;
+}
+.moon-dropdown:is(details) summary::-webkit-details-marker {
+  display: none;
+}
+.moon-dropdown.moon-dropdown-open .moon-dropdown-content, .moon-dropdown:focus .moon-dropdown-content, .moon-dropdown:focus-within .moon-dropdown-content {
+  scale: 100%;
+}
+.moon-dropdown:where([popover]) {
+  background: rgba(0, 0, 0, 0);
+}
+.moon-dropdown[popover] {
+  position: fixed;
+  color: inherit;
+}
+@supports not (position-area: bottom) {
+  .moon-dropdown[popover] {
+    margin: auto;
+  }
+  .moon-dropdown[popover].moon-dropdown-open:not(:popover-open) {
+    display: none;
+    transform-origin: top;
+    opacity: 0;
+    scale: 95%;
+  }
+  .moon-dropdown[popover]::backdrop {
+    background-color: color-mix(in oklab, #000 30%, rgba(0, 0, 0, 0));
+  }
+}
+.moon-dropdown[popover]:not(.moon-dropdown-open, :popover-open) {
+  display: none;
+  transform-origin: top;
+  opacity: 0;
+  scale: 95%;
 }
 
 .moon-input {

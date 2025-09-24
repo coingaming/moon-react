@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Accordion } from "@heathmont/moon-react";
+import { Accordion as AccordionComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Accordion>;
+type Type = React.ComponentProps<typeof AccordionComponent>;
 
 const meta: Meta<Type> = {
   title: "Content display/Accordion",
@@ -31,21 +31,24 @@ const meta: Meta<Type> = {
       },
     },
   },
-  render: ({ size, ...props }) => {
+  render: ({ size, variant, ...props }) => {
     const accordionProps = {
       ...props,
       ...(size !== "md" && { size }),
+      ...(variant !== "fill" && { variant }),
     };
     const items = new Array(3).fill("");
     return (
-      <Accordion {...accordionProps}>
+      <AccordionComponent {...accordionProps}>
         {items.map((_, index) => (
-          <Accordion.Item key={index}>
-            <Accordion.Header>{`Item ${index + 1}`}</Accordion.Header>
-            <Accordion.Content>Content</Accordion.Content>
-          </Accordion.Item>
+          <AccordionComponent.Item key={index}>
+            <AccordionComponent.Header>{`Item ${
+              index + 1
+            }`}</AccordionComponent.Header>
+            <AccordionComponent.Content>Content</AccordionComponent.Content>
+          </AccordionComponent.Item>
         ))}
-      </Accordion>
+      </AccordionComponent>
     );
   },
 };
@@ -54,9 +57,39 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const AccordionStory: Story = {
+export const Accordion: Story = {
   args: {
     size: "md",
     variant: "fill",
+  },
+};
+
+export const AccordionWithMeta: Story = {
+  args: {
+    size: "md",
+    variant: "fill",
+  },
+  render: ({ size, variant, ...props }) => {
+    const accordionProps = {
+      ...props,
+      ...(size !== "md" && { size }),
+      ...(variant !== "fill" && { variant }),
+    };
+    const items = new Array(3).fill("");
+    return (
+      <AccordionComponent {...accordionProps}>
+        {items.map((_, index) => (
+          <AccordionComponent.Item key={index}>
+            <AccordionComponent.Header>
+              {`Item ${index + 1}`}
+              <AccordionComponent.Meta>
+                <AccordionComponent.Toggle />
+              </AccordionComponent.Meta>
+            </AccordionComponent.Header>
+            <AccordionComponent.Content>Content</AccordionComponent.Content>
+          </AccordionComponent.Item>
+        ))}
+      </AccordionComponent>
+    );
   },
 };

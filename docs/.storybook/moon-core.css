@@ -1,4 +1,4 @@
-/* Moon UI v3.2.1 */
+/* Moon UI v3.3.0 */
 @theme inline {
 --color-background-backdrop: var(--color-gray-alpha-72);
 --color-background-brand-alpha: var(--color-mystic-indigo-alpha-12);
@@ -30,6 +30,8 @@
 --color-border-brand-subtle: var(--color-mystic-indigo-4);
 --color-border-brand: var(--color-mystic-indigo-9);
 --color-border-caution: var(--color-orange-9);
+--color-border-force-dark: var(--color-gray-black);
+--color-border-force-light: var(--color-gray-white);
 --color-border-info: var(--color-indigo-9);
 --color-border-inverse: var(--color-gray-12);
 --color-border-negative: var(--color-red-9);
@@ -56,7 +58,6 @@
 --color-icon-on-caution: var(--color-gray-white);
 --color-icon-on-info: var(--color-gray-white);
 --color-icon-on-negative: var(--color-gray-white);
---color-icon-on-neutral: var(--color-gray-white);
 --color-icon-on-positive: var(--color-gray-white);
 --color-icon-on-ui: var(--color-gray-12);
 --color-icon-positive-strong: var(--color-green-12);
@@ -84,7 +85,6 @@
 --color-text-on-caution: var(--color-gray-white);
 --color-text-on-info: var(--color-gray-white);
 --color-text-on-negative: var(--color-gray-white);
---color-text-on-neutral: var(--color-gray-white);
 --color-text-on-positive: var(--color-gray-white);
 --color-text-on-ui: var(--color-gray-12);
 --color-text-positive-strong: var(--color-green-12);
@@ -890,6 +890,8 @@
 --color-border-brand-subtle: var(--color-mystic-indigo-4);
 --color-border-brand: var(--color-mystic-indigo-9);
 --color-border-caution: var(--color-orange-9);
+--color-border-force-dark: var(--color-gray-black);
+--color-border-force-light: var(--color-gray-white);
 --color-border-info: var(--color-indigo-9);
 --color-border-inverse: var(--color-gray-12);
 --color-border-negative: var(--color-red-9);
@@ -965,7 +967,6 @@
 --color-icon-on-caution: var(--color-gray-white);
 --color-icon-on-info: var(--color-gray-white);
 --color-icon-on-negative: var(--color-gray-white);
---color-icon-on-neutral: var(--color-gray-white);
 --color-icon-on-positive: var(--color-gray-white);
 --color-icon-on-ui: var(--color-gray-12);
 --color-icon-positive-strong: var(--color-green-12);
@@ -1082,7 +1083,6 @@
 --color-text-on-caution: var(--color-gray-white);
 --color-text-on-info: var(--color-gray-white);
 --color-text-on-negative: var(--color-gray-white);
---color-text-on-neutral: var(--color-gray-white);
 --color-text-on-positive: var(--color-gray-white);
 --color-text-on-ui: var(--color-gray-12);
 --color-text-positive-strong: var(--color-green-12);
@@ -1456,6 +1456,8 @@
 --color-border-brand-subtle: var(--color-mystic-indigo-4);
 --color-border-brand: var(--color-mystic-indigo-9);
 --color-border-caution: var(--color-orange-9);
+--color-border-force-dark: var(--color-gray-black);
+--color-border-force-light: var(--color-gray-white);
 --color-border-info: var(--color-indigo-9);
 --color-border-inverse: var(--color-gray-12);
 --color-border-negative: var(--color-red-9);
@@ -1531,7 +1533,6 @@
 --color-icon-on-caution: var(--color-gray-white);
 --color-icon-on-info: var(--color-gray-white);
 --color-icon-on-negative: var(--color-gray-white);
---color-icon-on-neutral: var(--color-gray-white);
 --color-icon-on-positive: var(--color-gray-white);
 --color-icon-on-ui: var(--color-gray-12);
 --color-icon-positive-strong: var(--color-green-12);
@@ -1648,7 +1649,6 @@
 --color-text-on-caution: var(--color-gray-white);
 --color-text-on-info: var(--color-gray-white);
 --color-text-on-negative: var(--color-gray-white);
---color-text-on-neutral: var(--color-gray-white);
 --color-text-on-positive: var(--color-gray-white);
 --color-text-on-ui: var(--color-gray-12);
 --color-text-positive-strong: var(--color-green-12);

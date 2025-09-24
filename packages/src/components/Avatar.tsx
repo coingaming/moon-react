@@ -10,32 +10,33 @@ export type AvatarSizes = Extract<
 
 export type AvatarVariants = Extract<Variants, "fill" | "soft">;
 
-type AvatarProps = React.ComponentProps<"div"> & {
+type Props = React.ComponentProps<"div"> & {
   size?: AvatarSizes;
   variant?: AvatarVariants;
-  imgSrc?: string;
   className?: string;
+  children?: React.ReactNode;
 };
 
 const Avatar = ({
   size = "md",
   variant = "fill",
-  imgSrc,
   className,
+  children,
   ...props
-}: AvatarProps) => (
-  <div
-    className={mergeClasses(
-      "moon-avatar",
-      size !== "md" && `moon-avatar-${size}`,
-      variant !== "fill" && `moon-avatar-${variant}`,
-      className
-    )}
-    {...props}
-  >
-    {imgSrc ? <img src={imgSrc} /> : <User />}
-  </div>
-);
+}: Props) => {
+  const classes = mergeClasses(
+    "moon-avatar",
+    size !== "md" && `moon-avatar-${size}`,
+    variant !== "fill" && `moon-avatar-${variant}`,
+    className
+  );
+
+  return (
+    <div className={classes} {...props}>
+      {children || <User />}
+    </div>
+  );
+};
 
 Avatar.displayName = "Avatar";
 

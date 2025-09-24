@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LinksBlock from "../shared/LinksBlock";
-import { Avatar } from "@heathmont/moon-react";
+import { Avatar as AvatarComponent } from "@heathmont/moon-react";
 
-type Type = React.ComponentProps<typeof Avatar>;
+type Type = React.ComponentProps<typeof AvatarComponent>;
 
 const meta: Meta<Type> = {
   title: "Content display/Avatar",
@@ -30,14 +30,18 @@ const meta: Meta<Type> = {
         defaultValue: { summary: "fill" },
       },
     },
+    children: {
+      description: "Custom content of Avatar",
+      control: { type: "text" },
+    },
   },
-  render: ({ size, variant, ...props }) => {
+  render: ({ size, variant, children, ...props }) => {
     const avatarProps = {
       ...props,
       ...(size !== "md" && { size }),
       ...(variant !== "fill" && { variant }),
     };
-    return <Avatar {...avatarProps} />;
+    return <AvatarComponent {...avatarProps}>{children}</AvatarComponent>;
   },
 };
 
@@ -45,9 +49,10 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const AvatarStory: Story = {
+export const Avatar: Story = {
   args: {
     size: "md",
     variant: "fill",
+    children: undefined,
   },
 };
