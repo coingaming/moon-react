@@ -18,5 +18,8 @@
     "changeset": "changeset",
     "version": "changeset version && npm install && npm update && npm run build && npm run moon-ui",
     "release": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.7"
   }
 }
