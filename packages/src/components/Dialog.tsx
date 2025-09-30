@@ -47,6 +47,7 @@ const Close = () => {
   return (
     <button
       className="moon-dialog-close"
+      aria-label="Close"
       onClick={() => dialogRef?.current?.close()}
     >
       <CloseIcon />
