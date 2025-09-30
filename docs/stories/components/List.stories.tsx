@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { List } from "@heathmont/moon-react";
+import { List as ListComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
+import StarIcon from "../shared/icons/StarIcon";
 
-type Type = React.ComponentProps<typeof List>;
+type Type = React.ComponentProps<typeof ListComponent>;
 
 const meta: Meta<Type> = {
   title: "Content display/List",
@@ -30,11 +31,11 @@ const meta: Meta<Type> = {
     };
     const items = new Array(3).fill("");
     return (
-      <List {...listProps}>
+      <ListComponent {...listProps}>
         {items.map((_, index) => (
-          <List.Item key={index}>Item {index + 1}</List.Item>
+          <ListComponent.Item key={index}>Item {index + 1}</ListComponent.Item>
         ))}
-      </List>
+      </ListComponent>
     );
   },
 };
@@ -43,8 +44,33 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const ListStory: Story = {
+export const List: Story = {
   args: {
     size: "md",
+  },
+};
+
+export const ListWithMeta: Story = {
+  args: {
+    size: "md",
+  },
+  render: ({ size, ...props }) => {
+    const listProps = {
+      ...props,
+      ...(size !== "md" && { size }),
+    };
+    const items = new Array(3).fill("");
+    return (
+      <ListComponent {...listProps}>
+        {items.map((_, index) => (
+          <ListComponent.Item key={index}>
+            Item {index + 1}
+            <ListComponent.Meta>
+              <StarIcon />
+            </ListComponent.Meta>
+          </ListComponent.Item>
+        ))}
+      </ListComponent>
+    );
   },
 };

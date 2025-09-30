@@ -1,5 +1,12 @@
 # @heathmont/moon-react
 
+## 2.0.5
+
+### Patch Changes
+
+- 606f128: feat: add testing tool
+- fix: add tests - accordion [MDS-2004]
+
 ## 2.0.4
 
 ### Patch Changes
