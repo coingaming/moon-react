@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Table } from "@heathmont/moon-react";
+import { Table as TableComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Table>;
+type Type = React.ComponentProps<typeof TableComponent>;
 
 const meta: Meta<Type> = {
   title: "Content display/Table",
@@ -31,24 +31,26 @@ const meta: Meta<Type> = {
     const rows = new Array(5).fill("");
     const cols = new Array(3).fill("");
     return (
-      <Table {...tableProps}>
-        <Table.Head>
-          <Table.Row>
+      <TableComponent {...tableProps}>
+        <TableComponent.Head>
+          <TableComponent.Row>
             {cols.map((_, index) => (
-              <Table.HeadCell key={index}>Title</Table.HeadCell>
+              <TableComponent.HeadCell key={index}>
+                Title
+              </TableComponent.HeadCell>
             ))}
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
+          </TableComponent.Row>
+        </TableComponent.Head>
+        <TableComponent.Body>
           {rows.map((_, rowIndex) => (
-            <Table.Row key={rowIndex}>
+            <TableComponent.Row key={rowIndex}>
               {cols.map((_, colIndex) => (
-                <Table.Cell key={colIndex}>Cell</Table.Cell>
+                <TableComponent.Cell key={colIndex}>Cell</TableComponent.Cell>
               ))}
-            </Table.Row>
+            </TableComponent.Row>
           ))}
-        </Table.Body>
-      </Table>
+        </TableComponent.Body>
+      </TableComponent>
     );
   },
 };
@@ -57,4 +59,4 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const TableStory: Story = { args: { size: "md" } };
+export const Table: Story = { args: { size: "md" } };
