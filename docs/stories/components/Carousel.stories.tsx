@@ -33,7 +33,7 @@ const meta: Meta<Type> = {
       <CarouselComponent {...carouselProps} hasControls={hasControls}>
         {items.map((_, index) => (
           <CarouselComponent.Item key={index}>
-            <div className="flex items-center justify-center h-space-160 w-2xs bg-brand-subtle text-brand">
+            <div className="flex items-center justify-center h-40 w-2xs bg-brand-subtle text-brand">
               Item {index + 1}
             </div>
           </CarouselComponent.Item>
