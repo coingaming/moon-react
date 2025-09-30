@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Table from "../Table";
+import { Table } from "../components";
 
 describe("Table component", () => {
   it("renders with default size (md)", () => {
@@ -22,7 +22,6 @@ describe("Table component", () => {
     const table = screen.getByTestId("table");
     expect(table.tagName).toBe("TABLE");
     expect(table).toHaveClass("moon-table");
-    // md no agrega clase extra
     expect(table.className).not.toMatch(/moon-table-(sm|lg|xl)/);
 
     expect(screen.getByText("Header")).toBeInTheDocument();
