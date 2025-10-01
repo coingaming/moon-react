@@ -19,6 +19,7 @@ const CircularProgress = ({
 }: CircularProgressType) => (
   <div
     data-value={value}
+    role="progressbar"
     className={mergeClasses(
       "moon-circular-progress",
       size !== "md" && `moon-circular-progress-${size}`,
