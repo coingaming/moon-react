@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tooltip, Button } from "@heathmont/moon-react";
+import { Tooltip as TooltipComponent, Button } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Tooltip>;
+type Type = React.ComponentProps<typeof TooltipComponent>;
 
 const meta: Meta<Type> = {
   title: "Messaging & feedback/Tooltip",
@@ -22,6 +22,13 @@ const meta: Meta<Type> = {
         defaultValue: { summary: "top" },
       },
     },
+    hasPointer: {
+      description: "Defines if Tooltip has pointer",
+      control: "boolean",
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
   },
   render: ({ position, ...props }) => {
     const tooltipProps = {
@@ -29,10 +36,12 @@ const meta: Meta<Type> = {
       ...(position !== "top" && { position }),
     };
     return (
-      <Tooltip {...tooltipProps}>
-        <Button>Hover me</Button>
-        <Tooltip.Content>Tooltip</Tooltip.Content>
-      </Tooltip>
+      <TooltipComponent {...tooltipProps}>
+        <TooltipComponent.Trigger>
+          <Button>Hover me</Button>
+        </TooltipComponent.Trigger>
+        <TooltipComponent.Content>Tooltip</TooltipComponent.Content>
+      </TooltipComponent>
     );
   },
 };
@@ -41,8 +50,9 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const TooltipStory: Story = {
+export const Tooltip: Story = {
   args: {
     position: "top",
+    hasPointer: false,
   },
 };

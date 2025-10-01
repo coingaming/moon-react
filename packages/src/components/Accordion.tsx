@@ -14,7 +14,6 @@ type Props = {
 };
 
 type ItemProps = {
-  arrow?: boolean;
   initiallyOpen?: boolean;
   className?: string;
   children: React.ReactNode;
@@ -58,13 +57,13 @@ const Toggle = ({
   children,
   className,
   ...props
-}: React.ComponentProps<"button">) => {
+}: React.ComponentProps<"div">) => {
   const classes = mergeClasses("moon-accordion-item-toggle", className);
 
   return (
-    <button className={classes} {...props}>
+    <div className={classes} {...props}>
       {children || <ChevronDown />}
-    </button>
+    </div>
   );
 };
 

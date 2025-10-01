@@ -26,13 +26,13 @@ const Meta = ({
   children,
   className,
   ...props
-}: React.ComponentProps<"li"> & {
+}: React.ComponentProps<"div"> & {
   children: React.ReactNode;
   className?: string;
 }) => (
-  <li className={mergeClasses("moon-list-item-meta", className)} {...props}>
+  <div className={mergeClasses("moon-list-item-meta", className)} {...props}>
     {children}
-  </li>
+  </div>
 );
 
 const Root = ({ size = "md", children, className, ...props }: ListProps) => (

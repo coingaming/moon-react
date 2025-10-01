@@ -12,7 +12,7 @@ type TooltipChildren = {
 type TooltipProps = {
   children: React.ReactNode;
   position?: TooltipPositions;
-  pointer?: boolean;
+  hasPointer?: boolean;
 };
 
 const Trigger = ({ children, className }: TooltipChildren) => (
@@ -28,13 +28,13 @@ const Content = ({ children, className }: TooltipChildren) => (
 const Root = ({
   children,
   position = "top",
-  pointer = false,
+  hasPointer = false,
 }: TooltipProps) => (
   <div
     className={mergeClasses(
       "moon-tooltip",
       position !== "top" && `moon-tooltip-${position}`,
-      pointer && "moon-tooltip-pointer"
+      hasPointer && "moon-tooltip-pointer"
     )}
   >
     {children}

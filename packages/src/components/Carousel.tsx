@@ -76,6 +76,7 @@ const Control = ({
           props?.onClick?.(e);
         }
       }}
+      aria-label={direction === "start" ? "Scroll start" : "Scroll end"}
       {...props}
     >
       {direction === "end" ? <ChevronRight /> : <ChevronLeft />}

@@ -53,6 +53,6 @@ export const Avatar: Story = {
   args: {
     size: "md",
     variant: "fill",
-    children: undefined,
+    children: "",
   },
 };
