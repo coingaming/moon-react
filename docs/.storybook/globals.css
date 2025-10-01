@@ -21,6 +21,10 @@
   }
 }
 
+.docs-story > div:first-of-type {
+  min-height: 200px;
+}
+
 .docs-story,
 .sb-main-padded {
   background-color: var(--color-background-primary);

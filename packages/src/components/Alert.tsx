@@ -6,7 +6,7 @@ import type { Variants, Contexts } from "../types";
 export type AlertVariants = Extract<Variants, "fill" | "soft" | "outline">;
 
 type AlertProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 };
 
