@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LinksBlock from "../shared/LinksBlock";
-import { Alert } from "@heathmont/moon-react";
+import { Alert as AlertComponent } from "@heathmont/moon-react";
 
-type Type = React.ComponentProps<typeof Alert>;
+type Type = React.ComponentProps<typeof AlertComponent>;
 
 const meta: Meta<Type> = {
   title: "Messaging & feedback/Alert",
@@ -37,7 +37,7 @@ const meta: Meta<Type> = {
       ...(variant !== "fill" && { variant }),
       ...(context !== "brand" && { context }),
     };
-    return <Alert {...alertProps}>Alert</Alert>;
+    return <AlertComponent {...alertProps}>Alert</AlertComponent>;
   },
 };
 
@@ -45,6 +45,42 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const AlertStory: Story = {
+export const Alert: Story = {
   args: { variant: "fill", context: "brand" },
+};
+
+export const AlertWithMeta: Story = {
+  args: { variant: "fill", context: "brand" },
+  render: ({ variant, context, ...props }) => {
+    const alertProps = {
+      ...props,
+      ...(variant !== "fill" && { variant }),
+      ...(context !== "brand" && { context }),
+    };
+    return (
+      <AlertComponent {...alertProps}>
+        Alert
+        <AlertComponent.Meta>
+          <AlertComponent.Action>Action</AlertComponent.Action>
+          <AlertComponent.Close />
+        </AlertComponent.Meta>
+      </AlertComponent>
+    );
+  },
+};
+
+export const AlertWithContent: Story = {
+  args: { variant: "fill", context: "brand" },
+  render: ({ variant, context, ...props }) => {
+    const alertProps = {
+      ...props,
+      ...(variant !== "fill" && { variant }),
+      ...(context !== "brand" && { context }),
+    };
+    return (
+      <AlertComponent {...alertProps}>
+        Alert<AlertComponent.Content>Content</AlertComponent.Content>
+      </AlertComponent>
+    );
+  },
 };

@@ -1,5 +1,17 @@
 # @heathmont/moon-react
 
+## 2.1.0
+
+### Minor Changes
+
+- feat: improve Accordion, Alert, Carousel, List, Snackbar, Tooltip
+
+### Patch Changes
+
+- 1dbb682: feat: add UI tests for Menu and Breadcrumbs
+- 6474b8d: feat: add tests for TabList and Pagination
+- 606f128: feat: add testing tool
+
 ## 2.0.4
 
 ### Patch Changes
