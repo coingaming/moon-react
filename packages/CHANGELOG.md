@@ -12,6 +12,13 @@
 - 6474b8d: feat: add tests for TabList and Pagination
 - 606f128: feat: add testing tool
 
+## 2.0.5
+
+### Patch Changes
+
+- 606f128: feat: add testing tool
+- fix: add tests - accordion [MDS-2004]
+
 ## 2.0.4
 
 ### Patch Changes

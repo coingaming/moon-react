@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useRef, ReactNode } from "react";
+import React, { createContext, ReactNode, useContext, useRef } from "react";
 import { createPortal } from "react-dom";
-import mergeClasses from "../helpers/mergeClasses";
 import CloseIcon from "../assets/icons/Close";
+import mergeClasses from "../helpers/mergeClasses";
 
 type DrawerContextType = {
   drawerRef: React.RefObject<HTMLDialogElement | null> | null;
@@ -81,8 +81,9 @@ const Close = ({ onClick, className }: DrawerCloseProps) => {
   };
   return (
     <button
-      onClick={handleClick}
       className={mergeClasses("moon-drawer-close", className)}
+      aria-label="Close"
+      onClick={handleClick}
     >
       <CloseIcon />
     </button>
