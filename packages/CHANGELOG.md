@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 2.1.1
+
+### Patch Changes
+
+- fix: add tests to alert [MDS-2014]
+
 ## 2.1.0
 
 ### Minor Changes
