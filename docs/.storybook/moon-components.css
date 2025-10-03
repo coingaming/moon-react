@@ -1,4 +1,4 @@
-/* Moon UI v3.6.0 */
+/* Moon UI v3.7.0 */
 @layer components {
 .moon-form-hint {
   font: var(--font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--font-default);
@@ -1223,15 +1223,6 @@ label:has(.moon-radio):has(.moon-radio:disabled) {
   --component-badge-soft-border: var(--context-info-soft-border);
 }
 
-.moon-badge-wrapper {
-  position: relative;
-}
-.moon-badge-wrapper :where(.moon-badge) {
-  position: absolute;
-  bottom: calc(100% - var(--spacing-space-2));
-  inset-inline-start: calc(100% - var(--spacing-space-2));
-}
-
 .moon-bottom-sheet {
   position: fixed;
   display: grid;
@@ -1960,15 +1951,12 @@ label:has(.moon-radio):has(.moon-radio:disabled) {
   height: var(--spacing-space-16);
 }
 
-.moon-linear-progress-wrapper {
+label:has(.moon-linear-progress) {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-space-2);
-}
-.moon-linear-progress-wrapper :where(label) {
   font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
   color: var(--color-text-primary);
-  font-weight: var(--font-weight-medium);
   text-align: center;
 }
 
