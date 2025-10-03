@@ -22,20 +22,15 @@ type DrawerProps = {
 };
 
 type DrawerTriggerProps = {
-  children: ReactNode;
-  className?: string;
+  children: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
 };
 
-const Trigger = ({ children, className }: DrawerTriggerProps) => {
+const Trigger = ({ children }: DrawerTriggerProps) => {
   const { drawerRef } = useDrawerContext();
-  return (
-    <button
-      onClick={() => drawerRef?.current?.showModal()}
-      className={className}
-    >
-      {children}
-    </button>
-  );
+  const handleClick = () => drawerRef?.current?.showModal();
+  return React.cloneElement(children, {
+    onClick: handleClick,
+  });
 };
 
 type DrawerContentProps = {
