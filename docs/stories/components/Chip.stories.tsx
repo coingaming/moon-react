@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Chip } from "@heathmont/moon-react";
+import { Chip as ChipComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
+import { useState } from "react";
 
-type Type = React.ComponentProps<typeof Chip>;
+type Type = React.ComponentProps<typeof ChipComponent>;
 
 const meta: Meta<Type> = {
   title: "Forms & selection controls/Chip",
@@ -30,14 +31,31 @@ const meta: Meta<Type> = {
         defaultValue: { summary: "fill" },
       },
     },
+    isActive: {
+      description: "Defines if Chip is active",
+      control: "boolean",
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
   },
-  render: ({ variant, size, ...props }) => {
+  render: ({ variant, size, isActive, ...props }) => {
+    const [localActive, setLocalActive] = useState(false);
+    const currentActive = isActive || localActive;
     const chipProps = {
       ...props,
       ...(variant !== "fill" && { variant }),
       ...(size !== "md" && { size }),
     };
-    return <Chip {...chipProps}>Chip</Chip>;
+    return (
+      <ChipComponent
+        {...chipProps}
+        isActive={currentActive}
+        onClick={() => setLocalActive(!localActive)}
+      >
+        Chip
+      </ChipComponent>
+    );
   },
 };
 
@@ -45,9 +63,10 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const ChipStory: Story = {
+export const Chip: Story = {
   args: {
     size: "md",
     variant: "fill",
+    isActive: false,
   },
 };

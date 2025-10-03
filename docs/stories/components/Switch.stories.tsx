@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Switch } from "@heathmont/moon-react";
+import { Switch as SwitchComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Switch>;
+type Type = React.ComponentProps<typeof SwitchComponent>;
 
 const meta: Meta<Type> = {
   title: "Forms & selection controls/Switch",
@@ -28,7 +28,7 @@ const meta: Meta<Type> = {
       ...props,
       ...(size !== "sm" && { size }),
     };
-    return <Switch {...switchProps} />;
+    return <SwitchComponent {...switchProps} />;
   },
 };
 
@@ -36,6 +36,6 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const SwitchStory: Story = {
+export const Switch: Story = {
   args: { size: "sm" },
 };
