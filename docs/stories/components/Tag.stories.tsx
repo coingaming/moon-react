@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tag } from "@heathmont/moon-react";
+import { Tag as TagComponents } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Tag>;
+type Type = React.ComponentProps<typeof TagComponents>;
 
 const meta: Meta<Type> = {
   title: "Indicators & status/Tag",
@@ -46,7 +46,7 @@ const meta: Meta<Type> = {
       ...(variant !== "fill" && { variant }),
       ...(context !== "brand" && { context }),
     };
-    return <Tag {...tagProps}>Tag</Tag>;
+    return <TagComponents {...tagProps}>Tag</TagComponents>;
   },
 };
 
@@ -54,7 +54,7 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const TagStory: Story = {
+export const Tag: Story = {
   args: {
     size: "xs",
     variant: "fill",

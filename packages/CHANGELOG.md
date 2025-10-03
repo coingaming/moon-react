@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 2.3.0
+
+### Minor Changes
+
+- feat: improve CircularProgress and LinearProgress
+
 ## 2.2.0
 
 ### Minor Changes

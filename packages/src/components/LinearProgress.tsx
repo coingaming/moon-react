@@ -5,7 +5,7 @@ import type { Sizes } from "../types";
 export type LinearProgressSizes = Extract<Sizes, "5xs" | "4xs" | "3xs" | "2xs">;
 
 type LinearProgressProps = {
-  children?: React.ReactNode;
+  label?: string;
   className?: string;
   size?: LinearProgressSizes;
   value: number;
@@ -13,22 +13,37 @@ type LinearProgressProps = {
 
 const LinearProgress = ({
   className,
-  value,
+  value = 0,
   size = "2xs",
-  children,
-}: LinearProgressProps) => (
-  <div className={mergeClasses("moon-linear-progress-wrapper", className)}>
-    {children}
+  label,
+}: LinearProgressProps) => {
+  if (label) {
+    return (
+      <label className={className}>
+        <progress
+          value={String(value)}
+          max="100"
+          className={mergeClasses(
+            "moon-linear-progress",
+            size !== "2xs" && `moon-linear-progress-${size}`
+          )}
+        ></progress>
+        <span>{label}</span>
+      </label>
+    );
+  }
+  return (
     <progress
       value={String(value)}
       max="100"
       className={mergeClasses(
         "moon-linear-progress",
-        size !== "2xs" && `moon-linear-progress-${size}`
+        size !== "2xs" && `moon-linear-progress-${size}`,
+        className
       )}
     ></progress>
-  </div>
-);
+  );
+};
 
 LinearProgress.displayName = "LinearProgress";
 

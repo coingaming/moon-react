@@ -15,7 +15,7 @@ type CircularProgressType = {
 const CircularProgress = ({
   size = "md",
   className,
-  value,
+  value = 0,
 }: CircularProgressType) => (
   <div
     data-value={value}
