@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, Dropdown } from "@heathmont/moon-react";
+import { Button, Dropdown as DropdownComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Dropdown>;
+type Type = React.ComponentProps<typeof DropdownComponent>;
 
 const meta: Meta<Type> = {
   title: "Containers & layout/Dropdown",
@@ -18,16 +18,16 @@ const meta: Meta<Type> = {
       ...props,
     };
     return (
-      <Dropdown {...dropdownProps}>
-        <Dropdown.Trigger>
+      <DropdownComponent {...dropdownProps}>
+        <DropdownComponent.Trigger>
           <Button>Open Dropdown</Button>
-        </Dropdown.Trigger>
-        <Dropdown.Content>
-          <div className="w-full flex items-center justify-center h-space-80 bg-brand-subtle text-brand">
+        </DropdownComponent.Trigger>
+        <DropdownComponent.Content>
+          <div className="w-full flex items-center justify-center h-20 bg-brand-subtle text-brand">
             Content
           </div>
-        </Dropdown.Content>
-      </Dropdown>
+        </DropdownComponent.Content>
+      </DropdownComponent>
     );
   },
 };
@@ -36,7 +36,7 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const DropdownStory: Story = {
+export const Dropdown: Story = {
   args: {},
   play: async ({ canvasElement, userEvent }) => {
     const button = canvasElement.querySelector("button");

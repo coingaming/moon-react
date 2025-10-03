@@ -1,22 +1,30 @@
 import React, { createContext, useContext, useRef } from "react";
+import { createPortal } from "react-dom";
 import mergeClasses from "../helpers/mergeClasses";
 import CloseIcon from "../assets/icons/Close";
 
 type BottomSheetContextType = {
   bottomSheetRef: React.RefObject<HTMLDialogElement | null> | null;
+  hasHandle: boolean;
 };
 
 type BottomSheetProps = {
   children: React.ReactNode;
   className?: string;
+  hasHandle?: boolean;
 };
 
-type HandleProps = {
+type ComponentProps = {
+  children?: React.ReactNode;
   className?: string;
 };
 
-type CloseProps = BottomSheetProps & {
+type CloseProps = ComponentProps & {
   onClick?: () => void;
+};
+
+type BottomSheetTriggerProps = {
+  children: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
 };
 
 const BottomSheetContext = createContext<BottomSheetContextType | null>(null);
@@ -28,40 +36,34 @@ function useBottomSheetContext() {
   return ctx;
 }
 
-const Content = ({ children, className }: BottomSheetProps) => {
-  const { bottomSheetRef } = useBottomSheetContext();
-
-  return (
+const Content = ({ children, className }: ComponentProps) => {
+  const { bottomSheetRef, hasHandle } = useBottomSheetContext();
+  return createPortal(
     <dialog
       className={mergeClasses("moon-bottom-sheet", className)}
       ref={bottomSheetRef}
     >
-      <div className="moon-bottom-sheet-box">{children}</div>
+      <div className="moon-bottom-sheet-box">
+        {hasHandle && <div className="moon-bottom-sheet-handle"></div>}
+        {children}
+      </div>
       <form method="dialog" className="moon-backdrop">
         <button></button>
       </form>
-    </dialog>
+    </dialog>,
+    document.body
   );
 };
 
-const Trigger = ({ children, className }: BottomSheetProps) => {
+const Trigger = ({ children }: BottomSheetTriggerProps) => {
   const { bottomSheetRef } = useBottomSheetContext();
-
-  return (
-    <button
-      onClick={() => bottomSheetRef?.current?.showModal()}
-      className={className}
-    >
-      {children}
-    </button>
-  );
+  const handleClick = () => bottomSheetRef?.current?.showModal();
+  return React.cloneElement(children, {
+    onClick: handleClick,
+  });
 };
 
-const Handle = ({ className }: HandleProps) => (
-  <div className={mergeClasses("moon-bottom-sheet-handle", className)} />
-);
-
-const Header = ({ children, className }: BottomSheetProps) => (
+const Header = ({ children, className }: ComponentProps) => (
   <header className={mergeClasses("moon-bottom-sheet-header", className)}>
     {children}
   </header>
@@ -69,12 +71,10 @@ const Header = ({ children, className }: BottomSheetProps) => (
 
 const Close = ({ onClick, className }: CloseProps) => {
   const { bottomSheetRef } = useBottomSheetContext();
-
   const handleClick = () => {
     bottomSheetRef?.current?.close();
     onClick?.();
   };
-
   return (
     <button
       onClick={handleClick}
@@ -85,11 +85,10 @@ const Close = ({ onClick, className }: CloseProps) => {
   );
 };
 
-const Root = ({ children }: BottomSheetProps) => {
+const Root = ({ children, hasHandle = false }: BottomSheetProps) => {
   const bottomSheetRef = useRef<HTMLDialogElement | null>(null);
-
   return (
-    <BottomSheetContext.Provider value={{ bottomSheetRef }}>
+    <BottomSheetContext.Provider value={{ bottomSheetRef, hasHandle }}>
       {children}
     </BottomSheetContext.Provider>
   );
@@ -100,14 +99,12 @@ Trigger.displayName = "BottomSheet.Trigger";
 Content.displayName = "BottomSheet.Content";
 Close.displayName = "BottomSheet.Close";
 Header.displayName = "BottomSheet.Header";
-Handle.displayName = "BottomSheet.Handle";
 
 const BottomSheet = Object.assign(Root, {
   Trigger,
   Content,
   Close,
   Header,
-  Handle,
 });
 
 export default BottomSheet;
