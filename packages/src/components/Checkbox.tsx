@@ -8,10 +8,10 @@ type CheckboxProps = Omit<React.ComponentProps<"input">, "type"> & {
 const Checkbox = ({ className, label, ...props }: CheckboxProps) => {
   if (label) {
     return (
-      <div className={mergeClasses("moon-checkbox-wrapper", className)}>
+      <label className={className}>
         <input type="checkbox" className="moon-checkbox" {...props} />
-        {label && <label htmlFor={props.id}>{label}</label>}
-      </div>
+        <span>{label}</span>
+      </label>
     );
   }
   return (

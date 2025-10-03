@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 2.2.0
+
+### Minor Changes
+
+- feat: improve form components
+
 ## 2.1.0
 
 ### Minor Changes

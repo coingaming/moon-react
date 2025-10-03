@@ -27,6 +27,7 @@ export type { CircularProgressSizes } from "./CircularProgress";
 export { default as Dialog } from "./Dialog";
 export { default as Drawer } from "./Drawer";
 export { default as Dropdown } from "./Dropdown";
+export { default as FormGroup } from "./FormGroup";
 export { default as IconButton } from "./IconButton";
 export type { IconButtonSizes, IconButtonVariants } from "./IconButton";
 export { default as Input } from "./Input";
