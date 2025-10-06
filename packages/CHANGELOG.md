@@ -1,5 +1,23 @@
 # @heathmont/moon-react
 
+## 2.4.0
+
+### Minor Changes
+
+- feat: improve BottomSheet, Drawer, Dropdown
+
+## 2.3.0
+
+### Minor Changes
+
+- feat: improve CircularProgress and LinearProgress
+
+## 2.2.0
+
+### Minor Changes
+
+- feat: improve form components
+
 ## 2.1.1
 
 ### Patch Changes

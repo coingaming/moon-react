@@ -1,4 +1,4 @@
-import React, { useContext, createContext, ReactNode } from "react";
+import React, { useContext, createContext, useState } from "react";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes } from "../types";
 
@@ -17,27 +17,27 @@ function useSegmentedControlContext() {
   const context = useContext(SegmentedControlContext);
   if (!context) {
     throw new Error(
-      "SegmentedControl components must be used within <TabList> wrapper"
+      "SegmentedControl components must be used within <SegmentedControl> wrapper"
     );
   }
   return context;
 }
 
 type SegmentedControlProps = {
-  children: ReactNode;
+  children: React.ReactNode;
   size?: SegmentedControlSizes;
-  activeIndex: number;
-  setActiveIndex: (idx: number) => void;
+  activeIndex?: number;
+  setActiveIndex?: (idx: number) => void;
   className?: string;
 };
 
 type SegmentProps = React.ComponentProps<"button"> & {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
-  index: number;
+  index?: number;
 };
 
-const Item = ({ children, className, index, ...props }: SegmentProps) => {
+const Item = ({ children, className, index = 0, ...props }: SegmentProps) => {
   const context = useSegmentedControlContext();
   const isActive = context.activeIndex === index;
   return (
@@ -64,22 +64,42 @@ const Root = ({
   activeIndex,
   setActiveIndex,
   className,
-}: SegmentedControlProps) => (
-  <SegmentedControlContext.Provider
-    value={{ activeIndex, setActiveIndex, size }}
-  >
-    <div
-      role="tablist"
-      className={mergeClasses(
-        "moon-segmented-control",
-        size !== "md" && `moon-segmented-control-${size}`,
-        className
-      )}
+}: SegmentedControlProps) => {
+  const [internalActiveIndex, setInternalActiveIndex] = useState(0);
+  const currentActiveIndex = activeIndex ?? internalActiveIndex;
+  const currentSetActiveIndex = setActiveIndex ?? setInternalActiveIndex;
+  const childrenWithIndices = React.Children.map(children, (child, index) => {
+    if (React.isValidElement(child) && child.type === Item) {
+      const childProps = child.props as SegmentProps;
+      return React.cloneElement(child, {
+        ...childProps,
+        index: childProps.index ?? index,
+      } as SegmentProps);
+    }
+    return child;
+  });
+
+  return (
+    <SegmentedControlContext.Provider
+      value={{
+        activeIndex: currentActiveIndex,
+        setActiveIndex: currentSetActiveIndex,
+        size,
+      }}
     >
-      {children}
-    </div>
-  </SegmentedControlContext.Provider>
-);
+      <div
+        role="tablist"
+        className={mergeClasses(
+          "moon-segmented-control",
+          size !== "md" && `moon-segmented-control-${size}`,
+          className
+        )}
+      >
+        {childrenWithIndices}
+      </div>
+    </SegmentedControlContext.Provider>
+  );
+};
 
 Root.displayName = "SegmentedControl";
 Item.displayName = "SegmentedControl.Item";

@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Textarea } from "@heathmont/moon-react";
+import {
+  FormGroup,
+  Textarea as TextareaComponent,
+} from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Textarea>;
+type Type = React.ComponentProps<typeof TextareaComponent>;
 
 const meta: Meta<Type> = {
   title: "Forms & selection controls/Textarea",
@@ -30,6 +33,20 @@ const meta: Meta<Type> = {
         defaultValue: { summary: "fill" },
       },
     },
+    error: {
+      description: "Defines if Textarea is in error state",
+      control: "boolean",
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
+    disabled: {
+      description: "Defines if Textarea is disabled",
+      control: "boolean",
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
   },
   render: ({ size, variant, ...props }) => {
     const textareaProps = {
@@ -37,7 +54,7 @@ const meta: Meta<Type> = {
       ...(size !== "md" && { size }),
       ...(variant !== "fill" && { variant }),
     };
-    return <Textarea {...textareaProps} />;
+    return <TextareaComponent {...textareaProps} />;
   },
 };
 
@@ -45,9 +62,31 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const TextareaStory: Story = {
+export const Textarea: Story = {
   args: {
     size: "md",
     variant: "fill",
+    error: false,
+    disabled: false,
+  },
+};
+
+export const TextareaWithLabelAndHint: Story = {
+  args: { size: "md", variant: "fill", error: false, disabled: false },
+  render: ({ size, variant, ...props }) => {
+    const textareaProps = {
+      ...props,
+      ...(size !== "md" && { size }),
+      ...(variant !== "fill" && { variant }),
+    };
+    return (
+      <FormGroup>
+        <FormGroup.Label htmlFor="TextareaWithLabelAndHint">
+          Label
+        </FormGroup.Label>
+        <TextareaComponent {...textareaProps} id="TextareaWithLabelAndHint" />
+        <FormGroup.Hint>Hint</FormGroup.Hint>
+      </FormGroup>
+    );
   },
 };

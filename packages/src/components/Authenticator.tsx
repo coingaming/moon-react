@@ -7,20 +7,24 @@ export type AuthenticatorSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 export type AuthenticatorVariants = Extract<Variants, "fill" | "outline">;
 
 type AuthenticatorProps = {
+  id?: string;
   length?: number;
   size?: AuthenticatorSizes;
   variant?: AuthenticatorVariants;
   error?: boolean;
+  disabled?: boolean;
   value?: string;
   onChange?: (value: string) => void;
   className?: string;
 };
 
 const Authenticator = ({
+  id = "",
   length = 6,
   size = "md",
   variant = "fill",
   error = false,
+  disabled = false,
   value = "",
   onChange,
   className,
@@ -68,6 +72,7 @@ const Authenticator = ({
     Array.from({ length }, (_, index) => (
       <input
         key={index}
+        id={index === 0 ? id : `${id}${index}`}
         ref={(el) => {
           if (inputsRef?.current) {
             inputsRef.current[index] = el;
@@ -82,6 +87,7 @@ const Authenticator = ({
         autoComplete="off"
         inputMode="text"
         pattern="[0-9a-zA-Z]*"
+        disabled={disabled}
       />
     ));
 
@@ -94,6 +100,7 @@ const Authenticator = ({
         error && "moon-authenticator-error",
         className
       )}
+      role="group"
     >
       {renderInputs()}
     </div>

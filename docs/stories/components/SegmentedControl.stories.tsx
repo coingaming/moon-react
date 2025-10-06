@@ -1,8 +1,9 @@
+import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { SegmentedControl } from "@heathmont/moon-react";
+import { SegmentedControl as SegmentedControlComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof SegmentedControl>;
+type Type = React.ComponentProps<typeof SegmentedControlComponent>;
 
 const meta: Meta<Type> = {
   title: "Forms & selection controls/Segmented Control",
@@ -23,20 +24,25 @@ const meta: Meta<Type> = {
       },
     },
   },
-  render: ({ size, ...props }) => {
+  render: ({ size, activeIndex: controlledActiveIndex, ...props }) => {
+    const [localActiveIndex, setLocalActiveIndex] = useState(0);
     const segmentedControlProps = {
       ...props,
       ...(size !== "md" && { size }),
+      ...(controlledActiveIndex !== undefined && {
+        activeIndex: controlledActiveIndex,
+        setActiveIndex: setLocalActiveIndex,
+      }),
     };
     const items = new Array(3).fill("");
     return (
-      <SegmentedControl {...segmentedControlProps} activeIndex={1}>
+      <SegmentedControlComponent {...segmentedControlProps}>
         {items.map((_, index) => (
-          <SegmentedControl.Item key={index} index={index}>
+          <SegmentedControlComponent.Item key={index}>
             Item {index + 1}
-          </SegmentedControl.Item>
+          </SegmentedControlComponent.Item>
         ))}
-      </SegmentedControl>
+      </SegmentedControlComponent>
     );
   },
 };
@@ -45,6 +51,6 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const SegmentedControlStory: Story = {
+export const SegmentedControl: Story = {
   args: { size: "md" },
 };

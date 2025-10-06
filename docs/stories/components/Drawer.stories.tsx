@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Drawer, Button } from "@heathmont/moon-react";
+import { Drawer as DrawerComponent, Button } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Drawer>;
+type Type = React.ComponentProps<typeof DrawerComponent>;
 
 const meta: Meta<Type> = {
   component: () => <div>Coming soon</div>,
@@ -19,16 +19,16 @@ const meta: Meta<Type> = {
       ...props,
     };
     return (
-      <Drawer {...drawerProps}>
-        <Drawer.Trigger>
+      <DrawerComponent {...drawerProps}>
+        <DrawerComponent.Trigger>
           <Button>Open Drawer</Button>
-        </Drawer.Trigger>
-        <Drawer.Content>
+        </DrawerComponent.Trigger>
+        <DrawerComponent.Content>
           <div className="w-full flex items-center justify-center h-full bg-brand-subtle text-brand">
             Content
           </div>
-        </Drawer.Content>
-      </Drawer>
+        </DrawerComponent.Content>
+      </DrawerComponent>
     );
   },
 };
@@ -37,10 +37,39 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const DrawerStory: Story = {
+export const Drawer: Story = {
   args: {},
   play: async ({ canvasElement, userEvent }) => {
     const button = canvasElement.querySelector("button");
     await userEvent.click(button);
+  },
+};
+
+export const DrawerWithHeaderAndClose: Story = {
+  args: {},
+  play: async ({ canvasElement, userEvent }) => {
+    const button = canvasElement.querySelector("button");
+    await userEvent.click(button);
+  },
+  render: ({ ...props }) => {
+    const drawerProps = {
+      ...props,
+    };
+    return (
+      <DrawerComponent {...drawerProps}>
+        <DrawerComponent.Trigger>
+          <Button>Open Drawer</Button>
+        </DrawerComponent.Trigger>
+        <DrawerComponent.Content>
+          <DrawerComponent.Header>
+            Drawer Title
+            <DrawerComponent.Close />
+          </DrawerComponent.Header>
+          <div className="w-full flex items-center justify-center h-full bg-brand-subtle text-brand">
+            Content
+          </div>
+        </DrawerComponent.Content>
+      </DrawerComponent>
+    );
   },
 };
