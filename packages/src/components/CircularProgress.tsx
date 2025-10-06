@@ -6,24 +6,26 @@ export type CircularProgressSizes = Extract<
   "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
 >;
 
-type CircularProgressType = {
+type CircularProgressType = React.ComponentProps<"div"> & {
   size?: CircularProgressSizes;
-  value: number;
   className?: string;
+  value?: number;
 };
 
 const CircularProgress = ({
   size = "md",
   className,
   value = 0,
+  ...props
 }: CircularProgressType) => (
   <div
-    data-value={value}
     className={mergeClasses(
       "moon-circular-progress",
       size !== "md" && `moon-circular-progress-${size}`,
       className
     )}
+    data-value={value}
+    {...props}
   />
 );
 

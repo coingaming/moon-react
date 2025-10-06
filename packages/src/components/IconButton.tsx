@@ -11,6 +11,7 @@ type IconButtonProps = React.ComponentProps<"button"> & {
   variant?: IconButtonVariants;
   size?: IconButtonSizes;
   context?: Contexts;
+  isRounded?: boolean;
 };
 
 const IconButton = ({
@@ -18,6 +19,7 @@ const IconButton = ({
   variant = "fill",
   size = "md",
   context = "brand",
+  isRounded,
   ...props
 }: IconButtonProps) => (
   <button
@@ -26,6 +28,7 @@ const IconButton = ({
       variant !== "fill" && `moon-icon-button-${variant}`,
       size !== "md" && `moon-icon-button-${size}`,
       context !== "brand" && `moon-icon-button-${context}`,
+      isRounded && "moon-icon-button-rounded",
       className
     )}
     {...props}

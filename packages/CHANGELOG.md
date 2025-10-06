@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 2.5.0
+
+### Minor Changes
+
+- feat: update all components, prepare to open-source
+
 ## 2.4.0
 
 ### Minor Changes

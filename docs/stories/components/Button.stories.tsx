@@ -29,6 +29,13 @@ const meta: Meta<Type> = {
         defaultValue: { summary: "false" },
       },
     },
+    isFullWidth: {
+      description: "Sets Button to full width",
+      control: { type: "boolean" },
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
     variant: {
       description: "Defines Button variant",
       options: ["fill", "outline", "soft", "ghost"],
@@ -67,5 +74,6 @@ export const ButtonStory: Story = {
     variant: "fill",
     context: "brand",
     disabled: false,
+    isFullWidth: false,
   },
 };
