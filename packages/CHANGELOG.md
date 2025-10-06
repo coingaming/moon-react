@@ -18,6 +18,12 @@
 
 - feat: improve form components
 
+## 2.1.1
+
+### Patch Changes
+
+- fix: add tests to Alert, Snackbar and Tooltip [MDS-2014], [MDS-2016] and [MDS-2018]
+
 ## 2.1.0
 
 ### Minor Changes
