@@ -20,6 +20,6 @@ export type Contexts =
 
 export type Variants = "fill" | "soft" | "ghost" | "outline";
 
-export type Directions = "end" | "start";
+export type Directions = "next" | "previous";
 
 export type Positions = "end" | "start" | "top" | "bottom";

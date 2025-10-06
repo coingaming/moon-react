@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Pagination } from "@heathmont/moon-react";
+import { Pagination as PaginationComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Pagination>;
+type Type = React.ComponentProps<typeof PaginationComponent>;
 
 const meta: Meta<Type> = {
   title: "Navigation/Pagination",
@@ -13,19 +13,24 @@ const meta: Meta<Type> = {
       ),
     },
   },
+  argTypes: {
+    hasControls: {
+      description: "Has controls or not",
+      control: { type: "boolean" },
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
+  },
   render: ({ ...props }) => {
     const paginationProps = {
       ...props,
     };
-    const items = new Array(5).fill("");
     return (
-      <Pagination {...paginationProps}>
-        {items.map((_, index) => (
-          <Pagination.Item key={index} index={index}>
-            {index + 1}
-          </Pagination.Item>
-        ))}
-      </Pagination>
+      <PaginationComponent
+        {...paginationProps}
+        length={5}
+      ></PaginationComponent>
     );
   },
 };
@@ -34,4 +39,4 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const PaginationStory: Story = { args: {} };
+export const Pagination: Story = { args: { hasControls: false } };

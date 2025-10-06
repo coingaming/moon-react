@@ -37,9 +37,10 @@ const meta: Meta<Type> = {
       },
     },
   },
-  render: ({ size, ...props }) => {
+  render: ({ size, label, ...props }) => {
     const linearProgressProps = {
       ...props,
+      ...(label && { label }),
       ...(size !== "2xs" && { size }),
     };
     return (

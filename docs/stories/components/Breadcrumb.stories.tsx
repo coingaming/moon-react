@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Breadcrumb } from "@heathmont/moon-react";
+import { Breadcrumb as BreadcrumbComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Breadcrumb>;
+type Type = React.ComponentProps<typeof BreadcrumbComponent>;
 
 const meta: Meta<Type> = {
   title: "Navigation/Breadcrumb",
@@ -19,17 +19,20 @@ const meta: Meta<Type> = {
     };
     const items = new Array(5).fill("");
     return (
-      <Breadcrumb {...breadcrumbProps} defaultCurrentPage={4}>
+      <BreadcrumbComponent {...breadcrumbProps}>
         {items.map((_, index) => (
-          <Breadcrumb.Item key={index} index={index}>
+          <BreadcrumbComponent.Item
+            key={index}
+            isActive={index === items.length - 1}
+          >
             {index === items.length - 1 ? (
-              <>Item {index + 1}</>
+              `Page ${index + 1}`
             ) : (
-              <a href="#">Item {index + 1}</a>
+              <a href="#">Page {index + 1}</a>
             )}
-          </Breadcrumb.Item>
+          </BreadcrumbComponent.Item>
         ))}
-      </Breadcrumb>
+      </BreadcrumbComponent>
     );
   },
 };
@@ -38,4 +41,4 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const BreadcrumbStory: Story = { args: {} };
+export const Breadcrumb: Story = { args: {} };

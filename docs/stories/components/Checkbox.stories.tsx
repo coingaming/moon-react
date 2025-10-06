@@ -26,8 +26,12 @@ const meta: Meta<Type> = {
       },
     },
   },
-  render: ({ ...props }) => {
-    return <CheckboxComponent {...props} />;
+  render: ({ label, ...props }) => {
+    const checkboxProps = {
+      ...props,
+      ...(label && { label }),
+    };
+    return <CheckboxComponent {...checkboxProps} />;
   },
 };
 

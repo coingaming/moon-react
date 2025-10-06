@@ -11,6 +11,7 @@ type ButtonProps = React.ComponentProps<"button"> & {
   size?: ButtonSizes;
   context?: Contexts;
   className?: string;
+  isFullWidth?: boolean;
 };
 
 const Button = ({
@@ -18,6 +19,7 @@ const Button = ({
   variant = "fill",
   size = "md",
   context = "brand",
+  isFullWidth,
   ...props
 }: ButtonProps) => (
   <button
@@ -26,6 +28,7 @@ const Button = ({
       variant !== "fill" && `moon-button-${variant}`,
       size !== "md" && `moon-button-${size}`,
       context !== "brand" && `moon-button-${context}`,
+      isFullWidth && `moon-button-full-width`,
       className
     )}
     {...props}
