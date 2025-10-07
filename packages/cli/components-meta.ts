@@ -1,10 +1,4 @@
-import { fileURLToPath } from "url";
-import path from "path";
-
-const __dirname = path.join(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "../../src"
-);
+import { DIRECTORIES } from "./directories-constants";
 
 type InternalDeps = {
   name: string;
@@ -18,26 +12,46 @@ type Deps = {
 
 const typesHelper = {
   name: "index",
-  srcPath: path.resolve(path.join(__dirname, "types")),
+  srcPath: DIRECTORIES.TYPES,
   destPath: "src/types",
 };
 
 const mergeClassesHelper = {
   name: "mergeClasses",
-  srcPath: path.resolve(path.join(__dirname, "helpers")),
+  srcPath: DIRECTORIES.HELPERS,
   destPath: "src/helpers",
 };
 
 const componentsData: InternalDeps = {
   name: "",
-  srcPath: path.resolve(path.join(__dirname, "components")),
+  srcPath: DIRECTORIES.COMPONENTS,
   destPath: "src/components",
 };
 
 const iconsData: InternalDeps = {
   name: "",
-  srcPath: path.join(__dirname, "assets/icons"),
+  srcPath: DIRECTORIES.ICONS,
   destPath: "src/assets/icons",
+};
+
+const chevronLeftIcon: InternalDeps = {
+  ...iconsData,
+  name: "ChevronLeft",
+};
+
+const chevronRightIcon: InternalDeps = {
+  ...iconsData,
+  name: "ChevronRight",
+};
+
+const buttonComponent: InternalDeps = {
+  ...componentsData,
+  name: "button",
+};
+
+const closeIcon: InternalDeps = {
+  ...iconsData,
+  name: "Close",
 };
 
 export const COMPONENTS_META: Record<string, Deps> = {
@@ -62,14 +76,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
     ],
   },
   alert: {
-    internalDeps: [
-      mergeClassesHelper,
-      typesHelper,
-      {
-        ...iconsData,
-        name: "Close",
-      },
-    ],
+    internalDeps: [mergeClassesHelper, typesHelper, closeIcon],
   },
   authenticator: {
     internalDeps: [mergeClassesHelper, typesHelper],
@@ -87,22 +94,13 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [
       mergeClassesHelper,
       typesHelper,
-      {
-        ...componentsData,
-        name: "button",
-      },
-      {
-        ...iconsData,
-        name: "ChevronLeft",
-      },
-      {
-        ...iconsData,
-        name: "ChevronRight",
-      },
+      buttonComponent,
+      chevronLeftIcon,
+      chevronRightIcon,
     ],
   },
   select: { internalDeps: [mergeClassesHelper, typesHelper] },
-  "circular-progress": {
+  circularProgress: {
     internalDeps: [mergeClassesHelper],
   },
   checkbox: {
@@ -111,18 +109,11 @@ export const COMPONENTS_META: Record<string, Deps> = {
   dropdown: {
     internalDeps: [mergeClassesHelper],
   },
-  "linear-progress": {
+  linearProgress: {
     internalDeps: [mergeClassesHelper, typesHelper],
   },
-  "icon-button": {
-    internalDeps: [
-      mergeClassesHelper,
-      typesHelper,
-      {
-        ...componentsData,
-        name: "button",
-      },
-    ],
+  iconButton: {
+    internalDeps: [mergeClassesHelper, typesHelper, buttonComponent],
   },
   loader: {
     internalDeps: [mergeClassesHelper, typesHelper],
@@ -140,17 +131,7 @@ export const COMPONENTS_META: Record<string, Deps> = {
     internalDeps: [mergeClassesHelper, typesHelper],
   },
   pagination: {
-    internalDeps: [
-      mergeClassesHelper,
-      {
-        ...iconsData,
-        name: "ArrowLeftIcon",
-      },
-      {
-        ...iconsData,
-        name: "ArrowRightIcon",
-      },
-    ],
+    internalDeps: [mergeClassesHelper, chevronLeftIcon, chevronRightIcon],
   },
   switch: {
     internalDeps: [mergeClassesHelper, typesHelper],
@@ -165,14 +146,14 @@ export const COMPONENTS_META: Record<string, Deps> = {
   snackbar: {
     internalDeps: [mergeClassesHelper, typesHelper],
   },
-  "bottom-sheet": {
-    internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
+  bottomSheet: {
+    internalDeps: [mergeClassesHelper, closeIcon],
   },
   drawer: {
-    internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
+    internalDeps: [mergeClassesHelper, closeIcon],
   },
   dialog: {
-    internalDeps: [mergeClassesHelper, { ...iconsData, name: "CloseIcon" }],
+    internalDeps: [mergeClassesHelper, closeIcon],
   },
   list: {
     internalDeps: [mergeClassesHelper, typesHelper],
@@ -180,13 +161,13 @@ export const COMPONENTS_META: Record<string, Deps> = {
   radio: {
     internalDeps: [mergeClassesHelper],
   },
-  "segmented-control": {
+  segmentedControl: {
     internalDeps: [mergeClassesHelper],
   },
   menu: {
     internalDeps: [mergeClassesHelper, typesHelper],
   },
-  "tab-list": {
+  tabList: {
     internalDeps: [mergeClassesHelper, typesHelper],
   },
 };
