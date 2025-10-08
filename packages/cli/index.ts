@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-import { fileURLToPath } from "url";
-import path from "path";
 import { COMPONENTS_META } from "./components-meta.js";
 import { filterArgs, initMoonCss, logger } from "./helpers.js";
+import { DIRECTORIES } from "./directories-constants.js";
 
 const addCommand = await import("./commands/add.js");
 
@@ -17,14 +16,8 @@ const hasAllComponentsFlag = args.find(
 );
 
 const addComponents = () => {
-  const __dirname = path.join(
-    path.dirname(fileURLToPath(import.meta.url)),
-    "../../src/components"
-  );
-  const dirBase = path.resolve(__dirname);
-
   if (hasAllComponentsFlag) {
-    addCommand.default(Object.keys(COMPONENTS_META), dirBase);
+    addCommand.default(Object.keys(COMPONENTS_META), DIRECTORIES.COMPONENTS);
   } else if (args[0] === MOON_REACT_ARGS.ADD && args.length > 1) {
     const components = args.filter(
       (arg) =>
@@ -36,7 +29,7 @@ const addComponents = () => {
       process.exit(1);
     }
 
-    addCommand.default(components, dirBase);
+    addCommand.default(components, DIRECTORIES.COMPONENTS);
   }
 };
 
