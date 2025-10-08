@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useRef } from "react";
 import { createPortal } from "react-dom";
-import mergeClasses from "../helpers/mergeClasses";
 import CloseIcon from "../assets/icons/Close";
+import mergeClasses from "../helpers/mergeClasses";
 
 type BottomSheetContextType = {
   bottomSheetRef: React.RefObject<HTMLDialogElement | null> | null;
@@ -77,8 +77,9 @@ const Close = ({ onClick, className }: CloseProps) => {
   };
   return (
     <button
-      onClick={handleClick}
       className={mergeClasses("moon-bottom-sheet-close", className)}
+      aria-label="Close"
+      onClick={handleClick}
     >
       <CloseIcon />
     </button>
