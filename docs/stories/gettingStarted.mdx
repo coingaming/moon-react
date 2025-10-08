@@ -67,6 +67,21 @@ yarn add @heathmont/moon-react
 pnpm install @heathmont/moon-react
 ```
 
+Run @heathmont/moon-ui to generate the moon-core.css file, which contains primitive tokens for spacing, sizes, and other base styles.<br />
+Use the --add-components flag to generate moon-components.css, which includes more specific tokens focused on Moon React components:
+
+```bash
+npx @heathmont/moon-ui --add-components
+```
+
+Then import the components you need, just as you would with any other package.
+
+```typescript
+import { Button } from "@heathmont/moon-react";
+
+const App = () => <Button>Click me</Button>;
+```
+
 ### Component Installation via CLI
 
 Install selective components using the CLI:
@@ -83,6 +98,15 @@ Or install all components at once:
 
 ```bash
 npx @heathmont/moon-react --add-components
+```
+
+### Import css files into your project
+
+Finally, import your moon-core.css and moon-components.css files into your project, ideally at the root of your application component.
+
+```typescript
+import "../dist/moon-core.css";
+import "../dist/moon-components.css";
 ```
 
 ## Moon UI Integration

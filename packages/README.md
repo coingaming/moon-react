@@ -70,6 +70,12 @@ npx @heathmont/moon-ui --target css --preflight
 
 ### When installed via package.json
 
+Run @heathmont/moon-ui to generate the moon-core.css file, which contains primitive tokens for spacing, sizes, and other base styles. Use the --add-components flag to generate moon-components.css, which includes more specific tokens focused on Moon React components:
+
+`npx @heathmont/moon-ui --add-components`
+
+Then import the components you need, just as you would with any other package.
+
 ```typescript
 import { Button } from "@heathmont/moon-react";
 
@@ -82,6 +88,15 @@ const App = () => <Button>Click me</Button>;
 import { Button } from "../local-path-to-moon-components;
 
 const App = () => <Button>Click me</Button>;
+```
+
+### Import css files into your project
+
+Finally, import your moon-core.css and moon-components.css files into your project, ideally at the root of your application component.
+
+```typescript
+import "../dist/moon-core.css";
+import "../dist/moon-components.css";
 ```
 
 ## License
