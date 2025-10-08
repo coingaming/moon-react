@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { LinearProgress } from "@heathmont/moon-react";
+import { LinearProgress as LinearProgressComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof LinearProgress>;
+type Type = React.ComponentProps<typeof LinearProgressComponent>;
 
 const meta: Meta<Type> = {
   title: "Indicators & status/Linear Progress",
@@ -22,13 +22,30 @@ const meta: Meta<Type> = {
         defaultValue: { summary: "2xs" },
       },
     },
+    value: {
+      description: "Current value of LinearProgress",
+      control: "range",
+      table: {
+        defaultValue: { summary: "0" },
+      },
+    },
+    label: {
+      description: "Label for LinearProgress",
+      control: "text",
+      table: {
+        defaultValue: { summary: "" },
+      },
+    },
   },
-  render: ({ size, ...props }) => {
+  render: ({ size, label, ...props }) => {
     const linearProgressProps = {
       ...props,
+      ...(label && { label }),
       ...(size !== "2xs" && { size }),
     };
-    return <LinearProgress {...linearProgressProps} value={25} />;
+    return (
+      <LinearProgressComponent {...linearProgressProps} value={props.value} />
+    );
   },
 };
 
@@ -36,8 +53,10 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const LinearProgressStory: Story = {
+export const LinearProgress: Story = {
   args: {
     size: "2xs",
+    value: 25,
+    label: "",
   },
 };

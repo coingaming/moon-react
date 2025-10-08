@@ -1,18 +1,13 @@
-import React, { createContext, useContext, useState } from "react";
+import React from "react";
 import mergeClasses from "../helpers/mergeClasses";
-
-type DropdownContextType = {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-};
 
 type DropdownProps = {
   children: React.ReactNode;
-  defaultOpen?: boolean;
+  className?: string;
 };
 
 type DropdownTriggerProps = {
-  children: React.ReactNode;
+  children: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
 };
 
 type DropdownContentProps = {
@@ -20,35 +15,27 @@ type DropdownContentProps = {
   className?: string;
 };
 
-const DropdownContext = createContext<DropdownContextType | null>(null);
-
-function useDropdownContext() {
-  const ctx = useContext(DropdownContext);
-  if (!ctx)
-    throw new Error("Dropdown components must be used within <Dropdown>");
-  return ctx;
-}
-
 const Trigger = ({ children }: DropdownTriggerProps) => {
-  const { setOpen, open } = useDropdownContext();
-  return <span onClick={() => setOpen(!open)}>{children}</span>;
+  return React.cloneElement(children, {
+    tabIndex: 0,
+    role: "button",
+  });
 };
 
 const Content = ({ children, className }: DropdownContentProps) => {
-  const { open } = useDropdownContext();
-  if (!open) return null;
   return (
-    <div className={mergeClasses("moon-dropdown", className)}>{children}</div>
+    <div
+      tabIndex={0}
+      className={mergeClasses("moon-dropdown-content", className)}
+    >
+      {children}
+    </div>
   );
 };
 
-const Root = ({ children, defaultOpen = false }: DropdownProps) => {
-  const [open, setOpen] = useState(defaultOpen);
-
+const Root = ({ children, className }: DropdownProps) => {
   return (
-    <DropdownContext.Provider value={{ open, setOpen }}>
-      {children}
-    </DropdownContext.Provider>
+    <div className={mergeClasses("moon-dropdown", className)}>{children}</div>
   );
 };
 

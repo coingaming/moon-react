@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Loader } from "@heathmont/moon-react";
+import { Loader as LoaderComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Loader>;
+type Type = React.ComponentProps<typeof LoaderComponent>;
 
 const meta: Meta<Type> = {
   title: "Indicators & status/Loader",
@@ -28,7 +28,7 @@ const meta: Meta<Type> = {
       ...props,
       ...(size !== "md" && { size }),
     };
-    return <Loader {...loaderProps} />;
+    return <LoaderComponent {...loaderProps} />;
   },
 };
 
@@ -36,7 +36,7 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const LoaderStory: Story = {
+export const Loader: Story = {
   args: {
     size: "md",
   },

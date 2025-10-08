@@ -1,5 +1,35 @@
 # @heathmont/moon-react
 
+## 2.5.0
+
+### Minor Changes
+
+- feat: update all components, prepare to open-source
+
+## 2.4.0
+
+### Minor Changes
+
+- feat: improve BottomSheet, Drawer, Dropdown
+
+## 2.3.0
+
+### Minor Changes
+
+- feat: improve CircularProgress and LinearProgress
+
+## 2.2.0
+
+### Minor Changes
+
+- feat: improve form components
+
+## 2.1.1
+
+### Patch Changes
+
+- fix: add tests to Alert, Snackbar and Tooltip [MDS-2014], [MDS-2016] and [MDS-2018]
+
 ## 2.1.0
 
 ### Minor Changes

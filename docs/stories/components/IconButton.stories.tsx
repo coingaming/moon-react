@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { IconButton } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
-import UserIcon from "../shared/icons/UserIcon";
+import StarIcon from "../shared/icons/StarIcon";
 
 type Type = React.ComponentProps<typeof IconButton>;
 
@@ -30,6 +30,13 @@ const meta: Meta<Type> = {
         defaultValue: { summary: "false" },
       },
     },
+    isRounded: {
+      description: "Defines if IconButton has rounded corners",
+      control: { type: "boolean" },
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
     variant: {
       description: "Defines IconButton variant",
       options: ["fill", "outline", "soft", "ghost"],
@@ -47,15 +54,16 @@ const meta: Meta<Type> = {
       },
     },
   },
-  render: ({ variant, size, ...props }) => {
+  render: ({ variant, size, context, ...props }) => {
     const buttonProps = {
       ...props,
       ...(variant !== "fill" && { variant }),
+      ...(context !== "brand" && { context }),
       ...(size !== "md" && { size }),
     };
     return (
       <IconButton {...buttonProps}>
-        <UserIcon />
+        <StarIcon />
       </IconButton>
     );
   },
@@ -71,5 +79,6 @@ export const IconButtonStory: Story = {
     variant: "fill",
     context: "brand",
     disabled: false,
+    isRounded: false,
   },
 };

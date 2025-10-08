@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Menu } from "@heathmont/moon-react";
+import { Menu as MenuComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
+import StarIcon from "../shared/icons/StarIcon";
 
-type Type = React.ComponentProps<typeof Menu>;
+type Type = React.ComponentProps<typeof MenuComponent>;
 
 const meta: Meta<Type> = {
   title: "Navigation/Menu",
@@ -30,11 +31,11 @@ const meta: Meta<Type> = {
     };
     const items = new Array(3).fill("");
     return (
-      <Menu {...menuProps}>
+      <MenuComponent {...menuProps}>
         {items.map((_, index) => (
-          <Menu.Item key={index}>Item {index + 1}</Menu.Item>
+          <MenuComponent.Item key={index}>Item {index + 1}</MenuComponent.Item>
         ))}
-      </Menu>
+      </MenuComponent>
     );
   },
 };
@@ -43,8 +44,33 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const MenuStory: Story = {
+export const Menu: Story = {
   args: {
     size: "md",
+  },
+};
+
+export const MenuWithMeta: Story = {
+  args: {
+    size: "md",
+  },
+  render: ({ size, ...props }) => {
+    const menuProps = {
+      ...props,
+      ...(size !== "md" && { size }),
+    };
+    const items = new Array(3).fill("");
+    return (
+      <MenuComponent {...menuProps}>
+        {items.map((_, index) => (
+          <MenuComponent.Item key={index}>
+            Item {index + 1}
+            <MenuComponent.Meta>
+              <StarIcon />
+            </MenuComponent.Meta>
+          </MenuComponent.Item>
+        ))}
+      </MenuComponent>
+    );
   },
 };

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TabList } from "@heathmont/moon-react";
+import { TabList as TabListComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof TabList>;
+type Type = React.ComponentProps<typeof TabListComponent>;
 
 const meta: Meta<Type> = {
   title: "Navigation/Tab List",
@@ -30,13 +30,13 @@ const meta: Meta<Type> = {
     };
     const items = new Array(3).fill("");
     return (
-      <TabList {...tabListProps}>
+      <TabListComponent {...tabListProps}>
         {items.map((_, index) => (
-          <TabList.Item key={index} index={index}>
+          <TabListComponent.Item key={index}>
             Item {index + 1}
-          </TabList.Item>
+          </TabListComponent.Item>
         ))}
-      </TabList>
+      </TabListComponent>
     );
   },
 };
@@ -45,4 +45,4 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const TabListStory: Story = { args: { size: "md" } };
+export const TabList: Story = { args: { size: "md" } };

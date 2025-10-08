@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CircularProgress } from "@heathmont/moon-react";
+import { CircularProgress as CircularProgressComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof CircularProgress>;
+type Type = React.ComponentProps<typeof CircularProgressComponent> & {
+  value?: number;
+};
 
 const meta: Meta<Type> = {
   title: "Indicators & status/Circular Progress",
@@ -22,13 +24,25 @@ const meta: Meta<Type> = {
         defaultValue: { summary: "md" },
       },
     },
+    value: {
+      description: "Current value of CircularProgress",
+      control: { type: "range", min: 0, max: 100, step: 1 },
+      table: {
+        defaultValue: { summary: "0" },
+      },
+    },
   },
-  render: ({ size, ...props }) => {
+  render: ({ size, value, ...props }) => {
     const circularProgressProps = {
       ...props,
       ...(size !== "md" && { size }),
     };
-    return <CircularProgress {...circularProgressProps} value={25} />;
+    return (
+      <CircularProgressComponent
+        style={{ "--value": value } as React.CSSProperties}
+        {...circularProgressProps}
+      />
+    );
   },
 };
 
@@ -36,6 +50,6 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const CircularProgressStory: Story = {
-  args: { size: "md" },
+export const CircularProgress: Story = {
+  args: { size: "md", value: 25 },
 };

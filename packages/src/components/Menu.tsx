@@ -18,7 +18,9 @@ const Item = ({ children, className }: BaseProps) => (
 );
 
 const Meta = ({ children, className }: BaseProps) => (
-  <div className={mergeClasses("moon-menu-meta", className)}>{children}</div>
+  <div className={mergeClasses("moon-menu-item-meta", className)}>
+    {children}
+  </div>
 );
 
 const Root = ({ size = "md", children, className }: MenuProps) => (

@@ -5,13 +5,36 @@ type RadioProps = Omit<React.ComponentProps<"input">, "type"> & {
   label?: string;
 };
 
-const Radio = ({ className, label, ...props }: RadioProps) => {
+type RadioGroupProps = {
+  children: React.ReactNode;
+  className?: string;
+  name: string;
+};
+
+const Group = ({ children, className, name }: RadioGroupProps) => {
+  const childrenWithName = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child as React.ReactElement<any>, { name });
+    }
+    return child;
+  });
+  return (
+    <div
+      className={mergeClasses("moon-radio-group", className)}
+      role="radiogroup"
+    >
+      {childrenWithName}
+    </div>
+  );
+};
+
+const Root = ({ className, label, ...props }: RadioProps) => {
   if (label) {
     return (
-      <div className={mergeClasses("moon-radio-wrapper", className)}>
+      <label className={className}>
         <input type="radio" className="moon-radio" {...props} />
-        {label && <label htmlFor={props.id}>{label}</label>}
-      </div>
+        <span>{label}</span>
+      </label>
     );
   }
   return (
@@ -23,6 +46,9 @@ const Radio = ({ className, label, ...props }: RadioProps) => {
   );
 };
 
-Radio.displayName = "Radio";
+Root.displayName = "Radio";
+Group.displayName = "Radio.Group";
+
+const Radio = Object.assign(Root, { Group });
 
 export default Radio;

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LinksBlock from "../shared/LinksBlock";
-import { Radio } from "@heathmont/moon-react";
+import { Radio as RadioComponent } from "@heathmont/moon-react";
 
-type Type = React.ComponentProps<typeof Radio>;
+type Type = React.ComponentProps<typeof RadioComponent>;
 
 const meta: Meta<Type> = {
   title: "Forms & selection controls/Radio",
@@ -14,16 +14,24 @@ const meta: Meta<Type> = {
     },
   },
   argTypes: {
-    label: {
-      description: "Defines Radio label",
-      control: { type: "text" },
+    disabled: {
+      description: "Defines if Radio is disabled",
+      control: "boolean",
+      table: {
+        defaultValue: { summary: "false" },
+      },
     },
   },
   render: ({ ...props }) => {
     const radioProps = {
       ...props,
     };
-    return <Radio id="radio" {...radioProps} />;
+    return (
+      <RadioComponent.Group name="demo">
+        <RadioComponent {...radioProps} value="option 1" label="Option 1" />
+        <RadioComponent {...radioProps} value="option 2" label="Option 2" />
+      </RadioComponent.Group>
+    );
   },
 };
 
@@ -31,8 +39,8 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const RadioStory: Story = {
+export const Radio: Story = {
   args: {
-    label: "",
+    disabled: false,
   },
 };

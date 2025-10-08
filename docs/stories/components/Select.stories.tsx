@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Select } from "@heathmont/moon-react";
+import { FormGroup, Select as SelectComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Select>;
+type Type = React.ComponentProps<typeof SelectComponent>;
 
 const meta: Meta<Type> = {
   title: "Forms & selection controls/Select",
@@ -30,6 +30,20 @@ const meta: Meta<Type> = {
         defaultValue: { summary: "fill" },
       },
     },
+    error: {
+      description: "Defines if Select is in error state",
+      control: "boolean",
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
+    disabled: {
+      description: "Defines if Select is disabled",
+      control: "boolean",
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
   },
   render: ({ size, variant, ...props }) => {
     const selectProps = {
@@ -39,13 +53,13 @@ const meta: Meta<Type> = {
     };
     const items = new Array(3).fill("");
     return (
-      <Select {...selectProps}>
+      <SelectComponent {...selectProps}>
         {items.map((_, index) => (
-          <Select.Option key={index} value={`item-${index}`}>
+          <SelectComponent.Option key={index} value={`item-${index}`}>
             Item {index}
-          </Select.Option>
+          </SelectComponent.Option>
         ))}
-      </Select>
+      </SelectComponent>
     );
   },
 };
@@ -54,6 +68,33 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const SelectStory: Story = {
-  args: { size: "md", variant: "fill" },
+export const Select: Story = {
+  args: { size: "md", variant: "fill", error: false, disabled: false },
+};
+
+export const SelectWithLabelAndHint: Story = {
+  args: { size: "md", variant: "fill", error: false, disabled: false },
+  render: ({ size, variant, ...props }) => {
+    const selectProps = {
+      ...props,
+      ...(size !== "md" && { size }),
+      ...(variant !== "fill" && { variant }),
+    };
+    const items = new Array(3).fill("");
+    return (
+      <FormGroup>
+        <FormGroup.Label htmlFor="SelectWithLabelAndHint">
+          Label
+        </FormGroup.Label>
+        <SelectComponent {...selectProps} id="SelectWithLabelAndHint">
+          {items.map((_, index) => (
+            <SelectComponent.Option key={index} value={`item-${index}`}>
+              Item {index}
+            </SelectComponent.Option>
+          ))}
+        </SelectComponent>
+        <FormGroup.Hint>Hint</FormGroup.Hint>
+      </FormGroup>
+    );
+  },
 };

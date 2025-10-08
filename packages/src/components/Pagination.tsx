@@ -1,122 +1,138 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { useState } from "react";
 import ChevronLeft from "../assets/icons/ChevronLeft";
 import ChevronRight from "../assets/icons/ChevronRight";
 import mergeClasses from "../helpers/mergeClasses";
-
-type PaginationContextType = {
-  page: number;
-  setPage: (page: number | ((page: number) => number)) => void;
-  length: number;
-};
+import type { Directions } from "../types";
 
 type PaginationProps = {
-  children: React.ReactNode;
-  className?: string;
-  defaultPage?: number;
   length: number;
+  className?: string;
+  activePage?: number;
+  hasControls?: boolean;
+  onPageChange?: (page: number) => void;
+  renderItem?: (index: number) => React.ReactNode;
 };
 
 type PaginationItemProps = React.ComponentProps<"li"> & {
-  index: number;
-  isActive?: boolean;
+  pageIndex: number;
+  onPageChange: (page: number) => void;
+  currentPage: number;
 };
 
-type PaginationArrowsProps = React.ComponentProps<"span">;
-
-const PaginationContext = createContext<PaginationContextType>({
-  page: 0,
-  setPage: () => {},
-  length: 0,
-});
-
-function usePaginationContext() {
-  const context = useContext(PaginationContext);
-  if (!context) {
-    throw new Error(
-      "Pagination components must be used within <Pagination> wrapper"
-    );
-  }
-  return context;
-}
-
 const Item = ({
-  index,
-  isActive,
   className,
+  children,
+  pageIndex,
+  onPageChange,
+  currentPage,
   ...props
 }: PaginationItemProps) => {
-  const { page, setPage } = usePaginationContext();
+  const isActive = currentPage === pageIndex;
   return (
     <li
       className={mergeClasses(
         "moon-pagination-item",
-        page === index && "moon-pagination-item-active",
+        isActive && "moon-pagination-item-active",
         className
       )}
-      onClick={() => {
-        setPage(index);
-      }}
-      {...props}
-    />
-  );
-};
-
-const Previous = ({ ...props }: PaginationArrowsProps) => {
-  const { setPage } = usePaginationContext();
-
-  return (
-    <span
-      onClick={() => {
-        setPage((prevPage: number) => (prevPage > 0 ? prevPage - 1 : prevPage));
-      }}
+      onClick={() => onPageChange(pageIndex)}
+      {...(isActive && { "aria-current": "page" })}
       {...props}
     >
-      <ChevronLeft />
-    </span>
+      {children}
+    </li>
   );
 };
 
-const Next = ({ ...props }: PaginationArrowsProps) => {
-  const { setPage, length } = usePaginationContext();
-
-  return (
-    <span
-      onClick={() => {
-        setPage((prevPage: number) =>
-          prevPage < length - 1 ? prevPage + 1 : prevPage
-        );
-      }}
-      {...props}
-    >
-      <ChevronRight />
-    </span>
-  );
-};
-
-const Root = ({
-  children,
+const Control = ({
+  direction,
   className,
-  defaultPage = 0,
-  length,
-}: PaginationProps) => {
-  const [page, setPage] = useState(defaultPage);
-
+  disabled,
+  onClick,
+  ...props
+}: React.ComponentProps<"li"> & {
+  direction: Directions;
+  disabled?: boolean;
+}) => {
+  const isRTL = React.useMemo(() => {
+    if (typeof document === "undefined") return false;
+    const paginationElement = document.querySelector(".moon-pagination");
+    return paginationElement
+      ? getComputedStyle(paginationElement).direction === "rtl"
+      : false;
+  }, []);
   return (
-    <PaginationContext.Provider value={{ page, setPage, length }}>
-      <nav role="navigation" aria-label="pagination">
-        <ul className={mergeClasses("moon-pagination", className)}>
-          {children}
-        </ul>
-      </nav>
-    </PaginationContext.Provider>
+    <li
+      className={mergeClasses(
+        "moon-pagination-control",
+        disabled && "moon-pagination-control-disabled",
+        className
+      )}
+      onClick={disabled ? undefined : onClick}
+      aria-label={direction === "previous" ? "Previous" : "Next"}
+      {...(disabled && { "aria-disabled": "true" })}
+      {...props}
+    >
+      {direction === "previous" ? (
+        isRTL ? (
+          <ChevronRight />
+        ) : (
+          <ChevronLeft />
+        )
+      ) : isRTL ? (
+        <ChevronLeft />
+      ) : (
+        <ChevronRight />
+      )}
+    </li>
   );
 };
 
-Root.displayName = "Pagination";
-Item.displayName = "Pagination.Item";
-Previous.displayName = "Pagination.Previous";
-Next.displayName = "Pagination.Next";
+const Pagination = ({
+  length,
+  className,
+  activePage = 0,
+  hasControls = false,
+  onPageChange,
+  renderItem,
+}: PaginationProps) => {
+  const [currentPage, setCurrentPage] = useState(activePage);
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    onPageChange?.(page);
+  };
+  return (
+    <nav role="navigation" aria-label="pagination">
+      <ul className={mergeClasses("moon-pagination", className)}>
+        {hasControls && (
+          <Control
+            direction="previous"
+            disabled={currentPage === 0}
+            onClick={() => handlePageChange(currentPage - 1)}
+          />
+        )}
+        {Array.from({ length }, (_, index) => (
+          <Item
+            key={index}
+            pageIndex={index}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+          >
+            {renderItem ? renderItem(index) : index + 1}
+          </Item>
+        ))}
+        {hasControls && (
+          <Control
+            direction="next"
+            disabled={currentPage === length - 1}
+            onClick={() => handlePageChange(currentPage + 1)}
+          />
+        )}
+      </ul>
+    </nav>
+  );
+};
 
-const Pagination = Object.assign(Root, { Item, Previous, Next });
+Pagination.displayName = "Pagination";
 
 export default Pagination;

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Checkbox } from "@heathmont/moon-react";
+import { Checkbox as CheckboxComponent } from "@heathmont/moon-react";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof Checkbox>;
+type Type = React.ComponentProps<typeof CheckboxComponent>;
 
 const meta: Meta<Type> = {
   title: "Forms & selection controls/Checkbox",
@@ -18,12 +18,20 @@ const meta: Meta<Type> = {
       description: "Defines Checkbox label",
       control: { type: "text" },
     },
+    disabled: {
+      description: "Defines if Checkbox is disabled",
+      control: "boolean",
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
   },
-  render: ({ ...props }) => {
+  render: ({ label, ...props }) => {
     const checkboxProps = {
       ...props,
+      ...(label && { label }),
     };
-    return <Checkbox id="checkbox" {...checkboxProps} />;
+    return <CheckboxComponent {...checkboxProps} />;
   },
 };
 
@@ -31,8 +39,9 @@ export default meta;
 
 type Story = StoryObj<Type>;
 
-export const CheckboxStory: Story = {
+export const Checkbox: Story = {
   args: {
+    disabled: false,
     label: "",
   },
 };
