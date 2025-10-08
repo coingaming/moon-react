@@ -1,5 +1,11 @@
 # @heathmont/moon-react
 
+## 2.5.19
+
+### Patch Changes
+
+- fix: update README file [MDS-2078]
+
 ## 2.5.18
 
 ### Patch Changes
