@@ -1,5 +1,8 @@
 name: Release new docs
 
+permissions:
+  contents: read
+
 on:
   push:
     tags: [v*]
@@ -42,6 +45,8 @@ jobs:
     name: Update Docker Compose, Create Manifest, and Deploy
     runs-on: ubuntu-24.04
     needs: build-and-push
+    permissions:
+      contents: write
     steps:
       - name: Checkout Stacks Repo
         uses: actions/checkout@v4
