@@ -1,5 +1,12 @@
 # @heathmont/moon-react
 
+## 2.5.18
+
+### Patch Changes
+
+- fix: update moon-ui to latest
+- 3d394a8: feat: add tests for BottomSheet, CircularProgress, Tag and Badge components
+
 ## 2.5.0
 
 ### Minor Changes
