@@ -1,6 +1,7 @@
 {
   "name": "@heathmont/moon-react",
   "version": "2.5.18",
+  "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
