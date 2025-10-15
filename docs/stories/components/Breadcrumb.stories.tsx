@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Breadcrumb as BreadcrumbComponent } from "@heathmont/moon-react";
+import { Breadcrumb as BreadcrumbComponent } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof BreadcrumbComponent>;

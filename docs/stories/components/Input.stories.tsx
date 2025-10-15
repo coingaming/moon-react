@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Input as InputComponent, FormGroup } from "@heathmont/moon-react";
+import { Input as InputComponent, FormGroup } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof InputComponent>;

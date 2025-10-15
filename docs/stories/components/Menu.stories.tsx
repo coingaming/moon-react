@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Menu as MenuComponent } from "@heathmont/moon-react";
+import { Menu as MenuComponent } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 import StarIcon from "../shared/icons/StarIcon";
 

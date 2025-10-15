@@ -11,7 +11,7 @@
     "docs"
   ],
   "scripts": {
-    "moon-ui": "npx @heathmont/moon-ui --add-components",
+    "moon-ui": "npx @moondesignsystem/ui --add-components",
     "dev": "npm run build:watch --workspace packages & npm run dev --workspace docs",
     "build": "npm run build --workspace packages",
     "build-storybook": "npm run build-storybook --workspace docs",

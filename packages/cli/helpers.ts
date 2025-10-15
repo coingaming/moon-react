@@ -1,7 +1,7 @@
 import { execa, ExecaError } from "execa";
 import prompts from "prompts";
 
-const MOON_UI_PACKAGE = "@heathmont/moon-ui";
+const MOON_UI_PACKAGE = "@moondesignsystem/ui";
 const ADD_CSS_COMPONENTS = "--add-components";
 const PROMP_MOON_UI = "We are installing css components, do you agree?";
 const ARGS = [

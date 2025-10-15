@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Dialog as DialogComponent, Button } from "@heathmont/moon-react";
+import { Dialog as DialogComponent, Button } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof DialogComponent>;

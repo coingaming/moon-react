@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Checkbox as CheckboxComponent } from "@heathmont/moon-react";
+import { Checkbox as CheckboxComponent } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof CheckboxComponent>;

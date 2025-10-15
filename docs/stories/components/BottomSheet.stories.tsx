@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import {
   BottomSheet as BottomSheetComponent,
   Button,
-} from "@heathmont/moon-react";
+} from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof BottomSheetComponent>;

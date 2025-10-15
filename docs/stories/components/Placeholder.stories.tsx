@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Placeholder as PlaceholderComponent } from "@heathmont/moon-react";
+import { Placeholder as PlaceholderComponent } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof PlaceholderComponent>;

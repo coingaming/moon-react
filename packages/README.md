@@ -13,11 +13,11 @@ Moon React provides simple functional components, architected with the Compound 
 Install the complete component library:
 
 ```bash
-npm install @heathmont/moon-react
+npm install @moondesignsystem/react
 # or
-yarn add @heathmont/moon-react
+yarn add @moondesignsystem/react
 # or
-pnpm install @heathmont/moon-react
+pnpm install @moondesignsystem/react
 ```
 
 ### Component Installation via CLI
@@ -26,21 +26,21 @@ Install selective components using the CLI:
 
 ```bash
 # Add a single component
-npx @heathmont/moon-react --add button
+npx @moondesignsystem/react --add button
 
 # Add multiple components
-npx @heathmont/moon-react --add button input
+npx @moondesignsystem/react --add button input
 ```
 
 Or install all components at once:
 
 ```bash
-npx @heathmont/moon-react --add-components
+npx @moondesignsystem/react --add-components
 ```
 
 ## Moon UI Integration
 
-[Moon UI](https://ui.moon.io/) is a standalone library for generating core and component CSS files from Figma design tokens.
+[Moon UI](https://ui.moondesignsystem.com/) is a standalone library for generating core and component CSS files from Figma design tokens.
 
 ### Configuration
 
@@ -54,16 +54,16 @@ FIGMA_TOKEN=your-figma-token-here
 
 ```bash
 # Specify your project name for css files generation
-npx @heathmont/moon-react --projectName your-project
+npx @moondesignsystem/react --projectName your-project
 
 # Use custom Figma files
-npx @heathmont/moon-react --coreFileId CORE_FILE_ID --componentsProjectId COMPONENTS_PROJECT_ID
+npx @moondesignsystem/react --coreFileId CORE_FILE_ID --componentsProjectId COMPONENTS_PROJECT_ID
 
 # Configure for non-Tailwind projects (default is 'tailwindcss')
-npx @heathmont/moon-react --target css
+npx @moondesignsystem/react --target css
 
 # Generate vanilla CSS files with browser CSS reset. Not needed with tailwindcss target
-npx @heathmont/moon-ui --target css --preflight
+npx @moondesignsystem/ui --target css --preflight
 ```
 
 ## 📝 Component Usage
@@ -71,7 +71,7 @@ npx @heathmont/moon-ui --target css --preflight
 ### When installed via package.json
 
 ```typescript
-import { Button } from "@heathmont/moon-react";
+import { Button } from "@moondesignsystem/react";
 
 const App = () => <Button>Click me</Button>;
 ```
@@ -90,7 +90,7 @@ MIT
 
 ## Versioning
 
-Moon UI follows [Semantic Versioning](https://semver.org/). View available versions in the [repository tags](https://github.com/coingaming/moon-react/tags).
+Moon UI follows [Semantic Versioning](https://semver.org/). View available versions in the [repository tags](https://github.com/moondesignsystem/react/tags).
 
 - **MAJOR**: Incompatible API changes
 - **MINOR**: New backward-compatible functionality

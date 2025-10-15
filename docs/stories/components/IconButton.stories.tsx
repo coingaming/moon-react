@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { IconButton } from "@heathmont/moon-react";
+import { IconButton } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 import StarIcon from "../shared/icons/StarIcon";
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, Dropdown as DropdownComponent } from "@heathmont/moon-react";
+import { Button, Dropdown as DropdownComponent } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof DropdownComponent>;

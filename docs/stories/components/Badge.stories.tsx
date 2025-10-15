@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Badge as BadgeComponent } from "@heathmont/moon-react";
+import { Badge as BadgeComponent } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof BadgeComponent>;
