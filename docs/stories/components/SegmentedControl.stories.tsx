@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { SegmentedControl as SegmentedControlComponent } from "@heathmont/moon-react";
+import { SegmentedControl as SegmentedControlComponent } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof SegmentedControlComponent>;

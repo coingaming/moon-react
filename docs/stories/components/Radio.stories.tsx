@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LinksBlock from "../shared/LinksBlock";
-import { Radio as RadioComponent } from "@heathmont/moon-react";
+import { Radio as RadioComponent } from "@moondesignsystem/react";
 
 type Type = React.ComponentProps<typeof RadioComponent>;
 

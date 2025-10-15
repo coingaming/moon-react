@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FormGroup, Select as SelectComponent } from "@heathmont/moon-react";
+import { FormGroup, Select as SelectComponent } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof SelectComponent>;

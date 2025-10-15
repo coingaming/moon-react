@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LinksBlock from "../shared/LinksBlock";
-import { Avatar as AvatarComponent } from "@heathmont/moon-react";
+import { Avatar as AvatarComponent } from "@moondesignsystem/react";
 
 type Type = React.ComponentProps<typeof AvatarComponent>;
 

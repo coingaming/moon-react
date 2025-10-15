@@ -17,7 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": "..",
     "paths": {
-      "@heathmont/moon-react": [
+      "@moondesignsystem/react": [
         "../packages/src/index.ts",
         "../packages/dist/index.d.ts"
       ]

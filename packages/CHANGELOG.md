@@ -1,4 +1,4 @@
-# @heathmont/moon-react
+# @moondesignsystem/react
 
 ## 2.5.18
 

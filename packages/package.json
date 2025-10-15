@@ -1,18 +1,18 @@
 {
-  "name": "@heathmont/moon-react",
+  "name": "@moondesignsystem/react",
   "version": "2.5.18",
   "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
-  "author": "Yolo Group",
+  "author": "Moon Design System",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coingaming/moon-react.git"
+    "url": "git+https://github.com/moondesignsystem/react.git"
   },
-  "homepage": "https://react.moon.io",
+  "homepage": "https://react.moondesignsystem.com",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -37,7 +37,6 @@
     "build:watch": "tsc --project tsconfig.build.json --watch",
     "lint": "eslint .",
     "preview": "vite preview",
-    "moon-css": "npx @heathmont/moon-css --with-components",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest --config jest.config.js"

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Chip as ChipComponent } from "@heathmont/moon-react";
+import { Chip as ChipComponent } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 import { useState } from "react";
 

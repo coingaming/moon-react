@@ -9,7 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@heathmont/moon-react": path.resolve(__dirname, "../packages/src"),
+      "@moondesignsystem/react": path.resolve(__dirname, "../packages/src"),
     },
   },
 });

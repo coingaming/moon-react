@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LinksBlock from "../shared/LinksBlock";
-import { Alert as AlertComponent } from "@heathmont/moon-react";
+import { Alert as AlertComponent } from "@moondesignsystem/react";
 
 type Type = React.ComponentProps<typeof AlertComponent>;
 

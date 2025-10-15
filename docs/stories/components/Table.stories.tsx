@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Table as TableComponent } from "@heathmont/moon-react";
+import { Table as TableComponent } from "@moondesignsystem/react";
 import {
   createColumnHelper,
   flexRender,
@@ -196,7 +196,7 @@ export const TableWithTanstackTable: Story = {
       },
       source: {
         code: `import { useState } from "react";
-import { Table } from "@heathmont/moon-react";
+import { Table } from "@moondesignsystem/react";
 import {
   createColumnHelper,
   flexRender,

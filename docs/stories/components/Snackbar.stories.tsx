@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Snackbar as SnackbarComponent, Button } from "@heathmont/moon-react";
+import { Snackbar as SnackbarComponent, Button } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof SnackbarComponent>;

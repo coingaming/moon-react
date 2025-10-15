@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CircularProgress as CircularProgressComponent } from "@heathmont/moon-react";
+import { CircularProgress as CircularProgressComponent } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof CircularProgressComponent> & {

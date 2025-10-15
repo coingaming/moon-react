@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Drawer as DrawerComponent, Button } from "@heathmont/moon-react";
+import { Drawer as DrawerComponent, Button } from "@moondesignsystem/react";
 import LinksBlock from "../shared/LinksBlock";
 
 type Type = React.ComponentProps<typeof DrawerComponent>;
