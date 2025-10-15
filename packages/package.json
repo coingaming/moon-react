@@ -13,6 +13,9 @@
     "url": "git+https://github.com/moondesignsystem/react.git"
   },
   "homepage": "https://react.moondesignsystem.com",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
