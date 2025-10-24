@@ -1,5 +1,11 @@
 # @moondesignsystem/react
 
+## 2.5.19
+
+### Patch Changes
+
+- fix: add missing dist folder
+
 ## 2.5.18
 
 ### Patch Changes
