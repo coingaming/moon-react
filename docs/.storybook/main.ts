@@ -24,13 +24,13 @@ const config: StorybookConfig = {
   },
   managerHead: (head) => `
  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RG8X061MTB"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6L8W2YTV0W"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-RG8X061MTB');
+  gtag('config', 'G-6L8W2YTV0W');
 </script>
   <link rel="icon" href="https://assets.moon.io/symbols/product/moon.png" type="image/png">
     ${head}
